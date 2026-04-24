@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前田さん向け：ナレッジフォルダを開く手順（Windows版）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.8; }
+
+  .header { background: #1e293b; color: #fff; padding: 36px 24px 28px; text-align: center; }
+  .header h1 { font-size: 22px; margin-bottom: 6px; }
+  .header .sub { font-size: 13px; color: #94a3b8; }
+  .header .os-badge { display: inline-block; margin-top: 12px; padding: 4px 14px; background: #0078d4; color: #fff; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .header .time { display: inline-block; margin-top: 12px; margin-left: 6px; padding: 4px 14px; background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; font-size: 12px; color: #93c5fd; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 28px 20px 50px; }
+
+  .intro { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin-bottom: 24px; }
+  .intro h2 { font-size: 16px; color: #1e293b; margin-bottom: 10px; }
+  .intro p { font-size: 14px; color: #475569; margin-bottom: 6px; }
+  .intro .note { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 6px; padding: 10px 14px; margin-top: 10px; color: #92400e; font-size: 13px; }
+
+  .step-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin-bottom: 18px; }
+  .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .step-num { width: 34px; height: 34px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+  .step-title { font-size: 17px; font-weight: 700; color: #1e293b; }
+
+  .step-card p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .step-card ul, .step-card ol { font-size: 14px; color: #475569; padding-left: 22px; margin: 6px 0; }
+  .step-card li { margin-bottom: 4px; }
+
+  .cmd { background: #1e293b; color: #e2e8f0; padding: 12px 16px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 13px; margin: 8px 0; white-space: pre-wrap; word-break: break-all; }
+
+  .keycap { display: inline-block; background: #fff; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 7px; font-family: 'Consolas', monospace; font-size: 12px; color: #334155; margin: 0 2px; }
+
+  .success { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #166534; }
+  .warning { background: #fef3c7; border: 1px solid #fbbf24; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #92400e; }
+
+  .location-hint { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 8px; padding: 14px 18px; margin: 10px 0; }
+  .location-hint h4 { font-size: 13px; color: #1e40af; margin-bottom: 6px; }
+  .location-hint ul { font-size: 13px; color: #334155; margin: 0; padding-left: 20px; }
+  .location-hint li { margin-bottom: 3px; }
+
+  .daily-ops { background: #fff; border: 2px solid #3b82f6; border-radius: 12px; padding: 22px; margin-top: 28px; }
+  .daily-ops h2 { font-size: 16px; color: #1e40af; margin-bottom: 12px; }
+  .daily-row { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
+  .daily-row:last-child { border-bottom: none; }
+  .daily-time { min-width: 80px; font-weight: 700; color: #1e40af; font-size: 13px; flex-shrink: 0; }
+  .daily-action { flex: 1; font-size: 13px; color: #475569; }
+  .daily-action code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: 'Consolas', monospace; color: #334155; }
+
+  .fallback { background: #fff; border: 1px dashed #94a3b8; border-radius: 10px; padding: 20px; margin-top: 24px; }
+  .fallback h3 { font-size: 15px; color: #475569; margin-bottom: 10px; }
+  .fallback p { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+
+  .footer { text-align: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #94a3b8; }
+  .footer a { color: #3b82f6; text-decoration: none; }
+
+  code { font-family: 'Consolas', monospace; }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 18px; }
+    .step-title { font-size: 15px; }
+    .daily-row { flex-direction: column; gap: 4px; }
+    .daily-time { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ナレッジフォルダを開く手順</h1>
+  <div class="sub">前田さん向け — RUNBIRD福祉事業ナレッジAI</div>
+  <div>
+    <span class="os-badge">🪟 Windows版</span>
+    <span class="time">所要時間: 約3分</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== イントロ ===== -->
+<div class="intro">
+  <h2>このマニュアルで何ができるか</h2>
+  <p>4月10日の研修でセットアップ済みの「ランバード福祉ナレッジ」を、もう一度Cursorで開き直す方法です。</p>
+  <div class="note">
+    <strong>前提:</strong> 4/10の研修時にセットアップ済み（GitHub登録＋クローン＋動作確認pushまで完了済み）。PCにはすでにフォルダが入っている状態から始めます。
+  </div>
+</div>
+
+<!-- ===== 最重要注意 ===== -->
+<div style="background:#fef2f2; border:2px solid #ef4444; border-radius:12px; padding:22px; margin-bottom:24px;">
+  <h2 style="font-size:16px; color:#991b1b; margin-bottom:12px;">⚠️ 最初に読んでください — 「Clone repo」は押さない</h2>
+  <p style="font-size:14px; color:#7f1d1d; margin-bottom:10px;">Cursorの起動画面には「<strong>Clone repo</strong>」という目立つボタンがありますが、前田さんは<strong>押さないでください</strong>。</p>
+  <p style="font-size:13px; color:#7f1d1d; margin-bottom:10px;">4/10の研修で既にクローン済みのため、もう一度押すと<strong>同じフォルダが2つできてしまい</strong>、どちらが最新か分からなくなります。</p>
+
+  <table style="width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; background:#fff; border-radius:6px; overflow:hidden;">
+    <tr style="background:#fee2e2;">
+      <th style="text-align:left; padding:10px 12px; color:#991b1b; font-weight:700;">Cursor起動画面のボタン</th>
+      <th style="text-align:left; padding:10px 12px; color:#991b1b; font-weight:700;">前田さんの場合</th>
+    </tr>
+    <tr>
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#334155;"><strong>Recent</strong>（最近開いたフォルダ）</td>
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#166534;">✅ ここに <code>runbird-welfare-knowledge</code> があれば1クリック</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#334155;"><strong>Open folder</strong>（フォルダを開く）</td>
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#166534;">✅ Recentに無ければこちら</td>
+    </tr>
+    <tr style="background:#fef2f2;">
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#7f1d1d;"><strong>Clone repo</strong>（GitHubから取得）</td>
+      <td style="padding:10px 12px; border-top:1px solid #fecaca; color:#7f1d1d;">❌ <strong>押さない</strong>（2重クローンの原因）</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== Step 1 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">1</div>
+    <div class="step-title">フォルダの場所を思い出す</div>
+  </div>
+  <p>研修でクローンしたフォルダは、以下のどれかに入っているはずです。思い当たる場所をエクスプローラーで開いてみてください。</p>
+
+  <div class="location-hint">
+    <h4>💡 よくある保存場所（上から順に確認）</h4>
+    <ul>
+      <li><code>C:\git\runbird-welfare-knowledge</code>（推奨していた場所）</li>
+      <li><code>C:\Users\（ユーザー名）\runbird-welfare-knowledge</code></li>
+      <li>デスクトップ（<code>C:\Users\（ユーザー名）\Desktop\runbird-welfare-knowledge</code>）</li>
+      <li><code>C:\Users\（ユーザー名）\Documents\runbird-welfare-knowledge</code></li>
+    </ul>
+  </div>
+
+  <p><strong>見つからない場合:</strong> Windowsキー + <span class="keycap">E</span> でエクスプローラーを開き、右上の検索欄に <code>runbird-welfare-knowledge</code> と入力して検索してください。</p>
+
+  <div class="success">
+    ✅ フォルダが見つかったら、<strong>そのパスをメモ</strong>しておきます（エクスプローラーの上部アドレスバーに表示されています）。
+  </div>
+</div>
+
+<!-- ===== Step 2 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">2</div>
+    <div class="step-title">Cursorでそのフォルダを開く</div>
+  </div>
+  <p>Cursorを起動し、左上のメニューから:</p>
+  <ol>
+    <li><strong>File</strong>（ファイル）→ <strong>Open Folder</strong>（フォルダを開く）</li>
+    <li>Step 1で見つけたフォルダを選択</li>
+    <li>「フォルダーの選択」をクリック</li>
+    <li>信頼確認ダイアログが出たら <strong>「Yes, I trust the authors」</strong> をクリック</li>
+  </ol>
+
+  <div class="success">
+    ✅ 左サイドバーに以下が見えたら成功です。<br>
+    <code>ナレッジ/</code>、<code>README.md</code>、<code>.cursorrules</code>
+  </div>
+
+  <div class="warning">
+    <strong>💡 前回開いたフォルダなら:</strong> Cursor起動時の「Recent」（最近使用したフォルダ）一覧にも表示されているので、そこからワンクリックで開けます。
+  </div>
+</div>
+
+<!-- ===== Step 3 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">3</div>
+    <div class="step-title">最新版に更新する（必須）</div>
+  </div>
+  <p>研修以降に鈴木さん・星崎さん・他メンバーが追加したナレッジを取り込みます。Cursorのターミナルで:</p>
+  <p>ターミナルを開く: <span class="keycap">Ctrl</span> + <span class="keycap">`</span>（バッククォート、<span class="keycap">半角/全角</span>キーの隣）</p>
+  <div class="cmd">git pull</div>
+  <p>「Already up to date.」 または 新しいファイルのリストが表示されればOK。</p>
+  <div class="warning">
+    <strong>💡 エラーが出る場合:</strong> 研修以降にローカルで何か変更してしまった可能性があります。エラーメッセージを鈴木に送ってください。
+  </div>
+</div>
+
+<!-- ===== 日常運用 ===== -->
+<div class="daily-ops">
+  <h2>🗓 これからの日常運用</h2>
+  <div class="daily-row">
+    <div class="daily-time">朝イチ</div>
+    <div class="daily-action"><code>git pull</code>（他メンバーの追加分を取り込む）</div>
+  </div>
+  <div class="daily-row">
+    <div class="daily-time">日中</div>
+    <div class="daily-action">右パネルでAIに質問 / ナレッジ編集</div>
+  </div>
+  <div class="daily-row">
+    <div class="daily-time">退勤前</div>
+    <div class="daily-action">編集した日だけ：<br><code>git add -A &amp;&amp; git commit -m "内容" &amp;&amp; git push</code></div>
+  </div>
+</div>
+
+<!-- ===== どうしても見つからない場合 ===== -->
+<div class="fallback">
+  <h3>🆘 どうしてもフォルダが見つからない場合</h3>
+  <p>新しいPCに変えた、または何らかの理由でフォルダが消えてしまった場合は、もう一度クローンからやり直せます。Cursorのターミナルで:</p>
+  <div class="cmd">cd C:\
+mkdir git
+cd git
+git clone https://github.com/runbird-welfare/runbird-welfare-knowledge.git</div>
+  <p><strong>注意:</strong> OneDrive配下・ドキュメントフォルダには置かないでください（クラウド同期と競合してファイルが壊れます）。必ず <code>C:\git\</code> 配下に置きます。</p>
+</div>
+
+<div class="footer">
+  <p>作成: 2026/4/24 / 斗（hishaku）株式会社<br>
+  連絡先: 鈴木北斗（<a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a>）</p>
+</div>
+
+</div><!-- container -->
+
+</body>
+</html>
