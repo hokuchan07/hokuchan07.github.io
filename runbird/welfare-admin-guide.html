@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理者運用ガイド — RUNBIRD福祉事業 ナレッジAI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.8; }
+
+  .header { background: linear-gradient(135deg, #78350f, #92400e); color: #fff; padding: 40px 24px 32px; text-align: center; }
+  .header h1 { font-size: 26px; margin-bottom: 6px; }
+  .header .sub { font-size: 14px; color: #fcd34d; }
+  .header .badge { display: inline-block; margin-top: 12px; padding: 4px 14px; background: rgba(252,211,77,0.2); border: 1px solid rgba(252,211,77,0.4); border-radius: 6px; font-size: 13px; color: #fcd34d; }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  h2 { font-size: 20px; color: #1e293b; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 16px; color: #334155; margin: 24px 0 10px; }
+
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+  .card p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .card ul { font-size: 14px; color: #475569; padding-left: 20px; margin-bottom: 8px; }
+  .card li { margin-bottom: 6px; }
+
+  .cmd { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: 8px; font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; margin: 10px 0; overflow-x: auto; white-space: pre-wrap; }
+  .cmd .comment { color: #64748b; }
+
+  .daily { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .daily-card { background: #1e293b; border-radius: 12px; padding: 20px; }
+  .daily-card .when { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; color: #fbbf24; }
+  .daily-card .what { font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; color: #e2e8f0; margin-bottom: 6px; }
+  .daily-card .desc { font-size: 12px; color: #94a3b8; }
+
+  .info { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px 20px; margin: 12px 0; font-size: 14px; color: #334155; }
+
+  .warn { background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 14px 18px; margin: 12px 0; font-size: 14px; color: #92400e; }
+
+  .cycle { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin: 24px 0; }
+  .cycle-box { background: #fff; border: 2px solid #e2e8f0; border-radius: 10px; padding: 16px 20px; text-align: center; min-width: 140px; }
+  .cycle-box .icon { font-size: 28px; margin-bottom: 4px; }
+  .cycle-box .name { font-size: 14px; font-weight: 700; color: #1e293b; }
+  .cycle-box .desc { font-size: 12px; color: #64748b; margin-top: 2px; }
+  .cycle-arrow { font-size: 22px; color: #94a3b8; padding: 0 8px; }
+
+  .explain-row { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e2e8f0; align-items: flex-start; font-size: 14px; }
+  .explain-row:last-child { border-bottom: none; }
+  .explain-cmd { font-family: 'SF Mono', 'Consolas', monospace; color: #1e293b; font-weight: 600; min-width: 220px; flex-shrink: 0; }
+  .explain-mean { color: #475569; }
+
+  /* 未来ビジョン */
+  .vision { margin-top: 56px; }
+  .vision h2 { border-bottom-color: #3b82f6; color: #1e40af; }
+
+  .phase { margin-bottom: 32px; }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .phase-label { font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 4px; color: #fff; }
+  .phase-label.now { background: #22c55e; }
+  .phase-label.next { background: #3b82f6; }
+  .phase-label.future { background: #8b5cf6; }
+  .phase-title { font-size: 18px; font-weight: 700; color: #1e293b; }
+  .phase-time { font-size: 13px; color: #94a3b8; }
+
+  .phase-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  .phase-card p { font-size: 14px; color: #475569; margin-bottom: 6px; }
+  .phase-card .benefit { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px 14px; margin-top: 8px; font-size: 13px; color: #166534; }
+
+  .vision-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .vision-table th { text-align: left; padding: 12px 16px; background: #eff6ff; border-bottom: 1px solid #bfdbfe; color: #1e40af; font-weight: 600; }
+  .vision-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+  .vision-table .now-col { color: #64748b; }
+  .vision-table .future-col { color: #1e40af; font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .daily { grid-template-columns: 1fr; }
+    .cycle { flex-direction: column; }
+    .cycle-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .explain-row { flex-direction: column; gap: 2px; }
+    .explain-cmd { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>管理者運用ガイド</h1>
+  <div class="sub">RUNBIRD福祉事業 ナレッジAI — 嶋田社長・前田さん向け</div>
+  <div class="badge">管理者（Owner）専用</div>
+</div>
+
+<div class="container">
+
+<!-- ===== 管理者の役割 ===== -->
+<h2>管理者の役割</h2>
+
+<div class="card">
+  <p>管理者は<strong>ナレッジの追加・編集ができる唯一の権限</strong>です。</p>
+  <p>一般メンバーはCursorで質問するだけ。管理者がナレッジを育てれば育てるほど、AIの回答精度が上がり、全員の業務が楽になります。</p>
+</div>
+
+<div class="card">
+  <p><strong>管理者（Owner / 編集可能）:</strong> 嶋田社長、前田さん、中村さん、河合さん、鈴木、星崎</p>
+  <p><strong>使う人（Member / 読み取りのみ）:</strong> 豊田さん、遠藤さん、その他</p>
+</div>
+
+<div class="warn" style="margin-top:16px;">
+  <strong>📌 2026/4/25更新:</strong> リポジトリを<strong>private化</strong>しました。Org未参加の人はアクセスできません。新しいメンバーを追加する際は、GitHubアカウント取得→Org招待が必要です。<br>
+  使う人向けセットアップガイド: <a href="https://hokuchan07.github.io/runbird/welfare-user-guide.html" target="_blank">https://hokuchan07.github.io/runbird/welfare-user-guide.html</a>
+</div>
+
+<!-- ===== 日常運用 ===== -->
+<h2>管理者の日常</h2>
+
+<div class="daily">
+  <div class="daily-card">
+    <div class="when">朝イチ</div>
+    <div class="what">git pull</div>
+    <div class="desc">他の管理者が追加したナレッジを取得</div>
+  </div>
+  <div class="daily-card">
+    <div class="when">日中</div>
+    <div class="what">AIに質問 / ナレッジ編集</div>
+    <div class="desc">一般メンバーと同じ使い方 + 追加・修正</div>
+  </div>
+  <div class="daily-card">
+    <div class="when">編集した日の退勤前</div>
+    <div class="what">git add -A && commit && push</div>
+    <div class="desc">変更を全員に共有する</div>
+  </div>
+</div>
+
+<!-- ===== コマンド解説 ===== -->
+<h2>コマンド解説</h2>
+
+<div class="card">
+  <p>一般メンバーは <code>git pull</code> だけですが、管理者は<strong>4つ</strong>使います。</p>
+</div>
+
+<div class="info">
+  <div class="explain-row">
+    <div class="explain-cmd">git pull</div>
+    <div class="explain-mean"><strong>取得する。</strong>GitHubの最新をダウンロード。朝イチに実行。</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">git add -A</div>
+    <div class="explain-mean"><strong>まとめる。</strong>変更したファイルを送信リストに入れる。</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">git commit -m "内容"</div>
+    <div class="explain-mean"><strong>記録する。</strong>何を変えたかメモ付きで保存。日本語でOK。</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">git push</div>
+    <div class="explain-mean"><strong>送信する。</strong>GitHubにアップ。全員がpullで取得可能になる。</div>
+  </div>
+</div>
+
+<h3>退勤前のコマンド（まとめて実行）</h3>
+
+<div class="cmd">git add -A && git commit -m "苦情対応の返信例を追加" && git push</div>
+
+<div class="info">
+  <p><strong>&&</strong> は「前が成功したら次を実行」という意味。3つのコマンドを一気に実行しています。<br>
+  1つずつ分けて打っても同じ結果になります。</p>
+</div>
+
+<!-- ===== ナレッジの追加方法 ===== -->
+<h2>ナレッジの追加方法</h2>
+
+<h3>手順</h3>
+
+<div class="card">
+  <p><strong>1.</strong> 左サイドバーで追加したいフォルダを右クリック → 「New File」</p>
+  <p><strong>2.</strong> ファイル名を <code>.md</code> 付きで入力（例: <code>夜間対応.md</code>）</p>
+  <p><strong>3.</strong> テンプレートに沿って内容を書く（下記参照）</p>
+  <p><strong>4.</strong> <code>Ctrl+S</code> で保存</p>
+  <p><strong>5.</strong> ターミナルで push:</p>
+</div>
+<div class="cmd">git add -A && git commit -m "夜間対応の返信例を追加" && git push</div>
+
+<h3>返信例テンプレート</h3>
+
+<div class="cmd"><span class="comment"># タイトル</span>
+
+## 場面の説明
+
+### パターン
+（どういう状況で使うか）
+
+### 返信例
+```
+（実際の返信文）
+```
+
+### ポイント
+- （注意点1）
+- （注意点2）
+
+---
+
+## 更新履歴
+
+| 日付 | 更新者 | 内容 |
+|------|--------|------|
+| 2026-04-10 | （名前） | 初期作成 |</div>
+
+<h3>フォルダのルール</h3>
+
+<div class="card">
+  <ul>
+    <li><code>ナレッジ/返信例/</code> — 返信文のテンプレート・パターン集</li>
+    <li><code>ナレッジ/法令/</code> — 法令・制度の情報</li>
+    <li><code>ナレッジ/事業所/</code> — 事業所ごとの固有情報</li>
+  </ul>
+</div>
+
+<div class="warn">
+  <strong>フォルダ名を変えたり、新しいフォルダを作らないでください。</strong><br>
+  AIの参照ルール（.cursorrules）がこのフォルダ構成に合わせて設定されています。
+</div>
+
+<!-- ===== ナレッジ更新サイクル ===== -->
+<h2>ナレッジを育てるサイクル</h2>
+
+<div class="card">
+  <p>ナレッジは一度作って終わりではなく、定期的に育てていくものです。</p>
+</div>
+
+<div class="cycle">
+  <div class="cycle-box">
+    <div class="icon">💬</div>
+    <div class="name">ChatWork履歴</div>
+    <div class="desc">お客さんとのやり取り</div>
+  </div>
+  <div class="cycle-arrow">→</div>
+  <div class="cycle-box">
+    <div class="icon">📋</div>
+    <div class="name">パターン抽出</div>
+    <div class="desc">よくある質問・回答を整理</div>
+  </div>
+  <div class="cycle-arrow">→</div>
+  <div class="cycle-box">
+    <div class="icon">📝</div>
+    <div class="name">ナレッジに追加</div>
+    <div class="desc">テンプレートに沿って記述</div>
+  </div>
+  <div class="cycle-arrow">→</div>
+  <div class="cycle-box">
+    <div class="icon">⬆️</div>
+    <div class="name">git push</div>
+    <div class="desc">全員に共有</div>
+  </div>
+</div>
+
+<div class="info">
+  <p><strong>定期的にやること（月1〜2回）:</strong></p>
+  <p>ChatWorkの過去のトーク履歴を振り返り、新しい質問パターンや回答が増えていたらナレッジに追加する。<br>
+  斗（鈴木・星崎）がChatWork履歴を一括で読み取ってナレッジ化する作業も支援します。</p>
+</div>
+
+<!-- ===== トラブル対応 ===== -->
+<h2>トラブル対応</h2>
+
+<div class="info">
+  <div class="explain-row">
+    <div class="explain-cmd">pushでエラーが出た</div>
+    <div class="explain-mean">まず <code>git pull</code> してから再度push</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">addを取り消したい</div>
+    <div class="explain-mean"><code>git reset</code>（ファイルの中身は変わらない）</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">commitを取り消したい</div>
+    <div class="explain-mean"><code>git reset --soft HEAD~1</code>（ファイルの中身は変わらない）</div>
+  </div>
+  <div class="explain-row">
+    <div class="explain-cmd">pushした後に戻したい</div>
+    <div class="explain-mean">斗に連絡してください</div>
+  </div>
+</div>
+
+<!-- ===== 未来ビジョン ===== -->
+<div class="vision">
+<h2>Cursorでできるようになる未来</h2>
+
+<div class="card">
+  <p>今日は<strong>「ナレッジを読んでAIに質問する」</strong>というスタート地点です。<br>
+  Cursorを使いこなすと、福祉事業の仕事がこう変わっていきます。</p>
+</div>
+
+<!-- Phase 1 -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label now">今日</span>
+    <span class="phase-title">ナレッジAIで質問・返信文作成</span>
+  </div>
+  <div class="phase-card">
+    <p>ChatWorkでお客さんから質問が来たら、CursorのAIに聞いて返信文を作る。</p>
+    <p>法令の確認、書類の手順、返信のテンプレートをAIが回答してくれる。</p>
+    <div class="benefit">効果: ベテランに聞かなくても即座に対応できる。回答の品質がナレッジで標準化される。</div>
+  </div>
+</div>
+
+<!-- Phase 2 -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label next">次のステップ</span>
+    <span class="phase-title">全員がナレッジを追加できるようになる</span>
+  </div>
+  <div class="phase-card">
+    <p>一般メンバーも「こういう対応をした」「こういう質問が来た」をナレッジに追加できるようになる。</p>
+    <p>承認制を導入して、管理者がチェックしてから反映する仕組み。</p>
+    <div class="benefit">効果: 現場の最新ノウハウがリアルタイムでナレッジに蓄積。AIの回答精度がどんどん上がる。</div>
+  </div>
+</div>
+
+<!-- Phase 3 -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label future">将来</span>
+    <span class="phase-title">ChatWorkとの自動連携</span>
+  </div>
+  <div class="phase-card">
+    <p>ChatWorkの新しいメッセージを自動で読み取り、ナレッジを自動更新。</p>
+    <p>お客さんからの質問に対して、AIが返信案を自動で下書きしてくれる。</p>
+    <div class="benefit">効果: 手動でのナレッジ追加が不要になる。返信のスピードが劇的に上がる。</div>
+  </div>
+</div>
+
+<!-- Phase 4 -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label future">将来</span>
+    <span class="phase-title">書類作成・申請の自動化</span>
+  </div>
+  <div class="phase-card">
+    <p>指定申請の書類、事業計画書、報告書などをAIが下書き。</p>
+    <p>事業所情報と法令ナレッジを組み合わせて、自治体ごとのフォーマットに合わせた書類を自動生成。</p>
+    <div class="benefit">効果: 書類作成にかかる時間が大幅に短縮。ミスも減る。</div>
+  </div>
+</div>
+
+<!-- Phase 5 -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label future">将来</span>
+    <span class="phase-title">新人教育のAI化</span>
+  </div>
+  <div class="phase-card">
+    <p>新しい職員が入ったとき、Cursorを開くだけで業務に必要な知識にアクセスできる。</p>
+    <p>「○○の対応方法は？」「この書類の書き方は？」をAIに聞けば、ベテランと同じレベルの回答が返ってくる。</p>
+    <div class="benefit">効果: 教育コストの大幅削減。ベテランの負荷が減り、本来の業務に集中できる。</div>
+  </div>
+</div>
+
+<h3>今日 → 将来の変化</h3>
+
+<table class="vision-table">
+  <tr><th></th><th>今日</th><th>将来</th></tr>
+  <tr>
+    <td><strong>返信文</strong></td>
+    <td class="now-col">AIに質問して手動でChatWorkに貼る</td>
+    <td class="future-col">AIが自動で下書き → 確認してワンクリック送信</td>
+  </tr>
+  <tr>
+    <td><strong>ナレッジ追加</strong></td>
+    <td class="now-col">管理者が手動で追加・push</td>
+    <td class="future-col">ChatWork履歴から自動抽出・自動追加</td>
+  </tr>
+  <tr>
+    <td><strong>書類作成</strong></td>
+    <td class="now-col">テンプレートを手動で記入</td>
+    <td class="future-col">AIが事業所情報+法令から自動生成</td>
+  </tr>
+  <tr>
+    <td><strong>新人教育</strong></td>
+    <td class="now-col">ベテランが口頭で教える</td>
+    <td class="future-col">Cursorを開けば全ノウハウにアクセス</td>
+  </tr>
+  <tr>
+    <td><strong>法令対応</strong></td>
+    <td class="now-col">AIに聞いて確認</td>
+    <td class="future-col">法改正を自動検知して対応漏れを通知</td>
+  </tr>
+</table>
+
+<div class="card">
+  <p><strong>今日がスタートです。</strong> まずはナレッジAIで質問・返信文作成に慣れることが第一歩。<br>
+  使えば使うほどナレッジが育ち、AIが賢くなり、仕事が楽になっていきます。</p>
+</div>
+
+</div><!-- vision -->
+
+</div><!-- container -->
+
+</body>
+</html>
