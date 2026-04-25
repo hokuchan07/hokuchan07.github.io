@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>福祉ナレッジAI 使う人向けセットアップガイド</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  .header { background: #1e293b; color: #fff; padding: 40px 24px 32px; text-align: center; }
+  .header h1 { font-size: 24px; margin-bottom: 6px; }
+  .header .sub { font-size: 14px; color: #94a3b8; }
+  .header .badge { display: inline-block; margin-top: 12px; padding: 4px 14px; background: #16a34a; color: #fff; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .header .time { display: inline-block; margin-top: 12px; margin-left: 6px; padding: 4px 14px; background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; font-size: 12px; color: #93c5fd; }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  .intro { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .intro h2 { font-size: 18px; color: #1e293b; margin-bottom: 12px; }
+  .intro p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .intro .goal { background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 16px; margin-top: 12px; color: #166534; font-size: 14px; }
+
+  .role-box { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+  .role-box h3 { font-size: 15px; color: #1e40af; margin-bottom: 12px; }
+  .role-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border-radius: 6px; overflow: hidden; }
+  .role-table th { text-align: left; padding: 10px 12px; background: #dbeafe; color: #1e40af; font-weight: 600; }
+  .role-table td { padding: 10px 12px; border-top: 1px solid #f1f5f9; color: #475569; vertical-align: top; }
+
+  h2.section { font-size: 20px; color: #1e293b; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+
+  .step-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 18px; }
+  .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .step-num { width: 36px; height: 36px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+  .step-title { font-size: 17px; font-weight: 700; color: #1e293b; }
+
+  .step-card p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .step-card ul, .step-card ol { font-size: 14px; color: #475569; padding-left: 22px; margin: 8px 0; }
+  .step-card li { margin-bottom: 6px; }
+
+  .cmd { background: #1e293b; color: #e2e8f0; padding: 12px 16px; border-radius: 6px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 13px; margin: 8px 0; white-space: pre-wrap; word-break: break-all; }
+
+  .keycap { display: inline-block; background: #fff; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 7px; font-family: 'Consolas', monospace; font-size: 12px; color: #334155; margin: 0 2px; }
+
+  .success { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #166534; }
+  .warning { background: #fef3c7; border: 1px solid #fbbf24; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #92400e; }
+  .info { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #1e40af; }
+
+  .url-box { background: #1e293b; color: #93c5fd; padding: 12px 16px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 14px; margin: 10px 0; word-break: break-all; }
+  .url-box a { color: #93c5fd; text-decoration: none; }
+
+  .usage-card { background: #fff; border: 2px solid #16a34a; border-radius: 12px; padding: 24px; margin-top: 28px; }
+  .usage-card h2 { font-size: 18px; color: #166534; margin-bottom: 14px; }
+  .usage-card .qa { background: #f0fdf4; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'Consolas', monospace; font-size: 13px; color: #166534; }
+
+  .edit-routes { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px; }
+  .edit-routes h2 { font-size: 18px; color: #1e293b; margin-bottom: 14px; }
+  .route-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .route-box { padding: 16px; border-radius: 10px; border: 1px solid; }
+  .route-box.simple { background: #f0f9ff; border-color: #93c5fd; }
+  .route-box.advanced { background: #fef3c7; border-color: #fbbf24; }
+  .route-box h4 { font-size: 14px; margin-bottom: 8px; }
+  .route-box.simple h4 { color: #1e40af; }
+  .route-box.advanced h4 { color: #92400e; }
+  .route-box p { font-size: 13px; color: #475569; }
+  .route-box .recommended { display: inline-block; background: #16a34a; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; margin-left: 6px; font-weight: 700; }
+
+  .trouble { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px; }
+  .trouble h2 { font-size: 18px; color: #1e293b; margin-bottom: 14px; }
+  .trouble-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .trouble-table th { text-align: left; padding: 10px 12px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; color: #475569; font-weight: 600; }
+  .trouble-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569; vertical-align: top; }
+
+  .footer { text-align: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 13px; color: #94a3b8; }
+  .footer a { color: #3b82f6; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #334155; }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 20px; }
+    .step-title { font-size: 15px; }
+    .route-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>福祉ナレッジAI セットアップガイド</h1>
+  <div class="sub">使う人向け（豊田さん・遠藤さん他） — RUNBIRD福祉事業</div>
+  <div>
+    <span class="badge">使う人</span>
+    <span class="time">所要時間: 約30分</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== イントロ ===== -->
+<div class="intro">
+  <h2>このガイドの読み方</h2>
+  <p>RUNBIRD福祉事業の142事業所のChatWork履歴・返信例・公式資料・加算情報をAI（Cursor）で検索・質問できる仕組みを、自分のPCに導入する手順です。</p>
+  <div class="goal">
+    <strong>ゴール:</strong> Cursorを開いて、ナレッジAIに質問できる状態
+  </div>
+</div>
+
+<!-- ===== 役割の説明 ===== -->
+<div class="role-box">
+  <h3>📋 「使う人」の役割と権限</h3>
+  <table class="role-table">
+    <tr>
+      <th>できること</th>
+      <th>できないこと</th>
+    </tr>
+    <tr>
+      <td>
+        ✅ ナレッジを読む<br>
+        ✅ AIに業務質問する<br>
+        ✅ 加算・返信例・事業所履歴を検索する<br>
+        ✅ 自分のPC内で内容をコピー・参考にする
+      </td>
+      <td>
+        ❌ ファイルを直接編集して反映する<br>
+        ❌ 他の人のPCに変更を送る（push）
+      </td>
+    </tr>
+  </table>
+  <p style="font-size:12px; color:#1e40af; margin-top:10px;">※ ナレッジに追加したい情報がある場合は、ChatWorkで管理者（鈴木・前田など）に依頼してください。後述の「編集したい時」セクション参照。</p>
+</div>
+
+<!-- ============================================ -->
+<h2 class="section">📦 セットアップ手順（初回のみ）</h2>
+
+<!-- ===== Step 1 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">1</div>
+    <div class="step-title">GitHub Org招待を受諾する</div>
+  </div>
+  <p>GitHubから招待メール（「runbird-welfare invited you to join...」）が届いています。</p>
+  <ol>
+    <li>受信メールのリンク or 以下URLにアクセス:
+      <div class="url-box"><a href="https://github.com/orgs/runbird-welfare/invitation" target="_blank">https://github.com/orgs/runbird-welfare/invitation</a></div>
+    </li>
+    <li>緑の <strong>「Join runbird-welfare」</strong> ボタンをクリック</li>
+  </ol>
+  <div class="success">
+    ✅ これでrunbird-welfareの「Member」になりました（読み取り権限付与）
+  </div>
+</div>
+
+<!-- ===== Step 2 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">2</div>
+    <div class="step-title">Cursorをインストール</div>
+  </div>
+  <p>ブラウザで以下を開いてダウンロード:</p>
+  <div class="url-box"><a href="https://www.cursor.com/download" target="_blank">https://www.cursor.com/download</a></div>
+  <p>OSに合わせて選択:</p>
+  <ul>
+    <li><strong>Windows:</strong> 「Download for Windows」</li>
+    <li><strong>Mac (Apple Silicon=M1/M2/M3):</strong> 「Apple Silicon」</li>
+    <li><strong>Mac (Intel):</strong> 「Intel」</li>
+  </ul>
+  <p>ダウンロードしたインストーラーを実行 → 案内に従ってインストール → Cursorを起動</p>
+  <p>初回起動時、ログイン画面で <strong>「Sign up」</strong> または <strong>「Sign in with Google」</strong> でログイン。</p>
+  <div class="info">
+    💡 メールアドレスは個人/会社どちらでもOK。後でTeam招待を受ければランバードのTeamに紐づきます。
+  </div>
+</div>
+
+<!-- ===== Step 3 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">3</div>
+    <div class="step-title">Gitをインストール</div>
+  </div>
+
+  <p><strong>Windowsの場合:</strong></p>
+  <div class="url-box"><a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a></div>
+  <p>ダウンロードしたインストーラーを実行 → すべてデフォルトのまま「Next」連打でOK</p>
+
+  <p style="margin-top:14px;"><strong>Macの場合:</strong> macOS標準の「ターミナル」を開いて:</p>
+  <div class="cmd">xcode-select --install</div>
+  <p>「インストール」をクリック → 5〜10分待つ</p>
+</div>
+
+<!-- ===== Step 4 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">4</div>
+    <div class="step-title">ナレッジリポジトリをクローン</div>
+  </div>
+  <p>Cursorを起動 → ターミナルを開く（<span class="keycap">Ctrl</span> + <span class="keycap">`</span>）</p>
+
+  <p><strong>Windowsの場合:</strong></p>
+  <div class="cmd">cd C:\
+mkdir git
+cd git
+git clone https://github.com/runbird-welfare/runbird-welfare-knowledge.git</div>
+
+  <p style="margin-top:14px;"><strong>Macの場合:</strong></p>
+  <div class="cmd">mkdir -p ~/git
+cd ~/git
+git clone https://github.com/runbird-welfare/runbird-welfare-knowledge.git</div>
+
+  <div class="warning">
+    <strong>⚠️ 認証画面が出たら:</strong> ブラウザでGitHubにログインして「Authorize」をクリック。1回承認すれば次回から不要。
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ 保存先の重要な注意:</strong><br>
+    Windowsの「ドキュメント」「OneDrive」フォルダ、Macの「書類」「デスクトップ」「iCloud Drive」配下には<strong>絶対に置かないでください</strong>。クラウド同期と競合してファイルが壊れます。必ず上記の <code>C:\git</code> または <code>~/git</code> に置く。
+  </div>
+
+  <div class="success">
+    ✅ 「Receiving objects: 100% ...」と出れば成功です。
+  </div>
+</div>
+
+<!-- ===== Step 5 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">5</div>
+    <div class="step-title">Cursorでフォルダを開く</div>
+  </div>
+  <p>Cursor画面の左上から:</p>
+  <ol>
+    <li><strong>File</strong> → <strong>Open Folder</strong></li>
+    <li>クローンしたフォルダを選択:
+      <ul style="margin-top:4px;">
+        <li>Windows: <code>C:\git\runbird-welfare-knowledge</code></li>
+        <li>Mac: <code>~/git/runbird-welfare-knowledge</code></li>
+      </ul>
+    </li>
+    <li>「Yes, I trust the authors」をクリック</li>
+  </ol>
+
+  <p>左サイドバーに以下の構成が見えれば成功です:</p>
+  <div class="cmd">runbird-welfare-knowledge/
+├── .cursorrules
+├── README.md
+└── ナレッジ/
+    ├── Chatwork履歴/
+    ├── 事業所/（142ファイル）
+    ├── 加算/
+    ├── 公式資料/
+    ├── 返信例/
+    └── 法令/</div>
+</div>
+
+<!-- ============================================ -->
+<h2 class="section">💡 普段の使い方</h2>
+
+<!-- ===== 使い方 ===== -->
+<div class="usage-card">
+  <h2>🤖 AIに質問する（メインの使い方）</h2>
+  <p>Cursor画面右側の <strong>「New Agent」</strong> 入力欄に質問を入力 → <span class="keycap">Enter</span></p>
+
+  <p style="font-size:13px; color:#475569; margin-top:10px; margin-bottom:8px;"><strong>質問例:</strong></p>
+
+  <div class="qa">処遇改善加算が令和8年にどう変わるか教えて</div>
+
+  <div class="qa">利用者の家族から「対応が遅い」とクレームがあった時の返信例を作って</div>
+
+  <div class="qa">@ナレッジ/事業所/Royal.md この事業所の融資状況は？</div>
+
+  <p style="font-size:12px; color:#94a3b8; margin-top:10px;">※ <code>@</code> を使うと特定のファイルを参照させられます</p>
+
+  <div class="info">
+    💡 <strong>朝イチに必ず実行:</strong> Cursorのターミナルで <code>git pull</code> → 管理者が前日までに追加した最新のナレッジが取り込まれます。
+  </div>
+</div>
+
+<!-- ============================================ -->
+<h2 class="section">✏️ ナレッジを追加・編集したい時</h2>
+
+<div class="edit-routes">
+  <h2>2つのルート</h2>
+  <p style="font-size:13px;">使う人は<strong>直接の編集権限がない</strong>ので、以下のどちらかで対応します。</p>
+
+  <div class="route-grid">
+    <div class="route-box simple">
+      <h4>A. 簡単ルート<span class="recommended">推奨</span></h4>
+      <p><strong>ChatWorkで管理者に依頼</strong></p>
+      <p style="margin-top:6px;">「○○の情報を追加してほしい」とChatWorkで鈴木さん・前田さんなどに送る → 管理者が代理でナレッジに追加。</p>
+      <p style="margin-top:6px; font-size:12px; color:#1e40af;">最も簡単。技術知識不要。</p>
+    </div>
+    <div class="route-box advanced">
+      <h4>B. 上級ルート（任意）</h4>
+      <p><strong>Fork & Pull Request</strong></p>
+      <p style="margin-top:6px;">GitHubで自分用のコピー（Fork）を作って編集 → PRで本家に提案 → 管理者が承認・マージ。</p>
+      <p style="margin-top:6px; font-size:12px; color:#92400e;">Git操作の基礎知識が必要。慣れてから挑戦。</p>
+    </div>
+  </div>
+
+  <div class="info" style="margin-top:14px;">
+    💡 <strong>当面はAルート（ChatWorkで依頼）で十分です。</strong>業務が回りはじめてから、Bルートを学んでいけばOK。
+  </div>
+</div>
+
+<!-- ============================================ -->
+<h2 class="section">🆘 困ったときは</h2>
+
+<div class="trouble">
+  <h2>よくあるトラブル</h2>
+  <table class="trouble-table">
+    <tr>
+      <th style="width:40%;">症状</th>
+      <th>対処</th>
+    </tr>
+    <tr>
+      <td><code>git</code> コマンドが認識されない</td>
+      <td>Step 3 のGitインストールがまだ → インストール後Cursorを再起動</td>
+    </tr>
+    <tr>
+      <td>クローン時に <code>Permission denied</code> エラー</td>
+      <td>GitHub Org招待をまだ承諾していない可能性 → Step 1を再確認</td>
+    </tr>
+    <tr>
+      <td>クローン時に「Repository not found」エラー</td>
+      <td>同上（招待未承諾だと、privateリポジトリは見えない）</td>
+    </tr>
+    <tr>
+      <td>git pull で <code>rejected</code> エラー</td>
+      <td>理論上は起きない（Read権限ならpushしないため）→ エラー内容を鈴木さんに送る</td>
+    </tr>
+    <tr>
+      <td>AIが的外れな回答をする</td>
+      <td><code>@</code> でファイル名を指定して質問し直す（例: <code>@ナレッジ/加算/...</code>）</td>
+    </tr>
+    <tr>
+      <td>その他のトラブル</td>
+      <td>エラーメッセージのスクリーンショットを撮って ChatWork で鈴木に送ってください</td>
+    </tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>作成: 2026/4/25 / 斗（hishaku）株式会社<br>
+  連絡先: 鈴木北斗（<a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a>）</p>
+</div>
+
+</div><!-- container -->
+
+</body>
+</html>
