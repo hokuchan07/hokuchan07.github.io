@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Like Daddy | 顧客詳細</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>body { font-family: 'Noto Sans JP', -apple-system, sans-serif; }
+.tab-active { border-bottom: 2px solid #4f46e5; color: #4f46e5; font-weight: 500; }
+summary::-webkit-details-marker { display: none; }
+summary { list-style: none; }
+details[open] .chev { transform: rotate(180deg); }
+.chev { transition: transform 0.2s; display: inline-block; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen">
+
+<aside class="w-60 bg-slate-900 text-slate-200 flex flex-col">
+  <div class="p-5 border-b border-slate-800">
+    <div class="text-xs text-slate-500 mb-1">RUNBIRD</div>
+    <div class="font-bold text-base">顧客管理システム</div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1 text-sm">
+    <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>📊</span><span>ダッシュボード</span></a>
+    <a href="customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800 text-white border-l-2 border-indigo-400"><span>👥</span><span>顧客管理</span></a>
+    <a href="tasks.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>✅</span><span>工程チェック</span></a>
+    <a href="unpaid.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>💰</span><span>未収管理</span><span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">12</span></a>
+    <a href="evaluation.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>🏆</span><span>評価</span></a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>⚙️</span><span>設定</span></a>
+  </nav>
+  <div class="p-4 border-t border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold">NY</div>
+      <div class="text-xs"><div class="text-white">中村 侑加</div><div class="text-slate-500">内勤事務</div></div>
+    </div>
+  </div>
+</aside>
+
+<main class="flex-1">
+  <header class="bg-white border-b border-slate-200 px-8 py-4">
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+      <a href="customers.html" class="hover:text-slate-700">顧客管理</a><span>›</span><span>Like Daddy</span>
+    </div>
+    <div class="flex items-start justify-between">
+      <div>
+        <div class="flex items-center gap-3">
+          <h1 class="text-2xl font-bold">Like Daddy</h1>
+          <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">未収あり</span>
+          <span class="text-xs text-slate-500">顧客ID: 261</span>
+        </div>
+        <div class="text-sm text-slate-600 mt-1">代表: 渡真利 浩 ／ 沖縄県中頭郡</div>
+      </div>
+      <div class="flex gap-2">
+        <a href="#" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">📁 Dropboxフォルダを開く</a>
+        <button class="px-3 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">編集</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-8">
+
+    <div class="grid grid-cols-4 gap-6">
+
+      <!-- Left column: 基本情報 -->
+      <div class="col-span-1 space-y-4">
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <h3 class="font-bold mb-3 text-sm">基本情報</h3>
+          <dl class="space-y-2 text-xs">
+            <div><dt class="text-slate-500">屋号</dt><dd>Like Daddy</dd></div>
+            <div><dt class="text-slate-500">代表者名</dt><dd>渡真利 浩</dd></div>
+            <div><dt class="text-slate-500">代表携帯</dt><dd>090-xxxx-xxxx</dd></div>
+            <div><dt class="text-slate-500">店舗電話</dt><dd>098-xxx-xxxx</dd></div>
+            <div><dt class="text-slate-500">メール</dt><dd class="break-all">renew.like.d@xxxxxxxx.jp</dd></div>
+            <div><dt class="text-slate-500">店舗住所</dt><dd>沖縄県中頭郡…</dd></div>
+            <div><dt class="text-slate-500">郵送物宛名</dt><dd>渡真利 浩 様</dd></div>
+          </dl>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <h3 class="font-bold mb-3 text-sm">担当</h3>
+          <dl class="space-y-2 text-xs">
+            <div><dt class="text-slate-500">アポ担当</dt><dd>栗山 大輔</dd></div>
+            <div><dt class="text-slate-500">営業担当</dt><dd>高城 相成</dd></div>
+            <div><dt class="text-slate-500">監督</dt><dd>-</dd></div>
+            <div><dt class="text-slate-500">事務</dt><dd>中村 侑加</dd></div>
+          </dl>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <h3 class="font-bold mb-3 text-sm">メモ</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">広告運用中。2025/12〜督促対応。再架電リスト対象外（高城指示）。</p>
+        </div>
+      </div>
+
+      <!-- Right column: タブ -->
+      <div class="col-span-3 bg-white rounded-xl border border-slate-200">
+
+        <div class="border-b border-slate-200 px-6 flex gap-6 text-sm">
+          <button class="py-3 tab-active">契約情報 <span class="text-xs text-slate-400">(2)</span></button>
+          <button class="py-3 text-slate-500 hover:text-slate-800">進ちょく</button>
+          <button class="py-3 text-slate-500 hover:text-slate-800">対応履歴 <span class="text-xs text-slate-400">(8)</span></button>
+          <button class="py-3 text-slate-500 hover:text-slate-800">ファイル <span class="text-xs text-slate-400">(12)</span></button>
+          <button class="py-3 text-slate-500 hover:text-slate-800">料金回収</button>
+        </div>
+
+        <div class="p-6 space-y-3">
+
+          <div class="text-xs text-slate-500 mb-1">契約をクリックすると進捗・メモ・ファイルが開きます</div>
+
+          <!-- Contract 1: mobie.pr (collapsed by default) -->
+          <details class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+            <summary class="p-4 cursor-pointer hover:bg-slate-50 flex items-center gap-3">
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded">mobie.pr</span>
+                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">入金済</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium text-sm">初期契約</div>
+                <div class="text-xs text-slate-500 truncate">受注 2023-06-20 · ¥2,012,904 · アプラス可決 · 高城 相成</div>
+              </div>
+              <span class="text-xs text-slate-400 shrink-0">#261-1</span>
+              <span class="chev text-slate-400 shrink-0">▼</span>
+            </summary>
+
+            <div class="border-t border-slate-100 bg-slate-50/30 p-5 space-y-4">
+
+              <!-- 進捗 -->
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <span class="font-medium text-slate-700">進捗</span>
+                  <span class="text-emerald-600 font-medium">✓ 完了（納品 2023-09-11 · 入金 2023-09-19）</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">審査 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">App登録 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">審査結果 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">前確設定 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">前確 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">制作 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">納品 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-500 text-white text-[11px] font-medium rounded flex items-center justify-center">入金 ✓</div>
+                </div>
+              </div>
+
+              <!-- 工程チェック詳細（あんけんたすく置き換え） -->
+              <details class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                <summary class="p-3 cursor-pointer hover:bg-slate-50 flex items-center gap-2">
+                  <span>📋</span>
+                  <span class="text-xs font-medium text-slate-700">工程チェック詳細</span>
+                  <span class="text-xs text-emerald-600 ml-1">35 / 35 完了（全工程クリア）</span>
+                  <a href="tasks.html" class="ml-auto text-xs text-indigo-600 hover:underline">工程チェック画面で見る →</a>
+                  <span class="chev text-slate-400">▼</span>
+                </summary>
+                <div class="border-t border-slate-100 p-3 space-y-1.5 bg-slate-50/40">
+
+                  <!-- 審査 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">審査</span>
+                      <span class="text-slate-500">6/6</span>
+                      <span class="text-slate-400 ml-auto">完了後 → 審査結果待ち</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">Dropboxの顧客フォルダ作る</span><span class="text-slate-400 text-[10px]">2023-06-20 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">見積書を作成する</span><span class="text-slate-400 text-[10px]">2023-06-20 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">FAX(web)で審査依頼をする</span><span class="text-slate-400 text-[10px]">2023-06-20 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">営業のグループとIT事業部のLINEグループに審査登録(テンプレ)を送る</span><span class="text-slate-400 text-[10px]">2023-06-20 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">書類をすべて格納する</span><span class="text-slate-400 text-[10px]">2023-06-21 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ホワイトボードのディレクション(仮)に書く</span><span class="text-slate-400 text-[10px]">2023-06-21 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- App登録 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">App登録</span>
+                      <span class="text-slate-500">2/2</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appに顧客情報を追加する</span><span class="text-slate-400 text-[10px]">2023-06-23 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">契約書を締結した商品情報をすべて登録する</span><span class="text-slate-400 text-[10px]">2023-06-23 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 審査結果 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">審査結果</span>
+                      <span class="text-slate-500">4/4</span>
+                      <span class="text-slate-400 ml-auto">→ 前確待ち</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">審査結果(テンプレ)を営業のグループとIT事業部のグループに送る</span><span class="text-slate-400 text-[10px]">2023-06-25 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">否決の場合は信販交渉を送る(条件あり)</span><span class="text-slate-400 text-[10px]">該当なし（一次可決）</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">複数の信販会社で可決が出た場合、優先順位の低い信販会社に対して申込キャンセルの手続きをする</span><span class="text-slate-400 text-[10px]">該当なし</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ディレクション(仮)に間に合わないスケジュールは日時未定にする</span><span class="text-slate-400 text-[10px]">該当なし</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 確認電話 (AG契約のみ・対象外) -->
+                  <details class="bg-white rounded border border-slate-200 opacity-60">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-400 flex items-center justify-center text-[10px]">—</span>
+                      <span class="font-medium">確認電話</span>
+                      <span class="text-xs bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">AG契約のみ</span>
+                      <span class="text-slate-400 ml-auto">対象外（アプラス契約）</span>
+                    </summary>
+                  </details>
+
+                  <!-- 前確設定 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">前確設定</span>
+                      <span class="text-slate-500">6/6</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">最新の契約書・受注内容共有シートがDropboxに格納されてるか確認</span><span class="text-slate-400 text-[10px]">2023-07-28 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">営業ログや対応ログが提出されているか確認して格納する</span><span class="text-slate-400 text-[10px]">2023-07-28 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">LINEWORKSのカレンダーを登録する(契約書・受注内容共有シートも)</span><span class="text-slate-400 text-[10px]">2023-07-28 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ホワイトボードの前確待ちに書く</span><span class="text-slate-400 text-[10px]">2023-07-28 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appの信販会社・金額・CB・商品情報(広告運用含む)があってるか確認して正しく記録</span><span class="text-slate-400 text-[10px]">2023-07-29 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客に前確メール(契約書のご案内)を送る</span><span class="text-slate-400 text-[10px]">2023-07-29 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 前確 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">前確</span>
+                      <span class="text-slate-500">3/3</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">前確完了後は営業のグループに前確完了(テンプレ)を送る</span><span class="text-slate-400 text-[10px]">2023-08-01 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">前確のログをINNOVERAからダウンロードして格納する</span><span class="text-slate-400 text-[10px]">2023-08-01 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appに前確完了日を記録する</span><span class="text-slate-400 text-[10px]">2023-08-01 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 制作依頼 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">制作依頼</span>
+                      <span class="text-slate-500">4/4</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">自社制作は制作のグループに制作依頼(テンプレ)と契約書・受注内容共有シートを送る</span><span class="text-slate-400 text-[10px]">2023-08-03 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">他社制作はそれぞれの連絡方法で制作依頼と受注内容共有シートを送る</span><span class="text-slate-400 text-[10px]">該当なし</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">制作担当者が決まったらLINEグループを作成する</span><span class="text-slate-400 text-[10px]">2023-08-04 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">制作から初回ディレクション完了連絡が入ったら、MEO運用のグループにmeoクラウド初期設定依頼と受注内容共有シートを送る</span><span class="text-slate-400 text-[10px]">2023-08-10 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 納品(mobie.pr) -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">納品（mobie.pr）</span>
+                      <span class="text-slate-500">8/8</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appの納品日を記録する</span><span class="text-slate-400 text-[10px]">2023-09-11 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">マーケティングのグループに納品完了連絡(テンプレ)を送る</span><span class="text-slate-400 text-[10px]">2023-09-11 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">YouTubeに動画をアップロードしてURLを発行する</span><span class="text-slate-400 text-[10px]">2023-09-11 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">YouTubeのURLを顧客管理Appと制作実績のスプシに記録する</span><span class="text-slate-400 text-[10px]">2023-09-11 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">自社制作の場合、制作中のログをDropboxに格納</span><span class="text-slate-400 text-[10px]">2023-09-11 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">運用のスプシに請求開始日と金額を記入する</span><span class="text-slate-400 text-[10px]">2023-09-12 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントにクレカ登録もしくは口座振替登録がされているか確認</span><span class="text-slate-400 text-[10px]">2023-09-12 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">他社制作のみ、社内の制作グループにディスク制作依頼(テンプレ)を送る</span><span class="text-slate-400 text-[10px]">該当なし</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 完工書作成・送付 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">完工書作成・送付</span>
+                      <span class="text-slate-500">8/8</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">送る書類に付箋を貼る</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">送付状を作成して印刷する(Wordは保存する)</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ダブルCKを受ける</span><span class="text-slate-400 text-[10px]">2023-09-13 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">佐川の伝票を作成して印刷・梱包する</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">佐川の集荷を手配する</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appの送付日に発送日・送付する佐川の送り状番号・送ってる書類・返送期日を記録</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客に書類発送のメールを送る</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ホワイトボードの完工書返送待ちに書く</span><span class="text-slate-400 text-[10px]">2023-09-13 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 完工書受取 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">完工書受取</span>
+                      <span class="text-slate-500">5/5</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appの返送日に受け取った日にちを記録</span><span class="text-slate-400 text-[10px]">2023-09-15 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客に電話して検収日をヒアリングする(一括・分割・AG以外)</span><span class="text-slate-400 text-[10px]">2023-09-15 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">信販会社に検収依頼をする</span><span class="text-slate-400 text-[10px]">2023-09-16 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">返送されてきた書類をすべてDropboxに格納する</span><span class="text-slate-400 text-[10px]">2023-09-16 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ホワイトボードの検収完了待ちに書く</span><span class="text-slate-400 text-[10px]">2023-09-16 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 検収完了 -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">検収完了</span>
+                      <span class="text-slate-500">6/6</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">検収完了一覧を記入する(AGのみ原本送付日)</span><span class="text-slate-400 text-[10px]">2023-09-18 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appに検収完了日を記録</span><span class="text-slate-400 text-[10px]">2023-09-18 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">営業のグループに検収完了連絡(テンプレ)を送る</span><span class="text-slate-400 text-[10px]">2023-09-18 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">信販会社に送る書類をまとめる</span><span class="text-slate-400 text-[10px]">2023-09-18 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">送る書類セットをダブルCKしてもらう</span><span class="text-slate-400 text-[10px]">2023-09-18 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">信販会社にレターパックライトで発送(AGのみ発送日注意)</span><span class="text-slate-400 text-[10px]">2023-09-19 · 中村 侑加</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 入金チェック -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">入金チェック</span>
+                      <span class="text-slate-500">3/3</span>
+                      <span class="text-slate-400 ml-auto">→ ファイリング</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">顧客管理Appの信販入金日を確認して信販会社から入金あるか確認</span><span class="text-slate-400 text-[10px]">2023-10-19 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">書類・ログがすべて格納されているか最終チェック</span><span class="text-slate-400 text-[10px]">2023-10-19 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">CBなしのためファイリングBOXに入れる</span><span class="text-slate-400 text-[10px]">2023-10-19 · 堀河 つばさ</span></div>
+                    </div>
+                  </details>
+
+                </div>
+              </details>
+
+              <!-- 詳細フィールド -->
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="text-xs font-medium text-slate-700 mb-2">契約詳細</div>
+                <dl class="grid grid-cols-3 gap-3 text-xs">
+                  <div><dt class="text-slate-500">信販会社</dt><dd class="font-medium">アプラス</dd></div>
+                  <div><dt class="text-slate-500">信販入金額</dt><dd class="font-medium">¥2,012,904</dd></div>
+                  <div><dt class="text-slate-500">CB</dt><dd class="font-medium">-</dd></div>
+                  <div><dt class="text-slate-500">審査結果</dt><dd class="font-medium">可決</dd></div>
+                  <div><dt class="text-slate-500">審査期限</dt><dd class="font-medium">2023-09-19</dd></div>
+                  <div><dt class="text-slate-500">納品完了日</dt><dd class="font-medium">2023-09-11</dd></div>
+                  <div><dt class="text-slate-500">送付日</dt><dd class="font-medium">2023-09-11</dd></div>
+                  <div><dt class="text-slate-500">送付No.</dt><dd class="font-medium">490973171150</dd></div>
+                  <div><dt class="text-slate-500">アポ担当</dt><dd class="font-medium">栗山 大輔</dd></div>
+                </dl>
+              </div>
+
+              <!-- メモ -->
+              <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <span>📝</span>
+                  <span class="text-xs font-medium text-slate-700">メモ</span>
+                  <span class="text-[11px] text-slate-500 ml-auto">最終更新: 2023-10-04 中村 侑加</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line">【10/04】検収完了。
+【10/03】検収再設定 14F / 15F。
+要注意：検収まで急ぐこと。河合さんに対応依頼済み。
+営業担当の契約となっているため、既存店舗の保守の期間については別途確認が必要。</p>
+              </div>
+
+              <!-- 関連ファイル -->
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="text-xs font-medium text-slate-700">この契約に紐づくファイル（4件）</div>
+                  <a href="#" class="text-xs text-indigo-600 hover:underline">Dropboxで開く →</a>
+                </div>
+                <div class="space-y-1 text-xs">
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">契約書_mobie_pr_261.pdf</span><span class="text-slate-400">2023-06-20</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">アプラス審査可決通知.pdf</span><span class="text-slate-400">2023-06-21</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>🖼️</span><span class="flex-1">免許証_渡真利_表裏.jpg</span><span class="text-slate-400">2023-06-20</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>🎤</span><span class="flex-1">前確ログ_20230801.mp3</span><span class="text-slate-400">2023-08-01</span></div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Contract 2: 広告運用 (open by default — has active issue) -->
+          <details class="border border-red-200 rounded-xl overflow-hidden bg-white" open>
+            <summary class="p-4 cursor-pointer hover:bg-red-50/50 flex items-center gap-3 bg-red-50/30">
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded">広告運用</span>
+                <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">2ヶ月未収 ⚠️</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium text-sm">月額継続</div>
+                <div class="text-xs text-slate-500 truncate">開始 2023-11-01 · 月額 ¥11,000 · 口座振替 · 累計未収 ¥22,000</div>
+              </div>
+              <span class="text-xs text-slate-400 shrink-0">#261-2</span>
+              <span class="chev text-slate-400 shrink-0">▼</span>
+            </summary>
+
+            <div class="border-t border-red-100 p-5 space-y-4">
+
+              <!-- 進捗 -->
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <span class="font-medium text-slate-700">進捗</span>
+                  <span class="text-red-600 font-medium">⚠️ 督促フェーズ（最終対応 2026/4/15）</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">運用開始 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">初回請求 ✓</div>
+                  <div class="flex-1 h-7 bg-emerald-100 text-emerald-700 text-[11px] font-medium rounded flex items-center justify-center">継続運用 ✓</div>
+                  <div class="flex-1 h-7 bg-amber-100 text-amber-700 text-[11px] font-medium rounded flex items-center justify-center">未収検知 ✓</div>
+                  <div class="flex-1 h-7 bg-amber-500 text-white text-[11px] font-medium rounded flex items-center justify-center border-2 border-amber-700">督促SMS ●</div>
+                  <div class="flex-1 h-7 bg-slate-100 text-slate-500 text-[11px] font-medium rounded flex items-center justify-center">督促手紙</div>
+                  <div class="flex-1 h-7 bg-slate-100 text-slate-500 text-[11px] font-medium rounded flex items-center justify-center">督促電話</div>
+                  <div class="flex-1 h-7 bg-slate-100 text-slate-500 text-[11px] font-medium rounded flex items-center justify-center">法務対応</div>
+                </div>
+                <div class="mt-2 text-[11px] text-slate-500 flex items-center gap-4">
+                  <span>🗓️ 次回月次請求: 2026-05-01</span>
+                  <span>📆 契約満了: 2028-10-31（残 30ヶ月）</span>
+                  <span>💴 累計請求: ¥319,000 / 入金 ¥297,000</span>
+                </div>
+              </div>
+
+              <!-- 料金回収フロー（工程チェック詳細） -->
+              <details class="bg-white border border-slate-200 rounded-lg overflow-hidden" open>
+                <summary class="p-3 cursor-pointer hover:bg-slate-50 flex items-center gap-2">
+                  <span>📋</span>
+                  <span class="text-xs font-medium text-slate-700">料金回収フロー</span>
+                  <span class="text-xs text-red-600 ml-1">現在: 督促フェーズ（未完タスク 7件 · 期限超過 2件 ⚠️）</span>
+                  <a href="tasks.html" class="ml-auto text-xs text-indigo-600 hover:underline">工程チェック画面で見る →</a>
+                  <span class="chev text-slate-400">▼</span>
+                </summary>
+                <div class="border-t border-slate-100 p-3 space-y-1.5 bg-slate-50/40">
+
+                  <!-- 月次請求サイクル（完了・直近29ヶ月） -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                      <span class="font-medium">月次請求サイクル</span>
+                      <span class="text-slate-500">27 / 29 完了</span>
+                      <span class="text-slate-400 ml-auto">2023-11 〜 2026-03（直近2件未収）</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 text-xs">
+                      <!-- Month selector tabs -->
+                      <div class="mb-3">
+                        <div class="text-[11px] text-slate-500 mb-2">月を選択（クリックでその月の担当・実施日を表示）</div>
+                        <div class="grid grid-cols-6 gap-1">
+                          <button onclick="showMonth('2025-10')" data-month="2025-10" class="month-btn text-[10px] text-center py-1.5 bg-emerald-100 text-emerald-700 rounded hover:ring-2 hover:ring-emerald-300">2025-10 ✓</button>
+                          <button onclick="showMonth('2025-11')" data-month="2025-11" class="month-btn text-[10px] text-center py-1.5 bg-emerald-100 text-emerald-700 rounded hover:ring-2 hover:ring-emerald-300">2025-11 ✓</button>
+                          <button onclick="showMonth('2025-12')" data-month="2025-12" class="month-btn text-[10px] text-center py-1.5 bg-emerald-100 text-emerald-700 rounded hover:ring-2 hover:ring-emerald-300">2025-12 ✓</button>
+                          <button onclick="showMonth('2026-01')" data-month="2026-01" class="month-btn text-[10px] text-center py-1.5 bg-emerald-100 text-emerald-700 rounded hover:ring-2 hover:ring-emerald-300">2026-01 ✓</button>
+                          <button onclick="showMonth('2026-02')" data-month="2026-02" class="month-btn text-[10px] text-center py-1.5 bg-red-100 text-red-700 font-bold rounded hover:ring-2 hover:ring-red-300">2026-02 ✕</button>
+                          <button onclick="showMonth('2026-03')" data-month="2026-03" class="month-btn text-[10px] text-center py-1.5 bg-red-200 text-red-800 font-bold rounded ring-2 ring-red-500">2026-03 ✕</button>
+                        </div>
+                      </div>
+
+                      <!-- 2025-10 -->
+                      <div id="month-2025-10" class="month-content hidden">
+                        <div class="mb-2 p-2 bg-emerald-50 rounded text-[11px] text-emerald-700">✓ <strong>2025年10月分</strong> 正常収納完了（¥11,000 · 2025-10-27 入金）</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2025-10-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-10-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">口座振替実行（ロボペイ経由）</span><span class="text-slate-400 text-[10px]">2025-10-27 · ロボペイ自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 顧客管理Appに反映</span><span class="text-slate-400 text-[10px]">2025-10-31 14:20 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-10-28 09:00 · システム自動</span></div>
+                        </div>
+                      </div>
+
+                      <!-- 2025-11 -->
+                      <div id="month-2025-11" class="month-content hidden">
+                        <div class="mb-2 p-2 bg-emerald-50 rounded text-[11px] text-emerald-700">✓ <strong>2025年11月分</strong> 正常収納完了（¥11,000 · 2025-11-27 入金）</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2025-11-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-11-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">口座振替実行（ロボペイ経由）</span><span class="text-slate-400 text-[10px]">2025-11-27 · ロボペイ自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 顧客管理Appに反映</span><span class="text-slate-400 text-[10px]">2025-11-28 13:05 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-11-28 09:00 · システム自動</span></div>
+                        </div>
+                      </div>
+
+                      <!-- 2025-12 -->
+                      <div id="month-2025-12" class="month-content hidden">
+                        <div class="mb-2 p-2 bg-emerald-50 rounded text-[11px] text-emerald-700">✓ <strong>2025年12月分</strong> 正常収納完了（¥11,000 · 2025-12-29 入金 · 土日繰越）</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2025-12-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-12-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">口座振替実行（ロボペイ経由）</span><span class="text-slate-400 text-[10px]">2025-12-29 · ロボペイ自動（27日土曜のため繰越）</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 顧客管理Appに反映</span><span class="text-slate-400 text-[10px]">2025-12-30 10:40 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2025-12-30 09:00 · システム自動</span></div>
+                        </div>
+                      </div>
+
+                      <!-- 2026-01 -->
+                      <div id="month-2026-01" class="month-content hidden">
+                        <div class="mb-2 p-2 bg-emerald-50 rounded text-[11px] text-emerald-700">✓ <strong>2026年1月分</strong> 正常収納完了（¥11,000 · 2026-01-27 入金）</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2026-01-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2026-01-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">口座振替実行（ロボペイ経由）</span><span class="text-slate-400 text-[10px]">2026-01-27 · ロボペイ自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 顧客管理Appに反映</span><span class="text-slate-400 text-[10px]">2026-01-31 11:22 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2026-01-28 09:00 · システム自動</span></div>
+                        </div>
+                      </div>
+
+                      <!-- 2026-02 -->
+                      <div id="month-2026-02" class="month-content hidden">
+                        <div class="mb-2 p-2 bg-red-50 border border-red-200 rounded text-[11px] text-red-700">⚠️ <strong>2026年2月分</strong> 振替不能 · 未収発生（初回・残高不足）</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2026-02-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2026-02-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1 bg-red-50 rounded px-1"><input type="checkbox" disabled class="rounded"><span class="flex-1 text-red-700"><strong>口座振替実行（ロボペイ経由）</strong> → 振替不能 ⚠️</span><span class="text-red-600 text-[10px]">2026-02-27 · 残高不足</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 未収として顧客管理Appに記録</span><span class="text-slate-400 text-[10px]">2026-02-28 16:15 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1 opacity-50"><input type="checkbox" disabled class="rounded"><span class="flex-1 line-through">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">未入金のためスキップ</span></div>
+                        </div>
+                        <div class="mt-2 p-2 bg-amber-50 border border-amber-200 rounded text-[11px] text-amber-800">
+                          <strong>📝 堀河さんのメモ:</strong> 2026-02-28 初回の振替不能。翌月（3月）も要注意。督促フローは3月分確定後に起動予定。
+                        </div>
+                      </div>
+
+                      <!-- 2026-03 (DEFAULT OPEN) -->
+                      <div id="month-2026-03" class="month-content">
+                        <div class="mb-2 p-2 bg-red-50 border border-red-200 rounded text-[11px] text-red-700">⚠️ <strong>2026年3月分</strong> 振替不能 · 連続2ヶ月目未収 → 督促プロセス起動</div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボットペイメントで月次請求を登録</span><span class="text-slate-400 text-[10px]">2026-03-01 00:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">請求書メールを顧客に自動送付</span><span class="text-slate-400 text-[10px]">2026-03-01 09:00 · システム自動</span></div>
+                          <div class="flex items-center gap-2 py-1 bg-red-50 rounded px-1"><input type="checkbox" disabled class="rounded"><span class="flex-1 text-red-700"><strong>口座振替実行（ロボペイ経由）</strong> → 振替不能 ⚠️</span><span class="text-red-600 text-[10px]">2026-03-27 · 残高不足</span></div>
+                          <div class="flex items-center gap-2 py-1"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">ロボペイCSVで入金照合 → 未収記録 + 督促プロセス起動</span><span class="text-slate-400 text-[10px]">2026-03-31 15:42 · 堀河 つばさ</span></div>
+                          <div class="flex items-center gap-2 py-1 opacity-50"><input type="checkbox" disabled class="rounded"><span class="flex-1 line-through">領収書PDFを顧客に自動送付</span><span class="text-slate-400 text-[10px]">未入金のためスキップ</span></div>
+                        </div>
+                        <div class="mt-2 p-2 bg-amber-50 border border-amber-200 rounded text-[11px] text-amber-800">
+                          <strong>📝 堀河さんのメモ:</strong> 連続2ヶ月目のため督促プロセス自動起動。SMS送信済み（2026-03-18）。次回4/27の振替も失敗した場合、3ヶ月連続で法務エスカレーション対象。
+                        </div>
+                      </div>
+                    </div>
+
+                    <script>
+                      function showMonth(m) {
+                        document.querySelectorAll('.month-content').forEach(el => el.classList.add('hidden'));
+                        const target = document.getElementById('month-' + m);
+                        if (target) target.classList.remove('hidden');
+                        document.querySelectorAll('.month-btn').forEach(btn => {
+                          btn.classList.remove('ring-2', 'ring-red-500', 'ring-emerald-500');
+                        });
+                        const btn = document.querySelector('[data-month="' + m + '"]');
+                        if (btn) {
+                          if (btn.classList.contains('bg-red-100') || btn.classList.contains('bg-red-200')) {
+                            btn.classList.add('ring-2', 'ring-red-500');
+                          } else {
+                            btn.classList.add('ring-2', 'ring-emerald-500');
+                          }
+                        }
+                      }
+                    </script>
+                  </details>
+
+                  <!-- 未収検知・督促フェーズ（現在進行中） -->
+                  <details class="bg-white rounded border-2 border-amber-400" open>
+                    <summary class="p-2 cursor-pointer hover:bg-amber-50/50 flex items-center gap-2 text-xs bg-amber-50/50">
+                      <span class="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px]">●</span>
+                      <span class="font-medium">未収検知・督促フェーズ</span>
+                      <span class="text-amber-600 font-medium">4 / 8 完了 · 期限超過 2件 ⚠️</span>
+                      <span class="text-slate-400 ml-auto">現在のステージ</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-amber-100 px-3 py-2 space-y-1.5 text-xs">
+                      <div class="flex items-center gap-2 py-1 px-2 bg-emerald-50 rounded"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">2026-02 振替不能検知（ロボペイCSV照合）</span><span class="text-slate-400 text-[10px]">2026-02-28 · システム自動</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-emerald-50 rounded"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">2026-03 振替不能検知</span><span class="text-slate-400 text-[10px]">2026-03-31 · システム自動</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-emerald-50 rounded"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">督促SMS 1回目送信（メールボックス容量確認依頼）</span><span class="text-slate-400 text-[10px]">2026-03-18 12:00 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-emerald-50 rounded"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">督促SMS 2回目送信（迷惑メール設定確認依頼）</span><span class="text-slate-400 text-[10px]">2026-03-18 12:35 · 堀河 つばさ</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-red-50 border border-red-200 rounded">
+                        <input type="checkbox" class="rounded">
+                        <div class="flex-1">
+                          <div>督促手紙 初回送付（黄色封筒）</div>
+                          <div class="text-[10px] text-red-600 mt-0.5">期限: 2026-04-18（6日超過 ⚠️）</div>
+                        </div>
+                        <a href="unpaid.html" class="text-[10px] text-indigo-600 hover:underline shrink-0">一括生成 →</a>
+                      </div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-red-50 border border-red-200 rounded">
+                        <input type="checkbox" class="rounded">
+                        <div class="flex-1">
+                          <div>督促電話（代表携帯 090-xxxx-xxxx）</div>
+                          <div class="text-[10px] text-red-600 mt-0.5">期限: 2026-04-22（2日超過 ⚠️）</div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-slate-50 rounded">
+                        <input type="checkbox" class="rounded">
+                        <div class="flex-1">
+                          <div>督促手紙 2回目送付（赤色封筒）</div>
+                          <div class="text-[10px] text-slate-500 mt-0.5">期限: 2026-05-01（手紙初回送付の14日後）</div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-slate-50 rounded">
+                        <input type="checkbox" class="rounded">
+                        <div class="flex-1">
+                          <div>最終通告（内容証明前段階）</div>
+                          <div class="text-[10px] text-slate-500 mt-0.5">期限: 2026-05-15 · 3ヶ月連続未収時に法務へエスカレーション</div>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+
+                  <!-- 解約処理（進行中・回答待ち） -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-indigo-500 text-white flex items-center justify-center text-[10px]">●</span>
+                      <span class="font-medium">解約処理</span>
+                      <span class="text-indigo-600">1 / 4 進行中（顧客回答待ち）</span>
+                      <span class="chev text-slate-400 ml-auto">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1 px-2 bg-emerald-50 rounded"><input type="checkbox" checked disabled class="rounded"><span class="flex-1">解約申出受理・手数料計算（¥33,000）</span><span class="text-slate-400 text-[10px]">2026-04-15 · 中村 侑加</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-amber-50 border border-amber-200 rounded">
+                        <input type="checkbox" class="rounded">
+                        <div class="flex-1">
+                          <div>解約同意書面の返送回収</div>
+                          <div class="text-[10px] text-amber-600 mt-0.5">顧客回答待ち（2026-04-15送付 · 期限 2026-04-30）</div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-slate-50 rounded"><input type="checkbox" class="rounded"><span class="flex-1">ロボットペイメントの口座振替登録解除</span></div>
+                      <div class="flex items-center gap-2 py-1 px-2 bg-slate-50 rounded"><input type="checkbox" class="rounded"><span class="flex-1">営業担当（高城 相成）・監督に解約完了共有</span></div>
+                    </div>
+                  </details>
+
+                  <!-- 契約クロージング -->
+                  <details class="bg-white rounded border border-slate-200">
+                    <summary class="p-2 cursor-pointer hover:bg-slate-50 flex items-center gap-2 text-xs">
+                      <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">4</span>
+                      <span class="font-medium">契約クロージング</span>
+                      <span class="text-slate-400">0 / 4</span>
+                      <span class="text-slate-400 ml-auto">→ ファイリングBOXへ</span>
+                      <span class="chev text-slate-400">▼</span>
+                    </summary>
+                    <div class="border-t border-slate-100 px-3 py-2 space-y-1 text-xs">
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" class="rounded"><span class="flex-1">累計未収 ¥22,000 の回収 or 法務引継ぎ判断（3ヶ月超の場合法務へ）</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" class="rounded"><span class="flex-1">書類・ログがすべて格納されているか最終チェック</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" class="rounded"><span class="flex-1">Dropboxフォルダのアーカイブ化</span></div>
+                      <div class="flex items-center gap-2 py-1"><input type="checkbox" class="rounded"><span class="flex-1">ファイリングBOXへ格納 · 顧客管理Appで契約ステータス「解約完了」へ</span></div>
+                    </div>
+                  </details>
+
+                </div>
+              </details>
+
+              <!-- 詳細フィールド -->
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="text-xs font-medium text-slate-700 mb-2">契約詳細</div>
+                <dl class="grid grid-cols-3 gap-3 text-xs">
+                  <div><dt class="text-slate-500">支払方法</dt><dd class="font-medium">口座振替</dd></div>
+                  <div><dt class="text-slate-500">月額</dt><dd class="font-medium">¥11,000</dd></div>
+                  <div><dt class="text-slate-500">契約月数</dt><dd class="font-medium">60ヶ月</dd></div>
+                  <div><dt class="text-slate-500">契約開始日</dt><dd class="font-medium">2023-11-01</dd></div>
+                  <div><dt class="text-slate-500">満了日</dt><dd class="font-medium">2028-10-31</dd></div>
+                  <div><dt class="text-slate-500">自動更新</dt><dd class="font-medium">なし（30日前申告）</dd></div>
+                  <div><dt class="text-slate-500">RP口振番号</dt><dd class="font-medium text-[11px]">568231…954984</dd></div>
+                  <div><dt class="text-slate-500">累計未収</dt><dd class="font-medium text-red-600">¥22,000</dd></div>
+                  <div><dt class="text-slate-500">アカウントID</dt><dd class="font-medium">@likedaddy_ad</dd></div>
+                  <div class="col-span-3"><dt class="text-slate-500">動画URL</dt><dd class="font-medium"><a href="#" class="text-indigo-600 hover:underline">https://youtu.be/1s7vtuOXIo</a></dd></div>
+                </dl>
+              </div>
+
+              <!-- メモ -->
+              <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <span>📝</span>
+                  <span class="text-xs font-medium text-slate-700">メモ</span>
+                  <span class="text-[11px] text-slate-500 ml-auto">最終更新: 2026-04-15 中村 侑加</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line">【2026/4/15】解約申出あり。解約手数料 ¥33,000 のご案内メール送付済み。回答待ち。
+【2026/3/18】SMS督促2回送信、一時的に連絡取れる。請求書送付時のメール受信エラー発覚、迷惑メール設定・メールボックス容量の確認依頼済み。
+【2026/2/19】他顧客の催告状をメールで誤送信。電話で謝罪対応済み（中村侑加）→再発防止策を案内。
+【2025/12〜】口座振替NG頻発。再架電リスト対象外（高城指示）。
+※広告運用の成果は出ているが、資金繰りの問題で未収発生中。</p>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex gap-2 flex-wrap">
+                <button onclick="document.getElementById('collection-modal').classList.remove('hidden')" class="text-xs px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">📊 収納状況を確認（30ヶ月分）</button>
+                <a href="unpaid.html" class="text-xs px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium">📄 督促手紙を作成</a>
+                <button class="text-xs px-3 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium">📱 督促SMS送信</button>
+                <button class="text-xs px-3 py-2 bg-white border border-slate-300 rounded-lg hover:bg-slate-50">📞 督促電話記録</button>
+                <button class="text-xs px-3 py-2 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 ml-auto">✕ 解約処理</button>
+              </div>
+
+              <!-- 関連ファイル -->
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="text-xs font-medium text-slate-700">この契約に紐づくファイル（8件）</div>
+                  <a href="#" class="text-xs text-indigo-600 hover:underline">Dropboxで開く →</a>
+                </div>
+                <div class="space-y-1 text-xs">
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">督促状_20260424_2回目.pdf</span><span class="text-slate-400">2026-04-24</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">解約手数料ご案内.pdf</span><span class="text-slate-400">2026-04-15</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">督促状_20260318_初回.pdf</span><span class="text-slate-400">2026-03-18</span></div>
+                  <div class="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-50 rounded"><span>📄</span><span class="flex-1">広告運用契約書.pdf</span><span class="text-slate-400">2023-11-01</span></div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <button class="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-sm text-slate-500 hover:bg-slate-50">＋ 契約を追加</button>
+        </div>
+
+        <!-- 対応履歴（別タブとして模擬展開） -->
+        <div class="p-6 border-t border-slate-200 bg-slate-50">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-sm">対応履歴（直近5件）</h3>
+            <div class="flex gap-2">
+              <button onclick="document.getElementById('mail-modal').classList.remove('hidden')" class="text-xs px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">📧 メール送信</button>
+              <button class="text-xs px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">📱 SMS</button>
+              <button class="text-xs px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">📞 電話記録</button>
+            </div>
+          </div>
+
+          <!-- Thread 1 -->
+          <div class="bg-white rounded-xl border border-slate-200 p-4 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-medium text-sm">📌 広告運用解約について</div>
+              <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">要対応</span>
+            </div>
+            <div class="space-y-3 text-sm">
+              <div class="flex gap-3 pb-3 border-b border-slate-100">
+                <div class="w-7 h-7 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-xs shrink-0">📧</div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 text-xs text-slate-500 mb-1"><span>4/15 10:30</span><span>·</span><span>メール</span><span>·</span><span>中村 侑加</span></div>
+                  <div>解約申出の受付確認と、解約手数料（¥33,000）のご案内を送付</div>
+                </div>
+              </div>
+              <div class="flex gap-3 pb-3 border-b border-slate-100">
+                <div class="w-7 h-7 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xs shrink-0">📱</div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 text-xs text-slate-500 mb-1"><span>3/18 12:35</span><span>·</span><span>SMS</span><span>·</span><span>堀河 つばさ</span></div>
+                  <div>請求書送付時エラー発生のため、メールボックス容量の確認依頼</div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="w-7 h-7 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xs shrink-0">📱</div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 text-xs text-slate-500 mb-1"><span>3/18 12:00</span><span>·</span><span>SMS</span><span>·</span><span>堀河 つばさ</span></div>
+                  <div>請求書送付時エラー発生のため、迷惑メール設定の確認を依頼</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thread 2 -->
+          <div class="bg-white rounded-xl border border-slate-200 p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-medium text-sm">📌 メール誤送信について</div>
+              <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">対応完了</span>
+            </div>
+            <div class="flex gap-3 text-sm">
+              <div class="w-7 h-7 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs shrink-0">📞</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 text-xs text-slate-500 mb-1"><span>2/19 17:18</span><span>·</span><span>電話</span><span>·</span><span>中村 侑加</span></div>
+                <div>他顧客の催告状をメールで添付していたことをお伝えし謝罪。自社側の再発防止策を案内。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- Mail modal -->
+<div id="mail-modal" class="hidden fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl w-full max-w-2xl shadow-2xl">
+    <div class="px-6 py-4 border-b flex items-center justify-between">
+      <h3 class="font-bold">メール送信 — Like Daddy</h3>
+      <button onclick="document.getElementById('mail-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700">✕</button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 flex items-start gap-2 text-xs text-emerald-800">
+        <span>🔒</span>
+        <div>宛先は顧客マスタから自動設定されています。手動での宛先追加はできません（誤送信防止）</div>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">宛先 <span class="text-slate-400">(固定)</span></label>
+        <div class="px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-sm">
+          渡真利 浩 &lt;renew.like.d@xxxxxxxx.jp&gt;
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">テンプレート</label>
+          <select class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
+            <option>督促（2回目）</option>
+            <option>督促（初回）</option>
+            <option>督促（最終）</option>
+            <option>前確のご案内</option>
+            <option>納品完了のご連絡</option>
+            <option>契約内容確認</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">差出人</label>
+          <select class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
+            <option>info@runbird.co.jp（会社代表）</option>
+            <option>n.yuka@runbird.co.jp（自分）</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">件名</label>
+        <input type="text" value="【重要】広告運用サービス料金お支払いについて" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">本文</label>
+        <textarea class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm h-40">渡真利 浩 様
+
+いつもお世話になっております。株式会社ランバードでございます。
+
+標記の件につきまして、未納分のお支払いのご案内を差し上げております。
+
+  ご契約商材: 広告運用サービス
+  未納月数: 2ヶ月分
+  未納合計: ¥22,000
+
+恐れ入りますが、下記までご連絡いただけますようお願い申し上げます…</textarea>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">添付 <span class="text-slate-400">(この顧客のフォルダからのみ選択可)</span></label>
+        <div class="border border-dashed border-slate-300 rounded-lg p-3 text-xs text-slate-500 space-y-1">
+          <label class="flex items-center gap-2"><input type="checkbox" checked> 📄 督促状_261_20260424.pdf</label>
+          <label class="flex items-center gap-2"><input type="checkbox"> 📄 契約書_261.pdf</label>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t flex justify-end gap-2">
+      <button onclick="document.getElementById('mail-modal').classList.add('hidden')" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">下書き保存</button>
+      <button class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">📧 送信</button>
+    </div>
+  </div>
+</div>
+
+<!-- Collection status modal -->
+<div id="collection-modal" class="hidden fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl w-full max-w-5xl shadow-2xl flex flex-col" style="max-height: 90vh;">
+    <div class="px-6 py-4 border-b flex items-center justify-between">
+      <div>
+        <h3 class="font-bold">📊 収納状況 — Like Daddy（渡真利 浩）</h3>
+        <div class="text-xs text-slate-500 mt-0.5">契約: 広告運用サービス #261-2 · 月額¥11,000 · 口座振替（RP口振 568231…954984） · 2023-11-01 〜 2028-10-31（60ヶ月）</div>
+      </div>
+      <button onclick="document.getElementById('collection-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-xl">✕</button>
+    </div>
+
+    <!-- Summary -->
+    <div class="px-6 py-4 border-b grid grid-cols-4 gap-3">
+      <div class="bg-slate-50 rounded-lg p-3">
+        <div class="text-xs text-slate-500 mb-1">累計請求</div>
+        <div class="text-xl font-bold">¥330,000</div>
+        <div class="text-xs text-slate-400">30ヶ月（2023-11〜2026-04）</div>
+      </div>
+      <div class="bg-emerald-50 rounded-lg p-3">
+        <div class="text-xs text-emerald-700 mb-1">収納済み</div>
+        <div class="text-xl font-bold text-emerald-700">¥297,000</div>
+        <div class="text-xs text-emerald-600">27件</div>
+      </div>
+      <div class="bg-red-50 rounded-lg p-3">
+        <div class="text-xs text-red-700 mb-1">未収</div>
+        <div class="text-xl font-bold text-red-700">¥22,000</div>
+        <div class="text-xs text-red-600">2件</div>
+      </div>
+      <div class="bg-amber-50 rounded-lg p-3">
+        <div class="text-xs text-amber-700 mb-1">請求中</div>
+        <div class="text-xl font-bold text-amber-700">¥11,000</div>
+        <div class="text-xs text-amber-600">1件</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="px-6 py-3 border-b flex items-center gap-2 text-sm">
+      <select class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white">
+        <option>年度: すべて</option>
+        <option>2026年</option>
+        <option>2025年</option>
+        <option>2024年</option>
+        <option>2023年</option>
+      </select>
+      <select class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white">
+        <option>ステータス: すべて</option>
+        <option>収納済み</option>
+        <option>未収</option>
+        <option>請求中</option>
+      </select>
+      <button class="text-xs px-3 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50">📥 ロボペイCSV再取込</button>
+      <button class="ml-auto text-xs px-3 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50">📤 CSVエクスポート</button>
+      <button class="text-xs px-3 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50">🖨️ 印刷</button>
+    </div>
+
+    <!-- Table -->
+    <div class="flex-1 overflow-y-auto px-6 py-3">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-xs text-slate-600 uppercase sticky top-0">
+          <tr>
+            <th class="text-left px-3 py-2 font-medium">年月</th>
+            <th class="text-left px-3 py-2 font-medium">請求項目</th>
+            <th class="text-right px-3 py-2 font-medium">請求金額</th>
+            <th class="text-left px-3 py-2 font-medium">収納状況</th>
+            <th class="text-left px-3 py-2 font-medium">入金日</th>
+            <th class="text-left px-3 py-2 font-medium">備考</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr class="bg-amber-50">
+            <td class="px-3 py-2 font-medium">2026年4月</td>
+            <td class="px-3 py-2">広告運用サービス費 4月分</td>
+            <td class="px-3 py-2 text-right">¥11,000</td>
+            <td class="px-3 py-2"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">請求中</span></td>
+            <td class="px-3 py-2 text-xs text-slate-500">—</td>
+            <td class="px-3 py-2 text-xs">口座振替予定日: 2026-04-27</td>
+          </tr>
+          <tr class="bg-red-50">
+            <td class="px-3 py-2 font-medium">2026年3月</td>
+            <td class="px-3 py-2">広告運用サービス費 3月分</td>
+            <td class="px-3 py-2 text-right">¥11,000</td>
+            <td class="px-3 py-2"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">未収 ⚠️</span></td>
+            <td class="px-3 py-2 text-xs text-slate-500">—</td>
+            <td class="px-3 py-2 text-xs">振替不能 · 督促SMS送信済み（2026-03-18）</td>
+          </tr>
+          <tr class="bg-red-50">
+            <td class="px-3 py-2 font-medium">2026年2月</td>
+            <td class="px-3 py-2">広告運用サービス費 2月分</td>
+            <td class="px-3 py-2 text-right">¥11,000</td>
+            <td class="px-3 py-2"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">未収 ⚠️</span></td>
+            <td class="px-3 py-2 text-xs text-slate-500">—</td>
+            <td class="px-3 py-2 text-xs">振替不能</td>
+          </tr>
+          <tr><td class="px-3 py-2">2026年1月</td><td class="px-3 py-2">広告運用サービス費 1月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2026-01-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年12月</td><td class="px-3 py-2">広告運用サービス費 12月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-12-29</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年11月</td><td class="px-3 py-2">広告運用サービス費 11月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-11-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年10月</td><td class="px-3 py-2">広告運用サービス費 10月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-10-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年9月</td><td class="px-3 py-2">広告運用サービス費 9月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-09-29</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年8月</td><td class="px-3 py-2">広告運用サービス費 8月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-08-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年7月</td><td class="px-3 py-2">広告運用サービス費 7月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-07-28</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年6月</td><td class="px-3 py-2">広告運用サービス費 6月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-06-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年5月</td><td class="px-3 py-2">広告運用サービス費 5月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-05-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年4月</td><td class="px-3 py-2">広告運用サービス費 4月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-04-28</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年3月</td><td class="px-3 py-2">広告運用サービス費 3月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-03-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年2月</td><td class="px-3 py-2">広告運用サービス費 2月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-02-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2025年1月</td><td class="px-3 py-2">広告運用サービス費 1月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2025-01-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年12月</td><td class="px-3 py-2">広告運用サービス費 12月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-12-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年11月</td><td class="px-3 py-2">広告運用サービス費 11月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-11-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年10月</td><td class="px-3 py-2">広告運用サービス費 10月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-10-28</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年9月</td><td class="px-3 py-2">広告運用サービス費 9月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-09-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年8月</td><td class="px-3 py-2">広告運用サービス費 8月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-08-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年7月</td><td class="px-3 py-2">広告運用サービス費 7月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-07-29</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年6月</td><td class="px-3 py-2">広告運用サービス費 6月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-06-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年5月</td><td class="px-3 py-2">広告運用サービス費 5月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-05-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年4月</td><td class="px-3 py-2">広告運用サービス費 4月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-04-26</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年3月</td><td class="px-3 py-2">広告運用サービス費 3月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-03-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年2月</td><td class="px-3 py-2">広告運用サービス費 2月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-02-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2024年1月</td><td class="px-3 py-2">広告運用サービス費 1月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2024-01-29</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr><td class="px-3 py-2">2023年12月</td><td class="px-3 py-2">広告運用サービス費 12月分</td><td class="px-3 py-2 text-right">¥11,000</td><td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td><td class="px-3 py-2 text-xs">2023-12-27</td><td class="px-3 py-2 text-xs text-slate-400">—</td></tr>
+          <tr class="bg-slate-50">
+            <td class="px-3 py-2">2023年11月</td>
+            <td class="px-3 py-2">広告運用サービス費 11月分 <span class="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded ml-1">初回</span></td>
+            <td class="px-3 py-2 text-right">¥11,000</td>
+            <td class="px-3 py-2"><span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">収納済み</span></td>
+            <td class="px-3 py-2 text-xs">2023-12-27</td>
+            <td class="px-3 py-2 text-xs text-slate-500">契約開始 · 初回請求</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="px-6 py-3 border-t flex items-center justify-between">
+      <div class="text-xs text-slate-500">データソース: ロボットペイメント CSV（最終同期 2026-04-24 09:30）+ 顧客管理App</div>
+      <button onclick="document.getElementById('collection-modal').classList.add('hidden')" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<div class="fixed bottom-6 right-6 z-40">
+  <button class="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center text-2xl">💬</button>
+</div>
+
+</body>
+</html>

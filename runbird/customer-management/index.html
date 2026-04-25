@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ダッシュボード | ランバード顧客管理システム</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Noto Sans JP', -apple-system, sans-serif; }
+  .bar { transition: all 0.3s ease; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen">
+
+<!-- Sidebar -->
+<aside class="w-60 bg-slate-900 text-slate-200 flex flex-col">
+  <div class="p-5 border-b border-slate-800">
+    <div class="text-xs text-slate-500 mb-1">RUNBIRD</div>
+    <div class="font-bold text-base">顧客管理システム</div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1 text-sm">
+    <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800 text-white border-l-2 border-indigo-400">
+      <span>📊</span><span>ダッシュボード</span>
+    </a>
+    <a href="customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800">
+      <span>👥</span><span>顧客管理</span>
+    </a>
+    <a href="tasks.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800">
+      <span>✅</span><span>工程チェック</span>
+    </a>
+    <a href="unpaid.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800">
+      <span>💰</span><span>未収管理</span>
+      <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">12</span>
+    </a>
+    <a href="evaluation.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800">
+      <span>🏆</span><span>評価</span>
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800">
+      <span>⚙️</span><span>設定</span>
+    </a>
+  </nav>
+  <div class="p-4 border-t border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold">NY</div>
+      <div class="text-xs">
+        <div class="text-white">中村 侑加</div>
+        <div class="text-slate-500">内勤事務</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="flex-1">
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between">
+    <div>
+      <h1 class="text-xl font-bold">ダッシュボード</h1>
+      <p class="text-xs text-slate-500">2026年4月24日（木）14:32 更新</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="relative p-2 hover:bg-slate-100 rounded-lg">
+        <span class="text-lg">🔔</span>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+      <button class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700">＋ 新規顧客</button>
+    </div>
+  </header>
+
+  <div class="p-8 space-y-6">
+
+    <!-- Alerts -->
+    <div class="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
+      <span class="text-xl">⚠️</span>
+      <div class="flex-1">
+        <div class="font-bold text-red-800 text-sm mb-1">期日超過タスクが3件あります</div>
+        <div class="text-sm text-red-700 space-y-0.5">
+          <div>・審査期限超過: <a href="customer-detail.html" class="underline">株式会社ヒットアグリ（檜山尚哉）</a> — 濱島和哉担当</div>
+          <div>・前確遅延: <a href="customer-detail.html" class="underline">Bar リベラ（富所神）</a> — 堀河つばさ担当</div>
+          <div>・未収通知送信漏れ: 2件</div>
+        </div>
+      </div>
+      <a href="tasks.html" class="text-red-700 text-sm font-medium hover:underline shrink-0">一覧を見る →</a>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">今月の新規契約</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold">23</span>
+          <span class="text-sm text-slate-500">件</span>
+          <span class="text-xs text-emerald-600 font-medium ml-auto">↑ 8%</span>
+        </div>
+        <div class="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden"><div class="bg-indigo-500 h-full" style="width:72%"></div></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">期日遵守率</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold">87</span>
+          <span class="text-sm text-slate-500">%</span>
+          <span class="text-xs text-emerald-600 font-medium ml-auto">↑ 3pt</span>
+        </div>
+        <div class="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full" style="width:87%"></div></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">ミス率</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold">4.2</span>
+          <span class="text-sm text-slate-500">%</span>
+          <span class="text-xs text-emerald-600 font-medium ml-auto">↓ 1.1pt</span>
+        </div>
+        <div class="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden"><div class="bg-amber-500 h-full" style="width:4.2%"></div></div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">未収件数</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold">12</span>
+          <span class="text-sm text-slate-500">件</span>
+          <span class="text-xs text-red-600 font-medium ml-auto">¥342,000</span>
+        </div>
+        <div class="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden"><div class="bg-red-500 h-full" style="width:35%"></div></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Workflow stage chart -->
+      <div class="col-span-2 bg-white rounded-xl p-6 border border-slate-200">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold">工程別 滞留件数</h2>
+          <span class="text-xs text-slate-500">2026年4月</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>審査</span><span class="text-slate-500">8件 <span class="text-emerald-600 text-xs">平均2.1日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:20%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>App登録</span><span class="text-slate-500">5件 <span class="text-emerald-600 text-xs">平均0.8日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:12%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>審査結果</span><span class="text-slate-500">12件 <span class="text-emerald-600 text-xs">平均1.4日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:32%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>前確設定</span><span class="text-slate-500">18件 <span class="text-amber-600 text-xs">平均4.7日 ⚠️</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-amber-500 h-full" style="width:48%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>前確</span><span class="text-slate-500">9件 <span class="text-emerald-600 text-xs">平均1.2日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:23%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>制作依頼</span><span class="text-slate-500">14件 <span class="text-emerald-600 text-xs">平均2.3日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:38%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span>納品</span><span class="text-slate-500">6件 <span class="text-emerald-600 text-xs">平均0.9日</span></span></div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar bg-indigo-500 h-full" style="width:16%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff performance -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <h2 class="font-bold mb-4">担当者別 タスク消化</h2>
+        <div class="space-y-3 text-sm">
+          <div>
+            <div class="flex justify-between mb-1"><span>中村 侑加</span><span class="text-slate-500">42/45</span></div>
+            <div class="h-1.5 bg-slate-100 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width:93%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span>堀河 つばさ</span><span class="text-slate-500">38/42</span></div>
+            <div class="h-1.5 bg-slate-100 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width:90%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span>濱島 和哉</span><span class="text-slate-500">28/36</span></div>
+            <div class="h-1.5 bg-slate-100 rounded-full"><div class="bg-amber-500 h-full rounded-full" style="width:78%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Activity feed -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <h2 class="font-bold mb-4">最近の対応履歴</h2>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
+            <div class="w-8 h-8 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center shrink-0">✓</div>
+            <div class="flex-1">
+              <div><span class="font-medium">前確完了</span> — ハウオリ 今井悠子</div>
+              <div class="text-xs text-slate-500">中村 侑加 · 14:32</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
+            <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center shrink-0">📧</div>
+            <div class="flex-1">
+              <div><span class="font-medium">督促メール送信</span> — Like Daddy 渡真利浩</div>
+              <div class="text-xs text-slate-500">堀河 つばさ · 13:45</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
+            <div class="w-8 h-8 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center shrink-0">📱</div>
+            <div class="flex-1">
+              <div><span class="font-medium">未収SMS一括送信</span> — 15件</div>
+              <div class="text-xs text-slate-500">システム · 12:00</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
+            <div class="w-8 h-8 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center shrink-0">＋</div>
+            <div class="flex-1">
+              <div><span class="font-medium">新規顧客登録</span> — 株式会社onelife 富本雄樹</div>
+              <div class="text-xs text-slate-500">中村 侑加 · 10:15</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today's tasks -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold">今日のタスク</h2>
+          <span class="text-xs text-slate-500">自分宛 7件</span>
+        </div>
+        <div class="space-y-2 text-sm">
+          <label class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+            <input type="checkbox" class="rounded">
+            <div class="flex-1">
+              <div>FAX(web)で審査依頼 — 元気村 谷本寿国</div>
+              <div class="text-xs text-slate-500">期限: 今日 17:00</div>
+            </div>
+            <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded">急ぎ</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+            <input type="checkbox" class="rounded">
+            <div class="flex-1">
+              <div>契約書格納（Dropbox） — ametista 秋森眞一</div>
+              <div class="text-xs text-slate-500">期限: 今日</div>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+            <input type="checkbox" class="rounded">
+            <div class="flex-1">
+              <div>前確メール送付 — 株式会社True Heart 小林幸平</div>
+              <div class="text-xs text-slate-500">期限: 明日</div>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+            <input type="checkbox" class="rounded" checked>
+            <div class="flex-1 line-through text-slate-400">
+              <div>LINEWORKSカレンダー登録 — リラクゼーション和み庵</div>
+            </div>
+          </label>
+        </div>
+        <a href="tasks.html" class="block text-center mt-3 text-sm text-indigo-600 hover:underline">すべてのタスクを見る →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- AI QA Bot floating widget -->
+<div id="chatbot-wrap" class="fixed bottom-6 right-6 z-50">
+  <button onclick="document.getElementById('chat').classList.toggle('hidden')" class="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center text-2xl">💬</button>
+  <div id="chat" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden">
+    <div class="bg-indigo-600 text-white px-4 py-3">
+      <div class="font-bold text-sm">業務AIアシスタント</div>
+      <div class="text-xs text-indigo-100">作業でわからないことを聞けます</div>
+    </div>
+    <div class="p-3 h-64 overflow-y-auto space-y-2 text-sm bg-slate-50">
+      <div class="bg-white p-2 rounded-lg">Appの顧客フォルダの作り方を教えて</div>
+      <div class="bg-indigo-100 p-2 rounded-lg text-slate-800">
+        「顧客一覧」→「＋新規顧客」ボタン→屋号・代表者名を入力 → 保存するとDropboxにも同名フォルダが自動作成されます。<br><br>
+        ※審査済み案件は「工程チェック」画面から開始するとフォルダとチェックリストが同時に作成されます。
+      </div>
+    </div>
+    <div class="p-3 border-t flex gap-2">
+      <input type="text" placeholder="質問を入力…" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg">
+      <button class="px-3 py-2 bg-indigo-600 text-white text-sm rounded-lg">送信</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>未収管理 | ランバード顧客管理システム</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>body { font-family: 'Noto Sans JP', -apple-system, sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen">
+
+<aside class="w-60 bg-slate-900 text-slate-200 flex flex-col">
+  <div class="p-5 border-b border-slate-800">
+    <div class="text-xs text-slate-500 mb-1">RUNBIRD</div>
+    <div class="font-bold text-base">顧客管理システム</div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1 text-sm">
+    <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>📊</span><span>ダッシュボード</span></a>
+    <a href="customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>👥</span><span>顧客管理</span></a>
+    <a href="tasks.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>✅</span><span>工程チェック</span></a>
+    <a href="unpaid.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800 text-white border-l-2 border-indigo-400"><span>💰</span><span>未収管理</span><span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">12</span></a>
+    <a href="evaluation.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>🏆</span><span>評価</span></a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>⚙️</span><span>設定</span></a>
+  </nav>
+  <div class="p-4 border-t border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold">NY</div>
+      <div class="text-xs"><div class="text-white">中村 侑加</div><div class="text-slate-500">内勤事務</div></div>
+    </div>
+  </div>
+</aside>
+
+<main class="flex-1">
+  <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between">
+    <div>
+      <h1 class="text-xl font-bold">未収管理</h1>
+      <p class="text-xs text-slate-500">ロボットペイメントCSV照合による自動検知</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">📥 ロボペイCSV取込</button>
+    </div>
+  </header>
+
+  <div class="p-8 space-y-6">
+
+    <!-- Summary cards -->
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">未収顧客数</div>
+        <div class="text-3xl font-bold text-red-600">12</div>
+        <div class="text-xs text-slate-500 mt-1">先月比 +2</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">累計未収額</div>
+        <div class="text-3xl font-bold">¥342,000</div>
+        <div class="text-xs text-red-600 mt-1">先月比 +¥44,000</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">今月の自動照合</div>
+        <div class="text-3xl font-bold text-emerald-600">187</div>
+        <div class="text-xs text-slate-500 mt-1">件 / ロボペイCSV</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <div class="text-xs text-slate-500 mb-2">最終CSV取込</div>
+        <div class="text-xl font-bold">4/24 09:30</div>
+        <div class="text-xs text-emerald-600 mt-1">● 自動同期中</div>
+      </div>
+    </div>
+
+    <!-- Filters + actions -->
+    <div class="bg-white rounded-xl p-4 border border-slate-200">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex flex-wrap gap-2 text-sm">
+          <select class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white">
+            <option>経過日数: すべて</option>
+            <option>〜30日</option>
+            <option>31〜60日</option>
+            <option>61日以上</option>
+          </select>
+          <select class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white">
+            <option>支払方法: すべて</option>
+            <option>口座振替</option>
+            <option>クレジットカード</option>
+            <option>現金</option>
+          </select>
+          <select class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white">
+            <option>督促状況: すべて</option>
+            <option>未送信</option>
+            <option>初回送信済</option>
+            <option>2回目以降</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+        <div class="text-sm text-slate-600"><span class="font-bold text-indigo-600">7件</span> 選択中</div>
+        <div class="flex gap-2">
+          <button class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm rounded-lg flex items-center gap-2">
+            <span>📱</span><span>選択7件にSMS一括送信</span>
+          </button>
+          <button onclick="document.getElementById('letter-modal').classList.remove('hidden')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg flex items-center gap-2">
+            <span>📄</span><span>督促手紙を一括PDF生成（ボタン1発）</span>
+          </button>
+          <button class="px-4 py-2 bg-white border border-slate-300 text-sm rounded-lg hover:bg-slate-50">📧 督促メール一括</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-xs text-slate-600 uppercase tracking-wide">
+          <tr>
+            <th class="w-10 px-4 py-3"><input type="checkbox" checked class="rounded"></th>
+            <th class="text-left px-4 py-3 font-medium">顧客</th>
+            <th class="text-left px-4 py-3 font-medium">商材</th>
+            <th class="text-left px-4 py-3 font-medium">月額</th>
+            <th class="text-left px-4 py-3 font-medium">未収月数</th>
+            <th class="text-left px-4 py-3 font-medium">累計未収</th>
+            <th class="text-left px-4 py-3 font-medium">督促</th>
+            <th class="text-left px-4 py-3 font-medium">最終連絡</th>
+            <th class="w-20"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr class="bg-red-50/40">
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">Like Daddy</div>
+              <div class="text-xs text-slate-500">渡真利 浩</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">広告運用</span></td>
+            <td class="px-4 py-3">¥11,000</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">2ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥22,000</td>
+            <td class="px-4 py-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">SMS 1回</span></td>
+            <td class="px-4 py-3 text-xs">3/18 SMS</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">カウンセリング＆占いルーム いろは</div>
+              <div class="text-xs text-slate-500">永岡 ひろみ</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">HP(廉価)</span></td>
+            <td class="px-4 py-3">¥45,000</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">1ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥45,000</td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">未送信</span></td>
+            <td class="px-4 py-3 text-xs">-</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">3.Auto</div>
+              <div class="text-xs text-slate-500">松村 周平</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">広告運用</span></td>
+            <td class="px-4 py-3">¥11,000</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">1ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥11,000</td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">未送信</span></td>
+            <td class="px-4 py-3 text-xs">-</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr class="bg-red-50/40">
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">CLEAN-STYLE/ALO</div>
+              <div class="text-xs text-slate-500">山口 義信</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">cmsクラウド</span></td>
+            <td class="px-4 py-3">¥15,000</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">4ヶ月 ⚠️</span></td>
+            <td class="px-4 py-3 font-medium">¥60,000</td>
+            <td class="px-4 py-3"><span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded">法務対応</span></td>
+            <td class="px-4 py-3 text-xs">2/15 電話</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">リラクゼーション和み庵</div>
+              <div class="text-xs text-slate-500">森本 奈美</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">広告運用</span></td>
+            <td class="px-4 py-3">¥11,000</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">1ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥11,000</td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">未送信</span></td>
+            <td class="px-4 py-3 text-xs">-</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">亀有のおばちゃん</div>
+              <div class="text-xs text-slate-500">上野代 雅世</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">広告運用</span></td>
+            <td class="px-4 py-3">¥1,001</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">1ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥1,001</td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">未送信</span></td>
+            <td class="px-4 py-3 text-xs">-</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3"><input type="checkbox" checked class="rounded"></td>
+            <td class="px-4 py-3">
+              <div class="font-medium">MAZTER BAR</div>
+              <div class="text-xs text-slate-500">大塚 浩章</div>
+            </td>
+            <td class="px-4 py-3"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded">RUNBIRD-ADMOVE</span></td>
+            <td class="px-4 py-3">¥8,500</td>
+            <td class="px-4 py-3"><span class="text-red-600 font-bold">3ヶ月</span></td>
+            <td class="px-4 py-3 font-medium">¥25,500</td>
+            <td class="px-4 py-3"><span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">手紙 1回</span></td>
+            <td class="px-4 py-3 text-xs">3/5 手紙</td>
+            <td class="px-4 py-3"><a href="customer-detail.html" class="text-xs text-indigo-600 hover:underline">詳細 →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- Letter generation modal -->
+<div id="letter-modal" class="hidden fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl w-full max-w-3xl shadow-2xl">
+    <div class="px-6 py-4 border-b flex items-center justify-between">
+      <h3 class="font-bold">督促手紙 一括PDF生成</h3>
+      <button onclick="document.getElementById('letter-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700">✕</button>
+    </div>
+    <div class="p-6 grid grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div class="text-sm">
+          <div class="font-medium mb-2">対象: 選択7件</div>
+          <ul class="space-y-1 text-xs text-slate-600 bg-slate-50 rounded-lg p-3">
+            <li>・Like Daddy（渡真利 浩） ¥22,000</li>
+            <li>・カウンセリング&占いルーム いろは（永岡 ひろみ） ¥45,000</li>
+            <li>・3.Auto（松村 周平） ¥11,000</li>
+            <li>・CLEAN-STYLE/ALO（山口 義信） ¥60,000</li>
+            <li>・リラクゼーション和み庵（森本 奈美） ¥11,000</li>
+            <li>・亀有のおばちゃん（上野代 雅世） ¥1,001</li>
+            <li>・MAZTER BAR（大塚 浩章） ¥25,500</li>
+          </ul>
+          <div class="mt-2 text-xs text-slate-500">合計: ¥175,501</div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">テンプレート</label>
+          <select class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
+            <option>督促状（2回目・赤封筒用）</option>
+            <option>督促状（初回・黄封筒用）</option>
+            <option>督促状（最終・内容証明前段）</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">印刷方式</label>
+          <div class="space-y-1 text-sm">
+            <label class="flex items-center gap-2"><input type="radio" name="p" checked> 一括PDF（宛名差し込み済み）</label>
+            <label class="flex items-center gap-2"><input type="radio" name="p"> 個別PDF（ZIP）</label>
+            <label class="flex items-center gap-2"><input type="radio" name="p"> 宛名シールPDF（追加）</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-xs text-slate-600 mb-2">プレビュー</div>
+        <div class="bg-slate-100 rounded-lg p-4 text-xs font-serif h-80 overflow-hidden">
+          <div class="text-right mb-4">2026年4月24日</div>
+          <div class="mb-4">〒XXX-XXXX<br>渡真利 浩 様</div>
+          <div class="mb-6 text-right">株式会社ランバード<br>IT事業部</div>
+          <div class="font-bold text-center mb-4">ご契約料金未納についてのお願い</div>
+          <div class="leading-relaxed">
+            拝啓 時下ますますご清栄のこととお慶び申し上げます。<br><br>
+            さて、下記ご契約分の料金につきまして、入金の確認が取れておりません。お手数ですが至急ご確認の上…<br><br>
+            記<br>
+            ご契約商材: 広告運用サービス<br>
+            未納月数: 2ヶ月分<br>
+            未納合計: ¥22,000
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t flex justify-end gap-2">
+      <button onclick="document.getElementById('letter-modal').classList.add('hidden')" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">キャンセル</button>
+      <button class="px-4 py-2 text-sm bg-red-600 hover:bg-red-700 text-white rounded-lg">📄 PDF生成して印刷</button>
+    </div>
+  </div>
+</div>
+
+<div class="fixed bottom-6 right-6 z-40">
+  <button class="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center text-2xl">💬</button>
+</div>
+
+</body>
+</html>

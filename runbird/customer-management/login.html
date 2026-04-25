@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ログイン | ランバード顧客管理システム</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>body { font-family: 'Noto Sans JP', -apple-system, sans-serif; }</style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 min-h-screen flex items-center justify-center p-4">
+
+<div class="w-full max-w-md">
+
+  <div class="text-center mb-8">
+    <div class="text-sm text-indigo-300 mb-2">RUNBIRD</div>
+    <h1 class="text-2xl font-bold text-white">顧客管理システム</h1>
+  </div>
+
+  <!-- Step 1: Login -->
+  <div id="step1" class="bg-white rounded-2xl shadow-2xl p-8">
+    <h2 class="text-lg font-bold mb-1">ログイン</h2>
+    <p class="text-xs text-slate-500 mb-6">社内ネットワークまたはVPN経由でのみアクセス可能です</p>
+
+    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-5 flex items-center gap-2 text-xs text-emerald-800">
+      <span>🔒</span>
+      <span>接続元: 192.168.1.42（社内LAN）— 認証可能</span>
+    </div>
+
+    <form onsubmit="event.preventDefault(); document.getElementById('step1').classList.add('hidden'); document.getElementById('step2').classList.remove('hidden');" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">メールアドレス</label>
+        <input type="email" value="n.yuka@runbird.co.jp" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">パスワード</label>
+        <input type="password" value="••••••••••" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center gap-2"><input type="checkbox" class="rounded"> この端末を信頼する</label>
+        <a href="#" class="text-indigo-600 hover:underline">パスワードを忘れた</a>
+      </div>
+      <button class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg">次へ</button>
+    </form>
+
+    <div class="mt-6 pt-6 border-t text-xs text-slate-500 text-center">
+      すべてのアクセスは記録されます
+    </div>
+  </div>
+
+  <!-- Step 2: 2FA -->
+  <div id="step2" class="hidden bg-white rounded-2xl shadow-2xl p-8">
+    <h2 class="text-lg font-bold mb-1">2段階認証</h2>
+    <p class="text-xs text-slate-500 mb-6">認証アプリに表示された6桁のコードを入力してください</p>
+
+    <div class="flex justify-center gap-2 mb-6">
+      <input maxlength="1" value="4" class="w-12 h-14 text-center text-2xl font-bold border-2 border-indigo-500 rounded-lg">
+      <input maxlength="1" value="8" class="w-12 h-14 text-center text-2xl font-bold border-2 border-indigo-500 rounded-lg">
+      <input maxlength="1" value="2" class="w-12 h-14 text-center text-2xl font-bold border-2 border-indigo-500 rounded-lg">
+      <input maxlength="1" value="6" class="w-12 h-14 text-center text-2xl font-bold border-2 border-indigo-500 rounded-lg">
+      <input maxlength="1" value="9" class="w-12 h-14 text-center text-2xl font-bold border-2 border-slate-300 rounded-lg">
+      <input maxlength="1" placeholder="" class="w-12 h-14 text-center text-2xl font-bold border-2 border-slate-300 rounded-lg">
+    </div>
+
+    <a href="index.html" class="block text-center w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg">認証する</a>
+
+    <div class="mt-4 text-center text-sm">
+      <a href="#" class="text-indigo-600 hover:underline">コードを再送信</a>
+    </div>
+
+    <div class="mt-6 pt-6 border-t text-xs text-slate-500 text-center">
+      ログイン中: n.yuka@runbird.co.jp
+      <button onclick="document.getElementById('step1').classList.remove('hidden'); document.getElementById('step2').classList.add('hidden');" class="ml-2 text-indigo-600 hover:underline">変更</button>
+    </div>
+  </div>
+
+  <div class="text-center mt-6 text-xs text-slate-400">
+    © 2026 株式会社ランバード
+  </div>
+</div>
+
+</body>
+</html>

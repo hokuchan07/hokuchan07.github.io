@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>評価 | ランバード顧客管理システム</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>body { font-family: 'Noto Sans JP', -apple-system, sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen">
+
+<aside class="w-60 bg-slate-900 text-slate-200 flex flex-col">
+  <div class="p-5 border-b border-slate-800">
+    <div class="text-xs text-slate-500 mb-1">RUNBIRD</div>
+    <div class="font-bold text-base">顧客管理システム</div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1 text-sm">
+    <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>📊</span><span>ダッシュボード</span></a>
+    <a href="customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>👥</span><span>顧客管理</span></a>
+    <a href="tasks.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>✅</span><span>工程チェック</span></a>
+    <a href="unpaid.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>💰</span><span>未収管理</span><span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">12</span></a>
+    <a href="evaluation.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800 text-white border-l-2 border-indigo-400"><span>🏆</span><span>評価</span></a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800"><span>⚙️</span><span>設定</span></a>
+  </nav>
+  <div class="p-4 border-t border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold">NY</div>
+      <div class="text-xs"><div class="text-white">中村 侑加</div><div class="text-slate-500">内勤事務</div></div>
+    </div>
+  </div>
+</aside>
+
+<main class="flex-1">
+  <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between">
+    <div>
+      <h1 class="text-xl font-bold">評価</h1>
+      <p class="text-xs text-slate-500">2026年4月（月次） — 3ヶ月テスト運用中（本評価は 2026年10月〜 適用）</p>
+    </div>
+    <div class="flex gap-2">
+      <select class="px-3 py-2 text-sm border border-slate-300 rounded-lg">
+        <option>2026年 4月</option>
+        <option>2026年 3月</option>
+      </select>
+      <select class="px-3 py-2 text-sm border border-slate-300 rounded-lg">
+        <option>部門: 内勤事務</option>
+        <option>営業</option>
+        <option>経理</option>
+        <option>全社</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="p-8 space-y-6">
+
+    <!-- Personal score card -->
+    <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 text-white rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <div class="text-sm text-indigo-200 mb-1">あなたの今月の評価</div>
+          <div class="flex items-baseline gap-3">
+            <span class="text-5xl font-bold">92</span>
+            <span class="text-xl text-indigo-200">/ 100</span>
+            <span class="text-sm bg-white/20 px-3 py-1 rounded-full">A評価</span>
+          </div>
+          <div class="text-sm text-indigo-200 mt-2">社内ランキング: <span class="text-white font-medium">2位 / 12名</span></div>
+        </div>
+        <div class="text-right text-xs text-indigo-200">
+          <div>先月比 <span class="text-white font-bold">+4pt</span> ↑</div>
+          <div class="mt-1">Aランク継続 3ヶ月</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-3 mt-6">
+        <div class="bg-white/10 rounded-lg p-3">
+          <div class="text-xs text-indigo-200 mb-1">タスク完了率</div>
+          <div class="text-2xl font-bold">93<span class="text-sm text-indigo-200">%</span></div>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3">
+          <div class="text-xs text-indigo-200 mb-1">期日遵守率</div>
+          <div class="text-2xl font-bold">96<span class="text-sm text-indigo-200">%</span></div>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3">
+          <div class="text-xs text-indigo-200 mb-1">ミス率</div>
+          <div class="text-2xl font-bold">2.1<span class="text-sm text-indigo-200">%</span></div>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3">
+          <div class="text-xs text-indigo-200 mb-1">顧客対応数</div>
+          <div class="text-2xl font-bold">68<span class="text-sm text-indigo-200">件</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+
+      <!-- Team ranking -->
+      <div class="col-span-2 bg-white rounded-xl p-6 border border-slate-200">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold">内勤事務部門 ランキング</h2>
+          <span class="text-xs text-slate-500">2026年4月</span>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 p-3 bg-amber-50 rounded-xl">
+            <div class="w-10 h-10 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold">🥇</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-medium">堀河 つばさ</div>
+                <div class="text-lg font-bold">94</div>
+              </div>
+              <div class="flex gap-3 text-xs text-slate-500 mt-1">
+                <span>完了 95%</span><span>期日 98%</span><span>ミス 1.8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl border-2 border-indigo-300">
+            <div class="w-10 h-10 bg-slate-300 text-white rounded-full flex items-center justify-center font-bold">🥈</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-medium">中村 侑加 <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded ml-2">あなた</span></div>
+                <div class="text-lg font-bold">92</div>
+              </div>
+              <div class="flex gap-3 text-xs text-slate-500 mt-1">
+                <span>完了 93%</span><span>期日 96%</span><span>ミス 2.1%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl">
+            <div class="w-10 h-10 bg-orange-300 text-white rounded-full flex items-center justify-center font-bold">🥉</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-medium">濱島 和哉</div>
+                <div class="text-lg font-bold">84</div>
+              </div>
+              <div class="flex gap-3 text-xs text-slate-500 mt-1">
+                <span>完了 88%</span><span>期日 85%</span><span>ミス 3.5%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 hover:bg-slate-50 rounded-xl">
+            <div class="w-10 h-10 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center text-sm">4</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-medium">（夏以降 増員予定）</div>
+                <div class="text-sm text-slate-400">-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <h2 class="font-bold mb-4">評価配分</h2>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>タスク完了率</span><span class="font-bold">40pt</span></div>
+            <div class="h-2 bg-slate-100 rounded-full"><div class="bg-indigo-500 h-full rounded-full" style="width:40%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>期日遵守率</span><span class="font-bold">30pt</span></div>
+            <div class="h-2 bg-slate-100 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width:30%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>ミス率（逆算）</span><span class="font-bold">20pt</span></div>
+            <div class="h-2 bg-slate-100 rounded-full"><div class="bg-amber-500 h-full rounded-full" style="width:20%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>顧客対応数</span><span class="font-bold">10pt</span></div>
+            <div class="h-2 bg-slate-100 rounded-full"><div class="bg-purple-500 h-full rounded-full" style="width:10%"></div></div>
+          </div>
+          <div class="pt-3 border-t text-xs text-slate-500">
+            配分は中村一喜さんと合意後に確定。テスト期間中は参考値です。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dept level -->
+    <div class="grid grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <h2 class="font-bold mb-4">事業部全体のミス率（月次推移）</h2>
+        <div class="h-48 flex items-end gap-2">
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-amber-400 rounded-t" style="height:68%"></div><span class="text-xs text-slate-500">1月</span><span class="text-xs font-bold">6.8%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-amber-400 rounded-t" style="height:58%"></div><span class="text-xs text-slate-500">2月</span><span class="text-xs font-bold">5.8%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-amber-400 rounded-t" style="height:53%"></div><span class="text-xs text-slate-500">3月</span><span class="text-xs font-bold">5.3%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-emerald-500 rounded-t" style="height:42%"></div><span class="text-xs text-slate-500">4月</span><span class="text-xs font-bold">4.2%</span></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+        <h2 class="font-bold mb-4">期日遵守率（月次推移）</h2>
+        <div class="h-48 flex items-end gap-2">
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-emerald-300 rounded-t" style="height:78%"></div><span class="text-xs text-slate-500">1月</span><span class="text-xs font-bold">78%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-emerald-400 rounded-t" style="height:82%"></div><span class="text-xs text-slate-500">2月</span><span class="text-xs font-bold">82%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-emerald-400 rounded-t" style="height:84%"></div><span class="text-xs text-slate-500">3月</span><span class="text-xs font-bold">84%</span></div>
+          <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-emerald-500 rounded-t" style="height:87%"></div><span class="text-xs text-slate-500">4月</span><span class="text-xs font-bold">87%</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- AI QA Bot — more prominent on evaluation page -->
+<div class="fixed bottom-6 right-6 z-50">
+  <button onclick="document.getElementById('chat-big').classList.toggle('hidden')" class="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center text-2xl animate-pulse">💬</button>
+  <div id="chat-big" class="absolute bottom-16 right-0 w-96 bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden">
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 flex items-center gap-2">
+      <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">🤖</div>
+      <div>
+        <div class="font-bold text-sm">業務AIアシスタント</div>
+        <div class="text-xs text-indigo-100">RUNBIRD社内ナレッジを学習済み</div>
+      </div>
+    </div>
+    <div class="p-3 h-80 overflow-y-auto space-y-3 text-sm bg-slate-50">
+      <div class="bg-white p-3 rounded-lg shadow-sm max-w-[85%]">
+        <div class="text-xs text-slate-500 mb-1">中村 侑加</div>
+        BP信販で否決が出た場合の対応手順は？
+      </div>
+      <div class="bg-indigo-600 text-white p-3 rounded-lg shadow-sm max-w-[90%] ml-auto">
+        <div class="text-xs text-indigo-200 mb-1">AIアシスタント</div>
+        BP否決時は次の順で対応します：<br><br>
+        1. 営業担当に否決結果を共有（LINE「IT事業部」グループ）<br>
+        2. 信販交渉対象か判定<br>
+        　- 可決額 7割以上 → 交渉可<br>
+        　- 7割未満 → AB処理（キャンセル）<br>
+        3. 交渉可の場合、BP担当に再審査依頼<br>
+        4. 再審査は72時間以内（超過すると審査期限=可決+90日の計算がずれます）<br><br>
+        詳しくは <a href="#" class="underline">ナレッジ「信販対応マニュアル」</a> を参照。
+      </div>
+      <div class="bg-white p-3 rounded-lg shadow-sm max-w-[85%]">
+        <div class="text-xs text-slate-500 mb-1">中村 侑加</div>
+        元気村の案件、信販Bなんだけど今日中にやるべきことある？
+      </div>
+      <div class="bg-indigo-600 text-white p-3 rounded-lg shadow-sm max-w-[90%] ml-auto">
+        <div class="text-xs text-indigo-200 mb-1">AIアシスタント</div>
+        元気村（谷本寿国）さんは<strong>審査結果フェーズで2日超過</strong>しています。<br><br>
+        本日中の必須タスク：<br>
+        □ <a href="tasks.html" class="underline">BP信販交渉の書類送付</a>（期限超過）<br>
+        □ 営業担当（高城）への進捗共有<br><br>
+        よければ交渉テンプレートのドラフトを生成しましょうか？
+      </div>
+    </div>
+    <div class="p-3 border-t flex gap-2">
+      <input type="text" placeholder="質問を入力…" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg">
+      <button class="px-3 py-2 bg-indigo-600 text-white text-sm rounded-lg">送信</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
