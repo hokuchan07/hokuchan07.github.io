@@ -165,6 +165,13 @@
     <li><strong>Mac (Intel):</strong> 「Intel」</li>
   </ul>
   <p>ダウンロードしたインストーラーを実行 → 案内に従ってインストール → Cursorを起動</p>
+  <div class="warning">
+    ⚠️ <strong>Windowsで「WindowsによってPCが保護されました」という青い画面が出た場合</strong><br>
+    Microsoft Defender SmartScreenの標準動作で、Cursor自体は問題ありません。<br>
+    ① 画面左下の <strong>「詳細情報」</strong> をクリック<br>
+    ② 右下に現れる <strong>「実行」</strong> ボタンをクリック → そのままインストールを進める<br>
+    ※「実行しない」を押すと止まってしまうので必ず「詳細情報」→「実行」の順に。
+  </div>
   <p>初回起動時、ログイン画面で <strong>「Sign up」</strong> または <strong>「Sign in with Google」</strong> でログイン。</p>
   <div class="info">
     💡 メールアドレスは個人/会社どちらでもOK。後でTeam招待を受ければランバードのTeamに紐づきます。
@@ -185,6 +192,9 @@
   <p style="margin-top:14px;"><strong>Macの場合:</strong> macOS標準の「ターミナル」を開いて:</p>
   <div class="cmd">xcode-select --install</div>
   <p>「インストール」をクリック → 5〜10分待つ</p>
+  <div class="warning" style="margin-top:14px;">
+    ⚠️ <strong>Windowsで「PCが保護されました」が出たら</strong>「詳細情報」→「実行」でOK（Step 2 の注意書きと同じ）。
+  </div>
 </div>
 
 <!-- ===== Step 4 ===== -->
@@ -310,6 +320,10 @@ git clone https://github.com/runbird-welfare/runbird-welfare-knowledge.git</div>
     <tr>
       <th style="width:40%;">症状</th>
       <th>対処</th>
+    </tr>
+    <tr>
+      <td>Windowsで「WindowsによってPCが保護されました」と出てインストールが進めない</td>
+      <td>SmartScreenの標準動作。「詳細情報」→「実行」の順にクリックすればOK（Step 2 の注意書き参照）</td>
     </tr>
     <tr>
       <td><code>git</code> コマンドが認識されない</td>
