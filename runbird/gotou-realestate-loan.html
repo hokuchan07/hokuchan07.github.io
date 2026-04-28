@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五島久哉様 不動産融資ヒアリング 回答用</title>
+<style>
+  :root {
+    --primary: #1a365d; --accent: #2b6cb0; --accent-light: #bee3f8;
+    --success: #276749; --success-light: #c6f6d5;
+    --warning: #c05621; --warning-light: #feebc8;
+    --danger: #c53030; --danger-light: #fed7d7;
+    --bg: #f7fafc; --card: #ffffff; --border: #e2e8f0;
+    --text: #2d3748; --text-light: #718096;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px 16px 60px; }
+  .header { background: var(--primary); color: white; padding: 24px 20px; border-radius: 12px; margin-bottom: 24px; text-align: center; }
+  .header h1 { font-size: 20px; margin-bottom: 4px; }
+  .header p { font-size: 13px; opacity: 0.85; }
+  .purpose { background: #ebf8ff; border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 0 8px 8px 0; margin-bottom: 24px; font-size: 13px; }
+  .purpose strong { display: block; margin-bottom: 4px; color: var(--accent); }
+  .section { background: var(--card); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 20px; overflow: hidden; }
+  .section-header { padding: 14px 18px; font-size: 16px; font-weight: 700; color: white; display: flex; align-items: center; gap: 8px; }
+  .section-header .num { background: rgba(255,255,255,0.25); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .section-body { padding: 18px; }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+  .badge-red { background: var(--danger-light); color: var(--danger); }
+  .badge-orange { background: var(--warning-light); color: var(--warning); }
+  .badge-green { background: var(--success-light); color: var(--success); }
+  .alert { padding: 12px 14px; border-radius: 8px; margin: 12px 0; font-size: 13px; border-left: 4px solid; }
+  .alert-info { background: #ebf8ff; border-color: #3182ce; }
+  .alert-warning { background: #fffbeb; border-color: #d69e2e; }
+  .alert-success { background: #f0fff4; border-color: #38a169; }
+  .answered { background: #f0fff4; padding: 14px; border-radius: 8px; margin-bottom: 8px; }
+  .answered-content { font-size: 13px; margin-top: 6px; padding: 8px 12px; background: white; border-radius: 6px; }
+  .form-item { background: #fff5f5; padding: 14px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--danger); }
+  .form-item.partial { background: #fffbeb; border-left-color: var(--warning); }
+  .form-item .item-label { font-weight: 700; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .form-item .item-why { font-size: 12px; color: var(--text-light); margin-bottom: 12px; line-height: 1.6; }
+  .form-item .field-label { display: block; font-size: 12px; color: var(--text); font-weight: 600; margin-top: 10px; margin-bottom: 4px; }
+  .form-item input[type="text"], .form-item textarea, .form-item select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; background: white; color: var(--text); }
+  .form-item input:focus, .form-item textarea:focus, .form-item select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(43,108,176,0.15); }
+  .form-item textarea { min-height: 90px; resize: vertical; }
+  .form-item .checkbox-group, .form-item .radio-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .form-item .checkbox-group label, .form-item .radio-group label { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; background: white; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; cursor: pointer; margin: 0; }
+  .form-item .help { font-size: 11px; color: var(--text-light); margin-top: 3px; margin-bottom: 4px; }
+  .submit-area { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 24px; text-align: center; }
+  .submit-area p { font-size: 13px; color: var(--text-light); margin-bottom: 16px; }
+  .submit-btn { display: inline-block; padding: 16px 48px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .submit-btn:hover { background: #2c5282; }
+  .save-status { position: fixed; bottom: 20px; right: 20px; background: rgba(45,55,72,0.9); color: white; padding: 8px 14px; border-radius: 6px; font-size: 12px; opacity: 0; transition: opacity 0.3s; z-index: 100; }
+  .save-status.show { opacity: 1; }
+  .doc-status-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .doc-status-table th { background: #edf2f7; padding: 8px; text-align: left; font-weight: 600; }
+  .doc-status-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .doc-status-table .doc-name { font-weight: 600; }
+  .doc-status-table select, .doc-status-table input[type="text"] { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; background: white; }
+  @media (max-width: 600px) { .doc-status-table { display: block; } .doc-status-table thead { display: none; } .doc-status-table tr { display: block; border-bottom: 1px solid var(--border); padding: 8px 0; } .doc-status-table td { display: block; padding: 4px 8px; border: none; } }
+  @media print { .submit-area, .save-status { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+  <h1>五島 久哉 様 個人不動産融資ヒアリング</h1>
+  <p>古河市長谷町223番地1 取得済物件への融資申請ご準備シート</p>
+  <p style="margin-top:6px; font-size:11px;">ご回答は銀行・公庫等の融資打診資料に直接反映します</p>
+</div>
+
+<div class="purpose">
+  <strong>ご記入のお願い</strong>
+  本シートは、<strong>2026年3月31日に決済完了済の古河市長谷町物件¥1,000万円</strong>に対する<strong>事後融資（リフォーム費用含む）</strong>の申請準備として作成したものです。<br><br>
+  ・<strong>赤枠 <span class="badge badge-red">未確認</span></strong> = ご回答が必要な項目です<br>
+  ・<strong>緑枠 <span class="badge badge-green">回答済み</span></strong> = 弊社確認済み、ご訂正がある場合のみ訂正欄にご記入ください<br><br>
+  📝 入力内容はブラウザに自動保存されます。途中で閉じても次回開いた時に続きから入力できます。<br>
+  ★ 本物件は<strong>課税評価額¥10,843,423と売買代金¥10,000,000がほぼ整合</strong>しており、銀行担保評価で大幅減額のリスクは低い、強力な打診材料です。
+</div>
+
+<form id="hearing-form" action="https://script.google.com/macros/s/AKfycbw4Vr7AxF6eBpeB-MxaCl6VrTAw5EDbvQKjKewFiaBSm372lPJcyQwDt9_0Zq5Qoukl/exec" method="POST" data-netlify="true" name="gotou-hisaya-realestate-loan">
+<input type="hidden" name="form-id" value="gotou-hisaya-realestate-loan-20260428">
+<input type="hidden" name="client-name" value="五島 久哉">
+<input type="hidden" name="form-purpose" value="個人不動産融資（古河市長谷町223番地1）">
+
+
+<!-- ==================== SECTION 1: 本人基本情報 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#2b6cb0;">
+    <span class="num">1</span> ご本人 基本情報
+  </div>
+  <div class="section-body">
+
+    <div class="form-item partial">
+      <div class="item-label"><span class="badge badge-orange">確認のお願い</span> 1-1. 基本情報（登記完了証より弊社確認）</div>
+      <div class="item-why">下記内容で正しいですか？訂正があれば下の欄にご記入ください。</div>
+      <div style="background:#f0fff4; padding:10px 14px; border-radius:6px; font-size:13px; margin-bottom:10px;">
+        <strong>氏名:</strong> 五島 久哉 様<br>
+        <strong>現住所:</strong> 茨城県古河市女沼319番地9（登記完了証より）<br>
+        <strong>携帯:</strong> 090-1406-0203
+      </div>
+      <label class="field-label">確認</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q1_1_confirm" value="正しい"><span>上記で正しい</span></label>
+        <label><input type="radio" name="q1_1_confirm" value="訂正あり"><span>訂正あり（下記に記入）</span></label>
+      </div>
+      <label class="field-label">訂正がある場合の内容</label>
+      <textarea name="q1_1_correction" placeholder="例:&#10;・現住所は◯◯に変更&#10;・携帯番号は090-XXXX-XXXXに変更"></textarea>
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 1-2. 居住状況</div>
+      <label class="field-label">持家／賃貸</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q1_2_house_type" value="持家_自己所有"><span>持家（自己所有）</span></label>
+        <label><input type="radio" name="q1_2_house_type" value="持家_家族名義"><span>持家（家族名義）</span></label>
+        <label><input type="radio" name="q1_2_house_type" value="賃貸"><span>賃貸</span></label>
+      </div>
+      <p class="help">※住宅ローンの詳細は「3. 既存借入・与信」セクションでご記入ください</p>
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 1-3. 最終学歴</div>
+      <input type="text" name="q1_3_final_education" placeholder="例: ◯◯大学 工学部 1995年卒 / ◯◯高校 1991年卒">
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 1-4. 現職情報</div>
+      <div class="item-why">本業所得の安定性は融資審査の柱です。</div>
+      <label class="field-label">勤務先名</label>
+      <input type="text" name="q1_4_employer" placeholder="例: 株式会社◯◯建設">
+      <label class="field-label">勤務先所在地</label>
+      <input type="text" name="q1_4_employer_address" placeholder="例: 茨城県古河市◯◯">
+      <label class="field-label">雇用形態</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q1_4_employment" value="正社員"><span>正社員</span></label>
+        <label><input type="radio" name="q1_4_employment" value="契約社員"><span>契約社員</span></label>
+        <label><input type="radio" name="q1_4_employment" value="役員"><span>役員</span></label>
+        <label><input type="radio" name="q1_4_employment" value="自営業"><span>自営業</span></label>
+        <label><input type="radio" name="q1_4_employment" value="その他"><span>その他</span></label>
+      </div>
+      <label class="field-label">役職</label>
+      <input type="text" name="q1_4_position" placeholder="例: 現場監督 / 部長">
+      <label class="field-label">勤続年数</label>
+      <input type="text" name="q1_4_tenure" placeholder="例: 8年">
+      <label class="field-label">業種</label>
+      <input type="text" name="q1_4_industry" placeholder="例: 建設業（戸建て注文住宅）">
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SECTION 2: 収入・税務 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#276749;">
+    <span class="num">2</span> 収入・税務
+  </div>
+  <div class="section-body">
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 2-1. 源泉徴収票（直近3年分）の送付</div>
+      <div class="item-why">本業所得の安定性証明として、銀行打診に必須です。年収入力は不要です。直近3年分（2023・2024・2025）の源泉徴収票を ChatWork または h.suzuki@hishaku.co.jp までお送りください。</div>
+      <label class="field-label">送付状況</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q2_1_gensen_status" value="送付済"><span>送付済</span></label>
+        <label><input type="radio" name="q2_1_gensen_status" value="後日送付"><span>後日送付</span></label>
+        <label><input type="radio" name="q2_1_gensen_status" value="紛失_再発行"><span>紛失（前職に再発行依頼）</span></label>
+      </div>
+      <label class="field-label">補足（再発行のスケジュール等あれば）</label>
+      <input type="text" name="q2_1_gensen_note" placeholder="例: 5/3に発行依頼予定">
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SECTION 3: 既存借入・与信 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#744210;">
+    <span class="num">3</span> 既存借入・与信
+  </div>
+  <div class="section-body">
+
+    <div class="form-item partial">
+      <div class="item-label"><span class="badge badge-orange">部分回答</span> 3-1. 自宅住宅ローン</div>
+      <div class="item-why">★詳細は<strong>住宅ローン返済予定表</strong>をChatWork/メールでお送りいただければ詳細入力は不要です。</div>
+      <div style="background:#f0fff4; padding:8px 12px; border-radius:6px; font-size:12px; margin-bottom:10px;">
+        ✅ 弊社把握: 筑波銀行で住宅ローン取引あり（取引メイン銀行候補）
+      </div>
+      <label class="field-label">自宅住宅ローンの有無</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q3_1_house_loan" value="あり"><span>あり</span></label>
+        <label><input type="radio" name="q3_1_house_loan" value="なし"><span>なし</span></label>
+      </div>
+      <label class="field-label">借入金融機関（弊社把握: 筑波銀行）</label>
+      <input type="text" name="q3_1_bank" placeholder="例: 筑波銀行">
+      <label class="field-label">月額返済額</label>
+      <input type="text" name="q3_1_monthly" placeholder="例: ¥80,000">
+      <label class="field-label">現在残高</label>
+      <input type="text" name="q3_1_balance" placeholder="例: ¥18,500,000">
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 3-2. その他の借入</div>
+      <div class="item-why">あれば全件ご記入ください。返済予定表があればChatWork/メールでお送りください。</div>
+      <label class="field-label">自動車ローン</label>
+      <input type="text" name="q3_2_car" placeholder="例: なし / ◯◯ファイナンス 月¥30,000・残¥150万">
+      <label class="field-label">カードローン・キャッシング</label>
+      <input type="text" name="q3_2_card" placeholder="例: なし / ◯◯銀行カードローン残¥30万">
+      <label class="field-label">教育ローン・親族借入・その他</label>
+      <textarea name="q3_2_other" placeholder="例:&#10;・なし&#10;・親族借入¥100万"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SECTION 4: 金融資産 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#6b46c1;">
+    <span class="num">4</span> 金融資産
+  </div>
+  <div class="section-body">
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 4-1. 預貯金・有価証券</div>
+      <div class="item-why">「自己資金で物件を取得済」の裏付けとして自己資金力を示す材料になります。</div>
+      <label class="field-label">普通預金 合計（全金融機関）</label>
+      <input type="text" name="q4_1_savings" placeholder="例: ¥3,000,000">
+      <label class="field-label">定期預金 合計</label>
+      <input type="text" name="q4_1_deposit" placeholder="例: なし / ¥1,000,000">
+      <label class="field-label">有価証券（株式・投資信託・債券・暗号資産 等）</label>
+      <textarea name="q4_1_securities" placeholder="例:&#10;・なし&#10;・◯◯証券 株式¥150万・投信¥80万"></textarea>
+      <label class="field-label">生命保険 解約返戻金見込み（団信代替性の参考）</label>
+      <input type="text" name="q4_1_insurance" placeholder="例: なし / 終身保険返戻金見込み¥80万">
+    </div>
+</div>
+
+<!-- ==================== SECTION 5: 本物件購入の経緯 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#9f7aea;">
+    <span class="num">5</span> 本物件購入の経緯（古河市長谷町223番地1）
+  </div>
+  <div class="section-body">
+
+    <div class="alert alert-success">
+      <strong>★ 本物件は2026/3/31に決済完了済み・登記完了済み（弊社確認済）</strong>
+    </div>
+
+    <div class="form-item partial">
+      <div class="item-label"><span class="badge badge-orange">確認のお願い</span> 5-1. 物件情報・取得経緯（登記完了証より弊社確認）</div>
+      <div class="item-why">下記内容で正しいですか？訂正があれば下の欄にご記入ください。</div>
+      <div style="background:#f0fff4; padding:10px 14px; border-radius:6px; font-size:13px; margin-bottom:10px;">
+        <strong>所在:</strong> 茨城県古河市長谷町223番地1<br>
+        <strong>土地:</strong> 596.72㎡（うち2筆は持分53/70）／<strong>建物:</strong> 木造スレート葺2階建 199㎡（1F 99㎡＋2F 100㎡）<br>
+        <strong>売買代金:</strong> ¥10,000,000（手付¥800,000＋残¥9,200,000）<br>
+        <strong>引渡日:</strong> 2026/3/31（決済済）／登記完了 2026/4/3<br>
+        <strong>仲介:</strong> CENTURY 21 ／ <strong>売主:</strong> 株式会社タチキカックス（代表 立川徹様）<br>
+        <strong>登記代理:</strong> 司法書士法人おおさやなぎ事務所（古河市鴻巣2番地2 担当 大柳幸人様）<br>
+        <strong>★ 課税評価額合計: ¥10,843,423</strong>（売買代金¥10,000,000とほぼ整合）<br>
+        <strong>登録免許税:</strong> ¥176,900 納付済
+      </div>
+      <label class="field-label">確認</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q5_1_confirm" value="正しい"><span>上記で正しい</span></label>
+        <label><input type="radio" name="q5_1_confirm" value="訂正あり"><span>訂正あり（下記に記入）</span></label>
+      </div>
+      <label class="field-label">訂正がある場合の内容</label>
+      <textarea name="q5_1_correction" placeholder="例:&#10;・売買代金は◯◯万円&#10;・◯◯の項目を訂正"></textarea>
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 5-2. 諸費用の領収書送付</div>
+      <div class="item-why">仲介手数料・司法書士報酬・不動産取得税等の領収書写しがあれば、ChatWork または h.suzuki@hishaku.co.jp までお送りください。</div>
+      <label class="field-label">仲介手数料（CENTURY 21）の領収書</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q5_2_brokerage_receipt" value="送付済"><span>送付済</span></label>
+        <label><input type="radio" name="q5_2_brokerage_receipt" value="後日送付"><span>後日送付</span></label>
+        <label><input type="radio" name="q5_2_brokerage_receipt" value="紛失"><span>紛失</span></label>
+      </div>
+      <label class="field-label">司法書士報酬（おおさやなぎ事務所）の領収書</label>
+      <div class="radio-group">
+        <label><input type="radio" name="q5_2_legal_receipt" value="送付済"><span>送付済</span></label>
+        <label><input type="radio" name="q5_2_legal_receipt" value="後日送付"><span>後日送付</span></label>
+        <label><input type="radio" name="q5_2_legal_receipt" value="紛失"><span>紛失</span></label>
+      </div>
+      <label class="field-label">不動産取得税の通知到着状況</label>
+      <input type="text" name="q5_2_acquisition_tax" placeholder="例: 通知到着済 ¥◯万 / 未到着">
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SECTION 7: 物件運用計画 ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#2f855a;">
+    <span class="num">7</span> 本物件の運用計画（合同会社サンライズへの賃貸）
+  </div>
+  <div class="section-body">
+
+    <div class="answered">
+      <div class="item-label"><span class="badge badge-green">回答済み</span> 7-1. 賃貸借契約（弊社確認済み）</div>
+      <div class="answered-content">
+        <strong>賃貸借契約:</strong> 締結済（2026/4/26）<br>
+        <strong>借主:</strong> 合同会社サンライズ／<strong>連帯保証人:</strong> 藤倉常子様（明美様の実母）<br>
+        <strong>月額賃料:</strong> ¥315,000<br>
+        <strong>敷金:</strong> ¥630,000（賃料2ヶ月分）<br>
+        <strong>振込先:</strong> 筑波銀行 普通1062467 五島久哉<br>
+        <strong>契約期間:</strong> 令和8年7月1日〜令和11年6月30日（3年・3年毎更新可）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SECTION 8: 自己アピール ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#1a365d;">
+    <span class="num">8</span> 融資面談用 自己アピール
+  </div>
+  <div class="section-body">
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 8-1. ご主人様の強み・経験</div>
+      <div class="item-why">金融機関面談時の信用力訴求材料です。</div>
+      <label class="field-label">本業での評価ポイント（管理職経験・特殊技能・資格等）</label>
+      <textarea name="q8_1_strength" placeholder="例:&#10;・現場監督15年・部下20名の管理経験&#10;・1級建築施工管理技士&#10;・元独立経営者として10年経営経験あり"></textarea>
+      <label class="field-label">保有資格（業務関連／その他すべて）</label>
+      <textarea name="q8_1_qualifications" placeholder="例:&#10;・ヘルパー2級（約20年前取得）&#10;・1級建築施工管理技士&#10;・普通自動車運転免許&#10;・大型自動車免許"></textarea>
+      <label class="field-label">不動産投資・賃貸経営のご経験</label>
+      <input type="text" name="q8_1_real_estate_exp" placeholder="例: 初めて / 過去5年・1件（◯◯アパート）">
+    </div>
+
+    <div class="form-item">
+      <div class="item-label"><span class="badge badge-red">未確認</span> 8-2. 配偶者のGH事業（合同会社サンライズ）への支援姿勢</div>
+      <textarea name="q8_2_support" placeholder="例:&#10;・全面支援。物件提供のみならず連帯保証も検討可&#10;・物件提供のみで、法人融資の連帯保証は要相談&#10;・物件提供にとどめたい"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== ★必要書類リスト ==================== -->
+<div class="section">
+  <div class="section-header" style="background:#c53030;">
+    <span class="num">📋</span> ご準備いただきたい書類一覧（5/9までにお願いします）
+  </div>
+  <div class="section-body">
+
+    <div class="alert alert-info">
+      <strong>下記書類を ChatWork（room_id: 434796489 融資相談用）または h.suzuki@hishaku.co.jp までお送りください。</strong>
+    </div>
+
+    <table class="doc-status-table">
+      <thead>
+        <tr>
+          <th style="width:55%">書類</th>
+          <th style="width:25%">現在の状況</th>
+          <th style="width:20%">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="doc-name">本人確認書類<br><span style="font-size:11px; color:var(--text-light);">運転免許証 / マイナンバーカード / パスポート いずれか</span></td>
+          <td><select name="doc_id"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_id_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">源泉徴収票（直近3年分）<br><span style="font-size:11px; color:var(--text-light);">2023〜2025年分</span></td>
+          <td><select name="doc_gensen"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option><option value="再発行依頼">再発行依頼予定</option></select></td>
+          <td><input type="text" name="doc_gensen_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">給与明細（直近3ヶ月分）</td>
+          <td><select name="doc_payslip"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_payslip_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">自宅住宅ローン返済予定表<br><span style="font-size:11px; color:var(--text-light);">筑波銀行のもの</span></td>
+          <td><select name="doc_house_loan"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option><option value="再発行依頼">再発行依頼予定</option><option value="該当なし">住宅ローンなし</option></select></td>
+          <td><input type="text" name="doc_house_loan_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">その他借入の返済予定表（あれば全件）</td>
+          <td><select name="doc_other_loan"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option><option value="該当なし">その他借入なし</option></select></td>
+          <td><input type="text" name="doc_other_loan_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">個人銀行通帳コピー（最終ページ・残高欄）<br><span style="font-size:11px; color:var(--text-light);">給与振込口座 + 売買代金支払口座</span></td>
+          <td><select name="doc_bankbook"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_bankbook_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name" style="color:var(--text-light);">物件の登記事項証明書（履歴事項全部証明書）<br><span style="font-size:11px;">★弊社にて代理取得します（オンライン¥600・銀行打診時に必須のため）</span></td>
+          <td><select name="doc_property_registry"><option value="">選択してください</option><option value="斗で代理取得">斗で代理取得（推奨）</option><option value="自分で取得済">自分で取得済</option></select></td>
+          <td><input type="text" name="doc_property_registry_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">売買契約書のコピー</td>
+          <td><select name="doc_sale_contract"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_sale_contract_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">売買代金の領収書（手付・残金）</td>
+          <td><select name="doc_sale_receipt"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_sale_receipt_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">仲介手数料領収書（CENTURY 21）</td>
+          <td><select name="doc_brokerage_receipt"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_brokerage_receipt_note" placeholder=""></td>
+        </tr>
+        <tr>
+          <td class="doc-name">司法書士報酬領収書（おおさやなぎ事務所）</td>
+          <td><select name="doc_legal_receipt"><option value="">選択してください</option><option value="送付済">送付済</option><option value="後日送付">後日送付</option></select></td>
+          <td><input type="text" name="doc_legal_receipt_note" placeholder=""></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-success" style="margin-top: 20px;">
+      <strong>✅ 既受領済の書類（再送不要）</strong><br>
+      ・物件資料一式（登記完了証・課税評価明細書・PDF全3ページ版）<br>
+      ・サンライズとの賃貸借契約書（2026/4/26送付済）
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SUBMIT ==================== -->
+<div class="submit-area">
+  <p>
+    📝 <strong>入力途中でも送信可能です。</strong>後日不足分を追加していただいても結構です。<br>
+    送信後、株式会社斗 鈴木宛に通知メールが届きます。<br>
+    お問い合わせ: 090-6894-4907 / h.suzuki@hishaku.co.jp / ChatWork（room_id: 434796489）
+  </p>
+  <button type="submit" class="submit-btn" id="submit-btn">回答を送信する</button>
+</div>
+
+</form>
+
+</div>
+
+<div class="save-status" id="save-status">💾 入力内容を自動保存しました</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'gotou-hisaya-realestate-loan-draft-v1';
+  const form = document.getElementById('hearing-form');
+  const saveStatus = document.getElementById('save-status');
+  function showSaveStatus() { saveStatus.classList.add('show'); setTimeout(() => saveStatus.classList.remove('show'), 1500); }
+  function saveProgress() {
+    const data = {};
+    const fd = new FormData(form);
+    for (const [key, val] of fd.entries()) {
+      if (data[key] !== undefined) data[key] = Array.isArray(data[key]) ? [...data[key], val] : [data[key], val];
+      else data[key] = val;
+    }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, savedAt: Date.now() })); showSaveStatus(); } catch (e) {}
+  }
+  function restoreProgress() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const { data } = JSON.parse(raw);
+      Object.entries(data).forEach(([key, val]) => {
+        const els = form.querySelectorAll(`[name="${key}"]`);
+        els.forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            const values = Array.isArray(val) ? val : [val];
+            if (values.includes(el.value)) el.checked = true;
+          } else el.value = val;
+        });
+      });
+    } catch (e) {}
+  }
+  let saveTimer;
+  form.addEventListener('input', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
+  form.addEventListener('change', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
+  restoreProgress();
+})();
+</script>
+
+</body>
+</html>
