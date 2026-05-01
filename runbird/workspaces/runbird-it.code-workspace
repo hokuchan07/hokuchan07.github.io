@@ -1,0 +1,12 @@
+{
+  "folders": [
+    { "name": "IT営業ナレッジ", "path": "../../runbird-it-knowledge" },
+    { "name": "契約書（参照）", "path": "../../runbird-contracts" }
+  ],
+  "settings": {
+    "git.autofetch": true,
+    "git.autofetchPeriod": 600,
+    "task.allowAutomaticTasks": "on",
+    "window.title": "RUNBIRD ナレッジ（IT営業） — ${rootName}"
+  }
+}

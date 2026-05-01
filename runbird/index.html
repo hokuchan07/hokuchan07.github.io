@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNBIRD ナレッジAI 統合ハブ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 64px 24px 56px; text-align: center; }
+  .header .eyebrow { font-size: 12px; letter-spacing: 0.25em; color: #93c5fd; margin-bottom: 14px; }
+  .header h1 { font-size: 30px; margin-bottom: 12px; line-height: 1.4; }
+  .header .sub { font-size: 15px; color: #cbd5e1; max-width: 720px; margin: 0 auto; }
+  .header .org-badge { display: inline-block; margin-top: 22px; padding: 8px 22px; background: rgba(255,255,255,0.15); border: 1px solid rgba(147,197,253,0.3); border-radius: 24px; font-size: 13px; color: #cbd5e1; font-family: 'Consolas', monospace; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 48px 20px 80px; }
+
+  .section-title { font-size: 24px; color: #1e293b; margin-bottom: 8px; }
+  .section-sub { font-size: 14px; color: #64748b; margin-bottom: 28px; }
+  section { margin-bottom: 56px; }
+
+  /* 4 repos overview */
+  .repos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .repo-tile { padding: 22px 16px; border-radius: 14px; border: 2px solid; text-align: center; }
+  .repo-tile h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .repo-tile p { font-size: 12px; line-height: 1.5; }
+  .repo-tile .repo-id { display: inline-block; margin-top: 10px; padding: 3px 10px; background: rgba(0,0,0,0.06); border-radius: 4px; font-size: 10px; font-family: 'Consolas', monospace; }
+  .tile-welfare { background: #f0fdf4; border-color: #86efac; }
+  .tile-welfare h3 { color: #166534; }
+  .tile-welfare p { color: #15803d; }
+  .tile-it { background: #ecfeff; border-color: #67e8f9; }
+  .tile-it h3 { color: #155e75; }
+  .tile-it p { color: #0e7490; }
+  .tile-hr { background: #dbeafe; border-color: #60a5fa; }
+  .tile-hr h3 { color: #1e3a8a; }
+  .tile-hr p { color: #1e40af; }
+  .tile-ct { background: #ffedd5; border-color: #fb923c; }
+  .tile-ct h3 { color: #7c2d12; }
+  .tile-ct p { color: #9a3412; }
+
+  @media (max-width: 700px) { .repos-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Roles table */
+  .role-table-wrap { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; }
+  .role-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .role-table th { text-align: left; padding: 10px 12px; background: #f1f5f9; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .role-table td { padding: 12px; border-top: 1px solid #f1f5f9; vertical-align: top; }
+  .role-table .team-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin: 2px; font-weight: 600; white-space: nowrap; }
+  .role-table .t-exec { background: #f3e8ff; color: #6b21a8; }
+  .role-table .t-w-write { background: #dcfce7; color: #166534; }
+  .role-table .t-w-read { background: #ecfdf5; color: #166534; border: 1px dashed #86efac; }
+  .role-table .t-it-write { background: #cffafe; color: #155e75; }
+  .role-table .t-it-read { background: #ecfeff; color: #155e75; border: 1px dashed #67e8f9; }
+  .role-table .t-hr { background: #dbeafe; color: #1e3a8a; }
+  .role-table .t-ct-write { background: #ffedd5; color: #7c2d12; }
+  .role-table .t-ct-read { background: #fff7ed; color: #7c2d12; border: 1px dashed #fb923c; }
+
+  /* Setup card */
+  .setup-card { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 14px; padding: 32px; margin-bottom: 32px; }
+  .setup-card h3 { font-size: 18px; color: #78350f; margin-bottom: 12px; }
+  .setup-card p { font-size: 14px; color: #78350f; margin-bottom: 14px; }
+  .setup-cmd { background: #1e293b; color: #fde68a; padding: 16px 20px; border-radius: 8px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 13px; word-break: break-all; margin: 12px 0; }
+  .setup-card .note { font-size: 12px; color: #92400e; padding: 10px 14px; background: rgba(255,255,255,0.5); border-radius: 6px; border-left: 3px solid #f59e0b; margin-top: 14px; }
+
+  /* Cards */
+  .guide-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .guide-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; }
+  .guide-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+  .guide-card .target { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+  .guide-card.hr-card .target { background: #dbeafe; color: #1e40af; }
+  .guide-card.shi-card .target { background: #f3e8ff; color: #6b21a8; }
+  .guide-card h4 { font-size: 16px; color: #1e293b; margin-bottom: 6px; }
+  .guide-card p { font-size: 13px; color: #475569; }
+  .guide-card .arrow { display: block; margin-top: 12px; color: #3b82f6; font-size: 13px; font-weight: 600; }
+
+  @media (max-width: 700px) { .guide-cards { grid-template-columns: 1fr; } }
+
+  .footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #93c5fd; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 7px; border-radius: 4px; font-size: 12px; color: #334155; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">RUNBIRD KNOWLEDGE BASE</div>
+  <h1>RUNBIRD ナレッジAI 統合ハブ</h1>
+  <p class="sub">福祉・IT営業・人事・契約書の全社ナレッジを GitHub Organization で統合管理。役割（Team）に応じて、自分の権限内のナレッジに Cursor から1ウィンドウでアクセスできます。</p>
+  <span class="org-badge">github.com/runbird-inc</span>
+</header>
+
+<div class="container">
+
+  <!-- ========== 4 REPOS ========== -->
+  <section>
+    <h2 class="section-title">4つのナレッジ領域</h2>
+    <p class="section-sub">RUNBIRD の業務領域ごとに別々のリポジトリで管理。Team権限により誰がどこにアクセスできるかが決まります。</p>
+
+    <div class="repos-grid">
+      <div class="repo-tile tile-welfare">
+        <h3>福祉ナレッジ</h3>
+        <p>OWL/Royal等の福祉事業<br>運用記録・ChatWork履歴</p>
+        <div class="repo-id">runbird-welfare-knowledge</div>
+      </div>
+      <div class="repo-tile tile-it">
+        <h3>IT営業ナレッジ</h3>
+        <p>CTI/サブスクHP/<br>顧客管理/リスト収集</p>
+        <div class="repo-id">runbird-it-knowledge</div>
+      </div>
+      <div class="repo-tile tile-hr">
+        <h3>人事面談</h3>
+        <p>PLAUD録音/文字起こし<br>嶋田社長専用Cursor参照</p>
+        <div class="repo-id">runbird-hr-knowledge</div>
+      </div>
+      <div class="repo-tile tile-ct">
+        <h3>契約書</h3>
+        <p>過去〜現在の契約PDF<br>条件サマリmd</p>
+        <div class="repo-id">runbird-contracts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ROLES ========== -->
+  <section>
+    <h2 class="section-title">Team権限と担当者</h2>
+    <p class="section-sub">1人を複数Teamに所属させることで、複数領域を担当できます。退職や異動時はOrgから外すだけで全領域のアクセスが一斉に剥奪されます。</p>
+
+    <div class="role-table-wrap">
+      <table class="role-table">
+        <thead>
+          <tr>
+            <th>担当</th>
+            <th>所属Team</th>
+            <th>アクセス可能なナレッジ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>嶋田社長</strong></td>
+            <td><span class="team-tag t-exec">executives</span></td>
+            <td>全部（Admin）</td>
+          </tr>
+          <tr>
+            <td><strong>鈴木（斗）</strong></td>
+            <td><span class="team-tag t-exec">executives</span></td>
+            <td>全部（Admin）</td>
+          </tr>
+          <tr>
+            <td><strong>星崎</strong></td>
+            <td><span class="team-tag t-exec">executives</span></td>
+            <td>全部（Admin）</td>
+          </tr>
+          <tr>
+            <td><strong>前田さん</strong></td>
+            <td>
+              <span class="team-tag t-w-write">welfare-write</span>
+              <span class="team-tag t-hr">hr-input</span>
+              <span class="team-tag t-ct-read">contracts-read</span>
+            </td>
+            <td>福祉（編集）／人事（投入）／契約書（参照）</td>
+          </tr>
+          <tr>
+            <td><strong>中村一喜さん</strong></td>
+            <td>
+              <span class="team-tag t-w-write">welfare-write</span>
+              <span class="team-tag t-it-write">it-write</span>
+              <span class="team-tag t-hr">hr-input</span>
+              <span class="team-tag t-ct-write">contracts-write</span>
+            </td>
+            <td>福祉/IT/人事（編集）／契約書（投入担当）</td>
+          </tr>
+          <tr>
+            <td><strong>河合さん</strong></td>
+            <td>
+              <span class="team-tag t-w-write">welfare-write</span>
+              <span class="team-tag t-it-write">it-write</span>
+              <span class="team-tag t-hr">hr-input</span>
+              <span class="team-tag t-ct-read">contracts-read</span>
+            </td>
+            <td>福祉/IT/人事（編集）／契約書（参照）</td>
+          </tr>
+          <tr>
+            <td><strong>江口さん</strong></td>
+            <td>
+              <span class="team-tag t-it-write">it-write</span>
+              <span class="team-tag t-hr">hr-input</span>
+              <span class="team-tag t-ct-read">contracts-read</span>
+            </td>
+            <td>IT（編集）／人事（投入）／契約書（参照）</td>
+          </tr>
+          <tr>
+            <td><strong>齋藤さん</strong></td>
+            <td>
+              <span class="team-tag t-it-write">it-write</span>
+              <span class="team-tag t-ct-read">contracts-read</span>
+            </td>
+            <td>IT（編集）／契約書（参照）</td>
+          </tr>
+          <tr>
+            <td><strong>豊田さん</strong></td>
+            <td><span class="team-tag t-w-read">welfare-read</span></td>
+            <td>福祉（参照のみ）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== SETUP ========== -->
+  <section>
+    <h2 class="section-title">ワークスペース セットアップ（1コマンド）</h2>
+    <p class="section-sub">下記コマンド1回実行で、自分の権限内のナレッジが全部 Cursor の1ウィンドウで開ける状態になります。</p>
+
+    <div class="setup-card">
+      <h3>共通セットアップ（ほぼ全員これ）</h3>
+      <p>Mac の ターミナル（または VSCode/Cursor のターミナル）で以下を実行：</p>
+      <div class="setup-cmd">bash &lt;(curl -sL https://hokuchan07.github.io/runbird/runbird-setup.sh)</div>
+      <p style="margin-top:10px;">スクリプトが自動的に：</p>
+      <ul style="font-size:13px; color:#78350f; padding-left:24px; margin-top:6px;">
+        <li><code>~/Documents/runbird-knowledge/</code> を作成</li>
+        <li>あなたがアクセスできるナレッジを自動でclone（権限ないものはスキップ）</li>
+        <li>Cursor用の統合ワークスペースファイル <code>runbird.code-workspace</code> を生成</li>
+      </ul>
+      <p style="margin-top:14px;">完了後、Cursorで <code>File &gt; Open Workspace from File</code> から <code>runbird.code-workspace</code> を開けば1ウィンドウで全部見えます。</p>
+
+      <div class="note">
+        <strong>事前条件：</strong>GitHub のOrg招待メール（<code>runbird-inc</code>）を承認しておくこと。Cursor で GitHub にサインインしておくこと（Settings → Accounts）。
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ROLE-SPECIFIC GUIDES ========== -->
+  <section>
+    <h2 class="section-title">役割別の詳しいガイド</h2>
+    <p class="section-sub">担当によって運用ルールが少し変わります。自分に該当するガイドを読んでください。</p>
+
+    <div class="guide-cards">
+      <a href="hr-contracts-guide.html" class="guide-card hr-card">
+        <span class="target">前田・中村・河合・江口さん向け</span>
+        <h4>人事面談・契約書 投入ガイド</h4>
+        <p>面談記録のmd投入ルール、契約書PDFと解説mdのセット投入、フォルダ構造、テンプレート全文。</p>
+        <span class="arrow">読む →</span>
+      </a>
+
+      <a href="shimada-cursor-setup.html" class="guide-card shi-card">
+        <span class="target">嶋田社長専用</span>
+        <h4>嶋田社長 専用ワークスペース ガイド</h4>
+        <p>「保存して」と言うだけで人事/契約フォルダにmdが自動蓄積される仕組み。Cursor設定とセットアップ手順。</p>
+        <span class="arrow">読む →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== TROUBLE ========== -->
+  <section>
+    <h2 class="section-title">よくある質問</h2>
+
+    <div class="role-table-wrap">
+      <h4 style="font-size:15px; color:#1e293b; margin-bottom:6px;">Q. 既存のフォルダはどうなる？</h4>
+      <p style="font-size:13px; color:#475569; margin-bottom:18px;">A. 既にcloneしてあるフォルダはそのまま動きます（GitHubが旧URLから新URLへ自動リダイレクト）。整理したければ <code>~/Documents/runbird-knowledge/</code> にまとめ直すと統合ワークスペースで使えるようになります。</p>
+
+      <h4 style="font-size:15px; color:#1e293b; margin-bottom:6px;">Q. Org招待メールはどこから来る？</h4>
+      <p style="font-size:13px; color:#475569; margin-bottom:18px;">A. 件名「<code>[GitHub] @hokuchan07 invited you to join the runbird-inc organization</code>」で届きます。緑のボタン押して承認するだけ。</p>
+
+      <h4 style="font-size:15px; color:#1e293b; margin-bottom:6px;">Q. Cursorで質問するときの注意は？</h4>
+      <p style="font-size:13px; color:#475569; margin-bottom:18px;">A. 統合ワークスペースを開いた状態で質問すると、AIがどのナレッジを見るか自動的に判断します。「契約のことだけ知りたい」場合は、左サイドバーで「契約書」フォルダを選んでから質問するとピンポイントになります。</p>
+
+      <h4 style="font-size:15px; color:#1e293b; margin-bottom:6px;">Q. 新メンバーを追加したい</h4>
+      <p style="font-size:13px; color:#475569;">A. 鈴木（斗）にChatworkで「○○さんに××のアクセスを」と依頼してください。Team割当てで完結します。</p>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <p>RUNBIRD ナレッジAI 統合ハブ &nbsp;|&nbsp; 2026/5/1 公開 &nbsp;|&nbsp; 管理：株式会社 斗（hishaku）鈴木</p>
+  <p style="margin-top:6px;">トラブル・追加要望は <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> または ChatWork まで</p>
+</footer>
+
+</body>
+</html>
