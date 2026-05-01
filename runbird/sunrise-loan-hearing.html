@@ -508,6 +508,8 @@
   const STORAGE_KEY = 'sunrise-loan-hearing-draft-v1';
   const form = document.getElementById('hearing-form');
   const saveStatus = document.getElementById('save-status');
+  const submitBtn = document.getElementById('submit-btn');
+  const container = document.querySelector('.container');
   function showSaveStatus() { saveStatus.classList.add('show'); setTimeout(() => saveStatus.classList.remove('show'), 1500); }
   function saveProgress() {
     const data = {};
@@ -534,9 +536,52 @@
       });
     } catch (e) {}
   }
+  function showThankYou() {
+    container.innerHTML = `
+      <div class="header" style="background:#276749;">
+        <h1>✅ ご回答ありがとうございました</h1>
+        <p>送信が完了しました</p>
+      </div>
+      <div class="alert alert-success" style="padding:24px; font-size:14px; line-height:1.8;">
+        <strong style="font-size:16px; display:block; margin-bottom:12px;">回答は株式会社斗 鈴木宛に送信されました。</strong>
+        ・内容を確認のうえ、追加でご質問がある場合は ChatWork または h.suzuki@hishaku.co.jp よりご連絡いたします。<br>
+        ・後から追加・修正したい場合は、お手数ですが鈴木までご一報ください（再度フォームをお送りします）。<br><br>
+        <strong>このページを閉じていただいて結構です。</strong>
+      </div>
+      <div class="alert alert-info" style="font-size:12px; color:var(--text-light);">
+        ※ 回答内容の保護のため、ブラウザに保存されていた下書きは削除しました。
+        この URL を別の方が開いても、回答内容は表示されません。
+      </div>
+      <div class="submit-area" style="text-align:center;">
+        <p>お問い合わせ: 090-6894-4907 / h.suzuki@hishaku.co.jp</p>
+      </div>
+    `;
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(form)
+      });
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      form.reset();
+      showThankYou();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = '回答を送信する';
+      alert('送信に失敗しました。通信環境をご確認のうえ、再度お試しいただくか、ChatWork または h.suzuki@hishaku.co.jp までご連絡ください。');
+    }
+  }
   let saveTimer;
   form.addEventListener('input', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
   form.addEventListener('change', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
+  form.addEventListener('submit', handleSubmit);
   restoreProgress();
 })();
 </script>
