@@ -583,8 +583,8 @@
     document.querySelectorAll('.form-item').forEach(item => {
       const inputs = Array.from(item.querySelectorAll('[name]'));
       if (inputs.length === 0) return;
-      const allAnswered = inputs.every(i => answered.has(i.name));
-      if (allAnswered) {
+      const anyAnswered = inputs.some(i => answered.has(i.name));
+      if (anyAnswered) {
         const labelEl = item.querySelector('.item-label');
         let labelText = '';
         if (labelEl) {
@@ -602,24 +602,19 @@
       }
     });
 
-    answered.forEach(name => {
-      const els = form.querySelectorAll(`[name="${name}"]`);
-      els.forEach(el => {
-        if (el.tagName === 'SELECT') {
-          const badge = document.createElement('span');
-          badge.style.cssText = 'display:inline-block; padding:6px 10px; background:#c6f6d5; color:#276749; border-radius:4px; font-size:12px; font-weight:700;';
-          badge.textContent = '✓ 送信済み';
-          el.replaceWith(badge);
-        } else {
-          el.disabled = true;
-          el.value = '';
-          el.placeholder = '✓ 送信済み（内容は鈴木のみ閲覧可能）';
-          el.style.background = '#f0fff4';
-          el.style.color = '#276749';
-          el.style.cursor = 'not-allowed';
-          el.style.fontStyle = 'italic';
+    document.querySelectorAll('.doc-status-table tbody tr').forEach(tr => {
+      const inputs = Array.from(tr.querySelectorAll('[name]'));
+      if (inputs.length === 0) return;
+      const anyAnswered = inputs.some(i => answered.has(i.name));
+      if (anyAnswered) {
+        const cells = tr.querySelectorAll('td');
+        if (cells.length >= 2) {
+          cells[1].innerHTML = '<span style="display:inline-block; padding:6px 10px; background:#c6f6d5; color:#276749; border-radius:4px; font-size:12px; font-weight:700;">✓ 送信済み</span>';
         }
-      });
+        if (cells.length >= 3) {
+          cells[2].innerHTML = '<span style="font-size:11px; color:var(--text-light); font-style:italic;">内容は鈴木のみ閲覧可能</span>';
+        }
+      }
     });
 
     const purpose = container.querySelector('.purpose');
