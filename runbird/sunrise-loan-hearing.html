@@ -506,82 +506,212 @@
 <script>
 (function() {
   const STORAGE_KEY = 'sunrise-loan-hearing-draft-v1';
+  const ANSWERED_KEY = 'sunrise-loan-hearing-answered-v1';
+  const META_FIELDS = new Set(['form-id', 'client-name', 'respondent-name']);
   const form = document.getElementById('hearing-form');
   const saveStatus = document.getElementById('save-status');
   const submitBtn = document.getElementById('submit-btn');
   const container = document.querySelector('.container');
-  function showSaveStatus() { saveStatus.classList.add('show'); setTimeout(() => saveStatus.classList.remove('show'), 1500); }
+
+  function showSaveStatus(msg) {
+    if (msg) saveStatus.textContent = msg;
+    saveStatus.classList.add('show');
+    setTimeout(() => saveStatus.classList.remove('show'), 1800);
+  }
+
+  function getAnswered() {
+    try { return new Set(JSON.parse(localStorage.getItem(ANSWERED_KEY) || '[]')); } catch (e) { return new Set(); }
+  }
+  function addAnswered(names) {
+    const cur = getAnswered();
+    names.forEach(n => cur.add(n));
+    try { localStorage.setItem(ANSWERED_KEY, JSON.stringify([...cur])); } catch (e) {}
+  }
+
+  function seedAnsweredFromURL() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const seed = params.get('answered');
+      if (!seed) return;
+      const names = seed.split(',').map(s => s.trim()).filter(Boolean);
+      if (names.length > 0) {
+        addAnswered(names);
+        const url = new URL(window.location.href);
+        url.searchParams.delete('answered');
+        window.history.replaceState({}, '', url.toString());
+      }
+    } catch (e) {}
+  }
+
   function saveProgress() {
     const data = {};
     const fd = new FormData(form);
     for (const [key, val] of fd.entries()) {
+      if (META_FIELDS.has(key)) continue;
       if (data[key] !== undefined) data[key] = Array.isArray(data[key]) ? [...data[key], val] : [data[key], val];
       else data[key] = val;
     }
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, savedAt: Date.now() })); showSaveStatus(); } catch (e) {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, savedAt: Date.now() })); showSaveStatus('💾 入力内容を自動保存しました'); } catch (e) {}
   }
+
   function restoreProgress() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const { data } = JSON.parse(raw);
+      const answered = getAnswered();
       Object.entries(data).forEach(([key, val]) => {
+        if (answered.has(key)) return;
         const els = form.querySelectorAll(`[name="${key}"]`);
         els.forEach(el => {
+          if (el.disabled) return;
           if (el.type === 'checkbox' || el.type === 'radio') {
             const values = Array.isArray(val) ? val : [val];
             if (values.includes(el.value)) el.checked = true;
-          } else el.value = val;
+          } else {
+            el.value = val;
+          }
         });
       });
     } catch (e) {}
   }
-  function showThankYou() {
-    container.innerHTML = `
-      <div class="header" style="background:#276749;">
-        <h1>✅ ご回答ありがとうございました</h1>
-        <p>送信が完了しました</p>
-      </div>
-      <div class="alert alert-success" style="padding:24px; font-size:14px; line-height:1.8;">
-        <strong style="font-size:16px; display:block; margin-bottom:12px;">回答は株式会社斗 鈴木宛に送信されました。</strong>
-        ・内容を確認のうえ、追加でご質問がある場合は ChatWork または h.suzuki@hishaku.co.jp よりご連絡いたします。<br>
-        ・後から追加・修正したい場合は、お手数ですが鈴木までご一報ください（再度フォームをお送りします）。<br><br>
-        <strong>このページを閉じていただいて結構です。</strong>
-      </div>
-      <div class="alert alert-info" style="font-size:12px; color:var(--text-light);">
-        ※ 回答内容の保護のため、ブラウザに保存されていた下書きは削除しました。
-        この URL を別の方が開いても、回答内容は表示されません。
-      </div>
-      <div class="submit-area" style="text-align:center;">
-        <p>お問い合わせ: 090-6894-4907 / h.suzuki@hishaku.co.jp</p>
+
+  function lockAnsweredFields() {
+    const answered = getAnswered();
+    if (answered.size === 0) return;
+
+    document.querySelectorAll('.form-item').forEach(item => {
+      const inputs = Array.from(item.querySelectorAll('[name]'));
+      if (inputs.length === 0) return;
+      const allAnswered = inputs.every(i => answered.has(i.name));
+      if (allAnswered) {
+        const labelEl = item.querySelector('.item-label');
+        let labelText = '';
+        if (labelEl) {
+          const clone = labelEl.cloneNode(true);
+          clone.querySelectorAll('.badge').forEach(b => b.remove());
+          labelText = clone.textContent.trim();
+        }
+        const newDiv = document.createElement('div');
+        newDiv.className = 'answered';
+        newDiv.innerHTML = `
+          <div class="item-label"><span class="badge badge-green">送信済み</span> ${labelText}</div>
+          <div class="answered-content" style="color: var(--text-light); font-style: italic;">✓ ご回答送信済み（内容は鈴木のみ閲覧可能）</div>
+        `;
+        item.replaceWith(newDiv);
+      }
+    });
+
+    answered.forEach(name => {
+      const els = form.querySelectorAll(`[name="${name}"]`);
+      els.forEach(el => {
+        if (el.tagName === 'SELECT') {
+          const badge = document.createElement('span');
+          badge.style.cssText = 'display:inline-block; padding:6px 10px; background:#c6f6d5; color:#276749; border-radius:4px; font-size:12px; font-weight:700;';
+          badge.textContent = '✓ 送信済み';
+          el.replaceWith(badge);
+        } else {
+          el.disabled = true;
+          el.value = '';
+          el.placeholder = '✓ 送信済み（内容は鈴木のみ閲覧可能）';
+          el.style.background = '#f0fff4';
+          el.style.color = '#276749';
+          el.style.cursor = 'not-allowed';
+          el.style.fontStyle = 'italic';
+        }
+      });
+    });
+
+    const purpose = container.querySelector('.purpose');
+    if (purpose) {
+      const banner = document.createElement('div');
+      banner.className = 'alert alert-success';
+      banner.style.marginBottom = '24px';
+      banner.innerHTML = `
+        <strong>✓ 一部のご回答をお預かりしています</strong><br>
+        既に送信いただいた項目は <span class="badge badge-green">送信済み</span> と表示しています。残りの未回答項目（<span class="badge badge-red">未確認</span>）にご記入のうえ、再度送信ボタンを押してください。<br>
+        <span style="font-size:12px; color:var(--text-light);">※ ご回答内容は第三者には表示されません。鈴木のみ閲覧可能です。修正されたい場合は鈴木までご連絡ください。</span>
+      `;
+      purpose.insertAdjacentElement('afterend', banner);
+    }
+
+    const remaining = Array.from(form.querySelectorAll('input[name], textarea[name], select[name]'))
+      .filter(el => !META_FIELDS.has(el.name) && !el.disabled);
+    if (remaining.length === 0) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '✓ 全項目送信済みです';
+      submitBtn.style.background = '#276749';
+      submitBtn.style.cursor = 'default';
+    }
+  }
+
+  function showSubmittedOverlay(count) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed; inset:0; background:rgba(255,255,255,0.97); z-index:200; display:flex; align-items:center; justify-content:center; padding:24px;';
+    overlay.innerHTML = `
+      <div style="text-align:center; max-width:480px;">
+        <div style="font-size:56px; margin-bottom:16px;">✅</div>
+        <h2 style="color:#276749; margin-bottom:12px; font-size:22px;">送信完了</h2>
+        <p style="font-size:14px; line-height:1.8; color:#2d3748;">
+          ${count}項目のご回答を株式会社斗 鈴木宛に送信しました。<br>
+          ご記入ありがとうございます。<br><br>
+          <strong>残りの未回答項目は、後日同じURLからご記入いただけます。</strong><br>
+          既に送信した内容は表示されませんのでご安心ください。
+        </p>
+        <button id="reload-btn" style="margin-top:24px; padding:14px 32px; background:#1a365d; color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;">
+          続けて回答する / ページを更新
+        </button>
+        <p style="margin-top:16px; font-size:12px; color:#718096;">5秒後に自動でページを更新します</p>
       </div>
     `;
+    document.body.appendChild(overlay);
+    document.getElementById('reload-btn').addEventListener('click', () => window.location.reload());
+    setTimeout(() => window.location.reload(), 5000);
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (submitBtn.disabled) return;
+
+    const fd = new FormData(form);
+    const newlyAnswered = [];
+    for (const [key, val] of fd.entries()) {
+      if (META_FIELDS.has(key)) continue;
+      if (val && String(val).trim()) newlyAnswered.push(key);
+    }
+
+    if (newlyAnswered.length === 0) {
+      alert('まだ何もご記入されていないようです。1項目以上ご記入のうえ送信してください。');
+      return;
+    }
+
     submitBtn.disabled = true;
+    const origText = submitBtn.textContent;
     submitBtn.textContent = '送信中...';
+
     try {
       await fetch(form.action, {
         method: 'POST',
         mode: 'no-cors',
-        body: new FormData(form)
+        body: fd
       });
+      addAnswered(newlyAnswered);
       try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-      form.reset();
-      showThankYou();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showSubmittedOverlay(newlyAnswered.length);
     } catch (err) {
       submitBtn.disabled = false;
-      submitBtn.textContent = '回答を送信する';
+      submitBtn.textContent = origText;
       alert('送信に失敗しました。通信環境をご確認のうえ、再度お試しいただくか、ChatWork または h.suzuki@hishaku.co.jp までご連絡ください。');
     }
   }
+
   let saveTimer;
   form.addEventListener('input', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
   form.addEventListener('change', () => { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 500); });
   form.addEventListener('submit', handleSubmit);
+
+  seedAnsweredFromURL();
+  lockAnsweredFields();
   restoreProgress();
 })();
 </script>
