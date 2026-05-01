@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNBIRD 人事面談・契約書ナレッジAI 運用ガイド</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  /* ========== Header ========== */
+  .header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #fff; padding: 56px 24px 48px; text-align: center; }
+  .header .eyebrow { font-size: 12px; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 12px; }
+  .header h1 { font-size: 28px; margin-bottom: 10px; line-height: 1.4; }
+  .header .sub { font-size: 14px; color: #cbd5e1; max-width: 640px; margin: 0 auto; }
+  .header .date { display: inline-block; margin-top: 18px; padding: 5px 14px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 12px; color: #cbd5e1; }
+
+  /* ========== Quick Nav ========== */
+  .nav { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 20px; position: sticky; top: 0; z-index: 10; }
+  .nav-inner { max-width: 980px; margin: 0 auto; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .nav a { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; text-decoration: none; color: #334155; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .nav a:hover { background: #1e293b; color: #fff; }
+  .nav a.hr { background: #dbeafe; color: #1e40af; }
+  .nav a.hr:hover { background: #1e40af; color: #fff; }
+  .nav a.contracts { background: #ffedd5; color: #9a3412; }
+  .nav a.contracts:hover { background: #9a3412; color: #fff; }
+
+  /* ========== Container ========== */
+  .container { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* ========== Section base ========== */
+  section { margin-bottom: 56px; scroll-margin-top: 80px; }
+  .section-title { font-size: 24px; color: #1e293b; margin-bottom: 8px; }
+  .section-sub { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+
+  /* ========== Overview big diagram ========== */
+  .overview { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+  .overview h3 { font-size: 16px; color: #475569; margin-bottom: 24px; text-align: center; }
+  .repo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .repo-card { padding: 18px 14px; border-radius: 12px; border: 2px solid; text-align: center; transition: transform 0.2s; }
+  .repo-card:hover { transform: translateY(-3px); }
+  .repo-card .repo-icon { font-size: 28px; margin-bottom: 8px; display: block; line-height: 1; }
+  .repo-card .repo-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .repo-card .repo-desc { font-size: 11px; line-height: 1.4; }
+  .repo-welfare { background: #f0fdf4; border-color: #86efac; }
+  .repo-welfare .repo-name { color: #166534; }
+  .repo-welfare .repo-desc { color: #15803d; }
+  .repo-it { background: #ecfeff; border-color: #67e8f9; }
+  .repo-it .repo-name { color: #155e75; }
+  .repo-it .repo-desc { color: #0e7490; }
+  .repo-hr { background: #dbeafe; border-color: #60a5fa; box-shadow: 0 4px 12px rgba(59,130,246,0.15); }
+  .repo-hr .repo-name { color: #1e3a8a; }
+  .repo-hr .repo-desc { color: #1e40af; }
+  .repo-hr .new-badge { display: inline-block; background: #ef4444; color: #fff; font-size: 9px; padding: 2px 8px; border-radius: 10px; margin-top: 6px; font-weight: 700; }
+  .repo-contracts { background: #ffedd5; border-color: #fb923c; box-shadow: 0 4px 12px rgba(251,146,60,0.15); }
+  .repo-contracts .repo-name { color: #7c2d12; }
+  .repo-contracts .repo-desc { color: #9a3412; }
+  .repo-contracts .new-badge { display: inline-block; background: #ef4444; color: #fff; font-size: 9px; padding: 2px 8px; border-radius: 10px; margin-top: 6px; font-weight: 700; }
+
+  @media (max-width: 700px) {
+    .repo-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ========== Why section ========== */
+  .why-box { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+  .why-box h3 { font-size: 16px; color: #92400e; margin-bottom: 12px; }
+  .why-box p { font-size: 14px; color: #78350f; margin-bottom: 8px; }
+  .why-flow { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; justify-content: center; font-size: 13px; }
+  .why-step { padding: 8px 14px; background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; color: #78350f; }
+  .why-step.bad { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+  .why-step.good { background: #dcfce7; border-color: #86efac; color: #166534; }
+  .why-arrow { color: #d97706; font-weight: 700; }
+
+  /* ========== Repo intro card ========== */
+  .repo-intro { padding: 28px 32px; border-radius: 16px; margin-bottom: 28px; border: 2px solid; }
+  .repo-intro.hr { background: #eff6ff; border-color: #60a5fa; }
+  .repo-intro.contracts { background: #fff7ed; border-color: #fb923c; }
+  .repo-intro h2 { font-size: 26px; margin-bottom: 6px; }
+  .repo-intro.hr h2 { color: #1e3a8a; }
+  .repo-intro.contracts h2 { color: #7c2d12; }
+  .repo-intro .tagline { font-size: 14px; margin-bottom: 16px; }
+  .repo-intro.hr .tagline { color: #1e40af; }
+  .repo-intro.contracts .tagline { color: #9a3412; }
+  .repo-url { display: inline-block; background: #1e293b; color: #93c5fd; padding: 10px 18px; border-radius: 8px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 13px; text-decoration: none; word-break: break-all; }
+  .repo-url:hover { background: #0f172a; }
+
+  /* ========== Role flow diagram ========== */
+  .role-flow { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .role-flow h3 { font-size: 18px; color: #1e293b; margin-bottom: 4px; }
+  .role-flow .flow-sub { font-size: 13px; color: #64748b; margin-bottom: 24px; }
+
+  .flow-stage { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; }
+  .flow-col { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; padding: 16px 14px; text-align: center; }
+  .flow-col h4 { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .flow-col .actor { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .flow-col .actor-detail { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .flow-col.uploaders { border-color: #93c5fd; background: #eff6ff; }
+  .flow-col.uploaders .actor { color: #1e40af; }
+  .flow-col.repo { border-color: #cbd5e1; background: #f1f5f9; }
+  .flow-col.repo .actor { color: #334155; }
+  .flow-col.viewers { border-color: #86efac; background: #f0fdf4; }
+  .flow-col.viewers .actor { color: #166534; }
+  .flow-col.viewers.locked { border-color: #fca5a5; background: #fef2f2; }
+  .flow-col.viewers.locked .actor { color: #991b1b; }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 24px; font-weight: 700; }
+
+  @media (max-width: 700px) {
+    .flow-stage { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+  }
+
+  /* ========== Folder tree ========== */
+  .folder-tree { background: #1e293b; color: #e2e8f0; padding: 24px; border-radius: 10px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 13px; line-height: 1.9; overflow-x: auto; }
+  .folder-tree .folder { color: #93c5fd; }
+  .folder-tree .file { color: #fef08a; }
+  .folder-tree .comment { color: #94a3b8; font-style: italic; }
+  .folder-tree .new { color: #86efac; font-weight: 700; }
+
+  /* ========== Step cards ========== */
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .step { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; position: relative; }
+  .step .step-num { position: absolute; top: -14px; left: 20px; width: 32px; height: 32px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+  .step.hr .step-num { background: #3b82f6; }
+  .step.contracts .step-num { background: #f97316; }
+  .step h4 { font-size: 15px; color: #1e293b; margin-top: 8px; margin-bottom: 10px; font-weight: 700; }
+  .step p { font-size: 13px; color: #475569; margin-bottom: 6px; }
+  .step ul { font-size: 13px; color: #475569; padding-left: 18px; margin: 6px 0; }
+  .step li { margin-bottom: 4px; }
+  .step .step-cmd { background: #1e293b; color: #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 12px; margin: 8px 0; word-break: break-all; }
+
+  @media (max-width: 700px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+
+  /* ========== Template card ========== */
+  .template-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 18px; }
+  .template-card h3 { font-size: 16px; color: #1e293b; margin-bottom: 12px; }
+  .template-card .template-code { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 12px; color: #334155; overflow-x: auto; white-space: pre; line-height: 1.6; }
+  .template-card .yaml-key { color: #b45309; }
+  .template-card .yaml-val { color: #059669; }
+  .template-card .md-h { color: #1e40af; font-weight: 700; }
+  .template-card .md-comment { color: #94a3b8; font-style: italic; }
+
+  /* ========== Rule callouts ========== */
+  .rule-callout { padding: 18px 22px; border-radius: 10px; margin-top: 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .rule-callout .icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+  .rule-callout h4 { font-size: 15px; margin-bottom: 4px; }
+  .rule-callout p { font-size: 13px; line-height: 1.6; }
+  .rule-callout.warning { background: #fef2f2; border: 1px solid #fca5a5; }
+  .rule-callout.warning h4 { color: #991b1b; }
+  .rule-callout.warning p { color: #7f1d1d; }
+  .rule-callout.info { background: #eff6ff; border: 1px solid #93c5fd; }
+  .rule-callout.info h4 { color: #1e40af; }
+  .rule-callout.info p { color: #1e3a8a; }
+  .rule-callout.success { background: #f0fdf4; border: 1px solid #86efac; }
+  .rule-callout.success h4 { color: #166534; }
+  .rule-callout.success p { color: #14532d; }
+
+  /* ========== Access table ========== */
+  .access-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .access-table th { text-align: left; padding: 12px 14px; background: #f1f5f9; color: #475569; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .access-table td { padding: 12px 14px; border-top: 1px solid #f1f5f9; color: #334155; }
+  .access-table .check { color: #16a34a; font-weight: 700; text-align: center; }
+  .access-table .nocheck { color: #cbd5e1; text-align: center; }
+  .access-table .role-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .access-table .role-admin { background: #f3e8ff; color: #6b21a8; }
+  .access-table .role-input { background: #dbeafe; color: #1e40af; }
+  .access-table .role-view { background: #d1fae5; color: #047857; }
+  .access-table .role-onlyview { background: #fef3c7; color: #92400e; }
+
+  /* ========== Mini section title ========== */
+  h3.mini-title { font-size: 17px; color: #1e293b; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+
+  /* ========== Common section ========== */
+  .common-section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px; }
+  .common-section h3 { font-size: 18px; color: #1e293b; margin-bottom: 12px; }
+  .common-section ol { padding-left: 22px; font-size: 14px; color: #475569; }
+  .common-section ol li { margin-bottom: 10px; }
+  .common-section ol li strong { color: #1e293b; }
+
+  /* ========== Q&A example ========== */
+  .qa-example { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 18px; margin-top: 16px; }
+  .qa-example .q { color: #166534; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .qa-example .a { color: #14532d; font-size: 13px; padding-left: 16px; border-left: 3px solid #86efac; margin-top: 8px; }
+
+  /* ========== Footer ========== */
+  .footer { text-align: center; padding: 40px 20px; background: #1e293b; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #93c5fd; text-decoration: none; }
+
+  /* ========== Visual icon ========== */
+  .v-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+  .v-icon.blue { background: #dbeafe; color: #1e40af; }
+  .v-icon.orange { background: #ffedd5; color: #9a3412; }
+  .v-icon.green { background: #dcfce7; color: #166534; }
+  .v-icon.red { background: #fee2e2; color: #991b1b; }
+
+  /* ========== Big arrow flow ========== */
+  .big-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
+  .big-flow .stage { background: #fff; border: 2px solid; border-radius: 12px; padding: 14px 20px; text-align: center; min-width: 130px; }
+  .big-flow .stage.s1 { border-color: #93c5fd; background: #eff6ff; }
+  .big-flow .stage.s2 { border-color: #cbd5e1; background: #f1f5f9; }
+  .big-flow .stage.s3 { border-color: #86efac; background: #f0fdf4; }
+  .big-flow .stage h5 { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .big-flow .stage .label { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .big-flow .stage .tool { font-size: 11px; color: #64748b; }
+  .big-flow .arrow-big { color: #94a3b8; font-size: 22px; font-weight: 700; }
+
+  /* ========== Compare grid ========== */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+  .compare-col { padding: 22px; border-radius: 12px; border: 2px solid; }
+  .compare-col.hr-col { background: #eff6ff; border-color: #60a5fa; }
+  .compare-col.contracts-col { background: #fff7ed; border-color: #fb923c; }
+  .compare-col h4 { font-size: 16px; margin-bottom: 12px; }
+  .compare-col.hr-col h4 { color: #1e3a8a; }
+  .compare-col.contracts-col h4 { color: #7c2d12; }
+  .compare-col table { width: 100%; font-size: 13px; }
+  .compare-col table td { padding: 6px 0; vertical-align: top; }
+  .compare-col table td:first-child { color: #64748b; padding-right: 10px; white-space: nowrap; font-size: 12px; }
+  .compare-col table td:last-child { color: #1e293b; font-weight: 600; }
+
+  @media (max-width: 700px) {
+    .compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">RUNBIRD KNOWLEDGE BASE</div>
+  <h1>人事面談・契約書ナレッジAI 運用ガイド</h1>
+  <p class="sub">「あの面談どう言ってた？」「あの契約どうなってた？」を、嶋田社長と中村さんへの個別質問なしで Cursor が即答できる状態にする運用ガイドです。</p>
+  <div class="date">2026/5/1 公開</div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">全体像</a>
+    <a href="#hr" class="hr">人事面談 repo</a>
+    <a href="#contracts" class="contracts">契約書 repo</a>
+    <a href="#access">アクセス権</a>
+    <a href="#setup">承認・接続</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ========== OVERVIEW ========== -->
+  <section id="overview">
+    <h2 class="section-title">全体像</h2>
+    <p class="section-sub">RUNBIRD には現在 4つのナレッジリポジトリがあります。今回追加するのは右の2つです。</p>
+
+    <div class="overview">
+      <h3>RUNBIRD ナレッジリポジトリ 4本立て</h3>
+      <div class="repo-grid">
+        <div class="repo-card repo-welfare">
+          <span class="repo-icon">●</span>
+          <div class="repo-name">福祉ナレッジ</div>
+          <div class="repo-desc">Royal等の福祉事業<br>運用済</div>
+        </div>
+        <div class="repo-card repo-it">
+          <span class="repo-icon">●</span>
+          <div class="repo-name">IT営業ナレッジ</div>
+          <div class="repo-desc">CTI/HP/顧客管理<br>4/30運用開始</div>
+        </div>
+        <div class="repo-card repo-hr">
+          <span class="repo-icon">●</span>
+          <div class="repo-name">人事面談</div>
+          <div class="repo-desc">PLAUD録音+文字起こし<br>嶋田社長専用参照</div>
+          <span class="new-badge">NEW</span>
+        </div>
+        <div class="repo-card repo-contracts">
+          <span class="repo-icon">●</span>
+          <div class="repo-name">契約書</div>
+          <div class="repo-desc">過去〜現在の契約書PDF<br>Cursor持ち全員参照</div>
+          <span class="new-badge">NEW</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-box">
+      <h3>なぜ作るのか</h3>
+      <p>「あの面談で○○さん何て言ってた？」「あの契約解約はいつまでに通知すれば？」という質問が、嶋田社長や中村さんに集中している状況を解消します。</p>
+      <p>面談記録・契約書を専用リポジトリに集約し、Cursor AI が出典付きで即答できる状態を作ります。</p>
+
+      <div class="why-flow">
+        <span class="why-step bad">A：「中村さん、これどうなってた？」</span>
+        <span class="why-arrow">→</span>
+        <span class="why-step bad">中村が確認・回答</span>
+        <span class="why-arrow">→</span>
+        <span class="why-step bad">中村に質問が集中</span>
+      </div>
+      <div class="why-flow" style="margin-top:8px;">
+        <span class="why-step good">B：「Cursor、これどうなってる？」</span>
+        <span class="why-arrow">→</span>
+        <span class="why-step good">出典付きで即答</span>
+        <span class="why-arrow">→</span>
+        <span class="why-step good">中村は本来業務に集中</span>
+      </div>
+    </div>
+
+    <h3 class="mini-title">2 つのリポジトリの違いを一目で</h3>
+    <div class="compare">
+      <div class="compare-col hr-col">
+        <h4>人事面談 repo</h4>
+        <table>
+          <tr><td>用途</td><td>面談での発言・状況の蓄積</td></tr>
+          <tr><td>投入</td><td>前田・中村・河合・江口（4名）</td></tr>
+          <tr><td>形式</td><td>md（PLAUD文字起こし）</td></tr>
+          <tr><td>参照</td><td>嶋田社長のCursorのみ</td></tr>
+          <tr><td>機密度</td><td>★★★ 最高（経営判断専用）</td></tr>
+        </table>
+      </div>
+      <div class="compare-col contracts-col">
+        <h4>契約書 repo</h4>
+        <table>
+          <tr><td>用途</td><td>契約条件の即時確認</td></tr>
+          <tr><td>投入</td><td>中村（一喜）さん</td></tr>
+          <tr><td>形式</td><td>PDF + 解説md（必ずセット）</td></tr>
+          <tr><td>参照</td><td>Cursor持ち全員（6名）</td></tr>
+          <tr><td>機密度</td><td>★★ 高（契約条件含む）</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HR REPO ========== -->
+  <section id="hr">
+    <div class="repo-intro hr">
+      <h2>人事面談ナレッジ</h2>
+      <p class="tagline">前田・中村・河合・江口の4名が実施する面談を記録 → 嶋田社長がCursorで参照</p>
+      <a class="repo-url" href="https://github.com/hokuchan07/runbird-hr-knowledge" target="_blank">github.com/hokuchan07/runbird-hr-knowledge</a>
+    </div>
+
+    <div class="role-flow">
+      <h3>役割分担と情報の流れ</h3>
+      <p class="flow-sub">「投入」と「参照」を明確に分離します。書き込みアクセスは4名にも与えますが、Cursorでの質問運用は嶋田社長のみです。</p>
+
+      <div class="flow-stage">
+        <div class="flow-col uploaders">
+          <h4>投入（Push）</h4>
+          <div class="actor">前田・中村・河合・江口</div>
+          <div class="actor-detail">PLAUD録音→<br>文字起こし→<br>mdファイル作成→push</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-col repo">
+          <h4>蓄積場所</h4>
+          <div class="actor">runbird-hr-knowledge</div>
+          <div class="actor-detail">GitHub private repo<br>面談記録/{年月}/<br>に時系列で保存</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-col viewers locked">
+          <h4>参照（Cursor質問）</h4>
+          <div class="actor">嶋田社長 のみ</div>
+          <div class="actor-detail">Cursor で<br>「〇〇さん最近何と言ってる？」<br>と質問→出典付き回答</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mini-title">フォルダ構造</h3>
+    <div class="folder-tree">
+<span class="folder">runbird-hr-knowledge/</span>
+├── <span class="file">.cursorrules</span>            <span class="comment"># AIへの指示書（機密性ルール、出典必須）</span>
+├── <span class="file">README.md</span>
+└── <span class="folder">ナレッジ/</span>
+    ├── <span class="folder">面談記録/</span>           <span class="comment"># ★メインの投入先</span>
+    │   └── <span class="folder">2026-05/</span>       <span class="comment"># 月別フォルダ</span>
+    │       └── <span class="file">山田太郎_面談_20260512.md</span>
+    ├── <span class="folder">メンバー/</span>           <span class="comment"># 各人のプロフィール+履歴サマリ</span>
+    │   └── <span class="file">_索引.md</span>
+    ├── <span class="folder">評価フィードバック/</span>
+    ├── <span class="folder">テンプレート/</span>       <span class="comment"># 1on1シート等</span>
+    ├── <span class="folder">会社方針/</span>           <span class="comment"># 評価制度</span>
+    └── <span class="folder">FAQ/</span>
+    </div>
+
+    <h3 class="mini-title">投入の手順（前田・中村・河合・江口）</h3>
+    <div class="big-flow">
+      <div class="stage s1">
+        <h5>STEP 1</h5>
+        <div class="label">面談実施</div>
+        <div class="tool">PLAUDで録音</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s1">
+        <h5>STEP 2</h5>
+        <div class="label">文字起こし</div>
+        <div class="tool">PLAUDで自動生成</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s2">
+        <h5>STEP 3</h5>
+        <div class="label">mdに保存</div>
+        <div class="tool">テンプレに沿って</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s3">
+        <h5>STEP 4</h5>
+        <div class="label">git push</div>
+        <div class="tool">Cursor or VSCode</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step hr">
+        <div class="step-num">1</div>
+        <h4>ファイル名のルール</h4>
+        <p>以下の場所・命名で保存してください。</p>
+        <div class="step-cmd">ナレッジ/面談記録/{YYYY-MM}/{被面談者氏名}_{種別}_{YYYYMMDD}.md</div>
+        <ul>
+          <li>種別：面談 / 1on1 / 評価面談 / 退職面談 など</li>
+          <li>被面談者氏名は漢字フルネーム</li>
+          <li>同月ファイルが無ければ月フォルダから作成</li>
+        </ul>
+      </div>
+      <div class="step hr">
+        <div class="step-num">2</div>
+        <h4>ファイル冒頭のテンプレート</h4>
+        <p>AIが正確に答えるための「メタ情報」を最上部に書きます。</p>
+        <ul>
+          <li>被面談者・面談実施者・日時・場所を冒頭の <code>---</code> ブロックに</li>
+          <li>サマリ（1〜3行）→ 文字起こし本文 の順で記載</li>
+          <li>テンプレ全文は次のカードに</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <h3>面談記録テンプレート（コピペ可）</h3>
+<pre class="template-code"><span class="md-comment">---</span>
+<span class="yaml-key">被面談者:</span> <span class="yaml-val">山田太郎</span>
+<span class="yaml-key">面談実施者:</span> <span class="yaml-val">中村一喜</span>
+<span class="yaml-key">種別:</span> <span class="yaml-val">1on1</span>
+<span class="yaml-key">日時:</span> <span class="yaml-val">2026-05-12 14:00〜15:00</span>
+<span class="yaml-key">場所:</span> <span class="yaml-val">オフィス会議室</span>
+<span class="md-comment">---</span>
+
+<span class="md-h"># 山田太郎 1on1（2026-05-12）</span>
+
+<span class="md-h">## サマリ</span>
+（1〜3行で要点を記載）
+
+<span class="md-h">## 文字起こし</span>
+（PLAUDから貼り付け）
+
+<span class="md-h">## 補足メモ</span>
+（実施者の補足。事実ベースで）</pre>
+    </div>
+
+    <div class="rule-callout warning">
+      <div class="icon">!</div>
+      <div>
+        <h4>重要：このリポジトリのCursor参照は嶋田社長専用です</h4>
+        <p>4名の皆さまには「投入のみ」をお願いしています。リポジトリの中身は読めますが、Cursorで「○○さんについて教えて」のような質問運用は控えてください。経営判断のための機密情報として、Cursor接続は嶋田社長のみで運用します。</p>
+      </div>
+    </div>
+
+    <div class="rule-callout info">
+      <div class="icon">i</div>
+      <div>
+        <h4>記録の温度感</h4>
+        <p>「被面談者本人がいずれ読む可能性がある」前提で、事実ベース・発言の引用ベースで記録してください。印象論や個人攻撃は避け、後で本人へ開示しても問題ない粒度を心がけます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTRACTS REPO ========== -->
+  <section id="contracts">
+    <div class="repo-intro contracts">
+      <h2>契約書ナレッジ</h2>
+      <p class="tagline">中村さんが投入 → Cursor持ち全員が「あの契約どうなってた？」を即時確認</p>
+      <a class="repo-url" href="https://github.com/hokuchan07/runbird-contracts" target="_blank">github.com/hokuchan07/runbird-contracts</a>
+    </div>
+
+    <div class="role-flow">
+      <h3>役割分担と情報の流れ</h3>
+      <p class="flow-sub">中村さんが投入を担当し、Cursorを使う全メンバーが参照できます。「中村さん、あの契約どうなってた？」という質問を Cursor 自体に向けられる状態を作ります。</p>
+
+      <div class="flow-stage">
+        <div class="flow-col uploaders">
+          <h4>投入（Push）</h4>
+          <div class="actor">中村（一喜）</div>
+          <div class="actor-detail">PDF原本＋<br>解説md（条件サマリ）<br>を必ずセットで</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-col repo">
+          <h4>蓄積場所</h4>
+          <div class="actor">runbird-contracts</div>
+          <div class="actor-detail">GitHub private repo<br>種別×相手方で整理<br>Git LFSでPDF管理</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-col viewers">
+          <h4>参照（Cursor質問）</h4>
+          <div class="actor">Cursor持ち全員（6名）</div>
+          <div class="actor-detail">嶋田・前田・中村・<br>河合・江口・齋藤<br>各自のCursorで質問</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mini-title">フォルダ構造</h3>
+    <div class="folder-tree">
+<span class="folder">runbird-contracts/</span>
+├── <span class="file">.cursorrules</span>            <span class="comment"># AIへの指示書（出典必須・法的助言禁止）</span>
+├── <span class="file">.gitattributes</span>          <span class="comment"># PDF/docx/xlsxはLFSで保存</span>
+├── <span class="file">README.md</span>
+└── <span class="folder">ナレッジ/</span>
+    ├── <span class="folder">契約書/</span>             <span class="comment"># ★メインの投入先（種別×相手方）</span>
+    │   ├── <span class="folder">顧客契約/</span>        <span class="comment"># 顧客との業務委託・準委任・請負</span>
+    │   │   └── <span class="folder">{顧客名}/</span>
+    │   │       ├── <span class="file">20260315_業務委託契約書.pdf</span>
+    │   │       └── <span class="file">20260315_業務委託契約書.md</span>  <span class="comment"># ★必須セット</span>
+    │   ├── <span class="folder">業務委託/</span>        <span class="comment"># 社外パートナーとの契約</span>
+    │   ├── <span class="folder">雇用労務/</span>        <span class="comment"># 雇用契約・就業規則・労使協定</span>
+    │   ├── <span class="folder">NDA/</span>            <span class="comment"># 秘密保持契約</span>
+    │   ├── <span class="folder">その他/</span>
+    │   └── <span class="file">_索引.md</span>          <span class="comment"># 全契約一覧</span>
+    ├── <span class="folder">テンプレート/</span>       <span class="comment"># 新規契約用ひな型</span>
+    └── <span class="folder">解説FAQ/</span>           <span class="comment"># 契約全般のFAQ</span>
+    </div>
+
+    <h3 class="mini-title">投入の手順（中村さん）</h3>
+    <div class="big-flow">
+      <div class="stage s1">
+        <h5>STEP 1</h5>
+        <div class="label">PDFを保存</div>
+        <div class="tool">スキャン or 受領済PDF</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s1">
+        <h5>STEP 2</h5>
+        <div class="label">解説md作成</div>
+        <div class="tool">スペック表形式</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s2">
+        <h5>STEP 3</h5>
+        <div class="label">索引に追記</div>
+        <div class="tool">_索引.md に1行</div>
+      </div>
+      <span class="arrow-big">→</span>
+      <div class="stage s3">
+        <h5>STEP 4</h5>
+        <div class="label">git push</div>
+        <div class="tool">PDFはLFSで自動処理</div>
+      </div>
+    </div>
+
+    <div class="rule-callout warning">
+      <div class="icon">!</div>
+      <div>
+        <h4>最重要：PDFと解説mdは必ずセットで</h4>
+        <p>Cursor AI は バイナリPDFを直接読み解けません。PDF原本だけでは「契約どうなってる？」に答えられず、検索しても何も出ません。条件をスペック表化した <code>.md</code> を必ず同じ場所・同じ名前（拡張子だけ違い）で添えてください。</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step contracts">
+        <div class="step-num">1</div>
+        <h4>ファイル配置</h4>
+        <div class="step-cmd">ナレッジ/契約書/{種別}/{相手方}/{YYYYMMDD}_{契約名}.pdf
+ナレッジ/契約書/{種別}/{相手方}/{YYYYMMDD}_{契約名}.md</div>
+        <p>種別は5つから選択：</p>
+        <ul>
+          <li>顧客契約 / 業務委託 / 雇用労務 / NDA / その他</li>
+        </ul>
+      </div>
+      <div class="step contracts">
+        <div class="step-num">2</div>
+        <h4>解説mdに書くこと</h4>
+        <p>AIが即答できるよう、契約条件を<strong>スペック表形式</strong>で抽出。</p>
+        <ul>
+          <li>契約期間・自動更新の有無</li>
+          <li>解約通知の期限</li>
+          <li>契約金額・支払サイト</li>
+          <li>秘密保持期間・競業避止</li>
+          <li>損害賠償の上限</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <h3>解説mdテンプレート（コピペ可）</h3>
+<pre class="template-code"><span class="md-comment">---</span>
+<span class="yaml-key">契約名:</span> <span class="yaml-val">業務委託契約書</span>
+<span class="yaml-key">相手方:</span> <span class="yaml-val">株式会社○○</span>
+<span class="yaml-key">契約日:</span> <span class="yaml-val">2026-03-15</span>
+<span class="yaml-key">契約期間:</span> <span class="yaml-val">2026-04-01 〜 2027-03-31（自動更新有）</span>
+<span class="yaml-key">契約金額:</span> <span class="yaml-val">¥500,000/月</span>
+<span class="yaml-key">PDFファイル:</span> <span class="yaml-val">20260315_業務委託契約書.pdf</span>
+<span class="md-comment">---</span>
+
+<span class="md-h"># 業務委託契約書（株式会社○○・2026-03-15締結）</span>
+
+<span class="md-h">## スペック表</span>
+
+| 項目 | 内容 |
+|---|---|
+| 契約期間 | 2026-04-01 〜 2027-03-31 |
+| 自動更新 | 有（90日前までの解約通知が無ければ1年更新） |
+| 解約通知 | 終了日の90日前までに書面 |
+| 契約金額 | ¥500,000/月（消費税別） |
+| 支払サイト | 月末締め翌月末払い |
+| 秘密保持期間 | 契約終了後3年間 |
+| 競業避止 | 終了後1年間 |
+| 損害賠償上限 | 直近12ヶ月の支払額相当 |
+
+<span class="md-h">## 主要条項（原文要約と該当ページ）</span>
+
+- 第3条（業務内容）: ...（P. 2）
+- 第5条（報酬）: ...（P. 3）
+- 第10条（解約）: ...（P. 5）
+
+<span class="md-h">## 特記事項・リスク</span>
+
+- （特殊な特約や注意点があれば記載）
+
+<span class="md-h">## 改定履歴</span>
+
+- 2026-03-15 初版締結</pre>
+    </div>
+
+    <div class="rule-callout success">
+      <div class="icon">✓</div>
+      <div>
+        <h4>こう答えられるようになります</h4>
+        <p>「○○社との契約、解約はいつまでに通知すればいい？」<br>→ Cursor が「終了日の90日前までに書面で（出典：20260315_業務委託契約書.md / pdf）」と即答。</p>
+      </div>
+    </div>
+
+    <div class="qa-example">
+      <div class="q">Q. 「△△社のNDAって何年有効？」</div>
+      <div class="a">A. 「契約終了後3年間有効です（参照：ナレッジ/契約書/NDA/△△社/20260120_NDA.md）」のように、出典付きで即答できます。</div>
+    </div>
+  </section>
+
+  <!-- ========== ACCESS ========== -->
+  <section id="access">
+    <h2 class="section-title">アクセス権限まとめ</h2>
+    <p class="section-sub">2026/5/1 時点。GitHubから招待メールが届いているので承認してください。</p>
+
+    <h3 class="mini-title">人事面談 repo（runbird-hr-knowledge）</h3>
+    <table class="access-table">
+      <thead>
+        <tr>
+          <th>GitHub ID</th>
+          <th>担当</th>
+          <th>役割</th>
+          <th style="text-align:center;">投入</th>
+          <th style="text-align:center;">Cursor参照</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>hokuchan07</td><td>鈴木（斗）</td><td><span class="role-tag role-admin">管理</span></td><td class="check">✓</td><td class="nocheck">—</td></tr>
+        <tr><td>shimada-runbird</td><td>嶋田社長</td><td><span class="role-tag role-onlyview">経営参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+        <tr><td>maeda-runbird</td><td>前田さん</td><td><span class="role-tag role-input">投入</span></td><td class="check">✓</td><td class="nocheck">—</td></tr>
+        <tr><td>Nakamura-RUNBIRD</td><td>中村さん</td><td><span class="role-tag role-input">投入</span></td><td class="check">✓</td><td class="nocheck">—</td></tr>
+        <tr><td>takemi-kk</td><td>河合さん</td><td><span class="role-tag role-input">投入</span></td><td class="check">✓</td><td class="nocheck">—</td></tr>
+        <tr><td>TakuyaEguchi00</td><td>江口さん</td><td><span class="role-tag role-input">投入</span></td><td class="check">✓</td><td class="nocheck">—</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="mini-title">契約書 repo（runbird-contracts）</h3>
+    <table class="access-table">
+      <thead>
+        <tr>
+          <th>GitHub ID</th>
+          <th>担当</th>
+          <th>役割</th>
+          <th style="text-align:center;">投入</th>
+          <th style="text-align:center;">Cursor参照</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>hokuchan07</td><td>鈴木（斗）</td><td><span class="role-tag role-admin">管理</span></td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Nakamura-RUNBIRD</td><td>中村さん</td><td><span class="role-tag role-input">投入担当</span></td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>shimada-runbird</td><td>嶋田社長</td><td><span class="role-tag role-view">参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+        <tr><td>maeda-runbird</td><td>前田さん</td><td><span class="role-tag role-view">参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+        <tr><td>takemi-kk</td><td>河合さん</td><td><span class="role-tag role-view">参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+        <tr><td>TakuyaEguchi00</td><td>江口さん</td><td><span class="role-tag role-view">参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+        <tr><td>RyuSaito00</td><td>齋藤さん</td><td><span class="role-tag role-view">参照</span></td><td class="nocheck">—</td><td class="check">✓</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ========== SETUP ========== -->
+  <section id="setup">
+    <h2 class="section-title">承認・接続の手順（共通）</h2>
+    <p class="section-sub">既存の福祉ナレッジ・IT営業ナレッジと同じ流れです。福祉でやったメンバーは1〜2を飛ばせます。</p>
+
+    <div class="common-section">
+      <h3>1. GitHub招待メールを承認する</h3>
+      <ol>
+        <li><strong>GitHubにログイン</strong>した状態で、自分宛の招待メールを開く</li>
+        <li>「<strong>View invitation</strong>」または「招待を確認」をクリック</li>
+        <li>「<strong>Accept invitation</strong>」を押して承認完了</li>
+      </ol>
+
+      <h3 style="margin-top: 24px;">2. Cursorで該当リポジトリを開く</h3>
+      <ol>
+        <li>Cursor（または VSCode）を起動</li>
+        <li>「Clone Git Repository」または <code>git clone</code> でリポジトリを取得
+          <div class="step-cmd" style="margin-top:6px; background:#1e293b; color:#e2e8f0; padding:10px 14px; border-radius:6px; font-family:'Consolas',monospace; font-size:12px;">git clone https://github.com/hokuchan07/runbird-hr-knowledge.git
+git clone https://github.com/hokuchan07/runbird-contracts.git</div>
+        </li>
+        <li>初回オープン時に「<strong>このフォルダのタスクを自動的に許可しますか？</strong>」と聞かれたら「Allow / 許可」を選択
+          <p style="font-size:12px; color:#64748b; margin-top:4px;">→ 以降フォルダを開くたびに自動で <code>git pull</code> が走り、最新ナレッジが揃います</p>
+        </li>
+      </ol>
+
+      <h3 style="margin-top: 24px;">3. 質問するとき（嶋田社長 / 契約書参照メンバー）</h3>
+      <ol>
+        <li>Cursor上部のチャットを開く</li>
+        <li>そのまま日本語で質問する</li>
+        <li>AIが <code>ナレッジ/</code> 配下を参照して、<strong>出典ファイル名付き</strong>で回答</li>
+      </ol>
+
+      <div class="qa-example" style="margin-top:14px;">
+        <div class="q">人事面談での質問例（嶋田社長）</div>
+        <div class="a">「先月の面談で退職リスクが言及されたメンバーはいる？」<br>「中村さんは今期どんな目標を掲げてる？」<br>「○○さんの最近のモチベーションについて何か発言ある？」</div>
+      </div>
+
+      <div class="qa-example" style="margin-top:10px;">
+        <div class="q">契約書での質問例（参照メンバー全員）</div>
+        <div class="a">「○○社との契約、自動更新の停止はいつまでに通知すればいい？」<br>「現在進行中の業務委託契約で、損害賠償上限が一番高いのはどれ？」<br>「△△社のNDA、有効期間は何年？」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section id="faq">
+    <h2 class="section-title">よくある質問</h2>
+
+    <div class="common-section">
+      <h3>Q. PLAUDの文字起こしをそのまま貼り付けるだけでいい？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. はい、ただし冒頭のメタ情報（被面談者・面談実施者・日時）だけは追加してください。AIが「これは誰の何月の面談か」を識別する手がかりになります。</p>
+
+      <h3 style="margin-top:24px;">Q. 古い契約書はどう扱う？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. 削除せずに残します。終了済の契約は <code>_終了</code> サフィックスを付けるなど、いつ・どんな条件だったかが分かる状態で保管。改定があった場合は新ファイル（<code>YYYYMMDD_変更後</code>）として追加します。</p>
+
+      <h3 style="margin-top:24px;">Q. 契約書の解説mdって、毎回手書き？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. 上のテンプレートをコピーしてスペック表を埋めるだけです。1契約あたり 5〜10分程度で済みます。慣れたら Cursor に「このPDFから条件抽出して解説mdを作って」と頼むと下書きを生成できます（ただし最後は人の確認が必須）。</p>
+
+      <h3 style="margin-top:24px;">Q. 人事面談の内容、後で本人に開示することになったら？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. その想定で「事実ベース・引用ベース」で記録してください。印象論や個人攻撃は避けます。GitHubの履歴は残るので、編集・削除しても証拠としての痕跡は残ります。</p>
+
+      <h3 style="margin-top:24px;">Q. AIが「ナレッジに該当情報が見つかりませんでした」と言ったら？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. これは <strong>正しい挙動</strong> です。ナレッジに無いことを推測で答えるのを禁止しているためです。実データを追加してから再質問してください（人事 → 該当面談を投入、契約書 → 中村さんに依頼）。</p>
+
+      <h3 style="margin-top:24px;">Q. 既存の福祉ナレッジ・IT営業ナレッジと混ざらない？</h3>
+      <p style="font-size:14px; color:#475569; margin-top:6px;">A. リポジトリが別なので物理的に分離されています。Cursorで質問する際は、その時開いているフォルダのナレッジだけを参照します。例えば人事面談リポジトリを開いているときに「契約条件は？」と聞いても、契約書リポジトリの中身は参照されません（必要に応じてフォルダを切り替えてください）。</p>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <p>RUNBIRD ナレッジAI 運用ガイド &nbsp;|&nbsp; 2026/5/1 公開 &nbsp;|&nbsp; 管理：株式会社 斗（hishaku）鈴木</p>
+  <p style="margin-top:6px;">不明点は <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> までお気軽に</p>
+</footer>
+
+</body>
+</html>
