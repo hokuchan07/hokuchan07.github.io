@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNBIRD GitHub管理画面 早見表 — 嶋田社長専用ガイド</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 56px 24px 44px; text-align: center; }
+  .header .eyebrow { font-size: 11px; letter-spacing: 0.25em; color: #93c5fd; margin-bottom: 14px; }
+  .header h1 { font-size: 26px; margin-bottom: 12px; line-height: 1.4; }
+  .header .sub { font-size: 14px; color: #cbd5e1; max-width: 680px; margin: 0 auto; }
+  .header .org-badge { display: inline-block; margin-top: 18px; padding: 6px 18px; background: rgba(255,255,255,0.12); border: 1px solid rgba(147,197,253,0.3); border-radius: 20px; font-size: 12px; color: #cbd5e1; font-family: 'Consolas', monospace; }
+
+  .nav { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 14px 20px; position: sticky; top: 0; z-index: 10; }
+  .nav-inner { max-width: 980px; margin: 0 auto; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .nav a { padding: 8px 14px; background: #f1f5f9; border-radius: 20px; text-decoration: none; color: #334155; font-size: 12px; font-weight: 600; }
+  .nav a:hover { background: #1e3a8a; color: #fff; }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  section { margin-bottom: 56px; scroll-margin-top: 80px; }
+  .section-title { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+  .section-sub { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+
+  /* ========== Quick principle box ========== */
+  .principle-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #86efac; border-radius: 16px; padding: 28px 32px; margin-bottom: 32px; }
+  .principle-box h3 { font-size: 18px; color: #166534; margin-bottom: 12px; }
+  .principle-box p { font-size: 14px; color: #14532d; margin-bottom: 8px; }
+  .principle-box .key-rule { background: #fff; border-radius: 10px; padding: 16px 20px; margin-top: 14px; border-left: 4px solid #16a34a; }
+  .principle-box .key-rule strong { color: #166534; font-size: 15px; }
+
+  /* ========== Screen cheatsheet ========== */
+  .screen-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin-bottom: 18px; }
+  .screen-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
+  .screen-header .screen-icon { width: 44px; height: 44px; border-radius: 10px; background: #eff6ff; color: #1e3a8a; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+  .screen-header h3 { font-size: 17px; color: #0f172a; flex: 1; }
+  .screen-url { background: #1e293b; color: #93c5fd; padding: 6px 14px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 12px; word-break: break-all; max-width: 100%; }
+  .screen-content { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+  .screen-content .col h4 { font-size: 13px; color: #475569; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .screen-content .col ul { font-size: 13px; color: #475569; padding-left: 20px; line-height: 1.8; }
+  .screen-content .col.what-can h4 { color: #16a34a; }
+  .screen-content .col.what-not h4 { color: #ef4444; }
+  .screen-content .col.what-can ul { color: #14532d; }
+  .screen-content .col.what-not ul { color: #7f1d1d; }
+  @media (max-width: 700px) { .screen-content { grid-template-columns: 1fr; } }
+
+  /* ========== Invite flow ========== */
+  .invite-section { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 16px; padding: 32px; margin: 32px 0; }
+  .invite-section h3 { font-size: 20px; color: #78350f; margin-bottom: 18px; }
+  .invite-recommend { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 22px 24px; margin-bottom: 24px; }
+  .invite-recommend h4 { font-size: 15px; color: #166534; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .invite-recommend h4::before { content: "★"; color: #16a34a; font-size: 18px; }
+  .invite-recommend p { font-size: 13px; color: #14532d; line-height: 1.7; }
+  .invite-recommend .chat-example { background: #fff; border-radius: 8px; padding: 14px 18px; margin-top: 12px; font-size: 13px; color: #14532d; border-left: 3px solid #16a34a; font-family: 'Hiragino Sans', sans-serif; }
+
+  .invite-divider { text-align: center; margin: 24px 0; font-size: 12px; color: #92400e; letter-spacing: 0.1em; }
+
+  .invite-direct h4 { font-size: 16px; color: #78350f; margin-bottom: 16px; }
+  .invite-step { background: #fff; border: 1px solid #fde68a; border-radius: 10px; padding: 20px; margin-bottom: 12px; display: flex; gap: 18px; align-items: flex-start; }
+  .invite-step .step-num { width: 32px; height: 32px; background: #f59e0b; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+  .invite-step .step-body { flex: 1; }
+  .invite-step h5 { font-size: 15px; color: #0f172a; margin-bottom: 6px; }
+  .invite-step p { font-size: 13px; color: #475569; margin-bottom: 6px; line-height: 1.7; }
+  .invite-step .url-box { background: #1e293b; color: #93c5fd; padding: 8px 12px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 12px; margin: 8px 0; word-break: break-all; }
+  .invite-step .ui-action { background: #fef3c7; padding: 8px 14px; border-radius: 6px; font-size: 12px; color: #78350f; margin-top: 6px; display: inline-block; font-weight: 600; }
+
+  .team-table-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px; }
+  .team-table-card h4 { font-size: 15px; color: #0f172a; margin-bottom: 14px; }
+  .team-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .team-table th { text-align: left; padding: 10px 12px; background: #f8fafc; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .team-table td { padding: 10px 12px; border-top: 1px solid #f1f5f9; }
+  .team-table .team-name { font-family: 'Consolas', monospace; font-size: 12px; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+  .team-table .team-name.exec { background: #f3e8ff; color: #6b21a8; }
+  .team-table .team-name.welf-w { background: #dcfce7; color: #166534; }
+  .team-table .team-name.welf-r { background: #ecfdf5; color: #166534; border: 1px dashed #86efac; }
+  .team-table .team-name.it-w { background: #cffafe; color: #155e75; }
+  .team-table .team-name.it-r { background: #ecfeff; color: #155e75; border: 1px dashed #67e8f9; }
+  .team-table .team-name.hr { background: #dbeafe; color: #1e3a8a; }
+  .team-table .team-name.ct-w { background: #ffedd5; color: #7c2d12; }
+  .team-table .team-name.ct-r { background: #fff7ed; color: #7c2d12; border: 1px dashed #fb923c; }
+
+  /* ========== Other operations ========== */
+  .ops-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ops-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }
+  .ops-card h4 { font-size: 15px; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .ops-card .ops-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .ops-card .ops-tag.danger { background: #fee2e2; color: #991b1b; }
+  .ops-card .ops-tag.normal { background: #dbeafe; color: #1e40af; }
+  .ops-card p { font-size: 13px; color: #475569; line-height: 1.7; }
+  .ops-card .ops-step { background: #f8fafc; border-left: 3px solid #cbd5e1; padding: 8px 14px; margin-top: 10px; font-size: 12px; color: #475569; }
+  @media (max-width: 700px) { .ops-grid { grid-template-columns: 1fr; } }
+
+  /* ========== Callout ========== */
+  .callout { padding: 18px 22px; border-radius: 10px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+  .callout .icon { font-size: 22px; line-height: 1; flex-shrink: 0; font-weight: 700; }
+  .callout h4 { font-size: 15px; margin-bottom: 4px; }
+  .callout p { font-size: 13px; line-height: 1.6; }
+  .callout.warning { background: #fef2f2; border: 1px solid #fca5a5; }
+  .callout.warning .icon, .callout.warning h4 { color: #991b1b; }
+  .callout.warning p { color: #7f1d1d; }
+  .callout.info { background: #eff6ff; border: 1px solid #93c5fd; }
+  .callout.info .icon, .callout.info h4 { color: #1e40af; }
+  .callout.info p { color: #1e3a8a; }
+
+  .footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #93c5fd; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 7px; border-radius: 4px; font-size: 12px; color: #334155; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">FOR SHIMADA-SAN — ADMIN CHEATSHEET</div>
+  <h1>RUNBIRD GitHub管理画面<br>早見表 ＋ 新メンバー招待ガイド</h1>
+  <p class="sub">嶋田社長が GitHub の管理画面を開いた時に「これは何？」を即解決するためのリファレンス。新メンバー招待の手順もカバーしています。</p>
+  <div class="org-badge">github.com/runbird-inc</div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#principle">基本原則</a>
+    <a href="#screens">画面の意味</a>
+    <a href="#invite">新メンバー招待</a>
+    <a href="#other-ops">その他の操作</a>
+    <a href="#trouble">困ったら</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ========== Principle ========== -->
+  <section id="principle">
+    <h2 class="section-title">基本原則</h2>
+    <p class="section-sub">最初に、社長が知っておくべき大原則を1つだけ。</p>
+
+    <div class="principle-box">
+      <h3>このGitHub管理画面、社長は基本的に触らなくて大丈夫です</h3>
+      <p>RUNBIRDのナレッジAI運用は、すでに必要な設定が揃っている状態です。社長は普段はCursorで質問するだけ・人事/契約フォルダにメモが溜まっていくのを確認するだけ、で完結します。</p>
+
+      <div class="key-rule">
+        <strong>とはいえ「これは何？」と気になった時のため、各画面の意味を一覧化しました。</strong><br>
+        操作が必要な時は、原則的に <strong>鈴木にChatworkで一言</strong> 頂ければこちらで対応します。
+        誤操作で人事ナレッジが他の人に見える事故を防ぐためです。
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Screen cheatsheet ========== -->
+  <section id="screens">
+    <h2 class="section-title">画面別の意味と使い方</h2>
+    <p class="section-sub">GitHub の各画面で、何ができて何がやっちゃダメかをまとめました。</p>
+
+    <!-- Org Top -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-icon">●</div>
+        <h3>① Organization トップ</h3>
+        <div class="screen-url">github.com/runbird-inc</div>
+      </div>
+      <p style="font-size:13px; color:#475569; line-height:1.7;">RUNBIRD全社のナレッジリポジトリ一覧が見えるトップページ。4つのナレッジ（福祉・IT・人事・契約書）がここに並んでいます。</p>
+      <div class="screen-content">
+        <div class="col what-can">
+          <h4>できること</h4>
+          <ul>
+            <li>各ナレッジリポジトリへ移動</li>
+            <li>誰が何にアクセスできるか俯瞰</li>
+            <li>新着Activity の確認</li>
+          </ul>
+        </div>
+        <div class="col what-not">
+          <h4>触らないこと</h4>
+          <ul>
+            <li>「Settings」での Org rename</li>
+            <li>「Delete this organization」</li>
+            <li>有償プランへのアップグレード</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- People -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-icon">●</div>
+        <h3>② People（メンバー一覧）</h3>
+        <div class="screen-url">github.com/orgs/runbird-inc/people</div>
+      </div>
+      <p style="font-size:13px; color:#475569; line-height:1.7;">runbird-inc に所属している全メンバー（GitHubアカウント単位）が並ぶページ。誰がOrgに参加しているかの確認用。</p>
+      <div class="screen-content">
+        <div class="col what-can">
+          <h4>できること</h4>
+          <ul>
+            <li>Org全メンバーの確認</li>
+            <li>各メンバーのプロフィール確認</li>
+            <li>新メンバーの招待（「Invite member」ボタン）</li>
+          </ul>
+        </div>
+        <div class="col what-not">
+          <h4>注意点</h4>
+          <ul>
+            <li>招待するだけでは権限は付かない（Team追加が別途必要）</li>
+            <li>招待後の Team 振り分けを忘れると見えるナレッジが定まらない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teams -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-icon">●</div>
+        <h3>③ Teams（チーム一覧）— 権限グループ</h3>
+        <div class="screen-url">github.com/orgs/runbird-inc/teams</div>
+      </div>
+      <p style="font-size:13px; color:#475569; line-height:1.7;">8つのチーム（権限グループ）が並ぶページ。「誰がどのナレッジを見られるか」を決める仕組みの中核です。</p>
+      <div class="screen-content">
+        <div class="col what-can">
+          <h4>できること</h4>
+          <ul>
+            <li>各Teamのメンバー確認</li>
+            <li>Teamの権限（Read/Write/Admin）の確認</li>
+          </ul>
+        </div>
+        <div class="col what-not">
+          <h4>触らないこと</h4>
+          <ul>
+            <li>Team自体の削除</li>
+            <li>権限レベルの変更</li>
+            <li>新Team作成（領域追加時に鈴木が対応）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- executives team -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-icon">●</div>
+        <h3>④ Team詳細（例：executives = 幹部）</h3>
+        <div class="screen-url">github.com/orgs/runbird-inc/teams/executives</div>
+      </div>
+      <p style="font-size:13px; color:#475569; line-height:1.7;">「幹部（executives）」チームの詳細画面。社長が見ていたのはここです。経営層3名（社長・鈴木・星崎）が登録されており、全ナレッジに Admin権限を持っています。</p>
+      <div class="screen-content">
+        <div class="col what-can">
+          <h4>できること</h4>
+          <ul>
+            <li>幹部メンバー一覧の確認</li>
+            <li>新規幹部の追加（「メンバーを追加する」）</li>
+            <li>子チーム（サブチーム）の作成</li>
+          </ul>
+        </div>
+        <div class="col what-not">
+          <h4>注意点</h4>
+          <ul>
+            <li>ここに追加する＝<strong>全ナレッジ（人事含む）が見える</strong></li>
+            <li>経営層以外を追加しないこと</li>
+            <li>経営層追加は事前に鈴木とすり合わせ推奨</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repos -->
+    <div class="screen-card">
+      <div class="screen-header">
+        <div class="screen-icon">●</div>
+        <h3>⑤ Repositories（リポジトリ一覧）</h3>
+        <div class="screen-url">github.com/orgs/runbird-inc/repositories</div>
+      </div>
+      <p style="font-size:13px; color:#475569; line-height:1.7;">4つのナレッジリポジトリ（welfare-knowledge / it-knowledge / hr-knowledge / contracts）の一覧画面。</p>
+      <div class="screen-content">
+        <div class="col what-can">
+          <h4>できること</h4>
+          <ul>
+            <li>各リポジトリの中身確認（ファイル閲覧）</li>
+            <li>更新履歴の確認</li>
+          </ul>
+        </div>
+        <div class="col what-not">
+          <h4>触らないこと</h4>
+          <ul>
+            <li>リポジトリ削除</li>
+            <li>publicに変更（情報漏洩リスク）</li>
+            <li>Settings の Transfer / Archive</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========== INVITE FLOW ========== -->
+  <section id="invite">
+    <h2 class="section-title">新メンバーを招待したい時（江口さんを例に）</h2>
+    <p class="section-sub">新しい人をRUNBIRDナレッジに参加させる時の手順。社長が直接やる方法と、鈴木に依頼する方法の2つを示します。</p>
+
+    <div class="invite-section">
+
+      <!-- Recommend pattern -->
+      <div class="invite-recommend">
+        <h4>推奨：鈴木にChatworkで依頼するのが一番安全＆速い</h4>
+        <p>権限グループ（Team）の選択を間違えると、その方が見えてはいけないナレッジ（人事面談など）まで見えてしまいます。鈴木にお声がけ頂ければ、適切なTeamに振り分けて招待します。</p>
+
+        <div class="chat-example">
+          <strong>Chatworkで送る一言の例：</strong><br><br>
+          「鈴木さん、新しい営業の○○さん（GitHub ID: ××）にIT営業ナレッジへのアクセスをお願いします」<br><br>
+          → 鈴木が30秒で対応します🙏
+        </div>
+      </div>
+
+      <div class="invite-divider">━━━━━━━━━━ または ━━━━━━━━━━</div>
+
+      <!-- Direct invite -->
+      <div class="invite-direct">
+        <h4>社長が直接招待する場合（江口さんの招待を例に）</h4>
+
+        <div class="invite-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h5>事前準備：そのメンバーのGitHub IDを確認</h5>
+            <p>例：江口さんの場合 → GitHub ID は <code>TakuyaEguchi00</code><br>
+            まだGitHub アカウントを持っていない人の場合は、先に作ってもらってIDを聞いてください。</p>
+          </div>
+        </div>
+
+        <div class="invite-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h5>People（メンバー一覧）にアクセス</h5>
+            <div class="url-box">https://github.com/orgs/runbird-inc/people</div>
+            <span class="ui-action">右上の「Invite member」ボタンをクリック</span>
+          </div>
+        </div>
+
+        <div class="invite-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h5>GitHub IDを入力して招待</h5>
+            <p>検索欄に <code>TakuyaEguchi00</code> を入力 → 候補から該当ユーザーを選択 →「Invite」</p>
+            <p style="font-size:12px; color:#92400e; margin-top:6px;">→ 江口さんに招待メールが送信されます。承認待ち状態に。</p>
+          </div>
+        </div>
+
+        <div class="invite-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h5>★最重要：適切なTeamに追加（権限を決める）</h5>
+            <p>Org招待だけだと、その人は何にもアクセスできません。続いて Team に追加して権限を付与する必要があります。</p>
+            <p style="margin-top:10px;"><strong>例：江口さんを「IT営業 + 人事投入 + 契約書参照」にする場合</strong></p>
+            <ol style="font-size:13px; color:#475569; padding-left:24px; margin-top:6px; line-height:1.8;">
+              <li><code>github.com/orgs/runbird-inc/teams/it-write</code> へ移動 → 「メンバーを追加する」→ <code>TakuyaEguchi00</code> 追加</li>
+              <li><code>github.com/orgs/runbird-inc/teams/hr-input</code> へ移動 → 同様に追加</li>
+              <li><code>github.com/orgs/runbird-inc/teams/contracts-read</code> へ移動 → 同様に追加</li>
+            </ol>
+            <p style="font-size:12px; color:#92400e; margin-top:10px;">→ 3つのTeamに追加することで、3領域に対する適切な権限が付与されます。</p>
+          </div>
+        </div>
+
+        <div class="invite-step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h5>本人にアクセス可能であることを伝える</h5>
+            <p>招待メール承認 → 自動セットアップ実行 →Cursorで使用開始<br>
+            運用ガイドも合わせて送ると親切：<br>
+            <code>https://hokuchan07.github.io/runbird/</code></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team reference -->
+      <div class="team-table-card">
+        <h4>Team早見表（追加先を決めるための参考）</h4>
+        <table class="team-table">
+          <thead>
+            <tr>
+              <th>Team名</th>
+              <th>追加すると…</th>
+              <th>こんな人を入れる</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="team-name exec">executives</span></td>
+              <td>全部 Admin</td>
+              <td>経営層のみ（基本は触らない）</td>
+            </tr>
+            <tr>
+              <td><span class="team-name welf-w">welfare-write</span></td>
+              <td>福祉 編集</td>
+              <td>福祉事業の編集担当</td>
+            </tr>
+            <tr>
+              <td><span class="team-name welf-r">welfare-read</span></td>
+              <td>福祉 閲覧のみ</td>
+              <td>福祉事業の見る専門</td>
+            </tr>
+            <tr>
+              <td><span class="team-name it-w">it-write</span></td>
+              <td>IT営業 編集</td>
+              <td>IT営業（江口・齋藤など）</td>
+            </tr>
+            <tr>
+              <td><span class="team-name it-r">it-read</span></td>
+              <td>IT営業 閲覧のみ</td>
+              <td>IT営業の見る専門</td>
+            </tr>
+            <tr>
+              <td><span class="team-name hr">hr-input</span></td>
+              <td>人事面談 投入</td>
+              <td>面談を実施する人</td>
+            </tr>
+            <tr>
+              <td><span class="team-name ct-w">contracts-write</span></td>
+              <td>契約書 投入</td>
+              <td>契約書を入れる担当（中村さん）</td>
+            </tr>
+            <tr>
+              <td><span class="team-name ct-r">contracts-read</span></td>
+              <td>契約書 閲覧のみ</td>
+              <td>契約書を参照したい人</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning" style="margin-top:24px;">
+        <div class="icon">!</div>
+        <div>
+          <h4>注意：人事ナレッジを見せたくない人を executives に入れない</h4>
+          <p>executives に追加すると、人事面談ナレッジ（社長専用情報）まで見えてしまいます。経営層以外を追加することは原則ありません。判断に迷ったら鈴木にご確認ください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Other operations ========== -->
+  <section id="other-ops">
+    <h2 class="section-title">その他の操作</h2>
+    <p class="section-sub">招待以外でよくある操作も簡単にまとめています。</p>
+
+    <div class="ops-grid">
+      <div class="ops-card">
+        <h4>退職処理 <span class="ops-tag danger">重要</span></h4>
+        <p>退職者が出た場合、Org からメンバー除外することで、全リポジトリのアクセスが一斉に剥奪されます。</p>
+        <div class="ops-step">
+          1. People → 該当メンバーの「...」メニュー<br>
+          2. 「Remove from organization」<br>
+          3. 確認ダイアログで承認<br>
+          → 全ナレッジへのアクセス即時剥奪
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <h4>異動：別のTeamに移動 <span class="ops-tag normal">通常</span></h4>
+        <p>例：IT営業から福祉に異動した場合、it-writeから外して welfare-writeに追加。</p>
+        <div class="ops-step">
+          1. 元Team（it-write）→ Removeでメンバー除外<br>
+          2. 移動先Team（welfare-write）→ Add でメンバー追加<br>
+          → ナレッジアクセス権が切り替わる
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <h4>権限を上げる：Read → Write</h4>
+        <p>例：閲覧専門だった人に編集も任せたい場合、◯◯-read teamから◯◯-write team へ移動。</p>
+        <div class="ops-step">
+          1. ◯◯-read team から Remove<br>
+          2. ◯◯-write team に Add<br>
+          → 編集権限が付与される
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <h4>新領域追加（例：動画事業ナレッジ）</h4>
+        <p>新しいナレッジ領域が必要になった場合、新リポジトリ作成と新Team作成は鈴木が担当します。</p>
+        <div class="ops-step">
+          ChatWorkで「動画事業のナレッジ作りたい」と一言<br>
+          → 鈴木が repo作成・Team作成・初期投入<br>
+          → 完成後、社長にお知らせ
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Trouble ========== -->
+  <section id="trouble">
+    <h2 class="section-title">困った時</h2>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <h4>判断に迷ったら、まず鈴木にご相談ください</h4>
+        <p>権限管理は1度ミスをすると意図しない情報共有が起きるため、慎重に進めるのが原則です。<br>
+        ChatWorkで「これって大丈夫？」と一言頂ければ、こちらで状況を確認・代行します🙏</p>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <div class="icon">!</div>
+      <div>
+        <h4>絶対にやってはいけないこと</h4>
+        <p>
+        ・Organizationの削除（「Delete this organization」）<br>
+        ・リポジトリのpublic化（情報漏洩）<br>
+        ・リポジトリ削除（GitHubから完全消去）<br>
+        ・有償プランへの「うっかり」アップグレード<br>
+        この4つだけは避けてください。それ以外は基本的にリカバリ可能です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <p>RUNBIRD GitHub管理画面 早見表 &nbsp;|&nbsp; 嶋田社長専用 &nbsp;|&nbsp; 2026/5/1 公開 &nbsp;|&nbsp; 株式会社 斗（hishaku）鈴木</p>
+  <p style="margin-top:6px;">追加要望・トラブル: <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> / ChatWork</p>
+  <p style="margin-top:14px;"><a href="index.html">← RUNBIRD ナレッジAI 統合ハブに戻る</a></p>
+</footer>
+
+</body>
+</html>
