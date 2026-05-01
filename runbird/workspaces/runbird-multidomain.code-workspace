@@ -1,0 +1,14 @@
+{
+  "folders": [
+    { "name": "福祉ナレッジ", "path": "../../runbird-welfare-knowledge" },
+    { "name": "IT営業ナレッジ", "path": "../../runbird-it-knowledge" },
+    { "name": "人事面談（投入のみ）", "path": "../../runbird-hr-knowledge" },
+    { "name": "契約書（参照）", "path": "../../runbird-contracts" }
+  ],
+  "settings": {
+    "git.autofetch": true,
+    "git.autofetchPeriod": 600,
+    "task.allowAutomaticTasks": "on",
+    "window.title": "RUNBIRD ナレッジ（複数領域担当） — ${rootName}"
+  }
+}

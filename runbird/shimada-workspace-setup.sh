@@ -19,7 +19,7 @@ if [ -d "runbird-hr-knowledge" ]; then
   echo "[SKIP] runbird-hr-knowledge は既存（pullで更新）"
   cd runbird-hr-knowledge && git pull --rebase --autostash && cd ..
 else
-  git clone https://github.com/hokuchan07/runbird-hr-knowledge.git
+  git clone https://github.com/runbird-inc/runbird-hr-knowledge.git
   echo "[OK] runbird-hr-knowledge clone完了"
 fi
 
@@ -27,7 +27,7 @@ if [ -d "runbird-contracts" ]; then
   echo "[SKIP] runbird-contracts は既存（pullで更新）"
   cd runbird-contracts && git pull --rebase --autostash && cd ..
 else
-  git clone https://github.com/hokuchan07/runbird-contracts.git
+  git clone https://github.com/runbird-inc/runbird-contracts.git
   echo "[OK] runbird-contracts clone完了"
 fi
 
