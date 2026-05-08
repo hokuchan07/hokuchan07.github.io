@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGヒアリングフォーム 入力内容の復元 | 株式会社斗</title>
+<style>
+:root {
+  --primary: #2b6cb0;
+  --accent: #c53030;
+  --success: #276749;
+  --bg: #f7fafc;
+  --text: #1a202c;
+  --text-light: #4a5568;
+  --border: #e2e8f0;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 16px;
+  line-height: 1.7;
+}
+.container { max-width: 860px; margin: 0 auto; }
+h1 {
+  font-size: 22px;
+  background: var(--primary);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 0 0 16px;
+}
+.notice {
+  background: #fffaf0;
+  border-left: 4px solid #d69e2e;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.notice strong { color: var(--accent); }
+.empty-state {
+  background: #fff5f5;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--accent);
+  margin: 20px 0;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 24px;
+  flex-wrap: wrap;
+}
+.btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+.btn-primary { background: var(--primary); }
+.btn-primary:hover { background: #2c5282; }
+.btn-success { background: var(--success); }
+.btn-success:hover { background: #22543d; }
+.btn-secondary { background: var(--text-light); }
+.btn-secondary:hover { background: #2d3748; }
+.section {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.section-header {
+  padding: 12px 18px;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  background: var(--primary);
+}
+.section-header.s1 { background: #2b6cb0; }
+.section-header.s2 { background: #c53030; }
+.section-header.s3 { background: #276749; }
+.section-header.s4 { background: #744210; }
+.section-header.sd { background: #4a5568; }
+.section-body { padding: 4px 18px 12px; }
+.item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+.item:last-child { border-bottom: none; }
+.item-label {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.item-value {
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #f7fafc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--primary);
+}
+.item-value.empty {
+  background: #fafafa;
+  color: #a0aec0;
+  border-left-color: #cbd5e0;
+  font-style: italic;
+}
+.copy-area {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.copy-area h3 { margin: 0 0 8px; font-size: 14px; color: var(--text-light); }
+.copy-area textarea {
+  width: 100%;
+  min-height: 240px;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", monospace;
+  font-size: 13px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fafafa;
+  resize: vertical;
+  line-height: 1.6;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--success);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+  z-index: 100;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.savedAt {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📋 ヒアリングフォーム 入力内容の復元</h1>
+
+<div class="notice">
+  <strong>中村様 — お手数おかけして申し訳ございません。</strong><br>
+  フォームの送信処理に技術的な問題があり、ご入力いただいた内容が当方に届いていない状態でした。<br>
+  本ページは <strong>4/28にご入力いただいた端末・ブラウザ</strong>で開いていただくと、ご入力済みの内容を自動で表示します。<br>
+  下の「<strong>全文コピー</strong>」ボタンを押して、ChatWorkに貼り付けてご送信ください。<br>
+  再入力は不要です。
+</div>
+
+<div id="empty" class="empty-state" style="display:none;">
+  <strong>⚠️ 入力内容が見つかりませんでした</strong><br><br>
+  考えられる原因:<br>
+  ・4/28に入力された端末／ブラウザと異なる環境で開いている<br>
+  ・ブラウザの履歴・キャッシュをクリアされた<br>
+  ・プライベートブラウズモードで入力された<br><br>
+  <strong>4/28にフォームを開いた端末・ブラウザで本ページを開き直してください。</strong><br>
+  ご不明な場合は鈴木（090-6894-4907 / h.suzuki@hishaku.co.jp）までお電話ください。
+</div>
+
+<div id="content" style="display:none;">
+
+  <div class="savedAt" id="savedAt"></div>
+
+  <div class="actions">
+    <button class="btn btn-success" onclick="copyAll()">📋 全文コピー</button>
+    <button class="btn btn-primary" onclick="document.getElementById('rawText').scrollIntoView({behavior:'smooth'})">⬇ コピー用テキストを表示</button>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="copy-area">
+    <h3>▼ コピー用テキスト（このまま ChatWork に貼り付けられます）</h3>
+    <textarea id="rawText" readonly></textarea>
+    <div style="margin-top:12px;">
+      <button class="btn btn-success" onclick="copyAll()" style="width:100%;">📋 全文コピー</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<div class="toast" id="toast">✅ コピーしました</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'sg-loan-hearing-draft-v1';
+
+  // フォーム項目のラベル辞書（sg-loan-hearing.html と完全同期）
+  const SECTIONS = [
+    {
+      title: '1. 代表者情報',
+      cls: 's1',
+      items: [
+        { name: 'q1_3_high_school',         label: '1-3. 高校名（所在地・卒業年）' },
+        { name: 'q1_3_college',             label: '1-3. 大学・短大・専門学校（学部・学科・卒業年）' },
+        { name: 'q1_3_subjects',            label: '1-3. 大学・短大での履修科目', multi: true },
+        { name: 'q1_4_qualifications',      label: '1-4. 保有資格' },
+        { name: 'q1_5_welfare_experience',  label: '1-5. 福祉・介護との関わり（オセアン茅ヶ崎以外）' },
+        { name: 'q1_6_current_position',    label: '1-6. 芝浦マイスター 部署名・役職' },
+        { name: 'q1_6_management_history',  label: '1-6. 過去の役員・管理職経験' },
+        { name: 'q1_7_spouse_kana',         label: '1-7. 運営者（中村千鶴様）ふりがな' },
+        { name: 'q1_7_spouse_birth',        label: '1-7. 千鶴様 生年月日' },
+        { name: 'q1_7_spouse_education',    label: '1-7. 千鶴様 学歴' },
+        { name: 'q1_7_spouse_career',       label: '1-7. 千鶴様 職歴' },
+        { name: 'q1_7_spouse_welfare',      label: '1-7. 千鶴様 社会福祉・介護の実績' },
+        { name: 'q1_7_spouse_qualification',label: '1-7. 千鶴様 社会福祉主事任用資格' },
+        { name: 'q1_7_spouse_training',     label: '1-7. 千鶴様 介護研修受講経験' },
+        { name: 'q1_7_spouse_health',       label: '1-7. 千鶴様 健康状態・通院' },
+        { name: 'q1_7_spouse_role_consent', label: '1-7. 千鶴様 副管理者就任への同意' },
+        { name: 'q1_7_children_count',      label: '1-7. お子様の人数' },
+        { name: 'q1_7_child_1',             label: '1-7. お子様① 続柄/生年月日/同居or別居/職業' },
+        { name: 'q1_7_child_2',             label: '1-7. お子様② 続柄/生年月日/同居or別居/職業' },
+        { name: 'q1_7_child_3',             label: '1-7. お子様③' },
+        { name: 'q1_7_child_4',             label: '1-7. お子様④' },
+        { name: 'q1_8_address',             label: '1-8. 中村様 現住所' },
+        { name: 'q1_8_domicile',            label: '1-8. 本籍地' },
+        { name: 'q1_8_birthplace',          label: '1-8. 出身地（都道府県）' }
+      ]
+    },
+    {
+      title: '2. 創業の動機',
+      cls: 's2',
+      items: [
+        { name: 'q2_2_vision',          label: '2-2. 想い・理想像（GH運営の哲学）' },
+        { name: 'q2_2_resident_life',   label: '2-2. 入居者にどう過ごしてほしいか' },
+        { name: 'q2_4_concerns',        label: '2-4. 現時点で一番心配なこと' },
+        { name: 'q2_4_family_consent',  label: '2-4. ご家族の最終合意の状況' }
+      ]
+    },
+    {
+      title: '3. 資金・財務情報',
+      cls: 's3',
+      items: [
+        { name: 'q3_3_other_debts', label: '3-3. その他借入・保証（住宅・自動車・オリックス以外）' }
+      ]
+    },
+    {
+      title: '4. 事業計画の詳細',
+      cls: 's4',
+      items: [
+        { name: 'q4_7_relationship', label: '4-7. 厚木市・近隣の相談支援員との関係構築状況' },
+        { name: 'q4_7_old_network',  label: '4-7. 茅ヶ崎時代の相談支援員ネットワーク再活用可否' },
+        { name: 'q4_7_channels',     label: '4-7. 想定する集客チャネル' }
+      ]
+    },
+    {
+      title: '📎 必要書類リスト 提出状況',
+      cls: 'sd',
+      items: [
+        { name: 'doc_bankbook',           label: '個人銀行通帳コピー：状況' },
+        { name: 'doc_bankbook_note',      label: '個人銀行通帳コピー：備考' },
+        { name: 'doc_loan_house',         label: '住宅ローン返済予定表：状況' },
+        { name: 'doc_loan_house_note',    label: '住宅ローン返済予定表：備考' },
+        { name: 'doc_loan_car',           label: '自動車ローン返済予定表：状況' },
+        { name: 'doc_loan_car_note',      label: '自動車ローン返済予定表：備考' },
+        { name: 'doc_loan_orix',          label: 'オリックス銀行返済予定表：状況' },
+        { name: 'doc_loan_orix_note',     label: 'オリックス銀行返済予定表：備考' },
+        { name: 'doc_interior',           label: '岡崎ハイツⅠ内装工事見積：状況' },
+        { name: 'doc_interior_note',      label: '岡崎ハイツⅠ内装工事見積：備考' },
+        { name: 'doc_initial_cost',       label: '物件初期費用見積：状況' },
+        { name: 'doc_initial_cost_note',  label: '物件初期費用見積：備考' },
+        { name: 'doc_furniture',          label: '家具・家電・備品見積：状況' },
+        { name: 'doc_furniture_note',     label: '家具・家電・備品見積：備考' },
+        { name: 'doc_id',                 label: '本人確認書類：状況' },
+        { name: 'doc_id_note',            label: '本人確認書類：備考' },
+        { name: 'doc_corp_registry',      label: '法人履歴事項全部証明書：状況' },
+        { name: 'doc_corp_registry_note', label: '法人履歴事項全部証明書：備考' },
+        { name: 'doc_lease_contract',     label: '岡崎ハイツⅠ賃貸契約書：状況' },
+        { name: 'doc_lease_contract_note',label: '岡崎ハイツⅠ賃貸契約書：備考' }
+      ]
+    }
+  ];
+
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      return parsed;
+    } catch (e) { return null; }
+  }
+
+  function fmt(val) {
+    if (val === undefined || val === null || val === '') return '';
+    if (Array.isArray(val)) return val.join(', ');
+    return String(val);
+  }
+
+  function hasAnyData(data) {
+    for (const s of SECTIONS) {
+      for (const item of s.items) {
+        if (fmt(data[item.name])) return true;
+      }
+    }
+    return false;
+  }
+
+  function render(data, savedAt) {
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('empty').style.display = 'none';
+
+    if (savedAt) {
+      const d = new Date(savedAt);
+      document.getElementById('savedAt').textContent =
+        '🕐 自動保存日時: ' + d.toLocaleString('ja-JP');
+    }
+
+    const sectionsEl = document.getElementById('sections');
+    sectionsEl.innerHTML = '';
+
+    const textParts = [];
+    textParts.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    textParts.push('SGヒアリングフォーム 入力内容（4/28〜）');
+    textParts.push('一般社団法人SGパートナーズ 中村潤様');
+    if (savedAt) textParts.push('最終自動保存: ' + new Date(savedAt).toLocaleString('ja-JP'));
+    textParts.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    textParts.push('');
+
+    for (const s of SECTIONS) {
+      let sectionHasData = false;
+      const sectionTextLines = [];
+
+      const sectionEl = document.createElement('div');
+      sectionEl.className = 'section';
+      sectionEl.innerHTML = `<div class="section-header ${s.cls}">${s.title}</div>`;
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      for (const item of s.items) {
+        const val = fmt(data[item.name]);
+        const itemEl = document.createElement('div');
+        itemEl.className = 'item';
+        const valHtml = val
+          ? `<div class="item-value">${escapeHtml(val)}</div>`
+          : `<div class="item-value empty">（未入力）</div>`;
+        itemEl.innerHTML = `<div class="item-label">${escapeHtml(item.label)}</div>${valHtml}`;
+        body.appendChild(itemEl);
+
+        if (val) {
+          sectionHasData = true;
+          sectionTextLines.push('■ ' + item.label);
+          sectionTextLines.push(val);
+          sectionTextLines.push('');
+        }
+      }
+
+      sectionEl.appendChild(body);
+      sectionsEl.appendChild(sectionEl);
+
+      if (sectionHasData) {
+        textParts.push('【' + s.title + '】');
+        textParts.push('');
+        textParts.push(...sectionTextLines);
+      }
+    }
+
+    textParts.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    document.getElementById('rawText').value = textParts.join('\n');
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function showEmpty() {
+    document.getElementById('content').style.display = 'none';
+    document.getElementById('empty').style.display = 'block';
+  }
+
+  window.copyAll = async function() {
+    const text = document.getElementById('rawText').value;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('✅ コピーしました — ChatWorkに貼り付けてください');
+    } catch (e) {
+      // フォールバック: textareaを選択
+      const ta = document.getElementById('rawText');
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('✅ コピーしました');
+      } catch (e2) {
+        showToast('⚠️ コピーできませんでした。手動で全選択してください', true);
+      }
+    }
+  };
+
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.background = isError ? '#c53030' : '#276749';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  // 起動
+  const parsed = loadData();
+  if (!parsed || !parsed.data || !hasAnyData(parsed.data)) {
+    showEmpty();
+  } else {
+    render(parsed.data, parsed.savedAt);
+  }
+})();
+</script>
+
+</body>
+</html>
