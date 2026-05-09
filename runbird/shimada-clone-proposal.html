@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嶋田社長クローン構想 — 社員が社長に直接聞かずに済む仕組み</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  /* ========== Header ========== */
+  .header { background: linear-gradient(135deg, #0f172a 0%, #6b21a8 50%, #0f172a 100%); color: #fff; padding: 80px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 20%, rgba(216,180,254,0.12) 0%, transparent 50%); }
+  .header-inner { position: relative; z-index: 1; }
+  .header .eyebrow { font-size: 11px; letter-spacing: 0.3em; color: #d8b4fe; margin-bottom: 18px; }
+  .header h1 { font-size: 36px; margin-bottom: 14px; line-height: 1.4; }
+  .header .sub { font-size: 16px; color: #e9d5ff; max-width: 720px; margin: 0 auto; line-height: 1.7; }
+  .header .meta { display: flex; justify-content: center; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .header .meta span { padding: 6px 18px; background: rgba(255,255,255,0.1); border: 1px solid rgba(216,180,254,0.25); border-radius: 20px; font-size: 12px; color: #e9d5ff; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 56px 20px 80px; }
+  section { margin-bottom: 72px; scroll-margin-top: 80px; }
+  .section-tag { display: inline-block; padding: 4px 12px; background: #6b21a8; color: #fff; font-size: 11px; letter-spacing: 0.1em; border-radius: 4px; margin-bottom: 12px; }
+  .section-title { font-size: 28px; color: #0f172a; margin-bottom: 10px; line-height: 1.4; }
+  .section-sub { font-size: 15px; color: #64748b; margin-bottom: 32px; line-height: 1.7; }
+
+  /* ========== Concept box ========== */
+  .concept-box { background: linear-gradient(135deg, #6b21a8 0%, #9333ea 50%, #6b21a8 100%); color: #fff; padding: 40px 32px; border-radius: 18px; margin: 32px 0; box-shadow: 0 8px 24px rgba(107,33,168,0.2); position: relative; overflow: hidden; }
+  .concept-box::before { content: ""; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(216,180,254,0.2) 0%, transparent 70%); }
+  .concept-box > * { position: relative; z-index: 1; }
+  .concept-box .c-eyebrow { font-size: 11px; color: #d8b4fe; letter-spacing: 0.2em; margin-bottom: 10px; }
+  .concept-box h3 { font-size: 22px; margin-bottom: 16px; line-height: 1.4; }
+  .concept-box p { font-size: 14px; color: #f3e8ff; margin-bottom: 12px; line-height: 1.8; }
+  .concept-box .quote { font-size: 18px; color: #fff; margin: 20px 0; padding: 16px 20px; background: rgba(255,255,255,0.1); border-left: 3px solid #d8b4fe; border-radius: 6px; line-height: 1.6; }
+
+  /* ========== Before/After ========== */
+  .ba-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; margin: 32px 0; }
+  .ba-col { padding: 28px 24px; border-radius: 16px; }
+  .ba-col.before { background: #fef2f2; border: 2px solid #fca5a5; }
+  .ba-col.after { background: #faf5ff; border: 2px solid #d8b4fe; }
+  .ba-col h3 { font-size: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .ba-col.before h3 { color: #991b1b; }
+  .ba-col.after h3 { color: #6b21a8; }
+  .ba-col h3::before { content: ""; display: inline-block; width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+  .ba-col.before h3::before { background: #ef4444; }
+  .ba-col.after h3::before { background: #9333ea; }
+  .ba-col ul { padding-left: 22px; font-size: 14px; line-height: 1.8; }
+  .ba-col.before ul { color: #7f1d1d; }
+  .ba-col.after ul { color: #581c87; }
+  .ba-col li { margin-bottom: 8px; }
+  .ba-arrow { display: flex; align-items: center; justify-content: center; font-size: 32px; color: #1e293b; font-weight: 700; }
+  @media (max-width: 700px) {
+    .ba-grid { grid-template-columns: 1fr; }
+    .ba-arrow { transform: rotate(90deg); padding: 8px 0; }
+  }
+
+  /* ========== Org diagram ========== */
+  .org-diagram { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 36px 28px; margin: 32px 0; }
+  .org-title { text-align: center; font-size: 16px; color: #1e293b; margin-bottom: 8px; font-weight: 600; }
+  .org-tagline { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 30px; }
+  .org-tagline code { background: #1e293b; color: #d8b4fe; padding: 3px 10px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12px; }
+
+  .org-tree { position: relative; }
+  .org-root { background: linear-gradient(135deg, #0f172a 0%, #6b21a8 100%); color: #fff; padding: 16px 28px; border-radius: 12px; text-align: center; max-width: 320px; margin: 0 auto; box-shadow: 0 4px 12px rgba(107,33,168,0.15); }
+  .org-root .org-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .org-root .org-desc { font-size: 11px; color: #e9d5ff; }
+
+  .org-line { width: 2px; height: 32px; background: #cbd5e1; margin: 0 auto; }
+
+  .repos-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .repo-item { padding: 16px 12px; border-radius: 12px; border: 2px solid; text-align: center; position: relative; }
+  .repo-item.new::after { content: "NEW"; position: absolute; top: -10px; right: -8px; background: #9333ea; color: #fff; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.05em; }
+  .repo-item h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .repo-item .repo-id { font-size: 9px; font-family: 'Consolas', monospace; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+  .repo-item .repo-meta { font-size: 11px; line-height: 1.5; }
+  .repo-welfare { background: #f0fdf4; border-color: #86efac; }
+  .repo-welfare h4, .repo-welfare .repo-meta { color: #166534; }
+  .repo-welfare .repo-id { background: #dcfce7; color: #166534; }
+  .repo-it { background: #ecfeff; border-color: #67e8f9; }
+  .repo-it h4, .repo-it .repo-meta { color: #155e75; }
+  .repo-it .repo-id { background: #cffafe; color: #155e75; }
+  .repo-hr { background: #dbeafe; border-color: #60a5fa; }
+  .repo-hr h4, .repo-hr .repo-meta { color: #1e3a8a; }
+  .repo-hr .repo-id { background: #bfdbfe; color: #1e3a8a; }
+  .repo-ct { background: #ffedd5; border-color: #fb923c; }
+  .repo-ct h4, .repo-ct .repo-meta { color: #7c2d12; }
+  .repo-ct .repo-id { background: #fed7aa; color: #7c2d12; }
+  .repo-clone { background: #faf5ff; border-color: #c084fc; }
+  .repo-clone h4, .repo-clone .repo-meta { color: #6b21a8; }
+  .repo-clone .repo-id { background: #f3e8ff; color: #6b21a8; }
+  @media (max-width: 700px) { .repos-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ========== Folder structure ========== */
+  .folder-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin: 24px 0; }
+  .folder-card h3 { font-size: 17px; color: #0f172a; margin-bottom: 14px; }
+  .folder-card .folder-tagline { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+  .folder-tree { background: #1e293b; color: #e2e8f0; padding: 24px; border-radius: 10px; font-family: 'Consolas', 'SF Mono', monospace; font-size: 13px; line-height: 1.9; overflow-x: auto; }
+  .folder-tree .ft-comment { color: #94a3b8; }
+  .folder-tree .ft-private { color: #fca5a5; }
+  .folder-tree .ft-shared { color: #d8b4fe; font-weight: 700; }
+  .folder-tree .ft-existing { color: #94a3b8; }
+
+  /* ========== Flow diagram ========== */
+  .flow-diagram { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border: 1px solid #d8b4fe; border-radius: 16px; padding: 36px 28px; margin: 32px 0; }
+  .flow-title { font-size: 16px; color: #6b21a8; font-weight: 700; margin-bottom: 22px; text-align: center; }
+  .flow-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 10px; align-items: stretch; }
+  .flow-step { background: #fff; padding: 16px 12px; border-radius: 10px; text-align: center; border: 1px solid #d8b4fe; }
+  .flow-step .fs-num { display: inline-block; width: 24px; height: 24px; background: #9333ea; color: #fff; border-radius: 50%; line-height: 24px; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+  .flow-step .fs-label { font-size: 13px; font-weight: 700; color: #6b21a8; margin-bottom: 4px; }
+  .flow-step .fs-desc { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; color: #c084fc; font-size: 18px; font-weight: 700; }
+  @media (max-width: 700px) {
+    .flow-steps { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+  }
+
+  /* ========== Highlight numbers ========== */
+  .highlight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 32px 0; }
+  .h-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px 18px; text-align: center; }
+  .h-box .h-num { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 8px; background: linear-gradient(135deg, #6b21a8 0%, #9333ea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .h-box .h-label { font-size: 12px; color: #64748b; line-height: 1.5; }
+  .h-box.zero .h-num { background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  @media (max-width: 700px) { .highlight-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ========== Use case examples ========== */
+  .usecase-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin: 24px 0; }
+  .usecase-card h3 { font-size: 17px; color: #0f172a; margin-bottom: 14px; }
+  .usecase-list { display: grid; gap: 14px; }
+  .usecase-item { padding: 18px 20px; background: #faf5ff; border-left: 4px solid #9333ea; border-radius: 8px; }
+  .usecase-item .uc-q { font-size: 14px; color: #6b21a8; font-weight: 700; margin-bottom: 8px; }
+  .usecase-item .uc-q::before { content: "Q. "; color: #9333ea; font-weight: 800; }
+  .usecase-item .uc-a { font-size: 13px; color: #475569; line-height: 1.7; padding-left: 20px; }
+  .usecase-item .uc-a::before { content: "→ "; color: #9333ea; font-weight: 800; margin-left: -20px; }
+
+  /* ========== Loop card ========== */
+  .loop-card { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 16px; padding: 32px; margin: 32px 0; }
+  .loop-card h3 { font-size: 18px; color: #78350f; margin-bottom: 16px; }
+  .loop-card > p { font-size: 13px; color: #78350f; margin-bottom: 18px; line-height: 1.7; }
+  .loop-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: stretch; }
+  .loop-step { background: #fff; border: 1px solid #fde68a; border-radius: 10px; padding: 16px 14px; text-align: center; }
+  .loop-step .ls-icon { width: 36px; height: 36px; background: #fef3c7; color: #92400e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; margin: 0 auto 10px; }
+  .loop-step h5 { font-size: 13px; color: #78350f; margin-bottom: 6px; font-weight: 700; }
+  .loop-step p { font-size: 11px; color: #92400e; line-height: 1.5; }
+  @media (max-width: 700px) { .loop-steps { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ========== Action card ========== */
+  .action-card { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 16px; padding: 32px; margin: 32px 0; }
+  .action-card h3 { font-size: 20px; color: #78350f; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .action-card h3::before { content: "→"; color: #f59e0b; font-weight: 800; }
+  .action-step { background: #fff; border: 1px solid #fde68a; border-radius: 10px; padding: 20px; margin-bottom: 14px; display: flex; gap: 18px; align-items: flex-start; }
+  .action-step:last-child { margin-bottom: 0; }
+  .action-step .as-num { width: 36px; height: 36px; background: #f59e0b; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+  .action-step .as-content { flex: 1; }
+  .action-step h5 { font-size: 15px; color: #78350f; margin-bottom: 6px; }
+  .action-step p { font-size: 13px; color: #475569; line-height: 1.7; }
+  .action-step .as-time { display: inline-block; padding: 2px 10px; background: #fef3c7; color: #92400e; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 10px; }
+
+  /* ========== Risk card ========== */
+  .risk-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin: 24px 0; }
+  .risk-card h3 { font-size: 17px; color: #0f172a; margin-bottom: 14px; }
+  .risk-list { display: grid; gap: 12px; }
+  .risk-item { padding: 16px 18px; background: #f8fafc; border-radius: 8px; border-left: 3px solid #94a3b8; }
+  .risk-item h5 { font-size: 14px; color: #1e293b; margin-bottom: 6px; font-weight: 700; }
+  .risk-item p { font-size: 13px; color: #475569; line-height: 1.6; }
+  .risk-item.solved { border-left-color: #22c55e; background: #f0fdf4; }
+  .risk-item.solved h5 { color: #166534; }
+
+  /* ========== CTA / Links ========== */
+  .cta-section { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 40px 32px; border-radius: 16px; margin-top: 40px; text-align: center; }
+  .cta-section h3 { font-size: 20px; color: #0f172a; margin-bottom: 18px; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 600px; margin: 0 auto; }
+  .cta-link { display: block; padding: 16px 22px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; text-decoration: none; color: #0f172a; transition: transform 0.2s; }
+  .cta-link:hover { transform: translateY(-2px); border-color: #6b21a8; }
+  .cta-link .cta-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .cta-link .cta-title { font-size: 14px; font-weight: 700; }
+  @media (max-width: 700px) { .cta-grid { grid-template-columns: 1fr; } }
+
+  .footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #d8b4fe; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 7px; border-radius: 4px; font-size: 12px; color: #334155; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="eyebrow">PROPOSAL — KNOWLEDGE AI EXPANSION</div>
+    <h1>嶋田社長クローン構想<br><small style="font-size:18px; font-weight:400; color:#e9d5ff;">社員が社長に直接聞かずに済む、もう一人の社長</small></h1>
+    <p class="sub">既に運用中の RUNBIRD ナレッジAI に「クローン用ナレッジ」を1本追加するだけ。社長の判断や考えを、社員が自分で引き出せる仕組みです。</p>
+    <div class="meta">
+      <span>2026/5/9 提案</span>
+      <span>嶋田社長 ご判断用</span>
+      <span>追加コスト ¥0</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ========== Section 1: Concept ========== -->
+  <section>
+    <div class="section-tag">SECTION 1</div>
+    <h2 class="section-title">構想の核</h2>
+    <p class="section-sub">既存のナレッジAIは「過去の事実」を扱う仕組みでした。今回追加するのは「社長の判断・考え方」を扱う仕組みです。</p>
+
+    <div class="concept-box">
+      <div class="c-eyebrow">CORE IDEA</div>
+      <h3>社長への質問を、まずクローンが受ける</h3>
+      <p>社員が「社長ならどう判断するか」「過去にこういう件はどう処理したか」を社長本人に聞く前に、クローン（AI）に聞いて回答を得られるようにします。クローンは、社長が「これは共有してOK」と判断した情報だけを参照します。</p>
+
+      <div class="quote">
+        「俺だけが情報取れる」を一段進めて、<br>「俺の考え方も社員が引き出せる」を実現する。
+      </div>
+
+      <p style="font-size:13px; color:#e9d5ff;">人事/契約フォルダ（社長専用）はそのまま手元に残ります。共有OKと判断したものだけが、別のリポジトリ経由でクローンに渡る設計です。</p>
+    </div>
+  </section>
+
+  <!-- ========== Section 2: Why ========== -->
+  <section>
+    <div class="section-tag">SECTION 2</div>
+    <h2 class="section-title">なぜ必要か</h2>
+    <p class="section-sub">既存のナレッジAIは「ナレッジ集約による経営判断スピード向上」が目的でした。クローンは「社長の時間そのものを守る」ための仕組みです。</p>
+
+    <div class="ba-grid">
+      <div class="ba-col before">
+        <h3>現状（5/1〜）</h3>
+        <ul>
+          <li>社長の「考え方」「判断基準」は社長の頭の中にしかない</li>
+          <li>社員は判断に迷うと結局社長にChatWorkや電話で確認する</li>
+          <li>「過去にこういう件あったよね」を社員が再発見できない</li>
+          <li>同じ判断を社長が何度も口頭で説明している</li>
+          <li>社長の経営判断時間が「相談対応」で削られる</li>
+        </ul>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-col after">
+        <h3>クローン導入後</h3>
+        <ul>
+          <li>社員はまずクローンに聞く（「社長ならどう判断する？」）</li>
+          <li>クローンが既知の判断軸で回答→社員が自走できる</li>
+          <li>クローンで答えが出ない件だけ社長にエスカレーション</li>
+          <li>社長への質問件数が体感で半減</li>
+          <li>社長の時間が経営判断に集中できる</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Section 3: Structure ========== -->
+  <section>
+    <div class="section-tag">SECTION 3</div>
+    <h2 class="section-title">既存基盤の自然な拡張</h2>
+    <p class="section-sub">現在4本のナレッジrepoに、5本目「shimada-clone」を追加するだけ。Org構造もメンバー権限も既存の延長線上です。</p>
+
+    <div class="org-diagram">
+      <div class="org-title">RUNBIRD ナレッジAI 拡張構造</div>
+      <div class="org-tagline">GitHub Organization：<code>github.com/runbird-inc</code></div>
+
+      <div class="org-tree">
+        <div class="org-root">
+          <div class="org-name">runbird-inc</div>
+          <div class="org-desc">RUNBIRD全社 ナレッジAI</div>
+        </div>
+        <div class="org-line"></div>
+        <div class="repos-row">
+          <div class="repo-item repo-welfare">
+            <h4>福祉</h4>
+            <div class="repo-id">welfare-knowledge</div>
+            <div class="repo-meta">既存</div>
+          </div>
+          <div class="repo-item repo-it">
+            <h4>IT営業</h4>
+            <div class="repo-id">it-knowledge</div>
+            <div class="repo-meta">既存</div>
+          </div>
+          <div class="repo-item repo-hr">
+            <h4>人事面談</h4>
+            <div class="repo-id">hr-knowledge</div>
+            <div class="repo-meta">既存・社長専用</div>
+          </div>
+          <div class="repo-item repo-ct">
+            <h4>契約書</h4>
+            <div class="repo-id">contracts</div>
+            <div class="repo-meta">既存</div>
+          </div>
+          <div class="repo-item repo-clone new">
+            <h4>社長クローン</h4>
+            <div class="repo-id">shimada-clone</div>
+            <div class="repo-meta"><strong>新規追加</strong><br>全社員Read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:#64748b; margin-top:12px; text-align:center;">青い人事repoは社長専用のまま。新しいクローンrepoは全社員が読める「社長公認の判断ログ」になります。</p>
+  </section>
+
+  <!-- ========== Section 4: Selective sync ========== -->
+  <section>
+    <div class="section-tag">SECTION 4</div>
+    <h2 class="section-title">「指定したフォルダだけ」がクローンに渡る</h2>
+    <p class="section-sub">社長のMacにある全フォルダがクローンに見えるわけではありません。「共有/」フォルダに置いたものだけが、クローン用リポジトリに同期されます。</p>
+
+    <div class="folder-card">
+      <h3>社長Macのフォルダ構造（追加部分のみ説明）</h3>
+      <p class="folder-tagline">既存の「人事/」「契約/」はそのまま手元に残ります。「共有/」を1つだけ新設します。</p>
+
+      <div class="folder-tree">
+~/Documents/shimada-workspace/
+├── <span class="ft-private">人事/                        ← 既存・社長手元のみ（クローンに渡さない）</span>
+├── <span class="ft-private">契約/                        ← 既存・社長手元のみ（クローンに渡さない）</span>
+├── <span class="ft-shared">共有/                        ← 新設・ここに置いたものだけクローンに同期</span>
+<span class="ft-shared">│   ├── 経営判断ログ/</span>
+<span class="ft-shared">│   ├── 営業ナレッジ/</span>
+<span class="ft-shared">│   ├── よくある質問への回答/</span>
+<span class="ft-shared">│   └── 社員からの相談履歴/</span>
+└── <span class="ft-existing">ナレッジ/                    ← 既存・参照元（自動pull）</span>
+      </div>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-title">「共有して」の一言で、クローンに渡る判断記録が増えていく</div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="fs-num">1</div>
+          <div class="fs-label">社長が質問</div>
+          <div class="fs-desc">「中村との<br>役員候補の話、<br>共有して」</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="fs-num">2</div>
+          <div class="fs-label">Cursor AI</div>
+          <div class="fs-desc">回答を生成し<br>「共有/」へ<br>md自動保存</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="fs-num">3</div>
+          <div class="fs-label">自動push</div>
+          <div class="fs-desc">夜間に<br>shimada-clone<br>repoへ同期</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="fs-num">4</div>
+          <div class="fs-label">社員が参照</div>
+          <div class="fs-desc">翌朝から<br>クローンが<br>その判断を回答</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:#64748b; margin-top:16px; padding: 16px 20px; background: #faf5ff; border-radius: 10px; border-left: 3px solid #9333ea;">
+      <strong style="color:#6b21a8;">重要：</strong>「人事に保存」と言ったものは社長手元のみ。「共有して」と言ったものだけがクローンに渡ります。社長の一言で振り分けが完結する設計です。
+    </p>
+  </section>
+
+  <!-- ========== Section 5: Member experience ========== -->
+  <section>
+    <div class="section-tag">SECTION 5</div>
+    <h2 class="section-title">社員から見たクローン</h2>
+    <p class="section-sub">社員側のセットアップは現在のスクリプトを再実行するだけ。Cursorに「shimada-clone」フォルダが追加され、こんな質問ができるようになります。</p>
+
+    <div class="usecase-card">
+      <h3>使用イメージ（Cursorでの実際の質問例）</h3>
+      <div class="usecase-list">
+        <div class="usecase-item">
+          <div class="uc-q">取引先A社が値引き交渉してきました。社長ならどう対応しますか？</div>
+          <div class="uc-a">過去の値引き判断ログから、社長の判断軸（一定額以下は現場判断OK／〇〇円超は社長確認）を出典付きで回答。</div>
+        </div>
+        <div class="usecase-item">
+          <div class="uc-q">福祉事業の新エリア展開、社長は何を重視しますか？</div>
+          <div class="uc-a">社長が過去に出した展開判断ログから、立地・人材確保・既存事業所との距離感などの判断軸を回答。</div>
+        </div>
+        <div class="usecase-item">
+          <div class="uc-q">この案件、社長に相談する前に整理しておきたいです</div>
+          <div class="uc-a">類似案件の過去判断と、社長が必ず確認する論点（数字・リスク・タイムライン）をリスト化して回答。</div>
+        </div>
+        <div class="usecase-item">
+          <div class="uc-q">社長は最近どんな経営テーマを重視していますか？</div>
+          <div class="uc-a">直近1〜3ヶ月の共有ログから、頻出テーマ（採用／粗利／新規領域開拓など）を集計して回答。</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:#64748b; margin-top:16px;">クローンが回答できない件は「該当情報なし」と明示します（推測しない）。その場合は社員から社長に直接エスカレーションする運用です。</p>
+  </section>
+
+  <!-- ========== Section 6: Loop ========== -->
+  <section>
+    <div class="section-tag">SECTION 6</div>
+    <h2 class="section-title">クローンを育てる1ヶ月の運用ループ</h2>
+    <p class="section-sub">クローンは導入直後は何も知りません。社長の使用回数に応じて精度が上がる仕組みです。</p>
+
+    <div class="loop-card">
+      <h3>クローン育成の月次サイクル</h3>
+      <p>最初の1ヶ月は、社員からの質問ログを社長と鈴木でレビューします。クローンの回答が間違っていた／不足していた場合、社長が「共有/」フォルダに正しい判断を追記すると、翌日からそれが反映されます。</p>
+
+      <div class="loop-steps">
+        <div class="loop-step">
+          <div class="ls-icon">1</div>
+          <h5>社員が質問</h5>
+          <p>クローンに聞く<br>（普段通り）</p>
+        </div>
+        <div class="loop-step">
+          <div class="ls-icon">2</div>
+          <h5>ログ蓄積</h5>
+          <p>質問と回答が<br>自動記録</p>
+        </div>
+        <div class="loop-step">
+          <div class="ls-icon">3</div>
+          <h5>月1レビュー</h5>
+          <p>社長と鈴木で<br>30分</p>
+        </div>
+        <div class="loop-step">
+          <div class="ls-icon">4</div>
+          <h5>判断軸を補強</h5>
+          <p>社長が「共有して」<br>で1分追記</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Section 7: Highlights ========== -->
+  <section>
+    <div class="section-tag">SECTION 7</div>
+    <h2 class="section-title">運用面の効果</h2>
+    <p class="section-sub">既存基盤の延長線上なので、追加コスト・運用負荷ともに最小です。</p>
+
+    <div class="highlight-grid">
+      <div class="h-box zero">
+        <div class="h-num">¥0</div>
+        <div class="h-label">追加月額コスト<br>（既存Org内に追加）</div>
+      </div>
+      <div class="h-box">
+        <div class="h-num">1</div>
+        <div class="h-label">時間で構築完了<br>（鈴木側の工数）</div>
+      </div>
+      <div class="h-box">
+        <div class="h-num">1</div>
+        <div class="h-label">フォルダ追加のみ<br>（社長Mac側の変更）</div>
+      </div>
+      <div class="h-box">
+        <div class="h-num">0</div>
+        <div class="h-label">社員の追加学習<br>（既存Cursorに増えるだけ）</div>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <h3>想定リスクと対策</h3>
+      <div class="risk-list">
+        <div class="risk-item solved">
+          <h5>機密情報がクローンに漏れる？</h5>
+          <p>「共有して」と社長が明示的に言ったものだけがクローンに渡ります。「人事に保存」「契約に保存」は従来通り社長手元のみ。誤って漏れる経路はありません。</p>
+        </div>
+        <div class="risk-item solved">
+          <h5>クローンが間違った回答をして判断ミスにつながる？</h5>
+          <p>クローンは「該当情報なし」を明示する仕組みです（推測禁止ルール）。月次レビューで間違いを検出して補強する運用です。「クローンが言ってたから」を理由に重大判断はしない、を運用ルールに明文化します。</p>
+        </div>
+        <div class="risk-item solved">
+          <h5>社員が社長に直接相談しなくなる？</h5>
+          <p>これは目的の一部でもあります（質問の選別）。ただし、新規領域・大型判断・人事に関わる相談は引き続き社長に直接、を運用ルールに明記。月次レビューで「直接相談すべき種類の相談がクローンに流れていないか」も確認します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Section 8: Action ========== -->
+  <section>
+    <div class="section-tag">SECTION 8</div>
+    <h2 class="section-title">社長へのお願い</h2>
+    <p class="section-sub">最初の判断は1つだけ。GOが出たら鈴木側で構築を進めます。</p>
+
+    <div class="action-card">
+      <h3>社長のアクション</h3>
+
+      <div class="action-step">
+        <div class="as-num">1</div>
+        <div class="as-content">
+          <h5>このクローン構想の方向性GO/NG <span class="as-time">5分</span></h5>
+          <p>このページを読んで「やってみよう」「まだ早い」「ここを変えたい」のいずれかをChatWorkで返信ください。GOなら鈴木側で1時間以内に基盤構築（repo追加・Team設定・スクリプト更新）を完了します。</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="as-num">2</div>
+        <div class="as-content">
+          <h5>社長Macに「共有/」フォルダ追加 <span class="as-time">10分</span></h5>
+          <p>既存の専用Cursorワークスペース（5/1セットアップ済）に、「共有/」フォルダを1つ足すだけです。鈴木側でリモート支援、または訪問対応どちらでも可能です。</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="as-num">3</div>
+        <div class="as-content">
+          <h5>初回の「共有して」を10件試す <span class="as-time">最初の1週間</span></h5>
+          <p>普段の質問の中で「これは社員と共有してOK」と思ったものを、語尾に「共有して」と付けるだけ。10件たまると、クローンが社員の質問に意味のある回答を返せるようになります。それ以降は普段通り。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <div class="cta-section">
+    <h3>関連ドキュメント</h3>
+    <div class="cta-grid">
+      <a href="shimada-briefing.html" class="cta-link">
+        <div class="cta-label">前提となる既存ブリーフィング</div>
+        <div class="cta-title">RUNBIRD ナレッジAI 経営層ブリーフィング</div>
+      </a>
+      <a href="shimada-cursor-setup.html" class="cta-link">
+        <div class="cta-label">既存運用</div>
+        <div class="cta-title">嶋田社長 専用ワークスペース ガイド</div>
+      </a>
+      <a href="index.html" class="cta-link">
+        <div class="cta-label">統合ハブ</div>
+        <div class="cta-title">RUNBIRD ナレッジAI 統合ハブ</div>
+      </a>
+      <a href="https://github.com/runbird-inc" class="cta-link" target="_blank">
+        <div class="cta-label">GitHub</div>
+        <div class="cta-title">runbird-inc Organization</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>嶋田社長クローン構想 提案書 &nbsp;|&nbsp; 2026/5/9 &nbsp;|&nbsp; 株式会社 斗（hishaku）鈴木</p>
+  <p style="margin-top:6px;">追加要望・トラブル: <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> / ChatWork</p>
+</footer>
+
+</body>
+</html>
