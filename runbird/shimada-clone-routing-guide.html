@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嶋田社長クローン 共有判断ガイド — どこに保存するか迷わない3つの軸</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  .header { background: linear-gradient(135deg, #0f172a 0%, #6b21a8 50%, #0f172a 100%); color: #fff; padding: 72px 24px 56px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 20%, rgba(216,180,254,0.12) 0%, transparent 50%); }
+  .header-inner { position: relative; z-index: 1; }
+  .header .eyebrow { font-size: 11px; letter-spacing: 0.3em; color: #d8b4fe; margin-bottom: 18px; }
+  .header h1 { font-size: 32px; margin-bottom: 14px; line-height: 1.4; }
+  .header .sub { font-size: 15px; color: #e9d5ff; max-width: 680px; margin: 0 auto; line-height: 1.7; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
+  section { margin-bottom: 56px; scroll-margin-top: 80px; }
+  .section-tag { display: inline-block; padding: 4px 12px; background: #6b21a8; color: #fff; font-size: 11px; letter-spacing: 0.1em; border-radius: 4px; margin-bottom: 12px; }
+  .section-title { font-size: 26px; color: #0f172a; margin-bottom: 10px; line-height: 1.4; }
+  .section-sub { font-size: 14px; color: #64748b; margin-bottom: 28px; line-height: 1.7; }
+
+  /* Big rule card */
+  .big-rule { background: linear-gradient(135deg, #6b21a8 0%, #9333ea 50%, #6b21a8 100%); color: #fff; padding: 36px 32px; border-radius: 18px; margin: 28px 0; box-shadow: 0 8px 24px rgba(107,33,168,0.2); text-align: center; }
+  .big-rule .br-eyebrow { font-size: 11px; color: #d8b4fe; letter-spacing: 0.2em; margin-bottom: 12px; }
+  .big-rule h3 { font-size: 24px; margin-bottom: 14px; line-height: 1.5; }
+  .big-rule p { font-size: 15px; color: #f3e8ff; line-height: 1.7; max-width: 640px; margin: 0 auto; }
+  .big-rule strong { color: #fde68a; }
+
+  /* 3 axis cards */
+  .axis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+  .axis-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 14px; padding: 24px 22px; transition: transform 0.2s, border-color 0.2s; }
+  .axis-card:hover { transform: translateY(-3px); border-color: #c084fc; }
+  .axis-card .ac-num { display: inline-block; width: 36px; height: 36px; background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%); color: #fff; border-radius: 50%; line-height: 36px; text-align: center; font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+  .axis-card h4 { font-size: 17px; color: #0f172a; margin-bottom: 10px; line-height: 1.4; }
+  .axis-card p { font-size: 13px; color: #475569; line-height: 1.7; margin-bottom: 12px; }
+  .axis-card .ac-checks { background: #faf5ff; border-radius: 8px; padding: 12px 14px; }
+  .axis-card .ac-checks ul { list-style: none; padding: 0; }
+  .axis-card .ac-checks li { font-size: 12px; color: #581c87; padding: 4px 0 4px 22px; position: relative; line-height: 1.6; }
+  .axis-card .ac-checks li::before { content: "✓"; position: absolute; left: 0; color: #9333ea; font-weight: 800; }
+  @media (max-width: 700px) { .axis-grid { grid-template-columns: 1fr; } }
+
+  /* Decision rule */
+  .decision-rule { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 14px; padding: 24px 28px; margin: 28px 0; text-align: center; }
+  .decision-rule h4 { font-size: 17px; color: #78350f; margin-bottom: 10px; }
+  .decision-rule p { font-size: 14px; color: #78350f; line-height: 1.7; }
+  .decision-rule strong { color: #b45309; }
+
+  /* Cases table */
+  .cases-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin: 28px 0; overflow-x: auto; }
+  .cases-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cases-table th { text-align: left; padding: 12px 14px; background: #f8fafc; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+  .cases-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; vertical-align: top; line-height: 1.6; }
+  .cases-table .destination { font-weight: 700; white-space: nowrap; }
+  .cases-table .dest-share { color: #6b21a8; }
+  .cases-table .dest-hr { color: #1e3a8a; }
+  .cases-table .dest-ct { color: #7c2d12; }
+  .cases-table .dest-stra { color: #991b1b; }
+  .cases-table .dest-asset { color: #166534; }
+  .cases-table .reason { font-size: 12px; color: #64748b; }
+
+  /* Gray zone */
+  .gray-card { background: #f8fafc; border-left: 4px solid #94a3b8; padding: 22px 26px; border-radius: 8px; margin: 24px 0; }
+  .gray-card h4 { font-size: 16px; color: #1e293b; margin-bottom: 10px; }
+  .gray-card p { font-size: 13px; color: #475569; line-height: 1.7; }
+  .gray-card .gray-tip { background: #fff; padding: 12px 16px; border-radius: 6px; margin-top: 12px; font-size: 13px; color: #1e293b; border: 1px dashed #cbd5e1; }
+  .gray-card .gray-tip strong { color: #6b21a8; }
+
+  /* Keywords table */
+  .keywords-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin: 28px 0; }
+  .keywords-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .keywords-table th { text-align: left; padding: 10px 12px; background: #f1f5f9; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .keywords-table td { padding: 12px; border-top: 1px solid #f1f5f9; vertical-align: middle; }
+  .keywords-table .kw { font-family: 'Consolas', monospace; background: #1e293b; color: #fde68a; padding: 4px 10px; border-radius: 4px; font-size: 12px; display: inline-block; }
+  .keywords-table .kw.share { background: #6b21a8; color: #fde68a; }
+  .keywords-table .destpath { font-family: 'Consolas', monospace; font-size: 12px; color: #334155; }
+  .keywords-table .visibility { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .keywords-table .vis-share { background: #f3e8ff; color: #6b21a8; }
+  .keywords-table .vis-private { background: #fef2f2; color: #991b1b; }
+
+  /* Loop card */
+  .loop-card { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 14px; padding: 28px; margin: 28px 0; }
+  .loop-card h3 { font-size: 17px; color: #78350f; margin-bottom: 14px; }
+  .loop-card > p { font-size: 13px; color: #78350f; margin-bottom: 16px; line-height: 1.7; }
+  .loop-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .loop-step { background: #fff; border: 1px solid #fde68a; border-radius: 10px; padding: 16px 14px; text-align: center; }
+  .loop-step .ls-icon { width: 36px; height: 36px; background: #fef3c7; color: #92400e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; margin: 0 auto 10px; }
+  .loop-step h5 { font-size: 13px; color: #78350f; margin-bottom: 6px; font-weight: 700; }
+  .loop-step p { font-size: 11px; color: #92400e; line-height: 1.5; }
+  @media (max-width: 700px) { .loop-steps { grid-template-columns: 1fr; } }
+
+  /* CTA */
+  .cta-section { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 36px 32px; border-radius: 16px; margin-top: 40px; text-align: center; }
+  .cta-section h3 { font-size: 18px; color: #0f172a; margin-bottom: 16px; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 600px; margin: 0 auto; }
+  .cta-link { display: block; padding: 14px 20px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; text-decoration: none; color: #0f172a; transition: transform 0.2s; }
+  .cta-link:hover { transform: translateY(-2px); border-color: #6b21a8; }
+  .cta-link .cta-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .cta-link .cta-title { font-size: 13px; font-weight: 700; }
+  @media (max-width: 700px) { .cta-grid { grid-template-columns: 1fr; } }
+
+  .footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #d8b4fe; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 7px; border-radius: 4px; font-size: 12px; color: #334155; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="eyebrow">SHIMADA CLONE — ROUTING GUIDE</div>
+    <h1>共有するもの・しないもの<br><small style="font-size:16px; font-weight:400; color:#e9d5ff;">どこに保存するか迷わない3つの軸</small></h1>
+    <p class="sub">クローンに渡す情報を選別する判断基準。社員の自走を促しつつ、機密や個人情報を守る運用ルールです。</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ========== Big rule ========== -->
+  <section>
+    <div class="big-rule">
+      <div class="br-eyebrow">CORE PRINCIPLE</div>
+      <h3>デフォルトは「社長専用」<br>「共有して」は意識して付け加えるキーワード</h3>
+      <p>普通に質問して保存するだけなら自動的に <strong>人事/契約/経営戦略/資産運用</strong> のいずれかに保存され、誰にも見られません。<br>社員に渡したい時だけ <strong>「共有して」</strong> を語尾に添える、それだけです。</p>
+    </div>
+  </section>
+
+  <!-- ========== 3 axis ========== -->
+  <section>
+    <div class="section-tag">3 AXES</div>
+    <h2 class="section-title">共有OKかどうかの3つの軸</h2>
+    <p class="section-sub">質問に答える時、頭の中で以下の3つをチェックしてください。3つ全部YESなら共有OK、1つでもNGなら社長専用に保存。</p>
+
+    <div class="axis-grid">
+      <div class="axis-card">
+        <div class="ac-num">1</div>
+        <h4>社員に「役立つ」か</h4>
+        <p>社員が判断に迷った時、これがあれば自走できる？</p>
+        <div class="ac-checks">
+          <ul>
+            <li>同じことを何度も質問されるテーマ</li>
+            <li>判断基準を社員が知ると意思決定が速くなる</li>
+            <li>新人教育に使える</li>
+            <li>業界知見・市場動向</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="axis-card">
+        <div class="ac-num">2</div>
+        <h4>漏れても「困らない」か</h4>
+        <p>競合や外部に見られても問題ない？</p>
+        <div class="ac-checks">
+          <ul>
+            <li>個人を特定する情報が含まれない</li>
+            <li>取引先名で問題が出ない</li>
+            <li>給与・評価・モチベが含まれない</li>
+            <li>株主・M&A情報が含まれない</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="axis-card">
+        <div class="ac-num">3</div>
+        <h4>一般化「できる」か</h4>
+        <p>個別の人や取引先の名前を抜いても意味が成立する？</p>
+        <div class="ac-checks">
+          <ul>
+            <li>「判断の基準」だけ抽出できる</li>
+            <li>「○○さんが」を「営業担当が」に置換可能</li>
+            <li>「△△社が」を「取引先が」に置換可能</li>
+            <li>抽象化しても価値が残る</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision-rule">
+      <h4>判定式</h4>
+      <p><strong>3つ全部 YES</strong> → 共有OK（「共有して」で `共有/` に保存）<br><strong>1つでも NO</strong> → 社長専用に保存（人事 / 契約 / 経営戦略 / 資産運用）</p>
+    </div>
+  </section>
+
+  <!-- ========== Cases table ========== -->
+  <section>
+    <div class="section-tag">EXAMPLES</div>
+    <h2 class="section-title">典型ケース表</h2>
+    <p class="section-sub">よくある内容を保存先ごとに整理。迷ったらここを見てください。</p>
+
+    <div class="cases-card">
+      <table class="cases-table">
+        <thead>
+          <tr>
+            <th>内容</th>
+            <th>保存先</th>
+            <th>理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>「値引き交渉が来たらどう判断するか」の判断軸</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">社員の自走に直結／個人情報なし</td>
+          </tr>
+          <tr>
+            <td>中村さんの最近のモチベーション</td>
+            <td class="destination dest-hr">人事/</td>
+            <td class="reason">個人特定／本人に失礼</td>
+          </tr>
+          <tr>
+            <td>○○社の契約の解約条件</td>
+            <td class="destination dest-ct">契約/</td>
+            <td class="reason">取引先固有情報</td>
+          </tr>
+          <tr>
+            <td>契約期間の標準的な決め方</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">一般化された判断軸</td>
+          </tr>
+          <tr>
+            <td>次のM&A候補・買収戦略</td>
+            <td class="destination dest-stra">経営戦略/</td>
+            <td class="reason">経営機密／株価影響</td>
+          </tr>
+          <tr>
+            <td>葬儀事業の業界トレンド</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">業界知見・社員の学習材料</td>
+          </tr>
+          <tr>
+            <td>○○くんを役員候補にするか</td>
+            <td class="destination dest-hr">人事/</td>
+            <td class="reason">人事機密</td>
+          </tr>
+          <tr>
+            <td>役員候補を見極める基準</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">一般化された基準</td>
+          </tr>
+          <tr>
+            <td>個人の資産配分・株式保有</td>
+            <td class="destination dest-asset">資産運用/</td>
+            <td class="reason">完全プライベート</td>
+          </tr>
+          <tr>
+            <td>会社のキャッシュフロー方針</td>
+            <td class="destination dest-stra">経営戦略/</td>
+            <td class="reason">経営機密／賃上げ要求等の影響</td>
+          </tr>
+          <tr>
+            <td>採用面接での見極めポイント</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">教育・標準化に直結</td>
+          </tr>
+          <tr>
+            <td>失敗した過去案件の学び（個人名抜き）</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">組織の学びになる</td>
+          </tr>
+          <tr>
+            <td>失敗した過去案件の学び（◯◯さん原因と書く場合）</td>
+            <td class="destination dest-hr">人事/</td>
+            <td class="reason">個人責任化</td>
+          </tr>
+          <tr>
+            <td>業務プロセスの判断基準</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">標準化・属人化排除</td>
+          </tr>
+          <tr>
+            <td>パートナー企業との付き合い方</td>
+            <td class="destination dest-share">共有/</td>
+            <td class="reason">関係構築の知見</td>
+          </tr>
+          <tr>
+            <td>株主間の取り決め</td>
+            <td class="destination dest-stra">経営戦略/</td>
+            <td class="reason">株主機密</td>
+          </tr>
+          <tr>
+            <td>取締役会の議論内容</td>
+            <td class="destination dest-stra">経営戦略/</td>
+            <td class="reason">取締役機密</td>
+          </tr>
+          <tr>
+            <td>節税スキーム・税理士相談メモ</td>
+            <td class="destination dest-asset">資産運用/</td>
+            <td class="reason">プライベート財務</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== Gray zone ========== -->
+  <section>
+    <div class="section-tag">GRAY ZONE</div>
+    <h2 class="section-title">迷った時の判断</h2>
+
+    <div class="gray-card">
+      <h4>原則：迷ったら社長専用に保存</h4>
+      <p>後から「これは共有してよかった」と思ったら、社長専用フォルダから 共有/ にコピーすればOKです。逆は怖いです — 共有/ に上げて社員が見た後、削除しても「見られた事実」は消せません。</p>
+      <div class="gray-tip">
+        <strong>覚えておく：</strong>「共有→社長専用」は不可逆、「社長専用→共有」は後からいつでも可能。デフォルトを社長専用にしておくと安全。
+      </div>
+    </div>
+
+    <div class="gray-card">
+      <h4>グレーゾーンの典型パターン</h4>
+      <p><strong>個人特定 vs 一般化：</strong>「中村さんへの対応」は人事/、「中堅社員への対応の一般論」は共有/。同じ内容でも、個人名を抜いて一般化すれば共有可能になることが多いです。</p>
+      <p><strong>取引先個別 vs 業界知見：</strong>「○○社との契約」は契約/、「同業界の標準的な契約条件」は共有/。</p>
+      <p><strong>個別失敗 vs 組織の学び：</strong>「○○さんが原因の失敗」は人事/、「組織として学ぶべき構造」は共有/。</p>
+    </div>
+  </section>
+
+  <!-- ========== Keywords ========== -->
+  <section>
+    <div class="section-tag">CURSOR USAGE</div>
+    <h2 class="section-title">Cursorでの言い方一覧</h2>
+    <p class="section-sub">語尾に付けるキーワードで保存先が振り分けられます。デフォルトは社長専用、共有したい時だけ明示。</p>
+
+    <div class="keywords-card">
+      <table class="keywords-table">
+        <thead>
+          <tr>
+            <th>キーワード</th>
+            <th>保存先</th>
+            <th>公開範囲</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="kw">保存して</span></td>
+            <td class="destpath">人事/ または 契約/（自動判定）</td>
+            <td><span class="visibility vis-private">社長のみ</span></td>
+          </tr>
+          <tr>
+            <td><span class="kw">人事に保存</span></td>
+            <td class="destpath">人事/</td>
+            <td><span class="visibility vis-private">社長のみ</span></td>
+          </tr>
+          <tr>
+            <td><span class="kw">契約に保存</span></td>
+            <td class="destpath">契約/</td>
+            <td><span class="visibility vis-private">社長のみ</span></td>
+          </tr>
+          <tr>
+            <td><span class="kw">経営戦略に保存</span></td>
+            <td class="destpath">経営戦略/</td>
+            <td><span class="visibility vis-private">社長のみ</span></td>
+          </tr>
+          <tr>
+            <td><span class="kw">資産運用に保存</span></td>
+            <td class="destpath">資産運用/</td>
+            <td><span class="visibility vis-private">社長のみ</span></td>
+          </tr>
+          <tr>
+            <td><span class="kw share">共有して</span></td>
+            <td class="destpath">共有/{領域別サブフォルダ}/</td>
+            <td><span class="visibility vis-share">全社員参照可</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== Monthly review ========== -->
+  <section>
+    <div class="section-tag">MONTHLY REVIEW</div>
+    <h2 class="section-title">月次レビューでの見直し</h2>
+    <p class="section-sub">クローンを賢く育てるための月1ループ。鈴木と30分一緒にやります。</p>
+
+    <div class="loop-card">
+      <h3>毎月のクローン育成サイクル</h3>
+      <p>クローンは導入直後は精度が低めです。月次で社員の質問ログをレビューし、答えられなかった質問を社長が「共有して」で補強することで、月単位で賢くなります。</p>
+
+      <div class="loop-steps">
+        <div class="loop-step">
+          <div class="ls-icon">1</div>
+          <h5>共有/ の追加内容チェック</h5>
+          <p>1ヶ月で追加されたファイルの妥当性確認</p>
+        </div>
+        <div class="loop-step">
+          <div class="ls-icon">2</div>
+          <h5>答えられなかった質問特定</h5>
+          <p>クローンが「該当情報なし」と返した質問を抽出</p>
+        </div>
+        <div class="loop-step">
+          <div class="ls-icon">3</div>
+          <h5>判断軸を補強</h5>
+          <p>不足判断を社長が「共有して」で1分追記</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <div class="cta-section">
+    <h3>関連ドキュメント</h3>
+    <div class="cta-grid">
+      <a href="shimada-clone-proposal.html" class="cta-link">
+        <div class="cta-label">構想・全体像</div>
+        <div class="cta-title">嶋田社長クローン構想（提案書）</div>
+      </a>
+      <a href="shimada-cursor-setup.html" class="cta-link">
+        <div class="cta-label">既存運用</div>
+        <div class="cta-title">専用ワークスペース 使い方ガイド</div>
+      </a>
+      <a href="index.html" class="cta-link">
+        <div class="cta-label">統合ハブ</div>
+        <div class="cta-title">RUNBIRD ナレッジAI 統合ハブ</div>
+      </a>
+      <a href="https://github.com/runbird-inc/runbird-shimada-clone" class="cta-link" target="_blank">
+        <div class="cta-label">GitHub</div>
+        <div class="cta-title">runbird-shimada-clone repo</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>嶋田社長クローン 共有判断ガイド &nbsp;|&nbsp; 2026/5/9 &nbsp;|&nbsp; 株式会社 斗（hishaku）鈴木</p>
+  <p style="margin-top:6px;">追加要望・トラブル: <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> / ChatWork</p>
+</footer>
+
+</body>
+</html>
