@@ -20,12 +20,13 @@
   .section-sub { font-size: 14px; color: #64748b; margin-bottom: 28px; }
   section { margin-bottom: 56px; }
 
-  /* 4 repos overview */
-  .repos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-  .repo-tile { padding: 22px 16px; border-radius: 14px; border: 2px solid; text-align: center; }
-  .repo-tile h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-  .repo-tile p { font-size: 12px; line-height: 1.5; }
-  .repo-tile .repo-id { display: inline-block; margin-top: 10px; padding: 3px 10px; background: rgba(0,0,0,0.06); border-radius: 4px; font-size: 10px; font-family: 'Consolas', monospace; }
+  /* 5 repos overview */
+  .repos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 32px; }
+  .repo-tile { padding: 20px 14px; border-radius: 14px; border: 2px solid; text-align: center; position: relative; }
+  .repo-tile h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .repo-tile p { font-size: 11px; line-height: 1.5; }
+  .repo-tile .repo-id { display: inline-block; margin-top: 10px; padding: 3px 8px; background: rgba(0,0,0,0.06); border-radius: 4px; font-size: 9px; font-family: 'Consolas', monospace; }
+  .repo-tile.new::after { content: "NEW"; position: absolute; top: -8px; right: -6px; background: #9333ea; color: #fff; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.05em; }
   .tile-welfare { background: #f0fdf4; border-color: #86efac; }
   .tile-welfare h3 { color: #166534; }
   .tile-welfare p { color: #15803d; }
@@ -38,6 +39,9 @@
   .tile-ct { background: #ffedd5; border-color: #fb923c; }
   .tile-ct h3 { color: #7c2d12; }
   .tile-ct p { color: #9a3412; }
+  .tile-clone { background: #faf5ff; border-color: #c084fc; }
+  .tile-clone h3 { color: #6b21a8; }
+  .tile-clone p { color: #7c3aed; }
 
   @media (max-width: 700px) { .repos-grid { grid-template-columns: repeat(2, 1fr); } }
 
@@ -94,9 +98,9 @@
 
 <div class="container">
 
-  <!-- ========== 4 REPOS ========== -->
+  <!-- ========== 5 REPOS ========== -->
   <section>
-    <h2 class="section-title">4つのナレッジ領域</h2>
+    <h2 class="section-title">5つのナレッジ領域</h2>
     <p class="section-sub">RUNBIRD の業務領域ごとに別々のリポジトリで管理。Team権限により誰がどこにアクセスできるかが決まります。</p>
 
     <div class="repos-grid">
@@ -119,6 +123,11 @@
         <h3>契約書</h3>
         <p>過去〜現在の契約PDF<br>条件サマリmd</p>
         <div class="repo-id">runbird-contracts</div>
+      </div>
+      <div class="repo-tile tile-clone new">
+        <h3>社長クローン</h3>
+        <p>社長が「共有して」<br>と判断した判断ログ</p>
+        <div class="repo-id">runbird-shimada-clone</div>
       </div>
     </div>
   </section>
@@ -274,9 +283,9 @@
       </a>
 
       <a href="shimada-clone-proposal.html" class="guide-card shi-card">
-        <span class="target">嶋田社長専用 / 新規提案</span>
-        <h4>嶋田社長クローン構想（提案）</h4>
-        <p>社員が社長に直接聞かずに済む「もう一人の社長」を、既存ナレッジAIに5本目のrepoとして追加する提案書。社長判断待ち。</p>
+        <span class="target">嶋田社長専用 / 構築完了</span>
+        <h4>嶋田社長クローン（運用開始）</h4>
+        <p>社員が社長に直接聞かずに済む「もう一人の社長」。5本目のrepo <code>runbird-shimada-clone</code> として構築完了（2026/5/9）。社長Macに共有/フォルダ追加で運用開始。</p>
         <span class="arrow">読む →</span>
       </a>
     </div>
