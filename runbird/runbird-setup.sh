@@ -24,6 +24,7 @@ declare -a REPO_LIST=(
   "runbird-it-knowledge:IT営業ナレッジ"
   "runbird-hr-knowledge:人事面談"
   "runbird-contracts:契約書"
+  "runbird-shimada-clone:社長クローン"
 )
 
 declare -a INCLUDED_REPOS=()
