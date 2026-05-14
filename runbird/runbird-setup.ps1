@@ -73,27 +73,18 @@ if ($IncludedRepos.Count -eq 0) {
 }
 
 # Cursor統合ワークスペースファイル生成
+# 注意: irm | iex でPowerShell 5.1が日本語をCP932誤解釈してmojibakeになるため、
+#       スクリプト内に日本語文字列を書かず、GitHub Pagesから正しいUTF-8 JSONを
+#       バイナリダウンロードする方式に変更
 $WorkspaceFile = Join-Path $WorkspaceDir "runbird.code-workspace"
 
-$folders = for ($i = 0; $i -lt $IncludedRepos.Count; $i++) {
-    @{
-        name = $IncludedNames[$i]
-        path = $IncludedRepos[$i]
-    }
+try {
+    Invoke-WebRequest -Uri "https://hokuchan07.github.io/runbird/runbird.code-workspace" -OutFile $WorkspaceFile -UseBasicParsing
+} catch {
+    Write-Host "警告: workspace JSONテンプレートのダウンロードに失敗しました。" -ForegroundColor Yellow
+    Write-Host "手動で以下を実行してください:" -ForegroundColor Yellow
+    Write-Host "  Invoke-WebRequest -Uri https://hokuchan07.github.io/runbird/runbird.code-workspace -OutFile $WorkspaceFile" -ForegroundColor Yellow
 }
-
-$workspaceJson = @{
-    folders = @($folders)
-    settings = @{
-        "git.autofetch"          = $true
-        "git.autofetchPeriod"    = 600
-        "task.allowAutomaticTasks" = "on"
-        "window.title"           = "RUNBIRD ナレッジ — `${rootName}"
-    }
-} | ConvertTo-Json -Depth 5
-
-# BOM無しUTF-8で保存（Cursorは BOM があると不安定）
-[System.IO.File]::WriteAllText($WorkspaceFile, $workspaceJson, (New-Object System.Text.UTF8Encoding $false))
 
 # 各repoにフォルダオープン時の自動pullタスクを設定
 $tasksJsonContent = @'
