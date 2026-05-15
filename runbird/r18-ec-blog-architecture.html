@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>R18 EC × カラーミー × 自動ブログ投稿 構成イメージ</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: #f5f5f7;
+    margin: 0;
+    padding: 32px 24px;
+    color: #1d1d1f;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    font-size: 22px;
+    margin: 0 0 8px;
+    border-left: 6px solid #2563eb;
+    padding-left: 12px;
+  }
+  .sub { color: #6b7280; font-size: 13px; margin-bottom: 28px; }
+
+  .section {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: 16px;
+    margin: 0 0 16px;
+    color: #374151;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-ng { background: #fee2e2; color: #b91c1c; }
+  .badge-ok { background: #dcfce7; color: #166534; }
+  .badge-build { background: #dbeafe; color: #1e40af; }
+
+  .now-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .box {
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fafafa;
+    text-align: center;
+  }
+  .box-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .box-sub { font-size: 11px; color: #6b7280; }
+  .arrow {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ef4444;
+  }
+  .ng-line {
+    color: #dc2626;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+  }
+  .pillar {
+    border-radius: 12px;
+    padding: 18px;
+    color: #fff;
+  }
+  .pillar h3 { margin: 0 0 8px; font-size: 14px; }
+  .pillar p { margin: 0 0 6px; font-size: 12px; opacity: 0.95; }
+  .p-engine { background: linear-gradient(135deg,#1e3a8a,#2563eb); }
+  .p-wp { background: linear-gradient(135deg,#065f46,#10b981); }
+  .p-cm { background: linear-gradient(135deg,#9a3412,#f97316); }
+  .pillar ul { padding-left: 16px; margin: 8px 0 0; font-size: 11px; }
+  .pillar li { margin-bottom: 3px; }
+
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .flow-arrow {
+    text-align: center;
+    font-size: 28px;
+    color: #2563eb;
+    font-weight: 700;
+  }
+  .flow-box {
+    border: 2px dashed #94a3b8;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .flow-box b { display: block; margin-bottom: 4px; font-size: 13px; color: #1e293b; }
+
+  .build-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .build-table th, .build-table td {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .build-table th {
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
+  }
+  .build-table td.scope-yes { color: #166534; font-weight: 600; }
+  .build-table td.scope-reuse { color: #1e40af; font-weight: 600; }
+  .build-table td.scope-out { color: #9ca3af; }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .value-card {
+    border-left: 4px solid #2563eb;
+    background: #eff6ff;
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .value-card b { display: block; color: #1e3a8a; margin-bottom: 4px; }
+
+  .note {
+    margin-top: 16px;
+    background: #fefce8;
+    border-left: 4px solid #eab308;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #713f12;
+  }
+
+  .footer {
+    text-align: right;
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .arch { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); }
+    .value-grid { grid-template-columns: 1fr; }
+    .now-grid { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>R18 EC × カラーミー × 自動ブログ投稿 構成イメージ</h1>
+  <div class="sub">カラーミーEC案件向け 自動ブログ投稿機能の実現方式について（株式会社斗 / 鈴木 北斗）</div>
+
+  <!-- ① 現状 -->
+  <div class="section">
+    <h2><span class="badge badge-ng">① 現状の前提</span> カラーミー単体だと自動ブログ投稿が直接刺さらない</h2>
+    <div class="now-grid">
+      <div class="box">
+        <div class="box-title">自動ブログ投稿エンジン</div>
+        <div class="box-sub">記事生成 → 投稿API叩く</div>
+      </div>
+      <div class="arrow">✕</div>
+      <div class="box">
+        <div class="box-title">カラーミーEC（R18）</div>
+        <div class="box-sub">商品/受注APIはあるが<br>ブログ投稿系のAPIは非公開</div>
+      </div>
+    </div>
+    <div class="ng-line">→ WordPress用に組まれた自動投稿スクリプトは、そのままカラーミーに繋がらない</div>
+  </div>
+
+  <!-- ② 提案構成 -->
+  <div class="section">
+    <h2><span class="badge badge-ok">② 提案構成</span> WordPress を別建てして「埋め込み」で見せる</h2>
+    <div class="arch">
+      <div class="pillar p-engine">
+        <h3>① 自動投稿エンジン</h3>
+        <p>記事生成・スケジュール投稿・SEO制御</p>
+        <ul>
+          <li>キーワード × テンプレで自動生成</li>
+          <li>WordPress REST API で投稿</li>
+          <li>他クライアントへも横展開可能な共通基盤</li>
+        </ul>
+      </div>
+      <div class="pillar p-wp">
+        <h3>② WordPress（別ドメイン or サブドメイン）</h3>
+        <p>ブログ本体の置き場所</p>
+        <ul>
+          <li>blog.shop-name.com 等</li>
+          <li>記事DB・SEO評価はここに溜まる</li>
+          <li>カラーミー本体とは別管理で安全</li>
+        </ul>
+      </div>
+      <div class="pillar p-cm">
+        <h3>③ カラーミーEC</h3>
+        <p>商品販売・カート・決済はそのまま</p>
+        <ul>
+          <li>iframe / JS で WP の記事一覧を埋め込み</li>
+          <li>EC機能はカラーミーのまま</li>
+          <li>記事クリック → ブログ側へ遷移</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box">
+        <b>自動投稿エンジン</b>
+        記事生成 → 投稿予約
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <b>WordPress（別建て）</b>
+        記事公開・SEO蓄積
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <b>カラーミーEC</b>
+        記事一覧を埋め込み表示
+      </div>
+    </div>
+
+    <div class="note">
+      <b>ポイント：</b>「カラーミーに自動投稿を“接続”」ではなく、「WordPress を裏で動かして“表に貼る”」発想に切り替える。<br>
+      EC機能はカラーミーのまま安全に運用しつつ、ブログSEOは別ドメインで積み上げられる構成。
+    </div>
+  </div>
+
+  <!-- ③ 構築スコープ -->
+  <div class="section">
+    <h2><span class="badge badge-build">③ 今回作るもの</span> ／ 既存資産との切り分け</h2>
+    <table class="build-table">
+      <tr>
+        <th style="width:35%">パーツ</th>
+        <th style="width:18%">今回の扱い</th>
+        <th>状況</th>
+      </tr>
+      <tr>
+        <td>自動投稿エンジン本体（記事生成 + 投稿スケジューラ）</td>
+        <td class="scope-yes">新規構築</td>
+        <td>本案件で初号機として構築。今後の横展開も見据えた共通基盤として設計</td>
+      </tr>
+      <tr>
+        <td>WordPress 構築 + ブログ用テーマ調整</td>
+        <td class="scope-yes">新規構築</td>
+        <td>別ドメイン or サブドメインに設置、ブログ特化テーマで構築</td>
+      </tr>
+      <tr>
+        <td>WordPress 投稿スクリプト（REST API 連携部）</td>
+        <td class="scope-reuse">既存資産流用</td>
+        <td>当社で既に稼働している WordPress 自動投稿スクリプトを土台に拡張</td>
+      </tr>
+      <tr>
+        <td>カラーミー側への iframe / JS 埋め込み</td>
+        <td class="scope-yes">新規構築</td>
+        <td>サイトデザインに馴染ませる UI実装</td>
+      </tr>
+      <tr>
+        <td>カラーミー本体（カート / 決済 / 商品登録）</td>
+        <td class="scope-out">対象外</td>
+        <td>従来どおり別ラインで対応</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ④ 価値 -->
+  <div class="section">
+    <h2><span class="badge badge-build">④ 案件としての位置づけ</span></h2>
+    <div class="value-grid">
+      <div class="value-card">
+        <b>クライアントメリット</b>
+        WordPress を意識せず、カラーミーEC上にブログが自然に並ぶ。SEOは別ドメインで蓄積、本体ECは触らず安全に運用できる。
+      </div>
+      <div class="value-card">
+        <b>運用メリット</b>
+        記事生成〜公開を自動化することで、運用工数を最小化。継続的にブログ更新が走り、SEOからの集客導線を強化できる。
+      </div>
+      <div class="value-card">
+        <b>納期</b>
+        2〜3ヶ月で実装可能。WP構築・エンジンMVP・カラーミー側の埋め込み統合のスケジュールを組める。
+      </div>
+      <div class="value-card">
+        <b>拡張性</b>
+        自動投稿エンジンは共通基盤として設計するため、他のカラーミー／WordPress 案件にも適用可能。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">作成: 株式会社斗 鈴木北斗 ／ 2026-05-15</div>
+
+</div>
+</body>
+</html>
