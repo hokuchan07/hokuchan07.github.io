@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNBIRD Cursor運用安定化研修｜2026/5/22</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: #f9fafb;
+    color: #1f2937;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ========== HEADER ========== */
+  .hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .hero .label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; letter-spacing: 0.02em; }
+  .hero .subtitle { font-size: 1rem; opacity: 0.9; margin-bottom: 24px; }
+  .hero .meta {
+    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    opacity: 0.95;
+  }
+  .hero .meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ========== GOAL BOX ========== */
+  .goal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin: -28px auto 48px;
+    max-width: 920px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    border-top: 4px solid #fbbf24;
+  }
+  .goal h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #92400e;
+  }
+  .goal-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .goal-item {
+    text-align: center;
+    padding: 20px 16px;
+    background: #fffbeb;
+    border-radius: 12px;
+    border: 1px solid #fde68a;
+  }
+  .goal-item .num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #d97706;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .goal-item .text { font-size: 0.95rem; font-weight: 600; }
+
+  /* ========== TIMELINE ========== */
+  section { padding: 48px 0; }
+  .section-label {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 32px;
+  }
+
+  .timeline {
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 100px 60px 1fr;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-time { font-weight: 700; color: #6b7280; font-size: 0.9rem; }
+  .tl-icon { text-align: center; font-size: 1.4rem; }
+  .tl-content .tl-title { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+  .tl-content .tl-desc { font-size: 0.85rem; color: #6b7280; }
+
+  /* ========== PART CARDS ========== */
+  .part {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border-left: 6px solid;
+  }
+  .part-1 { border-color: #ef4444; }
+  .part-2 { border-color: #3b82f6; }
+  .part-3 { border-color: #8b5cf6; }
+  .part-4 { border-color: #10b981; }
+  .part-5 { border-color: #f59e0b; }
+  .part-6 { border-color: #6b7280; }
+
+  .part-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .part-num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: #6b7280;
+  }
+  .part-time {
+    font-size: 0.8rem;
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .part h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .part-why {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 24px;
+    padding-left: 14px;
+    border-left: 3px solid #e5e7eb;
+  }
+
+  .steps { counter-reset: step; }
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid #f3f4f6;
+  }
+  .step:first-child { border-top: none; }
+  .step::before {
+    content: counter(step);
+    background: #1f2937;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+  .step-body { font-size: 0.95rem; }
+  .step-body strong { color: #1f2937; }
+
+  /* ========== CODE BLOCKS ========== */
+  pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 12px 0;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+  code:not(pre code) {
+    background: #f3f4f6;
+    color: #b91c1c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  /* ========== CHECK ========== */
+  .check {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+  .check-title { font-weight: 700; font-size: 0.9rem; color: #047857; margin-bottom: 8px; }
+  .check ul { list-style: none; padding-left: 0; }
+  .check li {
+    padding: 4px 0 4px 28px;
+    position: relative;
+    font-size: 0.92rem;
+  }
+  .check li::before {
+    content: "☐";
+    position: absolute;
+    left: 4px;
+    font-size: 1.1rem;
+    color: #059669;
+  }
+
+  /* ========== WARN / INFO ========== */
+  .warn, .info {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.92rem;
+  }
+  .warn { background: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; }
+  .info { background: #eff6ff; border-left: 4px solid #3b82f6; color: #1e40af; }
+
+  /* ========== ROLE TABLE ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  th { background: #f9fafb; font-weight: 700; }
+
+  /* ========== CONFLICT DIAGRAM ========== */
+  .conflict {
+    background: #fef3c7;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+  }
+  .conflict-flow {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .conflict-box {
+    background: #fff;
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .conflict-arrow { text-align: center; font-size: 1.8rem; color: #d97706; }
+
+  /* ========== PROBLEM → SOLUTION ========== */
+  .problem-section {
+    background: linear-gradient(180deg, #fef2f2 0%, #fff5f5 100%);
+    padding: 56px 24px;
+    border-top: 4px solid #ef4444;
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .problem-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    border-left: 4px solid #ef4444;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.06);
+  }
+  .problem-num {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .problem-quote {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1f2937;
+    line-height: 1.4;
+  }
+  .problem-quote::before { content: "「"; color: #ef4444; }
+  .problem-quote::after { content: "」"; color: #ef4444; }
+  .ps-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  .ps-label.cause { color: #d97706; }
+  .ps-label.solution { color: #059669; }
+  .ps-desc {
+    font-size: 0.86rem;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+  .ps-desc code {
+    background: #f3f4f6;
+    color: #b91c1c;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+  .part-badge {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed #e5e7eb;
+    font-size: 0.78rem;
+    color: #6b7280;
+  }
+  .part-badge strong { color: #1f2937; }
+
+  /* ========== ROLE SECTION (Soccer Analogy) ========== */
+  .role-section {
+    background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%);
+    padding: 56px 24px;
+    border-top: 4px solid #10b981;
+  }
+  .pitch {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin: 24px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .pitch-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #047857;
+    margin-bottom: 20px;
+  }
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .role-card {
+    background: #fff;
+    border: 1px solid #d1fae5;
+    border-left: 4px solid #10b981;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .role-card.private { border-left-color: #f59e0b; background: #fffbeb; border-color: #fde68a; }
+  .role-card .role-repo {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .role-card .role-analogy {
+    font-size: 0.85rem;
+    color: #047857;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .role-card.private .role-analogy { color: #b45309; }
+  .role-card .role-content {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  .common-vs-local {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .cv-card {
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .cv-common {
+    background: #ecfdf5;
+    border: 2px solid #6ee7b7;
+  }
+  .cv-local {
+    background: #fffbeb;
+    border: 2px solid #fcd34d;
+  }
+  .cv-card .cv-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .cv-common .cv-badge { background: #059669; color: #fff; }
+  .cv-local .cv-badge { background: #d97706; color: #fff; }
+  .cv-card h4 { font-size: 1rem; margin-bottom: 8px; color: #1f2937; }
+  .cv-card ul { list-style: none; padding-left: 0; font-size: 0.88rem; }
+  .cv-card li { padding: 3px 0; }
+
+  /* ========== PROMOTION FLOW ========== */
+  .promo-flow {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin: 24px 0;
+    border: 1px solid #e5e7eb;
+  }
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+    align-items: stretch;
+  }
+  .flow-step {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 14px 10px;
+    text-align: center;
+    position: relative;
+    font-size: 0.82rem;
+  }
+  .flow-step .step-num {
+    background: #6366f1;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .flow-step::after {
+    content: "→";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-weight: 700;
+  }
+  .flow-step:last-child::after { display: none; }
+
+  .ba-example {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 12px;
+    align-items: center;
+    margin: 20px 0;
+  }
+  .ba-example .ba-box {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .ba-example .ba-box.local { background: #fffbeb; border: 1px solid #fde68a; }
+  .ba-example .ba-box.common { background: #ecfdf5; border: 1px solid #a7f3d0; }
+  .ba-example .ba-box .ba-label {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .ba-example .ba-box.local .ba-label { background: #d97706; color: #fff; }
+  .ba-example .ba-box.common .ba-label { background: #059669; color: #fff; }
+  .ba-example .ba-arrow {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #6366f1;
+    font-weight: 900;
+  }
+
+  @media (max-width: 720px) {
+    .role-grid { grid-template-columns: 1fr; }
+    .common-vs-local { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: 1fr; }
+    .flow-step::after { content: "↓"; right: 50%; top: auto; bottom: -20px; transform: translateX(50%); }
+    .ba-example { grid-template-columns: 1fr; }
+    .ba-example .ba-arrow { transform: rotate(90deg); }
+  }
+
+  /* ========== AI PATTERNS ========== */
+  .pattern-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .pattern-num {
+    background: #6366f1;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+  .pattern-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    color: #6b7280;
+    font-size: 0.85rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 48px;
+  }
+  footer strong { color: #1f2937; }
+
+  /* ========== PRINT ========== */
+  @media print {
+    body { background: #fff; }
+    .hero { background: #1e3a8a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .part { page-break-inside: avoid; box-shadow: none; }
+    pre { white-space: pre-wrap; word-break: break-all; }
+  }
+
+  @media (max-width: 720px) {
+    .goal-items { grid-template-columns: 1fr; }
+    .tl-row { grid-template-columns: 80px 40px 1fr; padding: 14px 18px; }
+    .hero h1 { font-size: 1.6rem; }
+    .conflict-flow { grid-template-columns: 1fr; }
+    .conflict-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="label">RUNBIRD × 株式会社斗</div>
+    <h1>Cursor運用安定化研修</h1>
+    <div class="subtitle">「綺麗な構築」を全員のPCで揃える90分</div>
+    <div class="meta">
+      <span>📅 2026年5月22日（金）</span>
+      <span>📍 RUNBIRD 晴海オフィス</span>
+      <span>👤 講師：株式会社斗 鈴木</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="goal">
+    <h2>🎯 今日の3つのゴール</h2>
+    <div class="goal-items">
+      <div class="goal-item">
+        <div class="num">①</div>
+        <div class="text">全員のPCが<br>同じ構造で揃う</div>
+      </div>
+      <div class="goal-item">
+        <div class="num">②</div>
+        <div class="text">編集競合<br>（修正消える事件）が消える</div>
+      </div>
+      <div class="goal-item">
+        <div class="num">③</div>
+        <div class="text">AI出力が<br>想定通りの場所に保存</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PROBLEM → SOLUTION ========== -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-label" style="color: #991b1b;">⚠ なぜこの研修をやるか</div>
+    <h2 class="section-title" style="color: #991b1b;">🎯 これで何が解決するのか</h2>
+    <p class="section-sub">3週間前、江口さんから出た悩み。原因と解決策と「なぜそれで解決するのか」を対応表で確認します。</p>
+
+    <div class="problem-grid">
+      <!-- Problem 1 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 1</span>
+        <div class="problem-quote">Cursorの使い方が分からない</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc">フォルダ構造が個人ごとにバラバラだった。<code>CLAUDE.md</code>（監督の指示書）が無い場所で作業していたので、AIに何ができるか自体が見えていなかった</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc">全員が同じ <code>.code-workspace</code> でサイドバーを統一。フォルダ役割をサッカー例えで一覧化。「AIへの聞き方5パターン」を手元に。<br><strong>→ 「どこで何をすればいいか」が見えるようになる</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 3 / Part 6 / Part 7</strong></div>
+      </div>
+
+      <!-- Problem 2 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 2</span>
+        <div class="problem-quote">更新しても下に戻る</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc">デスクトップなど <strong>git管理外のフォルダ</strong>で作業していた。または <code>git commit + push</code> をしていなかったので、他の人の <code>pull</code> で上書きされた</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc"><code>C:\git\</code> 配下のrepoルートでのみ作業。編集後すぐ <code>git commit + push</code>。さらに <strong>夜20時に自動pushでセーフティネット</strong>。<br><strong>→ 自分の変更が消えない仕組みが物理的にできる</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 2 / Part 6</strong></div>
+      </div>
+
+      <!-- Problem 3 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 3</span>
+        <div class="problem-quote">AIに指示しても全く効かない</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc"><code>CLAUDE.md</code>（監督の試合前指示書）が <strong>無いフォルダ</strong>でAIに頼んでいた。だからAIは「会社のルール」を一切読まずに動いていた</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc"><code>.code-workspace</code> で開くと必ずrepoルートに居る = <strong>CLAUDE.md が自動で効く</strong>。AIは毎回これを読んでから動く。<br><strong>→ AIに依頼すれば想定通りの場所に・想定通りの形式で保存される</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 3 / Part 6</strong></div>
+      </div>
+
+      <!-- Problem 4 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 4</span>
+        <div class="problem-quote">齋藤さんと競合する、自分の修正が消える</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc">同じファイルを別々のタイミングで編集 → 後にpushした方が勝つ「後勝ち上書き」。下書きと完成版が同じ場所に置かれていたので、誰が触っていいのか分からなかった</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc"><strong>朝9時 自動pull / 夜20時 自動push</strong>で時間帯を分離。個人作業は <code>_local/</code> で隔離（他人に絶対影響しない）。下書きが整ってから昇格させる運用。<br><strong>→ ぶつかる構造そのものが消える</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 4 / Part 6</strong></div>
+      </div>
+
+      <!-- Problem 5 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 5</span>
+        <div class="problem-quote">どこに何があるか分からない、保存場所が不明</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc">デスクトップ・ドキュメント・OneDriveに業務ファイルが散乱。フォルダの役割が共通理解されていなかった（「<code>articles</code> って何入れるの？」状態）</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc"><code>C:\git\</code> に統一 + 1ウィンドウ統合で「ここ以外で作業しない」状態。フォルダ役割をサッカー例えで明確化（試合レポート＝<code>articles/</code> など）。<br><strong>→ 迷わずファイルを保存できる</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 2 / Part 3 / 全体</strong></div>
+      </div>
+
+      <!-- Problem 6 -->
+      <div class="problem-card">
+        <span class="problem-num">PROBLEM 6</span>
+        <div class="problem-quote">江口・齋藤さんが「外部」扱いになっている</div>
+        <div class="ps-label cause">📍 原因</div>
+        <div class="ps-desc">GitHub上では Outside Collaborator（外部協力者）として個別repoに直付与されている状態。組織のメンバーリストに出ない、チーム権限管理ができない</div>
+        <div class="ps-label solution">✅ 解決</div>
+        <div class="ps-desc">研修中に <strong>Organization Member</strong> に昇格招待。チームベースの権限管理（it-write / hr-input / contracts-read）に揃える。契約書の権限はwrite→readに是正<br><strong>→ 社員として正式に扱われる、権限管理が一元化</strong></div>
+        <div class="part-badge">解決するPart: <strong>Part 5</strong></div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding: 24px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+      <p style="font-size: 1.15rem; font-weight: 700; color: #991b1b;">
+        → これら6つの問題、すべて今日90分で消します
+      </p>
+      <p style="font-size: 0.9rem; color: #6b7280; margin-top: 8px;">
+        座学ではなく、全員のPCを実際にその場で直す動作会形式
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOLDER ROLES (Soccer Analogy) ========== -->
+<section class="role-section">
+  <div class="container">
+    <div class="section-label">⚽ 全体像</div>
+    <h2 class="section-title">フォルダの役割 — サッカーチームで例えると</h2>
+    <p class="section-sub">RUNBIRDのナレッジ管理は、サッカーチームと同じ構造です</p>
+
+    <div class="pitch">
+      <div class="pitch-title">🏟 全体像：runbird-inc = RUNBIRD ナレッジチーム</div>
+      <pre style="background: #f9fafb; color: #1f2937; border: 1px solid #e5e7eb;">[runbird-inc] ━━━━━━━━━━━━━━━━━━━ RUNBIRDナレッジチーム全体
+    │
+    ├─ runbird-welfare-knowledge  ━━ 福祉事業部の戦術ボード
+    ├─ runbird-it-knowledge       ━━ IT営業部の戦術ボード
+    ├─ runbird-hr-knowledge       ━━ スカウト・採用部の面接ノート
+    ├─ runbird-contracts          ━━ 試合の契約・ルールブック
+    ├─ runbird-shimada-clone      ━━ 監督の判断ログ
+    │
+    └─ 各repo内の "_local/"       ━━ 個人の自主練ノート（自PCのみ）</pre>
+    </div>
+
+    <h3 style="text-align: center; font-size: 1.1rem; margin: 32px 0 16px;">各repoの担当者</h3>
+    <p style="text-align: center; font-size: 0.88rem; color: #6b7280; margin-bottom: 16px;">
+      repoの中身（何のためにあるか）は嶋田社長から説明済み。ここでは「誰が編集するか」だけ確認します
+    </p>
+    <table style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+      <thead>
+        <tr style="background: #ecfdf5;">
+          <th>repo</th>
+          <th>主な編集者（write）</th>
+          <th>閲覧者（read）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>runbird-welfare-knowledge</code></td>
+          <td><strong>前田さん</strong> ／ 河合さん ／ 中村さん</td>
+          <td>全員</td>
+        </tr>
+        <tr>
+          <td><code>runbird-it-knowledge</code></td>
+          <td><strong>江口さん ／ 齋藤さん</strong> ／ 河合さん ／ 中村さん</td>
+          <td>全員</td>
+        </tr>
+        <tr>
+          <td><code>runbird-hr-knowledge</code></td>
+          <td><strong>江口さん</strong></td>
+          <td>嶋田社長 ／ 鈴木</td>
+        </tr>
+        <tr>
+          <td><code>runbird-contracts</code></td>
+          <td>河合さん ／ 中村さん</td>
+          <td>江口さん ／ 齋藤さん ／ 嶋田社長</td>
+        </tr>
+        <tr>
+          <td><code>runbird-shimada-clone</code></td>
+          <td>嶋田社長 ／ 鈴木</td>
+          <td>全社員</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="text-align: center; font-size: 0.82rem; color: #9ca3af; margin-top: 8px;">
+      ※ 「全員」= <code>runbird-inc</code> Organization の正式メンバー（Part 5で江口さん・齋藤さんが昇格）
+    </p>
+
+    <!-- ========== INSIDE-FOLDER STRUCTURE (Soccer Analogy) ========== -->
+    <h3 style="text-align: center; font-size: 1.3rem; margin: 56px 0 8px; color: #047857;">⚽ repoの「中身」をサッカーで例えると</h3>
+    <p style="text-align: center; color: #6b7280; font-size: 0.9rem; margin-bottom: 24px;">
+      フォルダを開くと <code>CLAUDE.md</code> とか <code>articles/</code> とか見慣れないファイルがある。それぞれの役割をサッカーで例えると一発で理解できます
+    </p>
+
+    <div class="pitch">
+      <div class="pitch-title">📂 各repoの標準フォルダ構成</div>
+      <pre style="background: #f9fafb; color: #1f2937; border: 1px solid #e5e7eb; font-size: 0.82rem;">runbird-welfare-knowledge/      ← 福祉事業部のロッカールーム
+├── CLAUDE.md                  ━━ 監督の試合前指示書 ⚽
+├── README.md                  ━━ チーム紹介パンフ 📋
+├── _案件概要.md               ━━ 今シーズンの目標と布陣 🎯
+│
+├── articles/                  ━━ 試合レポート（個別記事） 📰
+│   └── 2026-05/
+├── reports/                   ━━ 月次の成績表（KPIまとめ） 📊
+├── data/                      ━━ スタッツデータ（CSV・統計） 📈
+├── prompts/                   ━━ 監督から選手への指示テンプレ 🎯
+├── knowledge/                 ━━ 戦術ノート（恒久ナレッジ） 🧠
+├── templates/                 ━━ 練習メニューの雛形 📝
+├── communications/            ━━ ロッカールームの議事録 💬
+│
+├── _local/                    ━━ ★個人の自主練ノート（自PCのみ） 📓
+└── .gitignore                 ━━ 持ち込み禁止リスト 🚫</pre>
+    </div>
+
+    <h4 style="text-align: center; font-size: 1rem; margin: 32px 0 12px;">各ファイル・フォルダの役割（サッカー例え）</h4>
+    <table style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-size: 0.88rem;">
+      <thead>
+        <tr style="background: #ecfdf5;">
+          <th style="width: 22%;">ファイル / フォルダ</th>
+          <th style="width: 28%;">サッカーで例えると</th>
+          <th>何が入っている？</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>CLAUDE.md</code></td>
+          <td>⚽ <strong>監督の試合前指示書</strong></td>
+          <td>AIに「このフォルダで動く時はこう振る舞え」と指示する書類。これがあるからAIが迷子にならない</td>
+        </tr>
+        <tr>
+          <td><code>README.md</code></td>
+          <td>📋 チーム紹介パンフ</td>
+          <td>このrepoは何のためにあるか、最初に読むもの</td>
+        </tr>
+        <tr>
+          <td><code>_案件概要.md</code></td>
+          <td>🎯 今シーズンの目標と布陣</td>
+          <td>このプロジェクト全体の概要・関係者・現状</td>
+        </tr>
+        <tr>
+          <td><code>articles/</code></td>
+          <td>📰 試合レポート</td>
+          <td>個別の記事・原稿（1試合＝1記事）</td>
+        </tr>
+        <tr>
+          <td><code>reports/</code></td>
+          <td>📊 月次の成績表</td>
+          <td>月次レポート、KPI集計、振り返り</td>
+        </tr>
+        <tr>
+          <td><code>data/</code></td>
+          <td>📈 スタッツデータ</td>
+          <td>CSV、JSON、Excelなどの生データ</td>
+        </tr>
+        <tr>
+          <td><code>prompts/</code></td>
+          <td>🎯 監督から選手への指示テンプレ</td>
+          <td>AIに依頼する時の定型文（よく使う命令集）</td>
+        </tr>
+        <tr>
+          <td><code>knowledge/</code></td>
+          <td>🧠 戦術ノート</td>
+          <td>恒久的に使うナレッジ、How-To集、手順書</td>
+        </tr>
+        <tr>
+          <td><code>templates/</code></td>
+          <td>📝 練習メニューの雛形</td>
+          <td>提案書・契約書・連絡文の雛形（コピーして使う）</td>
+        </tr>
+        <tr>
+          <td><code>communications/</code></td>
+          <td>💬 ロッカールームの議事録</td>
+          <td>メール・ChatWork・LINEのやりとりログ</td>
+        </tr>
+        <tr style="background: #fffbeb;">
+          <td><code>_local/</code></td>
+          <td>📓 <strong>個人の自主練ノート</strong></td>
+          <td><strong>自分のPCにしかない</strong>個人領域。下書き・実験・頭の整理用</td>
+        </tr>
+        <tr>
+          <td><code>.gitignore</code></td>
+          <td>🚫 持ち込み禁止リスト</td>
+          <td>ロッカールームに持ち込まないファイル一覧（.env、トークン、`_local/` の中身など）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info" style="margin-top: 20px;">
+      <strong>💡 ポイント</strong><br>
+      ・<code>CLAUDE.md</code> はAIにとっての「監督の指示書」。フォルダを開くと自動でAIが読む<br>
+      ・<code>_local/</code> 以外は <strong>全員に共有される共通エリア</strong><br>
+      ・フォルダ名は5社くらい使い回すので、慣れると別のrepoでも迷わない
+    </div>
+
+    <h3 style="text-align: center; font-size: 1.1rem; margin: 40px 0 16px;">共通エリア vs 個人エリア</h3>
+    <div class="common-vs-local">
+      <div class="cv-card cv-common">
+        <span class="cv-badge">⚽ 共通エリア</span>
+        <h4>チーム全員が見る戦術ボード</h4>
+        <ul>
+          <li>📂 各repoのルート〜サブフォルダ</li>
+          <li>✏️ 編集すると <strong>全社員のPCに反映</strong></li>
+          <li>📝 完成した記事・最終版資料を置く</li>
+          <li>📊 月報・KPI・契約書（最終版）</li>
+          <li>🔄 朝9時pull / 夜20時push で自動同期</li>
+        </ul>
+      </div>
+      <div class="cv-card cv-local">
+        <span class="cv-badge">📓 個人エリア</span>
+        <h4>自分だけの自主練ノート</h4>
+        <ul>
+          <li>📂 各repo内の <code>_local/</code> 配下のみ</li>
+          <li>🚫 GitHubに上がらない（<strong>自PCのみ</strong>）</li>
+          <li>📝 下書き、頭の整理、実験</li>
+          <li>💡 「これメモっとこ」「あとで整える」系</li>
+          <li>👁️ 他人に見られない（共有も不可）</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="text-align: center; font-size: 1.1rem; margin: 40px 0 16px;">迷ったらこれ — 黄金ルール</h3>
+    <table style="background: #fff; border-radius: 8px; overflow: hidden;">
+      <thead>
+        <tr><th>こういう時は…</th><th>どこに置く？</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>完成した記事・最終版の資料</td><td><strong style="color: #059669;">共通エリア（articles/ reports/ など）</strong></td></tr>
+        <tr><td>下書き、まだ整っていない</td><td><strong style="color: #d97706;">_local/ 配下</strong></td></tr>
+        <tr><td>ふと思いついたメモ</td><td><strong style="color: #d97706;">_local/ 配下</strong></td></tr>
+        <tr><td>他人に見せたくない検討中の内容</td><td><strong style="color: #d97706;">_local/ 配下</strong></td></tr>
+        <tr><td>個人の好み・カスタマイズ設定</td><td><strong style="color: #d97706;">_local/ 配下</strong></td></tr>
+        <tr><td>みんなで使うテンプレ・チェックリスト</td><td><strong style="color: #059669;">共通エリア（templates/ など）</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ========== PROMOTION FLOW ========== -->
+    <h3 style="text-align: center; font-size: 1.3rem; margin: 56px 0 8px; color: #047857;">🚀 個人 → 共通 への昇格フロー</h3>
+    <p style="text-align: center; color: #6b7280; font-size: 0.9rem; margin-bottom: 24px;"><code>_local/</code> で書いた下書きを「チームに共有する価値あり」と判断したら昇格させる</p>
+
+    <div class="promo-flow">
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div><strong>_local/</strong> で下書き</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div>「これ共有しよう」と判断</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div>共通エリアに <strong>移動</strong></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">4</div>
+          <div>みんなが読む前提で <strong>整える</strong></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">5</div>
+          <div><code>commit + push</code><br>→ 全社員に共有 ⚽</div>
+        </div>
+      </div>
+
+      <h4 style="margin: 32px 0 12px; font-size: 1rem;">具体例：江口さんが新しい営業フックを編み出した場合</h4>
+      <div class="ba-example">
+        <div class="ba-box local">
+          <span class="ba-label">BEFORE（個人領域）</span>
+          <div style="color: #6b7280;">runbird-it-knowledge/<br>　_local/下書き/<br>　　新しいアプローチ_メモ.md</div>
+          <div style="margin-top: 10px; color: #1f2937; white-space: normal; font-family: inherit; font-size: 0.85rem;">
+            # 新しいアプローチ<br>
+            最近こんなフックがハマる気がする<br>
+            ・「採用単価1桁削減」を最初に出す<br>
+            ・河合さんに見せたら「いいかも」って<br>
+            ・まだ要検証…
+          </div>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-box common">
+          <span class="ba-label">AFTER（共通領域）</span>
+          <div style="color: #6b7280;">runbird-it-knowledge/<br>　articles/2026-05/<br>　　20260522_営業フック_<br>　　採用単価訴求.md</div>
+          <div style="margin-top: 10px; color: #1f2937; white-space: normal; font-family: inherit; font-size: 0.85rem;">
+            # 営業フック：採用単価訴求<br>
+            ## 概要<br>
+            初回ヒアリングで「採用単価1桁<br>
+            削減」を最初に出す。<br>
+            ## 検証ケース<br>
+            ・2026/5/X ◯◯社で商談化
+          </div>
+        </div>
+      </div>
+
+      <div class="info" style="margin-top: 20px;">
+        <strong>💡 整える時のポイント</strong><br>
+        ・個人メモ表記を消す（「メモ」「気がする」など）<br>
+        ・ファイル名を <code>YYYYMMDD_タイトル.md</code> に統一<br>
+        ・誰が読んでも意味が分かる構造にする（概要 → 詳細）
+      </div>
+    </div>
+
+    <h3 style="text-align: center; font-size: 1.1rem; margin: 40px 0 16px; color: #6b7280;">⬇️ 共通 → 個人への降格（古いナレッジのアーカイブ）</h3>
+    <p style="text-align: center; font-size: 0.92rem; color: #6b7280; max-width: 720px; margin: 0 auto;">
+      古くなったナレッジを <code>_local/アーカイブ/</code> に下げる逆フローもアリ。<br>
+      ただし基本は <strong>消す勇気</strong> を持つ方が大事。古いものを残しすぎると新しい人が混乱します。
+    </p>
+  </div>
+</section>
+
+<section style="background: #fff;">
+  <div class="container">
+    <div class="section-label">TIMETABLE</div>
+    <h2 class="section-title">本日のタイムテーブル</h2>
+    <p class="section-sub">90分 / 6パート構成</p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-time">00-10分</div>
+        <div class="tl-icon">🎬</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 1: なぜこの研修をやるか</div>
+          <div class="tl-desc">「AI使い方教室」ではなく「PC片付け会」である</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">10-25分</div>
+        <div class="tl-icon">📁</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 2: フォルダ統一（C:\git\ に揃える）</div>
+          <div class="tl-desc">PowerShell 1行 → 全員同じ場所に4 repoが並ぶ</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">25-40分</div>
+        <div class="tl-icon">🪟</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 3: 1ウィンドウ統合（.code-workspace）</div>
+          <div class="tl-desc">サイドバーに4 repoが並ぶ状態をつくる</div>
+        </div>
+      </div>
+      <div class="tl-row" style="background: #fffbeb;">
+        <div class="tl-time">40-60分</div>
+        <div class="tl-icon">📓</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 4: <strong>_local/ セットアップ + 昇格演習</strong> ★全員ハンズオン</div>
+          <div class="tl-desc">個人エリアを作って、実際に下書き→昇格まで手を動かす</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">60-72分</div>
+        <div class="tl-icon">🔑</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 5: GitHub組織メンバー昇格</div>
+          <div class="tl-desc">江口さん・齋藤さんを Outside Collaborator → 正式メンバーへ</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">72-82分</div>
+        <div class="tl-icon">📜</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 6: CLAUDE.md とロール設定</div>
+          <div class="tl-desc">朝pull・夜push で競合を物理的に防ぐ</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">82-90分</div>
+        <div class="tl-icon">💬</div>
+        <div class="tl-content">
+          <div class="tl-title">Part 7: AIへの聞き方5パターン + 持ち帰り</div>
+          <div class="tl-desc">@ファイル指定 / @web / 丸投げ / 保存先指定 / NO返答</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PART 1 ========== -->
+<section>
+  <div class="container">
+
+    <article class="part part-1">
+      <div class="part-head">
+        <span class="part-num">PART 1</span>
+        <span class="part-time">00-10分</span>
+      </div>
+      <h3>🎬 なぜこの研修をやるか</h3>
+      <p class="part-why">江口さん「Cursorわからない、更新しても下に戻る、AIに指示しても効かない」<br>→ 江口さんの問題ではなく <strong>全員が違うフォルダ構造で動いてた</strong>のが原因</p>
+
+      <h4 style="margin: 16px 0 8px; font-size: 1rem;">よくあった失敗例</h4>
+      <div class="warn">
+        ❌ デスクトップに作ったmdが朝来たら消えてた<br>
+        ❌ Cursorで開いたら違うフォルダだった<br>
+        ❌ AIに頼んだら、どこかに保存されたけど見つからない<br>
+        ❌ 齋藤さんと同じファイル直したら、自分の修正が消えてた
+      </div>
+
+      <p style="margin-top: 16px; font-weight: 700; font-size: 1.05rem; text-align: center; color: #ef4444;">
+        → これ、今日全部終わります
+      </p>
+    </article>
+
+    <!-- ========== PART 2 ========== -->
+    <article class="part part-2">
+      <div class="part-head">
+        <span class="part-num">PART 2</span>
+        <span class="part-time">10-25分</span>
+      </div>
+      <h3>📁 フォルダ統一：<code>C:\git\</code> へ揃える</h3>
+      <p class="part-why">
+        <strong>なぜ <code>C:\git\</code> という場所なのか？</strong><br>
+        OneDriveとgitは「ファイルをバックアップする似た仕組み」を持つ別の管理人。<br>
+        同じファイルを2人の管理人が同時に触ると喧嘩して、ファイルが壊れます。<br>
+        だから <strong>OneDriveが触らない場所（<code>C:\git\</code>）</strong> を新しく作って、gitだけに管理させます。
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 18px;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: #991b1b; letter-spacing: 0.1em; margin-bottom: 10px;">❌ NG：今までの場所</div>
+          <p style="font-size: 0.92rem; margin-bottom: 10px; font-weight: 600;">デスクトップ / ドキュメント / OneDrive配下</p>
+          <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;">OneDriveが裏で自動同期している場所。ここにgitフォルダを置くと…</p>
+          <ul style="font-size: 0.85rem; padding-left: 18px; color: #7f1d1d; line-height: 1.7;">
+            <li>OneDriveがファイルを掴んでしまい <strong>git が動かない</strong></li>
+            <li>ファイル名末尾に「 2.md」「 3.md」が勝手に増える</li>
+            <li>同期タイミングで <strong>「更新しても下に戻る」</strong>事件</li>
+            <li>同じファイルが2箇所に存在して混乱</li>
+          </ul>
+        </div>
+
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 18px;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: #047857; letter-spacing: 0.1em; margin-bottom: 10px;">✅ OK：今日からの場所</div>
+          <p style="font-size: 0.92rem; margin-bottom: 10px; font-weight: 600;"><code style="font-size: 1rem;">C:\git\</code>（Cドライブ直下のgit専用フォルダ）</p>
+          <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;">OneDriveが触れない、誰の管理下でもない場所。ここに置くと…</p>
+          <ul style="font-size: 0.85rem; padding-left: 18px; color: #065f46; line-height: 1.7;">
+            <li>gitだけが管理する <strong>綺麗な状態</strong></li>
+            <li>ファイルが壊れない、勝手に増えない、消えない</li>
+            <li>OneDriveとの喧嘩がそもそも発生しない</li>
+            <li><strong>これまでの事故の9割が消える</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info" style="margin-bottom: 16px;">
+        <strong>💡 ひとことで言うと</strong><br>
+        OneDriveに「触らせない場所」を作って、そこでgitに専念させる、というだけの話。<br>
+        場所を変えるだけで、これまで原因不明だった事故が一気に消えます。
+      </div>
+
+      <h4 style="margin: 24px 0 12px; font-size: 1.05rem;">▼ 全員でやる手順（クリック単位）</h4>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-body">
+            <strong>① 「今どこで作業してるか」を講師に教える</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>今Cursorで開いてるフォルダのアイコンを <strong>Shiftキーを押しながら右クリック</strong></li>
+              <li>メニューが開く → 「<strong>パスとしてコピー</strong>」をクリック</li>
+              <li>ChatWorkの研修ルームに <strong>貼り付け（Ctrl+V）</strong> → 送信</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>講師が「あ、◯◯さんOneDriveに入っちゃってますね」と確認できる。これが今日直す対象です。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>② 「黒い画面（PowerShell）」を開く</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>キーボードの <strong>Windowsキー</strong> を押す（or 左下のWindowsマークをクリック）</li>
+              <li>そのまま「<strong>powershell</strong>」と入力</li>
+              <li>一番上に出てくる「<strong>Windows PowerShell</strong>」をクリック</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>黒い画面が開いて、青文字で <code>PS C:\Users\〇〇〇&gt;</code> と表示される。<br>
+              ※「コマンドプロンプト（黒い画面）」のお兄ちゃん版だと思えばOK
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 下のコマンドを「全部コピー」 → 黒い画面に「右クリックで貼り付け」 → Enter</strong>
+            <pre>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+irm https://hokuchan07.github.io/runbird/runbird-setup.ps1 | iex</pre>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>1〜2分間、白い文字が滝のようにダーッと流れる。<br>
+              <strong>途中で赤い文字や「文字化け」が出ても気にしない</strong>（毎回出ます。動作には影響なし）<br>
+              止まって <code>PS C:\Users\〇〇〇&gt;</code> がまた出たら完了
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>④ 自分のPCに「C:\git\runbird-knowledge\」フォルダができたか確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>エクスプローラー（フォルダのアイコン）を開く</li>
+              <li>左の「<strong>PC</strong>」をクリック → 「<strong>Windows (C:)</strong>」をダブルクリック</li>
+              <li>「<strong>git</strong>」フォルダをダブルクリック → 「<strong>runbird-knowledge</strong>」をダブルクリック</li>
+              <li>中に <strong>4つのフォルダ</strong> が並んでいる：
+                <ul style="margin: 4px 0 0 16px; font-size: 0.88rem;">
+                  <li>runbird-welfare-knowledge（福祉）</li>
+                  <li>runbird-it-knowledge（IT営業）</li>
+                  <li>runbird-hr-knowledge（人事）</li>
+                  <li>runbird-contracts（契約書）</li>
+                </ul>
+              </li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>4つフォルダがあれば、今日の「土台作り」は完了です ✅
+            </div>
+            <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; margin-top: 8px; font-size: 0.85rem;">
+              <strong>🆘 出てこない場合：</strong>すぐ講師（鈴木 or 河合さん）に手を挙げてください。一緒に直します。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>⑤ 「自分専用メモ置き場（_local）」も自動でできているか確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>上の4つのフォルダのうち、どれでもいいので <strong>ダブルクリックで中に入る</strong></li>
+              <li>「<strong>_local</strong>」（アンダースコア＋local）という名前のフォルダがある</li>
+              <li>中に「<strong>README.md</strong>」というファイルがある</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>これが「あなた専用のメモ置き場」。ここに何を置いても他人には絶対見えません ✅
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check">
+        <div class="check-title">✅ Part 2 終了チェック（全部✅になったら次へ）</div>
+        <ul>
+          <li>エクスプローラーで <code>C:\git\runbird-knowledge\</code> を開ける</li>
+          <li>そこに <strong>4つのフォルダ</strong> が並んでいる</li>
+          <li>4つのうちどれかを開くと中に <code>_local</code> フォルダがある</li>
+          <li>古いデスクトップのフォルダは <strong>まだ消さない</strong>（1週間様子見）</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ========== PART 3 ========== -->
+    <article class="part part-3">
+      <div class="part-head">
+        <span class="part-num">PART 3</span>
+        <span class="part-time">25-45分</span>
+      </div>
+      <h3>🪟 1ウィンドウ統合：<code>.code-workspace</code></h3>
+      <p class="part-why">
+        <strong>なぜ「1ウィンドウ」にまとめるのか？</strong><br>
+        Cursorを開くと「<strong>机が1つ</strong>」画面に広がるイメージ。<br>
+        AIは <strong>その机に置かれているノート（フォルダ）しか見えません</strong>。<br>
+        別の机に置いてあるノートは「存在すら知らない」状態になります。
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 18px;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: #991b1b; letter-spacing: 0.1em; margin-bottom: 10px;">❌ NG：今までの開き方</div>
+          <p style="font-size: 0.92rem; margin-bottom: 10px; font-weight: 600;">4つのフォルダを別々のCursorウィンドウで開く</p>
+          <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;">机が4つに分かれている状態。AIから見ると…</p>
+          <ul style="font-size: 0.85rem; padding-left: 18px; color: #7f1d1d; line-height: 1.7;">
+            <li>「契約書どうなってた？」と聞いても、<strong>今の机のノートしか探さない</strong></li>
+            <li>別ウィンドウの契約フォルダの情報は <strong>見えない</strong></li>
+            <li>「分かりません」と返ってきたり、間違った答えになる</li>
+            <li>毎回ウィンドウを切り替える手間が発生</li>
+          </ul>
+        </div>
+
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 18px;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: #047857; letter-spacing: 0.1em; margin-bottom: 10px;">✅ OK：今日からの開き方</div>
+          <p style="font-size: 0.92rem; margin-bottom: 10px; font-weight: 600;">4つのフォルダを1つの机に並べる</p>
+          <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;"><code>.code-workspace</code> ファイルをダブルクリックするだけ。すると…</p>
+          <ul style="font-size: 0.85rem; padding-left: 18px; color: #065f46; line-height: 1.7;">
+            <li>1ウィンドウの左サイドバーに <strong>4フォルダが全部並ぶ</strong></li>
+            <li>「契約書どうなってた？」で <strong>4つ全部を横断検索して答える</strong></li>
+            <li>ウィンドウ切り替え不要、視線移動だけで全部見える</li>
+            <li>毎回同じ机のセットがダブルクリックで開く</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info" style="margin-bottom: 16px;">
+        <strong>💡 <code>.code-workspace</code> ファイルとは？</strong><br>
+        「この机にこの4つのフォルダを並べてね」という<strong>設定書</strong>です。<br>
+        ファイル名は <code>runbird.code-workspace</code>。これをダブルクリックするだけで、毎回同じ4 repoが綺麗に並んだ状態でCursorが起動します。
+      </div>
+
+      <h4 style="margin: 24px 0 12px; font-size: 1.05rem;">▼ 全員でやる手順（クリック単位）</h4>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-body">
+            <strong>① 「4フォルダ一気に開く設定ファイル」をダウンロード</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>下のリンクを <strong>クリック</strong>：<br>
+                <a href="https://hokuchan07.github.io/runbird/runbird.code-workspace" style="color: #3b82f6; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.88rem;">https://hokuchan07.github.io/runbird/runbird.code-workspace</a>
+              </li>
+              <li>ブラウザの右下に「ダウンロードしました」と出る（or Edge/Chromeの上に通知が出る）</li>
+              <li>その通知の <strong>「フォルダーを開く」</strong> をクリック → ダウンロードフォルダが開く</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>「<code>runbird.code-workspace</code>」というファイルが <strong>ダウンロード</strong>フォルダに保存される。<br>
+              アイコンは少し見慣れない感じ（Cursorのアイコンか、白っぽい四角）
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>② ダウンロードしたファイルを「ダブルクリック」</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li><code>runbird.code-workspace</code> ファイルを <strong>ダブルクリック</strong></li>
+              <li>「このファイルを開くアプリを選んでください」と出たら <strong>Cursor</strong> を選ぶ</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>Cursorが起動して、左側に <strong>4つのフォルダ名</strong> がズラッと並ぶ。
+            </div>
+            <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; margin-top: 8px; font-size: 0.85rem;">
+              <strong>🆘 もし「Cursorが選べない」場合：</strong>ファイルを右クリック → 「プログラムから開く」 → 「別のプログラムを選択」 → Cursorを選ぶ
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 4つのフォルダが並んでいるか確認</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Cursor画面の <strong>一番左の列</strong>（縦長のリスト）に以下が並んでいればOK：</p>
+            <pre style="margin-top: 8px;">📁 ① 福祉ナレッジ
+📁 ② IT営業ナレッジ
+📁 ③ 人事面談
+📁 ④ 契約書
+📁 ⑤ 社長クローン（権限ある人だけ）</pre>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>これが「<strong>1つの机に4ノートを並べた状態</strong>」。
+              AIに「契約書どうなってた？」と聞くと、4つ全部から探してくれます ✅
+            </div>
+            <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; margin-top: 8px; font-size: 0.85rem;">
+              <strong>🆘 フォルダ名の左に ⚠️マーク が付いている場合：</strong>フォルダの場所と設定書が合っていません。講師が直しますので手を挙げてください。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>④ AIに「横断検索」できるか試す</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>キーボードの <strong>Ctrl + L</strong> を押す（or 画面右側の💬チャットアイコンをクリック）</li>
+              <li>画面の右側にAIチャット欄が開く</li>
+              <li>そこに以下を入力 → Enter：<br>
+                <code style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 4px;">全フォルダから「嶋田社長」を含むファイルを教えて</code>
+              </li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>AIが「以下のファイルに『嶋田社長』が含まれます」と <strong>複数のフォルダから</strong>結果を返してくれる。
+              これが「<strong>横断検索が効いてる状態</strong>」 ✅
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>⑤ 画面の一番下に「同期マーク」が出るか確認</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Cursor画面の <strong>一番下の細い帯</strong>（ステータスバー）の左の方に以下のような表示があります：</p>
+            <pre style="margin-top: 8px;">main  0↓ 0↑</pre>
+            <p style="margin-top: 8px; font-size: 0.88rem; color: #6b7280;">
+              ・<strong>main</strong>＝今いる場所の名前<br>
+              ・<strong>0↓</strong>＝みんなから取り込む変更が0件（最新）<br>
+              ・<strong>0↑</strong>＝みんなに送る変更が0件
+            </p>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ これが見えればOK：</strong>「今は最新で何も送る必要がない」というのが一目でわかる目印 ✅
+            </div>
+            <div style="background: #fef9c3; border-left: 3px solid #eab308; padding: 10px 14px; margin-top: 8px; font-size: 0.85rem;">
+              <strong>💡 ここに数字（例：<code>2↓</code>）が出てたら：</strong>「2件、誰かが更新したのを取り込んでない」という意味。<br>
+              → その数字をクリックすると自動で取り込まれます（これが「<strong>取り込み</strong>＝git pull」と呼ばれる動作）
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="check">
+        <div class="check-title">✅ Part 3 終了チェック（全部✅になったら次へ）</div>
+        <ul>
+          <li>Cursorの左側に <strong>4つのフォルダ</strong>（福祉・IT営業・人事・契約）が並んでいる</li>
+          <li>画面の一番下に <code>main 0↓ 0↑</code> のような表示がある</li>
+          <li>AIチャット（Ctrl+L）で複数フォルダから検索結果が返ってきた</li>
+          <li>明日からは <strong>必ずこの<code>.code-workspace</code>ファイルから起動</strong>する（個別のフォルダを単独で開かない）</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ========== PART 4 NEW: _local/ Setup + Promotion Drill ========== -->
+    <article class="part part-4" style="background: #fffbeb; border-left-color: #f59e0b;">
+      <div class="part-head">
+        <span class="part-num" style="color: #b45309;">PART 4</span>
+        <span class="part-time" style="background: #fef3c7;">40-60分</span>
+        <span style="background: #f59e0b; color: #fff; padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 800;">★全員ハンズオン</span>
+      </div>
+      <h3>📓 個人エリア（<code>_local/</code>）セットアップ + 昇格演習</h3>
+      <p class="part-why">ここまでで全員が同じrepoを見られるようになった。次は <strong>個人で下書きする場所</strong> を全員のPCに作る。<br>これがないと「江口さんがデスクトップに作った」事件が別の形で再発する。</p>
+
+      <!-- ========= Step A ========= -->
+      <h4 style="margin: 24px 0 8px; font-size: 1.05rem; color: #b45309;">▼ Step A：鈴木が4 repoに <code>_local/</code> テンプレを push（5分・全員見学）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 8px; color: #6b7280;">鈴木のターミナルで以下を実行（参加者は画面共有を見るだけ）</p>
+      <pre>cd ~/git
+bash ~/Documents/斗（hishaku）/受託事業/クライアント/RUNBIRD/ITコンサル/Cursor研修/setup_local_areas.sh</pre>
+      <p style="font-size: 0.88rem; color: #6b7280;">→ 4つのrepoに <code>_local/README.md</code> と <code>.gitignore</code> 更新がpushされる</p>
+
+      <!-- ========= Step B ========= -->
+      <h4 style="margin: 28px 0 8px; font-size: 1.05rem; color: #b45309;">▼ Step B：全員で「最新を取り込む」（3分）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 12px;">鈴木が送った設定書を、自分のPCに取り込みます。これが「<strong>取り込み（git pull）</strong>」と呼ばれる動作。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-body">
+            <strong>① Cursor画面の一番下の細い帯（ステータスバー）を見る</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;"><code>0↓</code> だったところが <code>1↓</code> や <code>2↓</code> に変わっているはず。<br>
+            これは「<strong>鈴木が送った変更を、まだ取り込んでいません</strong>」という意味。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>② その「<code>↓</code> マーク」をクリック</strong>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>数秒待つと、数字が <code>0↓</code> に戻る。<br>
+              → これが「最新を取り込み完了」の合図。これでみんなと同じ状態になりました ✅
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 各フォルダに「_local」フォルダが出現したか確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Cursor左サイドバーの「① 福祉ナレッジ」などを <strong>展開（▶をクリック）</strong></li>
+              <li><strong><code>_local</code></strong> という名前のフォルダが現れる</li>
+              <li>その中の <strong><code>README.md</code></strong> をクリックして開く</li>
+              <li>「ここは個人エリア（自主練ノート）です」と書かれている</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>これで「自分専用のメモ置き場」が4 repo全部に作られました ✅
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========= Step C ========= -->
+      <h4 style="margin: 28px 0 8px; font-size: 1.05rem; color: #b45309;">▼ Step C：自分専用のメモを試しに作る（5分）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 12px;"><strong>「ここに置いたら本当に自分だけが見える」</strong>のを体感してください。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-body">
+            <strong>① <code>_local</code> フォルダの中に新しいファイルを作る</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>「② IT営業ナレッジ」を展開 → 中の「<code>_local</code>」を <strong>右クリック</strong></li>
+              <li>メニューが出る → 「<strong>New File...</strong>」（or「新しいファイル」）をクリック</li>
+              <li>ファイル名を入力：<code>test_江口メモ.md</code>（自分の名前に変えてOK）</li>
+              <li>Enter</li>
+            </ol>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>② 中身を適当に書く</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">右側にファイルが開くので、何でもいいので書く：</p>
+            <pre>これは私の個人メモです。
+江口です。試しに書いてみました。</pre>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>キーボードの <strong>Ctrl + S</strong> で保存</li>
+            </ol>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 「これがgitに無視されている」のを目で確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Cursor左サイドバーの一番左にある <strong>「枝分かれ」みたいなアイコン</strong>（ソース管理）をクリック</li>
+              <li>普通ならファイルを変更すると「変更されたファイル一覧」に出てくる</li>
+              <li>でも、今作った <code>test_江口メモ.md</code> は <strong>出てこない</strong></li>
+            </ol>
+            <div style="background: #fef3c7; border-left: 3px solid #f59e0b; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ ここで実感してほしいこと：</strong>このファイルは <strong>絶対に他の人に共有されません</strong>。<br>
+              逆に言うと、PCが壊れたら消えます。本当に大事なものは共通エリアに置く。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========= Step D ========= -->
+      <h4 style="margin: 28px 0 8px; font-size: 1.05rem; color: #b45309;">▼ Step D：昇格演習 — メモを「全社員に共有」してみる（5分）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 12px;">先ほど作った自分専用メモを、共通エリアに移動して全社員に共有してみます。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-body">
+            <strong>① ファイルを共通エリアにドラッグ</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li><code>_local/test_江口メモ.md</code> を <strong>マウスでドラッグ</strong></li>
+              <li>同じrepo内の <code>articles/2026-05/</code> フォルダの上で <strong>離す</strong>
+                <ul style="margin: 4px 0 0 16px; font-size: 0.85rem;">
+                  <li>※ <code>articles/2026-05/</code> が無ければ、<code>articles</code> を右クリック → New Folder → <code>2026-05</code> を作る</li>
+                </ul>
+              </li>
+              <li>「Move」or「移動」を確認</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>ファイルが <code>_local/</code> から <code>articles/2026-05/</code> に移動。
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>② ファイル名を整える</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>移動したファイルを <strong>右クリック</strong> → 「Rename」</li>
+              <li>ファイル名を <code>20260522_テスト_江口.md</code> に変更（YYYYMMDD_タイトル_作者の順）</li>
+            </ol>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 中身を「他の人が読む前提」で書き直す</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">「自分用のメモ」のままだと全社員に共有されると恥ずかしいので、ちょっと整えます：</p>
+            <pre># テスト共有：江口の自主練メモ
+
+研修で _local から共通エリアに昇格させる演習用ファイルです。
+このファイルは後で削除します。</pre>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Ctrl + S で保存</li>
+            </ol>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>④ 「全社員に送る」をCursorのボタンでやる（commit + push）</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>左サイドバーの <strong>「枝分かれ」アイコン</strong>（ソース管理）をクリック</li>
+              <li>「変更」のところに <code>20260522_テスト_江口.md</code> が出ている</li>
+              <li>そのファイル名の右の <strong>「+」マーク</strong> をクリック<br>
+                <span style="color: #6b7280; font-size: 0.85rem;">→ これが「これを送ります」と選ぶ動作（git add）</span>
+              </li>
+              <li>上のメッセージ欄に <code>テスト昇格：江口の自主練ノート</code> と入力</li>
+              <li><strong>「コミット」ボタン</strong> をクリック<br>
+                <span style="color: #6b7280; font-size: 0.85rem;">→ これが「ここで一区切り」と記録する動作（git commit）</span>
+              </li>
+              <li>続けて <strong>「変更の同期」ボタン</strong>（または ↑マーク）をクリック<br>
+                <span style="color: #6b7280; font-size: 0.85rem;">→ これが「みんなに送る」動作（git push）</span>
+              </li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>ステータスバーが <code>0↓ 0↑</code> に戻る。これで <strong>全社員のPCに届く準備完了</strong> ✅
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>⑤ 隣の人のPCで「届いた」のを確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>隣の人のCursorのステータスバーを見る</li>
+              <li><code>1↓</code> や <code>2↓</code> に数字が増えているはず</li>
+              <li>その数字をクリック（取り込み）</li>
+              <li>左サイドバーの <code>articles/2026-05/</code> を展開</li>
+              <li>あなたが昇格させたファイルが見える！</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>これが「<strong>共通エリアに置く＝全社員に共有される</strong>」の体感 ✅<br>
+              これからの日々の運用：「_localで下書き → 整ったら昇格 → みんなで共有」
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========= Cleanup ========= -->
+      <h4 style="margin: 28px 0 8px; font-size: 1.05rem; color: #b45309;">▼ Step E：演習ファイルを片付ける（2分）</h4>
+      <p style="font-size: 0.92rem;">演習で作ったテストファイルは本番ナレッジを汚すので、最後に全員で削除します。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-body">
+            <strong>① 自分が作ったテストファイルを削除</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li><code>articles/2026-05/20260522_テスト_◯◯.md</code> を <strong>右クリック</strong></li>
+              <li>「Delete」 → 「Move to Trash」</li>
+            </ol>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-body">
+            <strong>② 削除も「全社員に送る」</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>ソース管理タブ（枝分かれアイコン）に削除が「変更」として出ている</li>
+              <li>同じ手順で「+」 → メッセージ <code>演習ファイル削除</code> → コミット → 同期</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>本番repoが綺麗な状態に戻る。<code>_local/</code> 自体は残るので、明日からの下書き場所として使える ✅
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check" style="background: #fef3c7; border-color: #fde68a;">
+        <div class="check-title" style="color: #b45309;">✅ Part 4 終了チェック（全部✅になったら次へ）</div>
+        <ul>
+          <li>4つのフォルダ全部に <code>_local</code> フォルダが現れた</li>
+          <li><code>_local</code> の中に作ったファイルが <strong>ソース管理タブに出ない</strong>（共有されない）のを確認した</li>
+          <li>1回 <strong>昇格演習</strong>（_local → articles → 全社員に送る）をやった</li>
+          <li>隣の人が送ったファイルを「取り込み（↓）」で受け取れた</li>
+          <li>演習で作ったテストファイルを削除して送った</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ========== PART 5 (was Part 4) GitHub Org migration ========== -->
+    <article class="part part-4">
+      <div class="part-head">
+        <span class="part-num">PART 5</span>
+        <span class="part-time">60-72分</span>
+        <span style="background: #10b981; color: #fff; padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 800;">★今日の新規</span>
+      </div>
+      <h3>🔑 GitHub組織メンバー昇格（江口さん・齋藤さん）</h3>
+      <p class="part-why">現状、江口さん・齋藤さんは <strong>Outside Collaborator（外部協力者）</strong>として個別repoに直接追加されている状態。これを <strong>Organization Member（正式メンバー）</strong>に昇格し、チームベースの権限管理に揃える。</p>
+
+      <h4 style="margin: 16px 0 8px;">対象者と権限設計</h4>
+      <table>
+        <thead>
+          <tr><th>お名前</th><th>GitHub</th><th>所属するチーム</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>江口さん</td>
+            <td><code>TakuyaEguchi00</code></td>
+            <td>it-write / hr-input / contracts-read / shimada-clone-read</td>
+          </tr>
+          <tr>
+            <td>齋藤さん</td>
+            <td><code>RyuSaito00</code></td>
+            <td>it-write / contracts-read / shimada-clone-read</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin: 20px 0 12px; font-size: 1.05rem;">▼ 全員でやる手順（クリック単位）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 12px; color: #6b7280;">
+        <strong>※ 江口さん・齋藤さんは本人作業</strong>、他の人は見学 or 自分の作業の続き。
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-body">
+            <strong>① 鈴木が「外部から正社員に変える」スクリプトを実行</strong>（江口さん・齋藤さんは画面共有を見るだけ）
+            <pre>bash ~/Documents/斗（hishaku）/受託事業/クライアント/RUNBIRD/ITコンサル/Cursor研修/github_promotion_commands.sh</pre>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>鈴木のターミナルに「外部扱いを解除しました」「招待メール送りました」と次々表示される。<br>
+              最後に「<strong>招待メールを承諾したらEnterを押してください</strong>」で一旦停止
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>② 江口さん・齋藤さんは「招待メール」を開く</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>自分のメールアプリ（Outlook、Gmail等）を開く<br>
+                <span style="color: #6b7280; font-size: 0.85rem;">※ GitHubに登録したメールアドレスのアプリ</span>
+              </li>
+              <li>受信トレイで <strong>「GitHub」</strong> と検索（送信者が <code>noreply@github.com</code> のメール）</li>
+              <li>件名「<strong>@runbird-inc has invited you to join their organization</strong>」を探す</li>
+              <li><strong>そのメールをクリック</strong>して開く</li>
+            </ol>
+            <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>🆘 メールが見つからない場合：</strong>
+              <ul style="margin: 4px 0 0 18px; font-size: 0.85rem;">
+                <li>迷惑メールフォルダを確認</li>
+                <li>「すべてのメール」「アーカイブ」を確認</li>
+                <li>それでも無ければ講師に申告（鈴木が再送信できます）</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>③ メールの中の「Join @runbird-inc」ボタンをクリック</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>メール本文の中に <strong>緑色の大きなボタン</strong> がある</li>
+              <li>そのボタンをクリック → ブラウザが開く</li>
+              <li>GitHubのページが表示される（ログイン画面が出たらログイン）</li>
+              <li>もう一度 <strong>「Join @runbird-inc」</strong> の確認ボタンが出るのでクリック</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>「Welcome to @runbird-inc」のようなメッセージが表示される。<br>
+              ブラウザのURLが <code>github.com/runbird-inc</code> になる ✅<br>
+              これで「<strong>外部の人扱い → 正式メンバー</strong>」に昇格完了
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>④ 「承諾しました」と鈴木に報告 → スクリプト再開</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>江口さん・齋藤さんが「承諾しました」と声をかける</li>
+              <li>鈴木がターミナルで <strong>Enterキー</strong> を押す</li>
+              <li>「チームに追加しました」と次々表示される</li>
+              <li>「完了」と表示されたら終了</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>江口さんは4つのチームに所属、齋藤さんは3つのチームに所属。<br>
+              これで「<strong>編集していい場所</strong>」「<strong>見るだけの場所</strong>」がはっきり分かれる。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>⑤ Cursorで「ちゃんと動くか」を試す</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Cursorに戻る</li>
+              <li>画面下のステータスバーの <strong>↻（くるくる）マーク</strong>をクリック<br>
+                <span style="color: #6b7280; font-size: 0.85rem;">→ または Ctrl+Shift+P → 「Git: Pull」と入力 → Enter</span>
+              </li>
+              <li>エラーが出ずに <code>0↓ 0↑</code> に戻ればOK</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>エラーなく取り込めれば、正社員として権限が効いている証拠 ✅
+            </div>
+            <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; margin-top: 8px; font-size: 0.85rem;">
+              <strong>🆘 エラーが出る場合：</strong>「Permission denied」や「Authentication required」が出たら講師に申告。
+              GitHubの再ログインで直ります。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info">
+        <strong>💡 なぜこの昇格が必要か</strong><br>
+        ・以前は「<strong>外部の人</strong>」扱いだった → 社員なのに変、リスト管理しにくい<br>
+        ・チームベースで権限管理できなかった → リポジトリが増えるたびに手作業で追加が必要<br>
+        ・<strong>契約書フォルダの権限が「書き換え可」になっていた</strong> → 危険なので「読むだけ」に是正
+      </div>
+
+      <div class="check">
+        <div class="check-title">✅ Part 5 終了チェック（江口さん・齋藤さん用）</div>
+        <ul>
+          <li>招待メールを承諾した（ブラウザで <code>github.com/runbird-inc</code> が見える）</li>
+          <li>Cursorで取り込み（↓）がエラーなく通る</li>
+          <li>「自分はもう外部ではない、正社員扱いになった」と納得した</li>
+          <li>契約書フォルダ（<code>runbird-contracts</code>）は <strong>読めるが書き換えできない</strong>状態（read権限のみ）になっている</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ========== PART 6 (was Part 5) CLAUDE.md + Role ========== -->
+    <article class="part part-5">
+      <div class="part-head">
+        <span class="part-num">PART 6</span>
+        <span class="part-time">72-82分</span>
+      </div>
+      <h3>📜 「AIへの指示書」と「自動同期」を設定する</h3>
+      <p class="part-why">
+        <strong>「自分の編集が齋藤さんに上書きされた」事件を物理的に防ぐ仕組み</strong>を入れます。<br>
+        ・朝9時に <strong>自動で最新を取り込む</strong>（取り込み忘れを防ぐ）<br>
+        ・夜20時に <strong>自動で全社員に送る</strong>（送り忘れを防ぐ）<br>
+        → 編集する時間帯が分散するので、そもそも「ぶつかる」ことが起きなくなる
+      </p>
+
+      <h4 style="margin: 24px 0 12px; font-size: 1.05rem;">▼ 役割（ロール）の決定</h4>
+      <table>
+        <thead>
+          <tr><th>ロール</th><th>該当する人</th><th>朝の取り込み</th><th>夜の送信</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>admin</strong></td><td>鈴木</td><td>✅ 自動</td><td>❌ 手動（判断者）</td></tr>
+          <tr style="background: #fffbeb;"><td><strong>editor</strong></td><td><strong>江口・齋藤・河合・前田</strong></td><td>✅ 自動（朝9時）</td><td>✅ 自動（夜20時）</td></tr>
+          <tr><td><strong>viewer</strong></td><td>嶋田社長</td><td>✅ 自動</td><td>❌ 書き込まない</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin: 28px 0 12px; font-size: 1.05rem;">▼ 全員でやる手順（クリック単位）</h4>
+      <p style="font-size: 0.92rem; margin-bottom: 12px; color: #6b7280;">
+        ※ editorの人（江口・齋藤・河合・前田）が対象。viewerの嶋田社長は鈴木が後日個別設定。
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-body">
+            <strong>① PowerShellを開く</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Windowsキーを押す → 「<strong>powershell</strong>」と入力</li>
+              <li>「Windows PowerShell」をクリック</li>
+            </ol>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>Part 2でやったのと同じ黒い画面が開く。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>② 「自分はeditorです」と書いたファイルを作る</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">下を黒い画面にコピペ → Enter：</p>
+            <pre>"editor" | Out-File -Encoding ascii ~/.runbird-role</pre>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>「<code>.runbird-role</code>」というファイルが自分のPCに作られる。<br>
+              中身に <code>editor</code> という1単語が書かれている。これが「自分の役割証明書」。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>③ 「朝9時と夜20時に自動でやって」の設定を作る</strong>
+            <p style="margin-top: 8px; font-size: 0.9rem;">下を黒い画面にコピペ → Enter：</p>
+            <pre>cd C:\git\runbird-knowledge\runbird-it-knowledge
+.\scripts\auto-sync\setup-win.ps1</pre>
+            <div style="background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなります：</strong>「タスクを登録しました」とメッセージが出る。<br>
+              これでWindowsが「朝9時と夜20時に自動で同期する」と覚える。
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-body">
+            <strong>④ 自動タスクが登録されたか目で確認</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Windowsキーを押す → 「<strong>タスクスケジューラ</strong>」と入力</li>
+              <li>「タスクスケジューラ」アプリをクリック</li>
+              <li>左の「タスクスケジューラ ライブラリ」をクリック</li>
+              <li>右の一覧に以下が並んでいるか確認：
+                <ul style="margin: 4px 0 0 16px; font-size: 0.88rem;">
+                  <li><code>RunbirdITKnowledge_AutoPull</code>（朝9時の取り込み）</li>
+                  <li><code>RunbirdITKnowledge_AutoCommitPush</code>（夜20時の送信）</li>
+                </ul>
+              </li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>2つのタスクが「準備完了」状態になっていれば自動同期が有効 ✅<br>
+              これで明日の朝、Cursorを開く前にWindowsが勝手に最新を取り込んでくれる。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h4 style="margin: 32px 0 12px; font-size: 1.05rem;">▼ CLAUDE.md（AIへの指示書）の中身を見てみる</h4>
+      <div class="info" style="margin-bottom: 16px;">
+        <strong>💡 CLAUDE.md って何？</strong><br>
+        各フォルダの一番上にある「<strong>監督から選手への試合前指示書</strong>」。<br>
+        AIはフォルダで何かするたびに、必ずこれを読んでから動きます。<br>
+        例えば「ファイルを <code>articles/2026-05/</code> に保存して」「ファイル名は <code>YYYYMMDD_タイトル.md</code> で」のようなルールが書かれている。<br>
+        → これが効いてるから、AIが想定通りの場所に保存してくれる。
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-body">
+            <strong>① 各repoのCLAUDE.mdを開いて中身を読む</strong>
+            <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9rem; line-height: 1.9;">
+              <li>Cursorの左サイドバーで「② IT営業ナレッジ」を展開</li>
+              <li>一番上の <strong><code>CLAUDE.md</code></strong> をクリック</li>
+              <li>右側に内容が表示される → ザッと読んで「こういうルールが書かれているんだな」と理解</li>
+              <li>同じことを「① 福祉」「③ 人事」「④ 契約書」でも繰り返す</li>
+            </ol>
+            <div style="background: #ecfdf5; border-left: 3px solid #10b981; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
+              <strong>→ こうなったらOK：</strong>4つのrepo全部にCLAUDE.mdがあることを目視確認 ✅<br>
+              中身は今読まなくてOK。「ここにルールが書かれている」と知っているだけで十分。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check">
+        <div class="check-title">✅ Part 6 終了チェック（全部✅になったら次へ）</div>
+        <ul>
+          <li>PowerShellで <code>.runbird-role</code> ファイルを作った（中身は <code>editor</code>）</li>
+          <li><code>setup-win.ps1</code> を実行した</li>
+          <li>タスクスケジューラに <code>AutoPull</code> と <code>AutoCommitPush</code> が登録されている</li>
+          <li>4つのrepo全部に <code>CLAUDE.md</code> があることを目で確認した</li>
+          <li>明日の朝、自動で同期されることを理解した</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ========== PART 7 (was Part 6) AI Patterns ========== -->
+    <article class="part part-6">
+      <div class="part-head">
+        <span class="part-num">PART 7</span>
+        <span class="part-time">82-90分</span>
+      </div>
+      <h3>💬 AIへの聞き方5パターン + 持ち帰り</h3>
+      <p class="part-why">構造が整ったら、あとは <strong>聞き方</strong>。よく使う順に5パターン。</p>
+
+      <div class="pattern-card">
+        <div><span class="pattern-num">⭐ 最頻出</span> <span class="pattern-name">パターン1：@ファイル指定</span></div>
+        <pre>@契約書テンプレ_20260301.md を参考に、サンライズ銀行向けに書き換えて</pre>
+        <p style="font-size: 0.88rem; color: #6b7280;">→ AIが該当ファイルだけを正確に読む。曖昧な指示より精度が3段階上がる。</p>
+      </div>
+
+      <div class="pattern-card">
+        <div><span class="pattern-num">2</span> <span class="pattern-name">@web で最新情報取得</span></div>
+        <pre>@web で「省力化補助金 第8回 公募要領」を調べて要点まとめて</pre>
+        <p style="font-size: 0.88rem; color: #6b7280;">→ ネット検索結果を踏まえて答える。古い情報の混入を防ぐ。</p>
+      </div>
+
+      <div class="pattern-card">
+        <div><span class="pattern-num">3</span> <span class="pattern-name">「めんどくさいからやって」丸投げ</span></div>
+        <pre>このフォルダ、ぐちゃぐちゃで何がどこにあるかわからない。
+めんどくさいから整理して、フォルダ構造も提案して</pre>
+        <p style="font-size: 0.88rem; color: #6b7280;">→ AIがフォルダ構造を提案。叩き台ができるので人の判断が10倍速くなる。</p>
+      </div>
+
+      <div class="pattern-card">
+        <div><span class="pattern-num">4</span> <span class="pattern-name">保存先指定（嶋田社長専用機能）</span></div>
+        <pre>今日の江口の面談記録、人事に保存して</pre>
+        <p style="font-size: 0.88rem; color: #6b7280;">→ <code>人事/20260522_江口面談.md</code> が自動生成（.cursor/rules 設定済み）</p>
+      </div>
+
+      <div class="pattern-card">
+        <div><span class="pattern-num">5</span> <span class="pattern-name">「筋が通ってない時はNOを返して」</span></div>
+        <p style="font-size: 0.88rem; color: #6b7280;">CLAUDE.mdに事前記載済み。AIが理由なく賛成しない。経営判断ログと照合してNOを返す。「イエスボス」を防ぐ。</p>
+      </div>
+    </article>
+
+    <!-- ========== TAKEAWAY ========== -->
+    <article class="part" style="background: #1f2937; color: #fff; border: none;">
+      <div class="part-head">
+        <span class="part-num" style="color: #fbbf24;">TAKEAWAY</span>
+      </div>
+      <h3 style="color: #fff;">🎁 持ち帰り4つだけ</h3>
+      <ol style="margin-top: 16px; padding-left: 24px; font-size: 1.05rem; line-height: 2;">
+        <li><strong>触る前に <code style="background: #374151; color: #fbbf24;">git pull</code></strong>（ステータスバーの↓を見る）</li>
+        <li><strong>編集したら <code style="background: #374151; color: #fbbf24;">git commit + push</code></strong>（夜20時に自動でも走る）</li>
+        <li><strong>下書きは <code style="background: #374151; color: #fbbf24;">_local/</code>、完成したら共通エリアに昇格</strong>（迷ったら _local/）</li>
+        <li><strong>AIに頼む時は <code style="background: #374151; color: #fbbf24;">@ファイル名</code> で範囲指定</strong>（精度3段階アップ）</li>
+      </ol>
+
+      <h4 style="color: #fbbf24; margin: 28px 0 12px; font-size: 1rem;">困ったとき</h4>
+      <p style="font-size: 0.95rem;">
+        ✉️ ChatWork：鈴木（株式会社斗）<br>
+        🆘 緊急時：Zoom画面共有30分以内対応<br>
+        💬 日常質問：河合さん経由
+      </p>
+    </article>
+
+    <!-- ========== FINAL CHECK ========== -->
+    <article class="part" style="border-left-color: #fbbf24;">
+      <div class="part-head">
+        <span class="part-num" style="color: #d97706;">FINAL CHECK</span>
+      </div>
+      <h3>✅ 研修終了時セルフチェック</h3>
+      <p class="part-why">全項目 ☐ → ☑ になれば研修完了。1つでも残ったらその場で個別フォロー。</p>
+
+      <div class="check" style="background: #fffbeb; border-color: #fde68a;">
+        <ul>
+          <li><code>.code-workspace</code> ダブルクリックで4 repoが1ウィンドウに並ぶ</li>
+          <li>ステータスバー <code>main 0↓ 0↑</code> で同期状態がわかる</li>
+          <li><code>~/.runbird-role</code> ファイルにロールが書かれている</li>
+          <li>TaskScheduler に自動pull（editorなら自動pushも）が登録されている</li>
+          <li>各repo（4本）にCLAUDE.mdがある</li>
+          <li><strong>各repo内に <code>_local/</code> フォルダがある（個人エリアの存在を理解）</strong></li>
+          <li><strong>「共通エリア vs <code>_local/</code>」の使い分けが言える</strong></li>
+          <li><strong>個人 → 共通の昇格フロー（5ステップ）を理解した</strong></li>
+          <li>AIに「@ファイル名」で範囲指定できる</li>
+          <li>（江口さん・齋藤さん）<code>runbird-inc</code> の正式メンバーになっている</li>
+          <li>困ったときの連絡先（鈴木 ChatWork）を把握している</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  <strong>RUNBIRD Cursor運用安定化研修 配布資料</strong><br>
+  2026年5月22日（金）｜株式会社斗 鈴木<br>
+  関連資料: <a href="https://hokuchan07.github.io/runbird/" style="color: #3b82f6;">hokuchan07.github.io/runbird/</a>
+</footer>
+
+</body>
+</html>
