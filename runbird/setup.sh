@@ -73,14 +73,51 @@ curl -sL https://hokuchan07.github.io/runbird/sync.sh -o "$SYNCSCRIPT"
 chmod +x "$SYNCSCRIPT"
 echo "[OK] sync.sh をダウンロード → $SYNCSCRIPT"
 
-# 5. crontab 登録
-TMP_CRON=$(mktemp)
-crontab -l 2>/dev/null | grep -v ".runbird/sync.sh" > "$TMP_CRON" || true
-echo "5 6 * * * $SYNCSCRIPT pull" >> "$TMP_CRON"
-echo "0 20 * * * $SYNCSCRIPT push" >> "$TMP_CRON"
-crontab "$TMP_CRON"
-rm "$TMP_CRON"
-echo "[OK] crontab 登録: 朝6:05 pull / 夜20:00 push"
+# 5. launchd 登録（crontab ではなく launchd を使う = スリープ中の予定が起床時に走る）
+LAUNCH_DIR=~/Library/LaunchAgents
+mkdir -p "$LAUNCH_DIR"
+
+# 既存の crontab 登録があれば削除（過去版の名残）
+crontab -l 2>/dev/null | grep -v ".runbird/sync.sh" | crontab - 2>/dev/null || true
+
+create_plist() {
+  local LABEL="$1"
+  local MODE="$2"
+  local HOUR="$3"
+  local MINUTE="$4"
+  local PLIST="$LAUNCH_DIR/$LABEL.plist"
+
+  cat > "$PLIST" <<PLIST_EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>$LABEL</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>$SYNCSCRIPT</string>
+        <string>$MODE</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>$HOUR</integer>
+        <key>Minute</key><integer>$MINUTE</integer>
+    </dict>
+    <key>StandardOutPath</key><string>$LOGDIR/launchd.log</string>
+    <key>StandardErrorPath</key><string>$LOGDIR/launchd.error.log</string>
+</dict>
+</plist>
+PLIST_EOF
+
+  # 既存ロードを解除してから再ロード
+  launchctl unload "$PLIST" 2>/dev/null || true
+  launchctl load   "$PLIST"
+}
+
+create_plist "com.runbird.sync.pull" "pull" 6  5
+create_plist "com.runbird.sync.push" "push" 20 0
+echo "[OK] launchd 登録: 朝6:05 pull / 夜20:00 push（スリープ中は次回起動時に自動キャッチアップ）"
 
 # 6. 即実行テスト
 printf "\n${GREEN}=== 動作テスト実行中... ===${NC}\n"

@@ -69,7 +69,7 @@ New-Item -ItemType Directory -Path $syncDir, $logDir -Force | Out-Null
 Invoke-RestMethod -Uri 'https://hokuchan07.github.io/runbird/sync.ps1' -OutFile $syncScript
 Write-Host "[OK] sync.ps1 をダウンロード → $syncScript"
 
-# 5. Task Scheduler 登録
+# 5. Task Scheduler 登録（スリープ後の自動キャッチアップ対応）
 Get-ScheduledTask -TaskName "RunbirdSync-Pull" -EA SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 Get-ScheduledTask -TaskName "RunbirdSync-Push" -EA SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 
@@ -78,9 +78,12 @@ $a1 = New-ScheduledTaskAction  -Execute $pwsh -Argument "-ExecutionPolicy Bypass
 $a2 = New-ScheduledTaskAction  -Execute $pwsh -Argument "-ExecutionPolicy Bypass -File `"$syncScript`" push"
 $t1 = New-ScheduledTaskTrigger -Daily -At "06:05"
 $t2 = New-ScheduledTaskTrigger -Daily -At "20:00"
-Register-ScheduledTask -TaskName "RunbirdSync-Pull" -Action $a1 -Trigger $t1 -Force | Out-Null
-Register-ScheduledTask -TaskName "RunbirdSync-Push" -Action $a2 -Trigger $t2 -Force | Out-Null
-Write-Host "[OK] Task Scheduler 登録: 朝6:05 pull / 夜20:00 push"
+# StartWhenAvailable: スリープ/シャットダウンで時刻を逃しても、次に PC が利用可能になった時点で走る
+# AllowStartIfOnBatteries: バッテリー駆動時も走る
+$settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
+Register-ScheduledTask -TaskName "RunbirdSync-Pull" -Action $a1 -Trigger $t1 -Settings $settings -Force | Out-Null
+Register-ScheduledTask -TaskName "RunbirdSync-Push" -Action $a2 -Trigger $t2 -Settings $settings -Force | Out-Null
+Write-Host "[OK] Task Scheduler 登録: 朝6:05 pull / 夜20:00 push（スリープ中は次回起動時に自動キャッチアップ）"
 
 # 6. 即実行テスト
 Write-Host ""
