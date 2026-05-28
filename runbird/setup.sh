@@ -16,12 +16,15 @@ SYNCDIR=~/.runbird
 SYNCSCRIPT="$SYNCDIR/sync.sh"
 LOGDIR=~/Library/Logs/runbird-sync
 
-# 1. Workspace 確認
+# 1. Workspace 確認（なければ自動構築）
 if [ ! -d "$WORKSPACE" ]; then
-  printf "${RED}[ERROR]${NC} workspace が見つかりません: $WORKSPACE\n"
-  printf "先に以下を実行してください:\n"
-  printf "  curl -sL https://hokuchan07.github.io/runbird/runbird-setup.sh | bash\n"
-  exit 1
+  printf "${YELLOW}[INFO]${NC} workspace 未構築 → runbird-setup.sh を先に実行します\n\n"
+  curl -sL https://hokuchan07.github.io/runbird/runbird-setup.sh | bash
+  echo ""
+  if [ ! -d "$WORKSPACE" ]; then
+    printf "${RED}[ERROR]${NC} workspace 構築に失敗しました。GitHub Org 招待を承認しているか確認してください。\n"
+    exit 1
+  fi
 fi
 
 # 2. core.pager 設定（git log で less ハング回避）

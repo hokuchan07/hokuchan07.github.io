@@ -6,17 +6,24 @@ $ErrorActionPreference = "Stop"
 Write-Host "=== RUNBIRD 自動同期セットアップ (Windows) ===" -ForegroundColor Cyan
 Write-Host ""
 
-# 1. Workspace 検出
+# 1. Workspace 検出（なければ自動構築）
 $workspace = $null
 $candidates = @("C:\git\runbird-knowledge", "$HOME\Documents\runbird-knowledge")
 foreach ($c in $candidates) {
     if (Test-Path $c) { $workspace = $c; break }
 }
 if (-not $workspace) {
-    Write-Host "[ERROR] workspace が見つかりません" -ForegroundColor Red
-    Write-Host "先に runbird-setup.ps1 を実行してください:"
-    Write-Host "  irm 'https://hokuchan07.github.io/runbird/runbird-setup.ps1' | iex"
-    return
+    Write-Host "[INFO] workspace 未構築 → runbird-setup.ps1 を先に実行します" -ForegroundColor Yellow
+    Write-Host ""
+    Invoke-RestMethod -Uri 'https://hokuchan07.github.io/runbird/runbird-setup.ps1' | Invoke-Expression
+    Write-Host ""
+    foreach ($c in $candidates) {
+        if (Test-Path $c) { $workspace = $c; break }
+    }
+    if (-not $workspace) {
+        Write-Host "[ERROR] workspace 構築に失敗しました。GitHub Org 招待を承認しているか確認してください。" -ForegroundColor Red
+        return
+    }
 }
 
 # 2. core.pager 設定（git log で less ハング回避）
