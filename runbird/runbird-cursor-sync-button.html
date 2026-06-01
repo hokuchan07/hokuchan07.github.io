@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同期ボタンの使い方（図解）</title>
+<style>
+  :root{ --bar:#2563eb; --ink:#111827; --sub:#6b7280; --line:#e5e7eb; --red:#dc2626; --green:#16a34a; }
+  *{ box-sizing:border-box; }
+  body{ font-family:-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif; color:var(--ink);
+        max-width:880px; margin:24px auto; padding:0 18px; line-height:1.7; background:#f8fafc;}
+  h1{ font-size:24px; margin:0 0 4px;}
+  .lead{ color:var(--sub); margin:0 0 24px;}
+  h2{ font-size:18px; margin:30px 0 12px; padding-left:10px; border-left:5px solid var(--bar);}
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0;
+         box-shadow:0 1px 3px rgba(0,0,0,.04);}
+
+  /* 画面下バーの再現 */
+  .window{ border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; margin:8px 0;}
+  .window-body{ height:90px; background:repeating-linear-gradient(180deg,#fafafa,#fafafa 14px,#f3f4f6 14px,#f3f4f6 28px);
+                display:flex; align-items:center; justify-content:center; color:#cbd5e1; font-size:13px;}
+  .statusbar{ background:var(--bar); color:#fff; display:flex; align-items:center; gap:18px;
+              padding:8px 14px; font-size:14px;}
+  .statusbar .seg{ display:flex; align-items:center; gap:6px; opacity:.92;}
+  .syncbtn{ background:rgba(255,255,255,.18); border-radius:8px; padding:4px 10px; font-weight:700;
+            display:inline-flex; align-items:center; gap:6px; }
+  .syncbtn.warn{ background:var(--red); }
+  .syncbtn.ok{ background:var(--green); }
+  .point{ position:relative;}
+  .callout{ display:inline-block; margin-top:8px; background:#fffbeb; border:1px dashed #f59e0b;
+            color:#92400e; border-radius:8px; padding:4px 10px; font-size:13px; font-weight:700;}
+
+  /* 3ステップの流れ */
+  .flow{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:10px; align-items:center; margin-top:8px;}
+  .step{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px; text-align:center;}
+  .step .badge{ display:inline-block; padding:3px 10px; border-radius:9999px; font-size:12px; font-weight:700; margin-bottom:8px;}
+  .b-red{ background:#fee2e2; color:#991b1b;} .b-blue{ background:#dbeafe; color:#1e40af;} .b-green{ background:#dcfce7; color:#166534;}
+  .pill{ font-size:22px; font-weight:800;}
+  .arrow{ font-size:26px; color:var(--sub); text-align:center;}
+  @media(max-width:680px){ .flow{ grid-template-columns:1fr; } .arrow{ transform:rotate(90deg);} }
+
+  /* 3ルール */
+  .rules{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .rule{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center;}
+  .rule .ico{ font-size:30px;} .rule b{ display:block; margin-top:6px; font-size:15px;}
+  .rule small{ color:var(--sub);}
+  @media(max-width:680px){ .rules{ grid-template-columns:1fr; } }
+
+  .red{ color:var(--red); font-weight:700;}
+  table{ width:100%; border-collapse:collapse; font-size:14px; background:#fff;}
+  th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left;}
+  th{ background:#f9fafb;}
+</style>
+</head>
+<body>
+  <h1>🔄 同期ボタンの使い方（図解）</h1>
+  <p class="lead">書いたナレッジをみんなと共有するためのボタンです。<b>押すだけ</b>。自動同期が裏で止まっても、これで誰でも直せます。</p>
+
+  <h2>① ボタンの場所</h2>
+  <div class="card point">
+    画面の<b>いちばん下の青い帯</b>の左のほう。<code>🔄</code> のとなりの数字が同期ボタンです。
+    <div class="window">
+      <div class="window-body">― エディタ（ここで作業）―</div>
+      <div class="statusbar">
+        <span class="seg">⎇ main</span>
+        <span class="syncbtn warn">🔄 1 ↓ &nbsp; 0 ↑</span>
+        <span class="seg">福祉ナレッジ</span>
+        <span class="seg">⊘ 0 ⚠ 0</span>
+      </div>
+    </div>
+    <span class="callout">⬆ この「🔄 数字」が同期ボタン。クリックする。</span>
+    <p style="margin:10px 0 0;font-size:14px;">
+      <b>↓ の数字</b>＝みんなから<b>受け取る</b>件数 ／ <b>↑ の数字</b>＝自分が<b>共有する</b>件数。<br>
+      <span class="red">どちらかに数字が出ていたら、まだ同期できていないサインです。</span>
+    </p>
+  </div>
+
+  <h2>② 押すとどうなる（流れ）</h2>
+  <div class="card">
+    <div class="flow">
+      <div class="step">
+        <span class="badge b-red">いま</span>
+        <div class="pill">🔄 1↓ 0↑</div>
+        <small>未同期の数字が出ている</small>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <span class="badge b-blue">クリック</span>
+        <div class="pill">🔄 …</div>
+        <small>受け取り＋共有が走る</small>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <span class="badge b-green">完了</span>
+        <div class="pill" style="color:var(--green)">🔄 0↓ 0↑</div>
+        <small>数字が消えたら最新！</small>
+      </div>
+    </div>
+    <p style="margin:12px 0 0;font-size:14px;"><b>数字が 0 になれば成功</b>です。むずかしい操作はありません。</p>
+  </div>
+
+  <h2>③ 覚えるルールは3つだけ</h2>
+  <div class="rules">
+    <div class="rule"><div class="ico">🌅</div><b>朝、開いたら押す</b><small>みんなの最新を受け取る</small></div>
+    <div class="rule"><div class="ico">🏠</div><b>帰る前に押す</b><small>自分の作業を共有する</small></div>
+    <div class="rule"><div class="ico">🔢</div><b>数字が出たら押す</b><small><span class="red">溜めない・放置しない</span></small></div>
+  </div>
+
+  <h2>④ こんな表示が出たら</h2>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table>
+      <tr><th>表示</th><th>意味</th><th>どうする</th></tr>
+      <tr><td>🔄 のとなりに数字</td><td>未共有／未受信あり</td><td><b>押す</b></td></tr>
+      <tr><td>Cannot rebase onto multiple branches</td><td>同期がつまずいた<br>（2026/6/1に対策済み）</td><td>一度開き直す。直らなければ<span class="red">鈴木さん／齋藤さんへ連絡</span></td></tr>
+      <tr><td>ぐるぐる回って終わらない</td><td>ネット不調 or 競合</td><td>数分待って再度押す。直らなければ連絡</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:18px;font-size:14px;color:var(--sub)">
+    ※ <span class="red">同期でエラーが出たまま作業を続けない。</span>自己流で git をいじらず、画面を見せて相談してください。
+  </p>
+</body>
+</html>
