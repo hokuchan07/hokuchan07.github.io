@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNBIRD AI活用 役割配置図 ── CursorとClaude Codeの使い分け</title>
+<style>
+  :root{
+    --navy:#0f1f3d; --ink:#1a2233; --sub:#5b6577; --line:#e3e7ef; --bg:#f5f7fb;
+    --max:#6d4aff;      /* 運用者 Claude Max */
+    --maxbg:#efeaff;
+    --exec:#e0a528;     /* 経営 Pro×2 */
+    --execbg:#fdf3da;
+    --cursor:#1f7ae0;   /* 消費者 Cursor */
+    --cursorbg:#e6f1fd;
+    --care:#16a085;     /* 福祉 設計補助のみ */
+    --carebg:#e3f6f1;
+    --off:#9aa3b2;      /* 対象外 */
+    --offbg:#eef0f4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px}
+  /* hero */
+  .hero{background:linear-gradient(135deg,#0f1f3d 0%,#22386b 100%);color:#fff;
+    padding:54px 40px;border-radius:0 0 28px 28px;margin-bottom:46px}
+  .hero .tag{display:inline-block;font-size:12px;letter-spacing:.12em;background:rgba(255,255,255,.16);
+    padding:5px 14px;border-radius:30px;margin-bottom:18px}
+  .hero h1{font-size:30px;font-weight:800;line-height:1.4;margin-bottom:14px}
+  .hero p{font-size:15px;color:#c7d2e6;max-width:760px}
+  .hero .date{margin-top:18px;font-size:12px;color:#8aa0c4}
+  /* section */
+  section{margin-bottom:54px}
+  .kicker{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .kicker .num{width:38px;height:38px;border-radius:11px;background:var(--navy);color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+  .kicker h2{font-size:22px;font-weight:800;color:var(--navy)}
+  .lead{font-size:15px;color:var(--sub);margin:-8px 0 22px 50px}
+  /* core diagram */
+  .core{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;text-align:center}
+  .repo{display:inline-block;background:var(--navy);color:#fff;border-radius:16px;padding:20px 40px;margin-bottom:8px}
+  .repo .t{font-size:18px;font-weight:800}
+  .repo .s{font-size:12.5px;color:#aebbd6;margin-top:4px}
+  .arrows{display:flex;justify-content:center;gap:90px;margin:6px 0 4px}
+  .arrows span{font-size:24px;color:#c0c8d6}
+  .windows{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:8px}
+  .win{flex:1;min-width:240px;max-width:330px;border-radius:16px;padding:22px;text-align:left}
+  .win.cur{background:var(--cursorbg);border:1.5px solid #bcdcff}
+  .win.cc{background:var(--maxbg);border:1.5px solid #d3c6ff}
+  .win h3{font-size:17px;margin-bottom:6px}
+  .win.cur h3{color:var(--cursor)} .win.cc h3{color:var(--max)}
+  .win .role{font-size:12px;font-weight:700;letter-spacing:.04em;opacity:.75;margin-bottom:10px}
+  .win ul{list-style:none;font-size:13.5px;color:#3b465a}
+  .win li{padding-left:18px;position:relative;margin-bottom:5px}
+  .win li::before{content:"▸";position:absolute;left:0;opacity:.5}
+  /* 3col compare */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card h4{font-size:15px;margin-bottom:4px}
+  .card .pos{font-size:11.5px;font-weight:700;color:#fff;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px}
+  .card p{font-size:12.8px;color:var(--sub)}
+  .card .use{font-size:12.5px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:#3b465a}
+  /* principle */
+  .principle{background:linear-gradient(120deg,#fff,#f0f4fb);border:1px solid var(--line);
+    border-left:6px solid var(--exec);border-radius:16px;padding:26px 30px}
+  .principle b{color:var(--navy)}
+  .axis{display:flex;align-items:stretch;gap:0;margin-top:22px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .axis .seg{flex:1;padding:18px 16px;background:#fff}
+  .axis .seg.light{background:var(--cursorbg)}
+  .axis .seg.heavy{background:var(--maxbg)}
+  .axis .seg .lv{font-size:11.5px;font-weight:800;letter-spacing:.05em;margin-bottom:6px}
+  .axis .seg.light .lv{color:var(--cursor)} .axis .seg.heavy .lv{color:var(--max)}
+  .axis .seg .ex{font-size:12.5px;color:var(--sub)}
+  .axis .seg .pl{font-size:12px;font-weight:700;margin-top:8px;color:var(--ink)}
+  /* org */
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;background:#fff;
+    border:1px solid var(--line);padding:7px 13px;border-radius:30px}
+  .dot{width:12px;height:12px;border-radius:50%;flex:none}
+  .org{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px}
+  .top{text-align:center;margin-bottom:8px}
+  .node{display:inline-block;padding:11px 22px;border-radius:12px;font-weight:700;font-size:14px;
+    border:1.5px solid var(--line);background:#fff;position:relative}
+  .node .badge{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;padding:2px 8px;
+    border-radius:20px;margin-left:8px;vertical-align:middle}
+  .b-max{background:var(--max)} .b-exec{background:var(--exec)} .b-cursor{background:var(--cursor)}
+  .b-care{background:var(--care)} .b-off{background:var(--off)}
+  .branch{margin-top:18px}
+  .mgr{border-left:3px solid var(--navy);padding-left:18px;margin-bottom:18px}
+  .mgr-h{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:10px}
+  .grp{margin:0 0 14px 14px}
+  .grp-t{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px;letter-spacing:.03em}
+  .people{display:flex;flex-wrap:wrap;gap:8px}
+  .p{font-size:12.5px;padding:6px 11px;border-radius:9px;border:1px solid var(--line);background:#fbfcfe;display:flex;align-items:center;gap:6px}
+  .p .d{width:9px;height:9px;border-radius:50%;flex:none}
+  .p.max{background:var(--maxbg);border-color:#d3c6ff}
+  .p.exec{background:var(--execbg);border-color:#f3dca0}
+  .p.cursor{background:var(--cursorbg);border-color:#bcdcff}
+  .p.care{background:var(--carebg);border-color:#b5e6db}
+  .p.off{background:var(--offbg);border-color:#dde1e8;color:#7c8596}
+  .done{font-size:9.5px;font-weight:800;color:var(--max);border:1px solid var(--max);border-radius:5px;padding:0 4px;margin-left:2px}
+  /* examples */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .scene{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;gap:14px}
+  .scene .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;flex:none}
+  .scene.cur .ic{background:var(--cursorbg)} .scene.cc .ic{background:var(--maxbg)}
+  .scene.app .ic{background:var(--execbg)}
+  .scene .q{font-size:13.5px;font-weight:700;margin-bottom:5px}
+  .scene .a{font-size:12.5px;color:var(--sub)}
+  .scene .a b{padding:1px 7px;border-radius:6px;font-size:11.5px}
+  .scene.cur .a b{background:var(--cursorbg);color:var(--cursor)}
+  .scene.cc .a b{background:var(--maxbg);color:var(--max)}
+  .scene.app .a b{background:var(--execbg);color:#b9831a}
+  /* roadmap */
+  .road{position:relative;padding-left:34px}
+  .road::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .step{position:relative;margin-bottom:22px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .step::before{content:"";position:absolute;left:-29px;top:22px;width:16px;height:16px;border-radius:50%;background:var(--navy);border:3px solid #fff;box-shadow:0 0 0 2px var(--navy)}
+  .step .ph{font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--navy);margin-bottom:5px}
+  .step h4{font-size:15.5px;margin-bottom:6px}
+  .step p{font-size:13px;color:var(--sub)}
+  .step .when{font-size:11.5px;color:#fff;background:var(--navy);padding:3px 10px;border-radius:20px;float:right;margin-top:-26px}
+  /* now box */
+  .now{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-bottom:24px}
+  .now h3{font-size:14px;color:var(--sub);font-weight:700;margin-bottom:14px;letter-spacing:.04em}
+  .now table{width:100%;border-collapse:collapse;font-size:13px}
+  .now td{padding:8px 6px;border-bottom:1px solid var(--line)}
+  .now td:first-child{font-weight:700;width:130px}
+  .now .ok{color:var(--max);font-weight:700}
+  .now .add{color:var(--exec);font-weight:700}
+  .foot{text-align:center;font-size:12px;color:#9aa3b2;margin-top:40px}
+  @media(max-width:760px){.three,.ex-grid{grid-template-columns:1fr}.axis{flex-direction:column}.arrows{gap:40px}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap" style="padding:0">
+    <span class="tag">RUNBIRD ／ AI活用 役割配置 提案</span>
+    <h1>CursorとClaude Code、誰がどう使うか<br>── 組織図に役割を配置する</h1>
+    <p>結論：本体は「ツール」ではなく <b style="color:#fff">会社が貯めるナレッジ（GitHubのMarkdown）</b>。
+       Cursorはそれを<b style="color:#9fc6ff">引く窓</b>、Claude Codeは<b style="color:#c9b8ff">貯めて・まとめる頭脳</b>。
+       プランは役職の高さではなく「使い方の強度」で決める。</p>
+    <div class="date">2026-06-03 ／ 株式会社斗（hishaku）作成</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1 -->
+  <section>
+    <div class="kicker"><div class="num">1</div><h2>CursorとClaude Codeをどう使い分けるか</h2></div>
+    <p class="lead">この2つは「対立」ではなく「層が違う」。同じナレッジの上に、用途の違う2つの窓を付ける。</p>
+
+    <div class="core">
+      <div class="repo">
+        <div class="t">📚 社内SaaSの本体 ＝ ナレッジ（GitHubのMarkdown）</div>
+        <div class="s">商談記録・FAQ・組織・売上…を蓄積。これが会社の資産</div>
+      </div>
+      <div class="arrows"><span>↑ 引く</span><span>↑ 貯める・まとめる</span></div>
+      <div class="windows">
+        <div class="win cur">
+          <div class="role">窓A ／ 知識を引く</div>
+          <h3>Cursor</h3>
+          <ul>
+            <li>「うちは〇〇についてどんな知見ある？」をGUIで質問</li>
+            <li>リポジトリ全体を検索（@Codebase）</li>
+            <li>ターミナル不要 → 非エンジニアでも使える</li>
+            <li>＝ <b>知識量の差を埋める消費者向け</b></li>
+          </ul>
+        </div>
+        <div class="win cc">
+          <div class="role">窓B ／ 貯める・まとめる</div>
+          <h3>Claude Code</h3>
+          <ul>
+            <li>録音・メール・CSVを自動で整形してMD化</li>
+            <li>横断要約・ツール作成・git・自動化（スキル/hook）</li>
+            <li>多案件を並列で回す＝<b>運用者の頭脳・OS</b></li>
+            <li>＝ <b>知識を作る・回す側向け</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="three">
+      <div class="card">
+        <h4>Cursor</h4>
+        <span class="pos" style="background:var(--cursor)">コードを書く現場＋知識を引く窓</span>
+        <p>AIエディタ。@Codebaseで蓄積を検索。GUIで誰でも使える。</p>
+        <div class="use">向く人：知識を<b>引く</b>大多数のスタッフ</div>
+      </div>
+      <div class="card">
+        <h4>Claude Code</h4>
+        <span class="pos" style="background:var(--max)">仕事をやり切る自律エージェント</span>
+        <p>ファイル操作・コマンド・git・MCP連携・並列処理まで自律実行。</p>
+        <div class="use">向く人：知識を<b>貯める・回す</b>運用者</div>
+      </div>
+      <div class="card">
+        <h4>Claudeアプリ（claude.ai）</h4>
+        <span class="pos" style="background:var(--exec)">出先の相談相手</span>
+        <p>PCを触らない壁打ち・PDF分析・スマホでの戦略相談。</p>
+        <div class="use">向く人：<b>経営・出先</b>での思考整理</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="kicker"><div class="num">2</div><h2>プランは「役職」でなく「使い方の強度」で決める</h2></div>
+    <p class="lead">社長だから一番高いMax、は間違い。AIをどれだけ自律的・連続的に酷使するかで決める。</p>
+
+    <div class="principle">
+      <b>判断軸：</b> 「相談・閲覧・壁打ち」中心なら <b>Pro で十分</b>。
+      「コードを書く・投入パイプラインを回す・一日中Opusを走らせる」運用者だけ <b>Max（約$100/月）</b>。
+      使わない機能に課金しない＝<b>過剰投資を避ける</b>。
+      <div class="axis">
+        <div class="seg light">
+          <div class="lv">軽い・相談型</div>
+          <div class="ex">知識を引く／戦略の壁打ち／資料要約／出先で相談</div>
+          <div class="pl">→ Cursor／Claude Pro</div>
+        </div>
+        <div class="seg heavy">
+          <div class="lv">重い・運用型</div>
+          <div class="ex">自動で貯める／まとめる／ツール作成／多案件を並列で回す</div>
+          <div class="pl">→ Claude Code（Max）</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="kicker"><div class="num">3</div><h2>組織図 × 役割配置</h2></div>
+    <p class="lead">RUNBIRD組織図（2026-05-27版）に、ティアを色で重ねた。</p>
+
+    <div class="legend">
+      <div class="lg"><span class="dot" style="background:var(--max)"></span>運用者：Claude Max ＋ Cursor</div>
+      <div class="lg"><span class="dot" style="background:var(--exec)"></span>経営：Claude Pro ＋ Cursor Pro</div>
+      <div class="lg"><span class="dot" style="background:var(--cursor)"></span>消費者：Cursor 据え置き</div>
+      <div class="lg"><span class="dot" style="background:var(--care)"></span>福祉：Cursor＋設計補助のみ</div>
+      <div class="lg"><span class="dot" style="background:var(--off)"></span>現場職人：AI運用 対象外</div>
+    </div>
+
+    <div class="org">
+      <div class="top">
+        <div class="node">代表取締役　嶋田 僚平 <span class="badge b-exec">Pro × 2</span></div>
+      </div>
+      <div style="text-align:center;color:#c0c8d6;margin:6px 0">│</div>
+
+      <div class="branch">
+        <div class="mgr">
+          <div class="mgr-h">マネージャー：江口 卓也 <span class="badge b-max" style="font-size:10px">Max</span></div>
+
+          <div class="grp">
+            <div class="grp-t">サブマネージャー：齋藤 立</div>
+            <div class="people" style="margin-bottom:12px">
+              <span class="p max"><span class="d" style="background:var(--max)"></span>齋藤 立（IT中核・Plaud投入）</span>
+            </div>
+
+            <div class="grp-t">IT事業部</div>
+            <div class="people">
+              <span class="p off"><span class="d" style="background:var(--off)"></span>高城 相成（プロフェッショナル）</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>永野 乃輝</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>濱島 和哉</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>下堂薗 遼馬</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>今坂 栄史</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>窪田 裕希</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>伊藤 隆真</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>野上 彰啓</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>岩﨑 由記子</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>本田 智誉</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>高浪 裕人</span>
+            </div>
+            <div class="grp-t" style="margin-top:12px">インサイドセールス事業部</div>
+            <div class="people">
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>佐久間 一彰</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>仲村 玲美</span>
+            </div>
+          </div>
+
+          <div class="grp">
+            <div class="grp-t">サブマネージャー：河合 毅満 <span class="done">Max導入済</span></div>
+            <div class="people">
+              <span class="p max"><span class="d" style="background:var(--max)"></span>河合 毅満（制作/マーケ・推進ペア）</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>深澤 晴乃（制作）</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>阿部 聡太（マーケ）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mgr">
+          <div class="mgr-h">経営企画室</div>
+          <div class="people">
+            <span class="p max"><span class="d" style="background:var(--max)"></span>中村 侑加（推進ペア） <span class="done">Max導入済</span></span>
+            <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>吉村 準平（スペシャリスト）</span>
+            <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>平田 亘</span>
+          </div>
+        </div>
+
+        <div class="mgr">
+          <div class="mgr-h">マネージャー：前田 智美 ／ サブマネージャー：神塚 竜也</div>
+          <div class="grp">
+            <div class="grp-t">福祉事業部（個人情報のため設計補助に限定）</div>
+            <div class="people">
+              <span class="p care"><span class="d" style="background:var(--care)"></span>神塚 竜也</span>
+              <span class="p care"><span class="d" style="background:var(--care)"></span>豊田 秀樹</span>
+              <span class="p care"><span class="d" style="background:var(--care)"></span>須賀 美鈴</span>
+              <span class="p care"><span class="d" style="background:var(--care)"></span>遠藤 友香</span>
+              <span class="p care"><span class="d" style="background:var(--care)"></span>伊藤 瑠菜</span>
+              <span class="p care"><span class="d" style="background:var(--care)"></span>菅野 美友</span>
+            </div>
+            <div class="grp-t" style="margin-top:12px">管理部 ／ 業務部</div>
+            <div class="people">
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>堀河 つばさ</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>中村 一喜</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>藤田 雄太</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>池田 菜々美</span>
+              <span class="p cursor"><span class="d" style="background:var(--cursor)"></span>横田 亜美</span>
+              <span class="p off"><span class="d" style="background:var(--off)"></span>松丸 百合佳（パート）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="kicker"><div class="num">4</div><h2>具体例 ── こういう時はこっち</h2></div>
+    <p class="lead">「誰が・どんな時に・どっちを使うか」をシーンで示す。</p>
+    <div class="ex-grid">
+      <div class="scene cur">
+        <div class="ic">🔎</div>
+        <div><div class="q">営業の永野さん「この業種の商談、過去の勝ちパターンある？」</div>
+        <div class="a"><b>Cursor</b> で @Codebase に質問 → 蓄積された商談ナレッジから即回答。ベテランの暗黙知を新人が引ける。</div></div>
+      </div>
+      <div class="scene cc">
+        <div class="ic">⚙️</div>
+        <div><div class="q">齋藤さん「Plaudの録音600件を分類してナレッジ化したい」</div>
+        <div class="a"><b>Claude Code</b> が自動で文字起こし整形・分類・MD保存・git push まで実行。運用者の自律エージェント。</div></div>
+      </div>
+      <div class="scene app">
+        <div class="ic">💭</div>
+        <div><div class="q">嶋田社長「移動中に来期の事業方針を壁打ちしたい」</div>
+        <div class="a"><b>Claudeアプリ</b> でスマホから戦略相談・PDF要約。社長クローンの対話もここ。</div></div>
+      </div>
+      <div class="scene cur">
+        <div class="ic">📖</div>
+        <div><div class="q">嶋田社長「うちのCTIの導入実績、数字どうだっけ？」</div>
+        <div class="a"><b>Cursor Pro</b> でデスクからナレッジを引く。社長自身が「会社の記憶」に直接アクセス。</div></div>
+      </div>
+      <div class="scene cc">
+        <div class="ic">📊</div>
+        <div><div class="q">中村さん「全事業部の売上を横断集計してダッシュボード化」</div>
+        <div class="a"><b>Claude Code（Max）</b> でツール自作・自動更新。経営企画の運用者として回す。</div></div>
+      </div>
+      <div class="scene cur">
+        <div class="ic">🤝</div>
+        <div><div class="q">福祉の須賀さん「支援記録の書き方の社内ルール確認したい」</div>
+        <div class="a"><b>Cursor</b> でナレッジ参照（※個人情報の実データはAIに入れない＝設計補助に限定）。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="kicker"><div class="num">5</div><h2>現状 → これからの進め方</h2></div>
+
+    <div class="now">
+      <h3>■ 現状</h3>
+      <table>
+        <tr><td>全スタッフ</td><td>Cursor チームプラン 加入済</td></tr>
+        <tr><td>中村・河合</td><td><span class="ok">Claude Max 導入済 ✓</span></td></tr>
+        <tr><td>嶋田社長</td><td>Claude Pro（¥3,000）＋ Cursor Pro（推定）</td></tr>
+        <tr><td>齋藤・江口</td><td><span class="add">Claude Max が未導入 ← ここが穴</span></td></tr>
+      </table>
+    </div>
+
+    <div class="road">
+      <div class="step"><span class="when">即時</span>
+        <div class="ph">STEP 1 ／ 運用者をMaxで揃える</div>
+        <h4>齋藤さん・江口さんに Claude Max を追加</h4>
+        <p>知識を「貯める・まとめる・回す」中核4名（齋藤・江口・中村・河合）をMaxで確定。これでIT側の運用エンジンが揃う。</p>
+      </div>
+      <div class="step"><span class="when">即時</span>
+        <div class="ph">STEP 2 ／ 経営の穴を埋める</div>
+        <h4>嶋田社長＝Claude Pro ＋ Cursor Pro で確定</h4>
+        <p>「足りていない一つ」はMaxではなくPro×2で正解。引く（Cursor）＋戦略の相棒（Claudeアプリ）の両輪を月¥6,000で。</p>
+      </div>
+      <div class="step"><span class="when">1〜2ヶ月</span>
+        <div class="ph">STEP 3 ／ 消費者層に「引く文化」を浸透</div>
+        <h4>IT・IS一般メンバーへ @Codebase 活用の徹底</h4>
+        <p>プラン追加はせずCursor据え置き。「分からなければまずナレッジに聞く」を定着させ、知識量の差を実際に埋める。</p>
+      </div>
+      <div class="step"><span class="when">様子見</span>
+        <div class="ph">STEP 4 ／ Claude Codeは"共用1〜2席"で効果測定</div>
+        <h4>消費者層に全員配布はしない（過剰投資回避）</h4>
+        <p>事業部に共用ライセンスを1〜2置き、ツール自作のニーズが出た人だけ昇格。効果が見えてから拡大する。</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    本体は「ナレッジ」、Cursorは引く窓、Claude Codeは貯める頭脳。<br>
+    プランは役職でなく使い方の強度で。── 株式会社斗（hishaku）
+  </div>
+</div>
+</body>
+</html>
