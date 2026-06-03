@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chrome リモートデスクトップで先方PCを直接操作（図解）</title>
+<style>
+  :root{ --ink:#111827; --sub:#6b7280; --line:#e5e7eb; --blue:#2563eb; --red:#dc2626; --green:#16a34a; --bg:#f8fafc; }
+  *{ box-sizing:border-box; }
+  body{ font-family:-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif; color:var(--ink);
+        max-width:920px; margin:24px auto; padding:0 18px; line-height:1.7; background:var(--bg);}
+  h1{ font-size:25px; margin:0 0 4px;}
+  .lead{ color:var(--sub); margin:0 0 22px;}
+  h2{ font-size:19px; margin:30px 0 12px; padding-left:10px; border-left:5px solid var(--blue);}
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .red{ color:var(--red); font-weight:700;} .green{color:var(--green);font-weight:700;}
+  .pill{ display:inline-block; background:#eff6ff; color:#1e40af; border-radius:9999px; padding:2px 12px; font-size:13px; font-weight:700; }
+
+  /* 全体イメージ図 */
+  .hero{ display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; margin:10px 0;}
+  .box{ background:#fff; border:2px solid var(--line); border-radius:14px; padding:18px; text-align:center;}
+  .box .big{ font-size:34px;} .box b{ display:block; margin-top:6px;} .box small{ color:var(--sub);}
+  .box.mac{ border-color:#93c5fd;} .box.win{ border-color:#86efac;}
+  .arrow{ text-align:center; color:var(--blue); font-weight:800; font-size:15px;}
+  .arrow .big{ font-size:30px; display:block;}
+  @media(max-width:720px){ .hero{ grid-template-columns:1fr; } .arrow .big{ transform:rotate(90deg);} }
+
+  ol{ margin:8px 0 0; padding-left:22px;} ol li{ margin:8px 0;}
+  .step-num{ display:inline-flex; width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; align-items:center; justify-content:center; font-weight:800; font-size:14px; margin-right:8px;}
+  code{ background:#f3f4f6; padding:2px 7px; border-radius:6px; font-size:90%; }
+  a{ color:var(--blue); }
+  table{ width:100%; border-collapse:collapse; font-size:14px; background:#fff;}
+  th,td{ border:1px solid var(--line); padding:9px 11px; text-align:left;} th{ background:#f9fafb;}
+  .warn{ background:#fffbeb; border:1px solid #f59e0b; border-radius:10px; padding:12px 14px; color:#92400e; font-size:14px;}
+</style>
+</head>
+<body>
+  <h1>🖥️ Chrome リモートデスクトップで先方PCを直接操作（図解）</h1>
+  <p class="lead">鈴木さんのMacから、先方のWindows画面を<b>まるごと</b>操作します。画面の中の<b>Cursorもそのまま動かせます</b>（＝LINEで送ってコピペ、が不要に）。</p>
+
+  <h2>① 全体イメージ</h2>
+  <div class="card">
+    <div class="hero">
+      <div class="box mac"><div class="big">💻</div><b>鈴木さんのMac</b><small>ここから操作する</small></div>
+      <div class="arrow"><span class="big">→</span>インターネット経由<br>で画面を操作</div>
+      <div class="box win"><div class="big">🪟</div><b>先方のWindows</b><small>中のCursorを直接動かす</small></div>
+    </div>
+    <p style="margin:12px 0 0;font-size:14px;">
+      <span class="pill">ポイント</span> リモートデスクトップは「先方の画面・キーボード・マウスを遠隔に伸ばす」仕組み。
+      <b>先方のCursorを開いて、ターミナルでコマンドを打つ・gitを直す</b>——全部、先方の席に座っているのと同じようにできます。
+    </p>
+  </div>
+
+  <h2>② 先方PC側の初期設定（各PCで1回だけ・5分）</h2>
+  <div class="card">
+    <p>先方のWindows PCで、Chrome（ブラウザ）を開いて作業します。</p>
+    <ol>
+      <li><span class="step-num">1</span>Chromeで <a href="https://remotedesktop.google.com/access">remotedesktop.google.com/access</a> を開く</li>
+      <li><span class="step-num">2</span><b class="red">鈴木さんのGoogleアカウント（s.hokuoto）でログイン</b>（先方のアカウントではなく、鈴木さんのを使う＝鈴木さんがどのPCにも繋げるように）</li>
+      <li><span class="step-num">3</span>「リモートアクセスの設定」→ <b>ダウンロード</b>してインストール（画面の指示通り）</li>
+      <li><span class="step-num">4</span><b>このPCの名前</b>を付ける（例：<code>齋藤PC</code> <code>江口PC</code>）</li>
+      <li><span class="step-num">5</span><b>PIN（6桁以上の暗証番号）</b>を設定（鈴木さんが覚えておく）</li>
+      <li><span class="step-num">6</span>「オンライン」になれば完了 ✓</li>
+    </ol>
+    <div class="warn" style="margin-top:12px;">
+      ⚠️ <b>常時接続（無人アクセス）</b>になるので、<b>先方に「サポートのため遠隔で入れるようにします」と一言伝えて合意</b>を取っておく。PINは鈴木さんだけが知っている状態に。
+    </div>
+  </div>
+
+  <h2>③ 鈴木さんのMacから接続する</h2>
+  <div class="card">
+    <ol>
+      <li><span class="step-num">1</span>Macで <a href="https://remotedesktop.google.com/access">remotedesktop.google.com/access</a> を開く（<b>同じ s.hokuoto でログイン</b>）</li>
+      <li><span class="step-num">2</span>設定したPC（<code>齋藤PC</code>など）が一覧に出る → クリック</li>
+      <li><span class="step-num">3</span><b>PINを入力</b> → 先方の画面が表示され、操作できる状態に</li>
+      <li><span class="step-num">4</span>先方の <b>Cursorを開いて、いつも通り作業</b>（ターミナル・git・編集）</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:14px;"><span class="green">これで「LINEで送る→コピペ」が消えます。</span>鈴木さんが直接やる／Claude（私）が画面を見ながら正確なコマンドを出して鈴木さんが先方Cursorで実行——<b>推測ではなく実際の出力を見ながら</b>進められます。</p>
+  </div>
+
+  <h2>④ 2つのモードの違い（参考）</h2>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table>
+      <tr><th>モード</th><th>使い方</th><th>向き</th></tr>
+      <tr><td><b>リモートアクセス</b><br>（無人・推奨）</td><td>PINを1回設定すれば、鈴木さんがいつでも繋げる</td><td>◎ 定期メンテ・突発対応</td></tr>
+      <tr><td>リモートサポート<br>（その都度）</td><td>先方がワンタイムコードを発行→鈴木さんが入力（毎回必要）</td><td>△ 1回きりの応急</td></tr>
+    </table>
+    <p style="padding:10px 14px 14px;margin:0;font-size:13px;color:var(--sub);">→ 繰り返し直すなら<b>「リモートアクセス（無人）」</b>を各PCに設定しておくのがベスト。</p>
+  </div>
+
+  <h2>⑤ 注意点</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px;">
+      <li><span class="red">先方が同時にPCを使っていると画面を取り合う</span>ので、作業は先方が使っていない時間に（事前に一言）。</li>
+      <li>PINは<b>第三者に教えない</b>。鈴木さんだけが管理。</li>
+      <li>先方PCには顧客情報があるため、<b>遠隔操作する合意</b>を取ってから設定する。</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:18px;color:var(--sub);font-size:14px;">作成: 2026/6/2 ／ RUNBIRD 遠隔サポート基盤</p>
+</body>
+</html>
