@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資金繰り表（24ヶ月）— ライフケアはーと合同会社</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#fff;color:#1a1a1a;line-height:1.5;padding:16px}
+  .container{max-width:1400px;margin:0 auto}
+  h1{text-align:center;font-size:22px;color:#1a365d;margin-bottom:4px}
+  .subtitle{text-align:center;font-size:12px;color:#718096;margin-bottom:10px}
+  .draft-badge{text-align:center;margin-bottom:20px}
+  .draft{display:inline-block;background:#2c4a6e;color:#fff;font-weight:700;font-size:12px;padding:4px 14px;border-radius:4px}
+  h2{font-size:16px;color:#1a365d;margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid #bee3f8}
+  .assumptions{background:#ebf8ff;border:1px solid #2b6cb0;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:12px}
+  .assumptions strong{color:#1a365d}
+  table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:20px}
+  th,td{padding:5px 6px;border:1px solid #cbd5e0;text-align:right}
+  th{background:#1a365d;color:#fff;font-weight:600;text-align:center;font-size:11px;white-space:nowrap}
+  td.label{background:#f7fafc;font-weight:600;text-align:left;white-space:nowrap;position:sticky;left:0;z-index:1}
+  .section-head{background:#2c4a6e;color:#fff;font-weight:700}
+  .section-head td{background:#2c4a6e;color:#fff}
+  .total-row td{background:#edf2f7;font-weight:700}
+  .milestone{background:#fffbeb!important}
+  .neg{color:#c53030}
+  .positive{color:#2e7d32}
+  .scroll{overflow-x:auto}
+  .grand-total-box{background:#1a365d;color:#fff;padding:14px;border-radius:8px;margin:16px 0;text-align:center}
+  .grand-total-box .num{font-size:24px;font-weight:700;margin:4px 0}
+  .footer{text-align:center;font-size:11px;color:#718096;margin-top:30px;padding-top:16px;border-top:1px solid #e2e8f0}
+  .positive-box{background:#f0fff4;border:2px solid #38a169;border-radius:8px;padding:14px;margin:16px 0}
+  .pre-open-box{background:#fff5f5;border:2px solid #e53e3e;border-radius:8px;padding:14px 18px;margin:16px 0}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>資金繰り表（24ヶ月）</h1>
+  <div class="subtitle">ライフケアはーと合同会社／障がい者GH「みんなのいえ 羽坂どおり」（神戸市兵庫区）</div>
+  <div class="draft-badge"><span class="draft">確定版 v1.0（2026/6/7）／賃貸借契約書・運営規程・指定申請書 反映（物件賃料・利用者負担・定員 確定）</span></div>
+
+  <div class="assumptions">
+    <strong>前提条件：</strong>
+    <ul style="margin:6px 0 0 20px">
+      <li>開設: 2026年8月1日（定員4名／居室4室：1F 9㎡・2F 8.8㎡・3F 8.3㎡×2）</li>
+      <li>地域単価: 神戸市＝障害福祉2級地（上乗せ16%）。本表は厚木4級地（¥10.96）水準で保守的に試算（神戸2級地は単価がやや高い見込み＝上振れ余地）</li>
+      <li><strong>物件賃料（法人→大家 貸主）: 月¥151,200（家賃150,000＋共益費1,200）</strong>／更新料無／支払27日（賃貸借契約書 確定）</li>
+      <li><strong>利用者負担（収入）: ¥88,000/人/月</strong>（家賃35,000＋光熱水15,000＋食材33,000＋日用品5,000、通信費¥0）（運営規程第9条 確定）</li>
+      <li>区分構成: <strong>区分3中心（区分4×1・区分3×2・区分2×1／平均3.0）</strong>＝黒字化の最重要レバー</li>
+      <li>入居ペース: 9月1名→12月4名満室（慎重め）★要確認</li>
+      <li><strong>融資: ¥5,000,000（8月実行）／据置6ヶ月・7年返済・年利2.0%／据置中利息¥8,333・据置後返済¥64,000</strong>（★希望額は寺田様確認）</li>
+      <li>自己資金（開業時手元）: 約¥1,000,000（資本金505万のうち設立費・消防・リユース・改造支払後の残／6/3寺田様談）</li>
+      <li><strong>役員報酬¥0方式</strong>（寺田夫妻の生計は管理者 寺田美絵様の看護師本業所得で賄う）</li>
+      <li>給付費＝提供月の<strong>翌々月入金</strong>（8月提供分→10月入金）</li>
+      <li>人件費は概算（★実額要確定）。サビ管（天野様）・夜間支援の雇用条件で増減</li>
+    </ul>
+  </div>
+
+  <div class="pre-open-box">
+    <strong style="color:#c53030">★ なぜ融資が必須か（立ち上げの崖）</strong>
+    <p style="font-size:13px;margin-top:8px;color:#2d3748">
+      給付費は提供月の翌々月入金のため、8/1開業でも最初のまとまった入金は11月以降。一方、家賃¥151,200＋人件費＋諸経費で毎月¥60〜100万が出ていきます。<strong>開業時手元¥100万だけでは9月で残高がマイナス＝資金ショート</strong>。融資¥500万を<strong>8月実行</strong>で確保することが生命線です（寺田様「融資を早めに」は正しい）。
+    </p>
+  </div>
+
+  <div class="positive-box">
+    <strong style="color:#276749">★ ライフケアはーと様の資金繰り特徴</strong>
+    <p style="font-size:13px;margin-top:6px">
+      新設法人で<strong>累積欠損のないクリーンな与信</strong>。物件賃料が月¥151,200と低く（SG厚木¥204,000比）固定費が軽い。<strong>管理者 寺田美絵様が看護師（看護師長10年）で本業所得あり</strong>＝返済バックアップ＋医療連携体制加算を内製。サビ管（天野様）確保済・通信費¥0も追い風。融資¥500万・8月実行なら<strong>資金繰りボトムは¥3,528,658（2026/12）で一度もマイナスにならず</strong>、満室・区分3中心で<strong>月+¥185,811の安定黒字</strong>。
+    </p>
+  </div>
+
+  <h2>年度1（2026年8月〜2027年7月）</h2>
+  <div class="scroll">
+    <table>
+      <tr>
+        <th style="position:sticky;left:0;z-index:2">項目</th>
+        <th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th><th>1月</th>
+        <th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th>
+        <th>年計</th>
+      </tr>
+      <tr class="section-head"><td class="label" colspan="14">【収入】</td></tr>
+      <tr><td class="label">自己資金（開業時手元）</td><td>1,000,000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1,000,000</td></tr>
+      <tr><td class="label">融資実行</td><td>5,000,000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>5,000,000</td></tr>
+      <tr><td class="label">訓練等給付費（基本）</td><td>0</td><td>0</td><td>0</td><td>194,318</td><td>388,635</td><td>582,953</td><td>777,270</td><td>777,270</td><td>777,270</td><td>777,270</td><td>777,270</td><td>777,270</td><td>5,829,526</td></tr>
+      <tr><td class="label">処遇改善加算</td><td>0</td><td>0</td><td>0</td><td>24,873</td><td>49,746</td><td>74,618</td><td>99,491</td><td>99,491</td><td>99,491</td><td>99,491</td><td>99,491</td><td>99,491</td><td>746,183</td></tr>
+      <tr><td class="label">医療連携体制加算</td><td>0</td><td>0</td><td>0</td><td>10,000</td><td>20,000</td><td>30,000</td><td>40,000</td><td>40,000</td><td>40,000</td><td>40,000</td><td>40,000</td><td>40,000</td><td>300,000</td></tr>
+      <tr><td class="label">利用者負担</td><td>0</td><td>88,000</td><td>176,000</td><td>264,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>352,000</td><td>3,344,000</td></tr>
+      <tr class="total-row"><td class="label">収入合計</td><td>6,000,000</td><td>88,000</td><td>176,000</td><td>493,191</td><td>810,381</td><td>1,039,571</td><td>1,268,761</td><td>1,268,761</td><td>1,268,761</td><td>1,268,761</td><td>1,268,761</td><td>1,268,761</td><td>16,219,709</td></tr>
+
+      <tr class="section-head"><td class="label" colspan="14">【支出】</td></tr>
+      <tr><td class="label">人件費（役員報酬¥0）</td><td>350,000</td><td>400,000</td><td>450,000</td><td>500,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>550,000</td><td>6,100,000</td></tr>
+      <tr><td class="label">地代家賃（法人→大家）</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>151,200</td><td>1,814,400</td></tr>
+      <tr><td class="label">食材・水光熱・日用・OWL（人数連動）</td><td>0</td><td>59,750</td><td>119,500</td><td>179,250</td><td>239,000</td><td>239,000</td><td>239,000</td><td>239,000</td><td>239,000</td><td>239,000</td><td>239,000</td><td>239,000</td><td>2,270,500</td></tr>
+      <tr><td class="label">固定費（税理・事務通信・保険）</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>78,750</td><td>945,000</td></tr>
+      <tr><td class="label">借入返済（据置→据置後）</td><td>8,333</td><td>8,333</td><td>8,333</td><td>8,333</td><td>8,333</td><td>8,333</td><td>64,000</td><td>64,000</td><td>64,000</td><td>64,000</td><td>64,000</td><td>64,000</td><td>433,998</td></tr>
+      <tr class="total-row"><td class="label">支出合計</td><td>588,283</td><td>698,033</td><td>807,783</td><td>917,533</td><td>1,027,283</td><td>1,027,283</td><td>1,082,950</td><td>1,082,950</td><td>1,082,950</td><td>1,082,950</td><td>1,082,950</td><td>1,082,950</td><td>11,563,898</td></tr>
+
+      <tr class="section-head"><td class="label" colspan="14">【キャッシュフロー】</td></tr>
+      <tr>
+        <td class="label">月間収支</td>
+        <td class="positive">5,411,717</td><td class="neg">-610,033</td><td class="neg">-631,783</td><td class="neg">-424,342</td><td class="neg">-216,902</td><td class="positive">12,288</td>
+        <td class="positive">185,811</td><td class="positive">185,811</td><td class="positive">185,811</td><td class="positive">185,811</td><td class="positive">185,811</td><td class="positive">185,811</td>
+        <td class="positive">4,655,811</td>
+      </tr>
+      <tr class="milestone">
+        <td class="label">月末残高</td>
+        <td>5,411,717</td><td>4,801,684</td><td>4,169,901</td><td>3,745,559</td><td>3,528,658</td><td>3,540,946</td>
+        <td>3,726,757</td><td>3,912,568</td><td>4,098,379</td><td>4,284,190</td><td>4,470,001</td><td>4,655,812</td>
+        <td>4,655,812</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grand-total-box">
+    <div>年度1 資金繰りボトム（最低手元資金）＝ ¥3,528,658（2026年12月）／一度もマイナスにならない</div>
+    <div class="num">年度1末 手元残高 +¥4,655,812</div>
+    <div style="font-size:13px">★ 2027年1月に月次黒字転換（満室到達済）、据置明けの2月以降は返済込みで月+¥185,811の安定黒字</div>
+  </div>
+
+  <h2>年度2（2027年8月〜2028年7月・満室通年）</h2>
+  <div class="assumptions">
+    <strong>年度2の前提：</strong>
+    <ul style="margin:6px 0 0 20px">
+      <li>満室（4名・区分3中心）通年継続＝月次 +¥185,811/月</li>
+      <li>季節支出（処遇改善払出・消防点検等）を考慮しても年間 約+¥211万の黒字</li>
+      <li>累積した内部留保は、繰上返済・設備更新・2棟目展開（将来）の原資に</li>
+    </ul>
+  </div>
+  <table>
+    <tr><th>月</th><th>月収支</th><th>月末残高（累計）</th></tr>
+    <tr><td class="label">2027年8月</td><td class="positive">+¥185,811</td><td>¥4,841,623</td></tr>
+    <tr><td class="label">2027年9月〜2028年7月</td><td class="positive">+¥185,811 ×11ヶ月</td><td>—</td></tr>
+    <tr class="total-row"><td class="label">年度2 年間収支（季節支出前）</td><td class="positive">約 +¥2,229,732</td><td>年度2末 約 ¥6,885,544</td></tr>
+  </table>
+
+  <h2>2年間累計サマリ</h2>
+  <table>
+    <tr><th>年度</th><th>収入合計</th><th>支出合計</th><th>年間収支</th><th>期末残高（累計）</th></tr>
+    <tr><td class="label">年度1（2026/8〜2027/7）</td><td>¥16,219,709</td><td>¥11,563,898</td><td class="positive">+¥4,655,811</td><td class="positive">+¥4,655,812</td></tr>
+    <tr><td class="label">年度2（2027/8〜2028/7・満室通年）</td><td>¥15,225,132</td><td>¥12,995,400</td><td class="positive">+¥2,229,732</td><td class="positive">約 +¥6,885,544</td></tr>
+  </table>
+
+  <div class="positive-box">
+    <strong style="color:#276749">★ 結論</strong>
+    <p style="margin-top:6px">
+      <strong>融資¥500万を8月に実行すれば、資金繰りは一度もマイナスにならず回ります（ボトム¥352万）。</strong>満室・区分3中心で月+¥18.5万の安定黒字、返済比率は約5%（健全圏）。返済原資は給付費（国保連経由で回収リスク実質ゼロ）に加え、管理者 寺田美絵様の看護師本業所得がバックアップ。<br>
+      <strong>2つの条件</strong>—①融資の8月実行 ②区分3中心の入居方針—を満たせば、堅実に黒字化する事業計画です。
+    </p>
+  </div>
+
+  <div class="footer">
+    最終更新: 2026/6/7 / 株式会社斗 鈴木北斗（確定版 v1.0：賃貸借契約書・運営規程・指定申請書を反映、物件賃料¥151,200／利用者負担¥88,000で再計算）<br>
+    携帯：090-6894-4907 ／ メール：h.suzuki@hishaku.co.jp
+  </div>
+</div>
+</body>
+</html>
