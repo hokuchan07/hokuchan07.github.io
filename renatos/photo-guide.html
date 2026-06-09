@@ -81,6 +81,16 @@
   .list-machines .r:first-child{border-top:none;background:#f2f6fa;font-weight:800;color:var(--navy);}
   .list-machines .r span:last-child{color:#5a6a7d;font-size:12px;}
 
+  .datebox{background:#fff7e6;border:1px solid #f0d59a;border-radius:10px;padding:12px 14px;font-size:13px;color:#6b4e12;margin-top:12px;line-height:1.75;}
+  .mtable{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .mtable th,.mtable td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;}
+  .mtable thead th{background:#f2f6fa;color:var(--navy);font-weight:800;font-size:12.5px;}
+  .mtable thead th span{font-weight:600;color:#5a6a7d;font-size:11px;}
+  .mtable td:nth-child(2){color:#5a6a7d;font-size:12px;}
+  .mtable td.d{font-weight:800;color:#c0392b;white-space:nowrap;text-align:center;background:#fff7e6;}
+  .mtable th:nth-child(3){text-align:center;}
+  .mtable tbody tr:last-child td{border-bottom:none;}
+
   .tips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
   .tips .t{background:#eef5fb;border:1px solid #cfe0f0;border-radius:999px;padding:5px 12px;font-size:12.5px;color:#1f4f7a;}
   footer{text-align:center;font-size:12px;color:#7c8a9b;margin-top:26px;}
@@ -117,9 +127,15 @@
       <div class="t1">小規模事業者持続化補助金（第17回）</div>
       <div class="t2">合同会社レナトス</div>
       <div class="row"><span>管理番号</span><span>A117000017496</span></div>
-      <div class="row"><span>取得年月日</span><span>2026年 ＿月 ＿日</span></div>
+      <div class="row"><span>取得年月日</span><span style="color:#c0392b;font-weight:700;">＝機材が届いた日</span></div>
     </div>
     <div class="caption">▲ シールの見本（この4項目が書いてあればOK・サイズは名刺〜ハガキ大）</div>
+
+    <div class="datebox">
+      📅 <b>「取得年月日」に書く日付＝その機材が「届いた日」</b>です。<br>
+      届いた日がはっきり分からない場合は、<b>振込日（お支払いした日）</b>を書いてください。<br>
+      <span style="color:#c0392b;font-weight:700;">機材ごとに日付が違います。</span>下の「③一覧」に各機材の日付をまとめましたので、その日付を書いてください。
+    </div>
 
     <div class="tips">
       <span class="t">✏️ 手書きでもOK</span>
@@ -176,18 +192,25 @@
   <section>
     <div class="sec-h">
       <div class="sec-num">3</div>
-      <div><h2>撮影する機材の一覧</h2>
-      <div class="sub">この7点にシールを貼って撮影してください</div></div>
+      <div><h2>撮影する機材の一覧と「シールに書く日付」</h2>
+      <div class="sub">この7点にシールを貼って撮影。シールの日付は右の「届いた日」を書いてください</div></div>
     </div>
-    <div class="list-machines">
-      <div class="r"><span>機材</span><span>メーカー／型番</span></div>
-      <div class="r"><span>① 業務用冷蔵庫</span><span>ホシザキ RT-63PTE1</span></div>
-      <div class="r"><span>② エスプレッソマシン</span><span>GAGGIA Classic Evo Pro</span></div>
-      <div class="r"><span>③ コーヒーグラインダー</span><span>Varia VS3（第二世代）</span></div>
-      <div class="r"><span>④ 電気ケトル</span><span>Fellow Stagg EKG PRO</span></div>
-      <div class="r"><span>⑤ トースター</span><span>Aladdin グラファイトトースター</span></div>
-      <div class="r"><span>⑥ 2槽シンク</span><span>テンポスバスターズ</span></div>
-      <div class="r"><span>⑦ 電気温水器</span><span>ユノカ SN1-40K5</span></div>
+    <table class="mtable">
+      <thead>
+        <tr><th>機材</th><th>メーカー／型番</th><th>シールに書く日付<br><span>（＝届いた日）</span></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>① 業務用冷蔵庫</td><td>ホシザキ RT-63PTE1</td><td class="d">2026年4月15日</td></tr>
+        <tr><td>② エスプレッソマシン</td><td>GAGGIA Classic Evo Pro</td><td class="d">2026年2月16日</td></tr>
+        <tr><td>③ コーヒーグラインダー</td><td>Varia VS3（第二世代）</td><td class="d">2026年2月21日</td></tr>
+        <tr><td>④ 電気ケトル</td><td>Fellow Stagg EKG PRO</td><td class="d">2026年2月21日</td></tr>
+        <tr><td>⑤ トースター</td><td>Aladdin グラファイトトースター</td><td class="d">2026年2月16日</td></tr>
+        <tr><td>⑥ 2槽シンク</td><td>テンポスバスターズ</td><td class="d">2026年5月11日</td></tr>
+        <tr><td>⑦ 電気温水器</td><td>ユノカ SN1-40K5</td><td class="d">2026年5月29日</td></tr>
+      </tbody>
+    </table>
+    <div class="datebox" style="margin-top:12px;">
+      ✏️ 上の表のとおり、<b>各機材のシールにはその機材の「届いた日」</b>を書いてください（全部同じ日ではありません）。日付がはっきりしない機材は<b>振込日</b>でも大丈夫です。
     </div>
   </section>
 
