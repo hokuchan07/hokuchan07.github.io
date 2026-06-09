@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写真の撮り方ガイド｜小規模事業者持続化補助金 実績報告</title>
+<style>
+  :root{
+    --navy:#1f3a5f; --blue:#2f6fb0; --amber:#e3a008; --green:#1f9d55; --red:#c0392b;
+    --bg:#f4f6f9; --line:#d7dde5; --ink:#1a2330;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);margin:0;background:var(--bg);line-height:1.75;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px 60px;}
+  header{background:linear-gradient(135deg,#1f3a5f,#2f6fb0);color:#fff;padding:30px 24px 26px;border-radius:0 0 18px 18px;margin-bottom:6px;}
+  header h1{font-size:23px;margin:0 0 6px;letter-spacing:.5px;}
+  header p{margin:0;font-size:13.5px;opacity:.92;}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 12px;font-size:12px;margin-bottom:10px;}
+  .lead{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14px;}
+  .lead b{color:var(--blue);}
+  section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 22px 24px;margin:22px 0;box-shadow:0 1px 3px rgba(20,40,70,.05);}
+  .sec-h{display:flex;align-items:center;gap:11px;margin:0 0 14px;}
+  .sec-num{flex:none;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;}
+  .sec-h h2{font-size:19px;margin:0;}
+  .sec-h .sub{font-size:12.5px;color:#5a6a7d;margin-top:2px;}
+
+  /* シール見本 */
+  .seal{max-width:430px;margin:8px auto 4px;border:3px solid var(--red);border-radius:10px;padding:14px 16px;background:#fff;text-align:center;}
+  .seal .t1{font-size:15px;font-weight:800;color:var(--red);letter-spacing:.5px;}
+  .seal .t2{font-size:13px;margin-top:6px;}
+  .seal .row{display:flex;justify-content:space-between;font-size:12.5px;border-top:1px dashed #c9b3b3;margin-top:8px;padding-top:7px;}
+  .seal .row span:first-child{color:#777;}
+  .caption{text-align:center;font-size:12px;color:#6b7a8d;margin-top:4px;}
+
+  /* 良い例 / 悪い例 */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  @media(max-width:560px){.grid{grid-template-columns:1fr;}}
+  .shot{border:2px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;}
+  .shot.good{border-color:var(--green);}
+  .shot.bad{border-color:#e3b0aa;}
+  .shot .tag{font-size:13px;font-weight:800;padding:7px 12px;color:#fff;}
+  .shot.good .tag{background:var(--green);}
+  .shot.bad .tag{background:var(--red);}
+  .frame{position:relative;height:190px;background:repeating-linear-gradient(45deg,#eef2f6,#eef2f6 12px,#e7edf3 12px,#e7edf3 24px);display:flex;align-items:center;justify-content:center;}
+  .machine{width:120px;height:120px;border-radius:10px;background:linear-gradient(160deg,#9aa7b6,#7c8a9b);box-shadow:inset 0 -10px 0 rgba(0,0,0,.12);position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;}
+  .machine.small{width:80px;height:80px;font-size:22px;opacity:.85;}
+  .machine.cut{clip-path:inset(0 38% 0 0);}
+  .mini-seal{position:absolute;bottom:8px;right:8px;background:#fff;border:2px solid var(--red);border-radius:4px;font-size:8px;color:var(--red);font-weight:800;padding:2px 4px;line-height:1.2;text-align:center;}
+  .blur{filter:blur(2.5px);}
+  .shot ul{margin:0;padding:10px 14px 12px 30px;font-size:12.5px;color:#42505f;}
+  .shot.good li{color:#1d7a43;}
+  .shot.bad li{color:#a23b30;}
+
+  .checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:8px;}
+  @media(max-width:560px){.checklist{grid-template-columns:1fr;}}
+  .checklist .it{display:flex;gap:9px;align-items:flex-start;background:#f7fafc;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13px;}
+  .checklist .it .n{flex:none;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px;}
+  @media(max-width:560px){.three{grid-template-columns:1fr;}}
+  .three .card{border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center;background:#fbfcfe;}
+  .three .ic{font-size:30px;}
+  .three .ti{font-weight:800;font-size:14px;margin:5px 0 3px;color:var(--navy);}
+  .three .de{font-size:12px;color:#566678;}
+
+  /* 工事前後 */
+  .ba{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:6px;margin-top:8px;}
+  @media(max-width:560px){.ba{grid-template-columns:1fr;}.ba .arrow{transform:rotate(90deg);margin:4px auto;}}
+  .ba .pane{border:2px solid var(--line);border-radius:11px;overflow:hidden;}
+  .ba .pane .lab{font-size:12.5px;font-weight:800;padding:6px 10px;color:#fff;}
+  .ba .before .lab{background:#7c8a9b;}
+  .ba .after .lab{background:var(--blue);}
+  .ba .pic{height:130px;display:flex;align-items:center;justify-content:center;font-size:34px;}
+  .ba .before .pic{background:#e9edf1;color:#8c9aab;}
+  .ba .after .pic{background:#e8f1fb;color:var(--blue);}
+  .ba .arrow{text-align:center;font-size:26px;color:var(--amber);font-weight:800;}
+  .same{background:#fff7e6;border:1px solid #f0d59a;border-radius:9px;padding:9px 12px;font-size:12.5px;margin-top:10px;color:#7a5a12;}
+
+  .list-machines{margin-top:8px;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .list-machines .r{display:flex;justify-content:space-between;gap:10px;padding:9px 13px;font-size:13px;border-top:1px solid var(--line);}
+  .list-machines .r:first-child{border-top:none;background:#f2f6fa;font-weight:800;color:var(--navy);}
+  .list-machines .r span:last-child{color:#5a6a7d;font-size:12px;}
+
+  .tips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .tips .t{background:#eef5fb;border:1px solid #cfe0f0;border-radius:999px;padding:5px 12px;font-size:12.5px;color:#1f4f7a;}
+  footer{text-align:center;font-size:12px;color:#7c8a9b;margin-top:26px;}
+  .note-final{background:#1f3a5f;color:#fff;border-radius:12px;padding:16px 18px;font-size:13.5px;margin-top:20px;}
+  .note-final b{color:#ffd877;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap" style="padding-bottom:0;">
+    <div class="badge">小規模事業者持続化補助金（第17回）／実績報告</div>
+    <h1>📸 写真の撮り方ガイド</h1>
+    <p>合同会社レナトス カフェ事業｜導入した機材の写真・工事の前後写真の撮影方法</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    実績報告では、補助金で導入した<b>機材の写真</b>と、工事の<b>前後写真</b>の提出が必要です。<br>
+    お手数ですが、<b>このガイドのとおりにスマホで撮影</b>していただけますと、そのまま申請に使えます。1機材あたり<b>1〜2枚</b>、所要は全体で15〜20分ほどです。
+  </div>
+
+  <!-- 1. シール -->
+  <section>
+    <div class="sec-h">
+      <div class="sec-num">1</div>
+      <div><h2>補助金シールを作って機材に貼る</h2>
+      <div class="sub">「この機材は補助金で買いました」という札（ふだ）です。手書きでもOK</div></div>
+    </div>
+    <p style="font-size:13.5px;margin-top:0;">下の内容を<b>白い紙やラベルに書いて（印刷でも手書きでもOK）</b>、各機材の見やすい場所に貼ってください。テープで仮どめでも構いません。</p>
+
+    <div class="seal">
+      <div class="t1">小規模事業者持続化補助金（第17回）</div>
+      <div class="t2">合同会社レナトス</div>
+      <div class="row"><span>管理番号</span><span>A117000017496</span></div>
+      <div class="row"><span>取得年月日</span><span>2026年 ＿月 ＿日</span></div>
+    </div>
+    <div class="caption">▲ シールの見本（この4項目が書いてあればOK・サイズは名刺〜ハガキ大）</div>
+
+    <div class="tips">
+      <span class="t">✏️ 手書きでもOK</span>
+      <span class="t">📄 白い紙＋テープで可</span>
+      <span class="t">📐 名刺〜ハガキ大</span>
+      <span class="t">👀 正面から読める位置に</span>
+    </div>
+  </section>
+
+  <!-- 2. 機材写真 -->
+  <section>
+    <div class="sec-h">
+      <div class="sec-num">2</div>
+      <div><h2>機材を撮影する（シールが写るように）</h2>
+      <div class="sub">1機材ずつ・シールが読める状態で</div></div>
+    </div>
+
+    <div class="grid">
+      <div class="shot good">
+        <div class="tag">◎ 良い例</div>
+        <div class="frame">
+          <div class="machine">☕
+            <div class="mini-seal">補助金<br>シール</div>
+          </div>
+        </div>
+        <ul>
+          <li>機材<b>全体</b>が写っている</li>
+          <li><b>シールが貼られ</b>、読める</li>
+          <li>明るく・ピントが合っている</li>
+        </ul>
+      </div>
+      <div class="shot bad">
+        <div class="tag">✕ 悪い例</div>
+        <div class="frame">
+          <div class="machine cut blur">☕</div>
+        </div>
+        <ul>
+          <li>機材が<b>見切れている</b></li>
+          <li>シールが<b>無い／写っていない</b></li>
+          <li>暗い・ぼやけている</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;margin:16px 0 6px;font-weight:700;color:var(--navy);">1つの機材につき、できれば次の3点が分かるように：</p>
+    <div class="three">
+      <div class="card"><div class="ic">🖼️</div><div class="ti">①全体</div><div class="de">機材ぜんたいが入った1枚</div></div>
+      <div class="card"><div class="ic">🏷️</div><div class="ti">②シール</div><div class="de">貼ったシールの寄り（文字が読める）</div></div>
+      <div class="card"><div class="ic">🔖</div><div class="ti">③型番ラベル</div><div class="de">メーカー名・型番のシール部分</div></div>
+    </div>
+  </section>
+
+  <!-- 撮影対象リスト -->
+  <section>
+    <div class="sec-h">
+      <div class="sec-num">3</div>
+      <div><h2>撮影する機材の一覧</h2>
+      <div class="sub">この7点にシールを貼って撮影してください</div></div>
+    </div>
+    <div class="list-machines">
+      <div class="r"><span>機材</span><span>メーカー／型番</span></div>
+      <div class="r"><span>① 業務用冷蔵庫</span><span>ホシザキ RT-63PTE1</span></div>
+      <div class="r"><span>② エスプレッソマシン</span><span>GAGGIA Classic Evo Pro</span></div>
+      <div class="r"><span>③ コーヒーグラインダー</span><span>Varia VS3（第二世代）</span></div>
+      <div class="r"><span>④ 電気ケトル</span><span>Fellow Stagg EKG PRO</span></div>
+      <div class="r"><span>⑤ トースター</span><span>Aladdin グラファイトトースター</span></div>
+      <div class="r"><span>⑥ 2槽シンク</span><span>テンポスバスターズ</span></div>
+      <div class="r"><span>⑦ 電気温水器</span><span>ユノカ SN1-40K5</span></div>
+    </div>
+  </section>
+
+  <!-- 4. 工事前後 -->
+  <section>
+    <div class="sec-h">
+      <div class="sec-num">4</div>
+      <div><h2>工事の「前」と「後」の写真</h2>
+      <div class="sub">同じ場所・同じ向きで撮るのがコツ</div></div>
+    </div>
+    <p style="font-size:13.5px;margin-top:0;">改装した場所について、<b>工事前（着工前）</b>と<b>工事後（完成）</b>の写真をペアで。もし工事前の写真が残っていれば、それでOKです。</p>
+
+    <div class="ba">
+      <div class="pane before"><div class="lab">工事前（Before）</div><div class="pic">🏚️</div></div>
+      <div class="arrow">→</div>
+      <div class="pane after"><div class="lab">工事後（After）</div><div class="pic">🏪</div></div>
+    </div>
+    <div class="same">📍 <b>コツ：</b>前と後を<b>同じ立ち位置・同じ角度</b>で撮ると、変化が伝わって審査でも分かりやすくなります。</div>
+
+    <p style="font-size:13.5px;margin:16px 0 6px;font-weight:700;color:var(--navy);">撮ってほしい工事箇所：</p>
+    <div class="checklist">
+      <div class="it"><div class="n">1</div><div>内装（床・壁・カウンター等）</div></div>
+      <div class="it"><div class="n">2</div><div>塗装した箇所（外壁・看板・内壁）</div></div>
+      <div class="it"><div class="n">3</div><div>電気工事（照明・コンセント）</div></div>
+      <div class="it"><div class="n">4</div><div>給排水（シンク・配管まわり）</div></div>
+      <div class="it"><div class="n">5</div><div>電気温水器の設置箇所</div></div>
+      <div class="it"><div class="n">6</div><div>解体した箇所（前後があれば）</div></div>
+    </div>
+  </section>
+
+  <!-- 撮影のコツ -->
+  <section>
+    <div class="sec-h">
+      <div class="sec-num">5</div>
+      <div><h2>共通のコツ</h2></div>
+    </div>
+    <div class="tips">
+      <span class="t">💡 部屋を明るくして撮る</span>
+      <span class="t">🤳 両手で固定してブレ防止</span>
+      <span class="t">🔍 文字（シール・型番）が読めるか確認</span>
+      <span class="t">📲 スマホの標準カメラでOK</span>
+      <span class="t">🗂️ 撮ったらそのまま送ってください</span>
+    </div>
+  </section>
+
+  <div class="note-final">
+    📤 撮影が終わったら、写真を<b>そのままLINE／メールでお送りください</b>。こちらで実績報告用に整理します。<br>
+    ご不明点は遠慮なくご連絡ください。<b>1機材1〜2枚・工事は前後ペア</b>を目安にお願いします。
+  </div>
+
+  <footer>合同会社レナトス｜小規模事業者持続化補助金 第17回 実績報告｜撮影ガイド（2026年6月）</footer>
+
+</div>
+</body>
+</html>
