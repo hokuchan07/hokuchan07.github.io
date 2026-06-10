@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>図解：神奈川 葬儀ネット集客スキーム（RUNBIRD×True Heart）</title>
+<style>
+  :root{
+    --ink:#1a2330; --sub:#5a6678; --line:#dde3ec; --bg:#f4f6fa;
+    --navy:#16335e; --blue:#2563eb; --teal:#0d9488; --red:#dc2626; --amber:#d97706; --green:#15803d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; padding:32px 20px 80px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  header{background:var(--navy); color:#fff; border-radius:14px; padding:28px 32px; margin-bottom:28px;}
+  header .tag{display:inline-block; background:rgba(255,255,255,.15); border-radius:999px; padding:2px 14px; font-size:12px; letter-spacing:.1em; margin-bottom:10px;}
+  header h1{font-size:26px; line-height:1.4;}
+  header p{margin-top:8px; font-size:13px; opacity:.85;}
+  h2{font-size:19px; margin:36px 0 14px; padding-left:12px; border-left:5px solid var(--blue);}
+  h2 small{font-size:12px; color:var(--sub); font-weight:normal; margin-left:10px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .grid{display:grid; gap:12px;}
+  .g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);} .g4{grid-template-columns:repeat(4,1fr);}
+  @media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr;}}
+  /* スキームフロー */
+  .flow{display:flex; align-items:stretch; gap:0; flex-wrap:wrap;}
+  .fbox{flex:1; min-width:150px; background:#fff; border:2px solid var(--blue); border-radius:10px; padding:12px 14px; text-align:center; position:relative;}
+  .fbox h4{font-size:14px; color:var(--blue); margin-bottom:4px;}
+  .fbox p{font-size:11.5px; color:var(--sub);}
+  .arrow{display:flex; align-items:center; justify-content:center; min-width:34px; font-size:20px; color:var(--blue); font-weight:bold;}
+  .moneyback{margin-top:10px; text-align:center; font-size:13px; color:var(--green); font-weight:bold;}
+  /* 数値カード */
+  .stat{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px;}
+  .stat .num{font-size:24px; font-weight:bold; color:var(--navy);}
+  .stat .num span{font-size:13px;}
+  .stat .lbl{font-size:12px; color:var(--sub); margin-top:2px;}
+  /* テーブル */
+  table{width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; font-size:13px;}
+  th{background:var(--navy); color:#fff; padding:9px 10px; text-align:left; font-weight:600;}
+  td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .ok{color:var(--green); font-weight:bold;} .ng{color:var(--red); font-weight:bold;} .warn{color:var(--amber); font-weight:bold;}
+  .pill{display:inline-block; border-radius:999px; padding:1px 10px; font-size:11px; font-weight:bold; color:#fff;}
+  .p-red{background:var(--red);} .p-amber{background:var(--amber);} .p-green{background:var(--green);} .p-blue{background:var(--blue);} .p-teal{background:var(--teal);}
+  .note{font-size:12px; color:var(--sub); margin-top:8px;}
+  /* インサイト */
+  .insight{border-left:4px solid var(--teal); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .insight b{color:var(--teal);}
+  .danger{border-left:4px solid var(--red); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .danger b{color:var(--red);}
+  /* ロードマップ */
+  .phase{display:flex; gap:10px; flex-wrap:wrap;}
+  .ph{flex:1; min-width:200px; background:#fff; border:1px solid var(--line); border-top:5px solid var(--blue); border-radius:10px; padding:14px;}
+  .ph h4{font-size:14px; margin-bottom:6px;}
+  .ph ul{padding-left:16px; font-size:12px; color:var(--sub);}
+  .ph .gate{margin-top:8px; font-size:11.5px; background:var(--bg); border-radius:8px; padding:6px 8px;}
+  footer{margin-top:48px; font-size:11px; color:var(--sub); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">RUNBIRD 新規事業 ／ 2026-06-10 ／ 5体AIエージェント調査の図解</div>
+  <h1>神奈川 葬儀ネット集客スキーム 全体像<br><span style="font-size:17px; opacity:.9;">RUNBIRD（集客・送客）× True Heart（施行・川崎市溝の口）</span></h1>
+  <p>競合4社のネット集客手法の分解／市場・顧客・アナロジー調査／批判検証を経た送客モデルの設計図</p>
+</header>
+
+<!-- 1. スキーム -->
+<h2>① 送客スキーム全体図<small>RUNBIRDが集客し、True Heartへ送客して紹介料を得る</small></h2>
+<div class="card">
+  <div class="flow">
+    <div class="fbox"><h4>遺族</h4><p>川崎・横浜北部<br>没後2〜6時間で即決<br>8割スマホ・深夜検索</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>Google検索／マップ</h4><p>緊急KW・斎場名KW・生前KW<br>53%がマップで実在確認</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>RUNBIRD集客メディア</h4><p>相談サイト＋LP群＋斎場ページ<br>総額シミュレーション表示<br>運営者・紹介サービス明示</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>電話 直転送</h4><p>トラッキング番号経由で<br>True Heart 24h窓口へ<br>CTIで録音・応答率監視</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox" style="border-color:var(--teal);"><h4 style="color:var(--teal);">True Heart 施行</h4><p>お迎え→安置→火葬式/1日葬/2日葬<br>拠点：川崎市高津区溝口</p></div>
+  </div>
+  <div class="moneyback">↩ 成約報告（最終請求額）→ 紹介料 ＝ 実勢売上 × 20%（≒10.9万円/件）が RUNBIRD へ</div>
+  <div class="note">⚠ 紹介料は「基本プラン下限」ではなく「追加・オプション込みの実勢売上」ベースが絶対条件（下限ベースだと5.7万円/件でCPAとトントン＝利益が残らない）。手数料の遺族転嫁は契約で禁止。</div>
+</div>
+
+<!-- 2. 市場 -->
+<h2>② 市場ファクト<small>市場は本物。商品構成は追い風</small></h2>
+<div class="grid g4">
+  <div class="stat"><div class="num">9.5〜10<span>万件/年</span></div><div class="lbl">神奈川県の死亡数（≒葬儀件数）。横浜＋川崎で5割強</div></div>
+  <div class="stat"><div class="num">25<span>%</span></div><div class="lbl">一日葬の構成比（17.7%→25%へ急拡大）＝True Heartの最高利益率商品(54%)が追い風</div></div>
+  <div class="stat"><div class="num">1.83<span>兆円</span></div><div class="lbl">葬祭市場規模（2024、前年比108%）。平均費用は30万円台へ下落傾向</div></div>
+  <div class="stat"><div class="num">4.56<span>日</span></div><div class="lbl">横浜の火葬待ち平均（火葬炉数は政令市ワースト級）→安置費用が構造的に発生</div></div>
+</div>
+
+<!-- 3. 顧客 -->
+<h2>③ 顧客の意思決定<small>「最初に電話を取った社が勝つ」ゲーム</small></h2>
+<div class="grid g3">
+  <div class="stat"><div class="num">30<span>%</span></div><div class="lbl">没後<b>2時間未満</b>で葬儀社を決定（6時間以内に過半数）。比較検討はほぼ起きない</div></div>
+  <div class="stat"><div class="num">41.7<span>% / 35.6%</span></div><div class="lbl">不安の1位「価格」・2位「追加費用」。ただし選定基準で「安さ」は3位(15.1%)→<b>「最安」より「明朗」が効く</b></div></div>
+  <div class="stat"><div class="num">3.5<span>人に1人</span></div><div class="lbl">生前に葬儀社を決定（過去最高）。事前検討層は平均12万円安く満足度も高い</div></div>
+</div>
+<div class="grid g2" style="margin-top:12px;">
+  <div class="insight"><b>インサイト1：</b>真の競合は他社サイトではなく<b>「病院の提携葬儀社」</b>。病院紹介は平均10万円超割高だが「断ってよい」と知らない人が大半→啓蒙コンテンツが空白地帯。</div>
+  <div class="insight"><b>インサイト2：</b>低価格プラン最大の壁は予算ではなく<b>「親族の目」</b>。「火葬式でも礼を尽くせる」「親族への伝え方」コンテンツがCVRの隠れレバー。</div>
+</div>
+
+<!-- 4. 競合 -->
+<h2>④ 競合のネット集客手法<small>チャット共有4社の分解＋ポータルの構造</small></h2>
+<table>
+  <tr><th style="width:16%;">社名</th><th style="width:14%;">火葬式価格</th><th style="width:38%;">ネット集客の核</th><th>学ぶこと／突くこと</th></tr>
+  <tr><td><b>グランドセレモニー</b></td><td>8.25万円〜</td><td>「東京 葬儀屋」リスティング＋<b>市区別ページ量産</b>。「追加費用一切なし」現役掲示</td><td>市区別ページの面取り。※「追加なし」表示は措置命令と同型のリスク（真似しない）</td></tr>
+  <tr><td><b>都民のお葬式</b></td><td>7.9万円〜</td><td><b>「都民の」地域呼称ブランド</b>×公営斎場連携×施設を持たないアセットライト</td><td>本件が最も参考にすべき実在モデル。「県民の」神奈川版は空席に見える</td></tr>
+  <tr><td><b>花葬儀</b></td><td>22万円〜</td><td><b>斎場1つ=1ページ×DSA</b>（動的検索広告）で「○○斎場」固有名詞検索を機械的に刈り取る</td><td>神奈川版をそのまま再現可能（かわさき北部/南部斎苑等）。斗の内製で量産コスト低</td></tr>
+  <tr><td><b>小さなお葬式</b><br><span style="font-size:11px;color:var(--sub);">(osohshiki.jp＝共有URLの正体)</span></td><td>17.6万円<br>(割引後)</td><td>全国ポータル物量戦（累計59万件・提携4,000式場）＋<b>資料請求割引で「没前」に名簿化</b></td><td>正面衝突しない。マップ上に実店舗を持てない・「提携先ガチャ」が構造的弱点</td></tr>
+  <tr><td><b>よりそう</b><br><span style="font-size:11px;color:var(--sub);">(yoriso.com)</span></td><td>8.36万円〜</td><td>事前割 最大12万円で生前ロックイン。提携5,000斎場</td><td>送客手数料20〜30%（1件5.7〜8.6万円相当）＝<b>自社集客CPAがこれを下回れば構造優位</b></td></tr>
+</table>
+<div class="note">True Heartの16.5万円〜は小さなお葬式とほぼ同水準＝最安訴求では戦えない。勝負所は「明朗・即応・地域専門性」。</div>
+
+<!-- 5. True Heart -->
+<h2>⑤ True Heart ファクト<small>パンフレット・費用相場PDF・公式サイトより</small></h2>
+<div class="grid g2">
+  <div class="card">
+    <b>会社</b>
+    <ul style="padding-left:18px; font-size:13px; margin-top:6px;">
+      <li>株式会社True Heart／代表取締役 小林幸平氏</li>
+      <li>拠点：<b>川崎市高津区溝口（溝の口）</b>→ 商圏＝川崎全域＋横浜北部</li>
+      <li>24時間365日受付standard（044-281-4478）・LINE・HP既設（「川崎市の葬儀・家族葬」でサイト構築済み）</li>
+      <li>SKY行政書士事務所と連携：相続・遺品整理・仏壇・散骨等のアフター商品→<b>LTVはプラン粗利以上</b></li>
+      <li>福祉葬（生活保護）対応</li>
+    </ul>
+  </div>
+  <div class="card">
+    <b>単価（基本プラン → 実勢平均）</b>
+    <table style="margin-top:6px; font-size:12.5px;">
+      <tr><th>プラン</th><th>基本</th><th>実勢平均</th><th>月件数*</th></tr>
+      <tr><td>火葬式</td><td>16.5万〜</td><td><b>38.5万</b></td><td>5件</td></tr>
+      <tr><td>1日葬</td><td>38.5万〜</td><td><b>68.5万</b></td><td>4件</td></tr>
+      <tr><td>2日葬</td><td>49.5万〜</td><td><b>77.5万</b></td><td>1件</td></tr>
+    </table>
+    <div class="note">*代表の前職実績（会社アセット込みの数字＝「捌ける」証明であって「取れる」証明ではない点に注意）</div>
+  </div>
+</div>
+<div class="danger" style="margin-top:12px;"><b>最重要発見：</b>火葬式プランは「安置1日・ドライアイス1回・搬送10km」内訳。横浜火葬待ち4.56日と<b>構造的に乖離→「16.5万円〜」で集客すると追加料金がほぼ必ず発生</b>＝措置命令3社（小さなお葬式 課徴金1.018億円等）と同じパターンの入口。逆手に取り「火葬待ち○日なら総額○円」シミュレーション表示を武器化する。</div>
+
+<!-- 6. 経済性 -->
+<h2>⑥ ユニットエコノミクス<small>送客モデル（紹介料20%・実勢売上ベース）</small></h2>
+<div class="grid g4">
+  <div class="stat"><div class="num">10.9<span>万円/件</span></div><div class="lbl">紹介料（実勢加重平均54.4万円×20%）<br><span class="ng">基本プラン下限ベースだと5.7万円＝成立しない</span></div></div>
+  <div class="stat"><div class="num">≤2.0<span>万円</span></div><div class="lbl">入電CPA目標（CPC1,000〜2,500円×CVR8〜15%）</div></div>
+  <div class="stat"><div class="num">≤6.0<span>万円</span></div><div class="lbl">成約CPA目標（入電→成約30%の保守値）。<b>8万円超え継続で赤字＝撤退基準</b></div></div>
+  <div class="stat"><div class="num">+46<span>万円/月</span></div><div class="lbl">Phase 2想定粗利（月10件成約：紹介料109万−広告費60万−ツール3万）</div></div>
+</div>
+
+<!-- 7. チャネルプラン -->
+<h2>⑦ Web集客プラン<small>Google広告 3キャンペーン＋MEO支援（Phase 1：月30万円）</small></h2>
+<table>
+  <tr><th style="width:22%;">キャンペーン</th><th style="width:12%;">予算</th><th style="width:36%;">中身</th><th>狙い</th></tr>
+  <tr><td><span class="pill p-red">①緊急検索</span></td><td>15万円</td><td>「川崎 火葬式」「横浜 直葬」等のフレーズ/完全一致。電話専用広告＋通話アセット。<b>夜間(20-8時)入札強化</b>・スマホ強化</td><td>発生需要の即決を獲る。入電8〜12件/月</td></tr>
+  <tr><td><span class="pill p-blue">②斎場名DSA</span></td><td>6万円</td><td>かわさき北部/南部斎苑・横浜市北部斎場・戸塚斎場・久保山霊堂等の<b>個別ページ×動的検索広告</b></td><td>固有名詞ロングテール（CPC安・競合浅）。花葬儀手法の神奈川版</td></tr>
+  <tr><td><span class="pill p-teal">③生前・事前相談</span></td><td>9万円</td><td>「葬儀 事前相談」「葬儀 費用 いくら」等。資料請求・事前割のフォームCV＋リマーケティング</td><td>没前の名簿づくり。CPAは緊急の1/3。12〜18ヶ月後の安定基盤</td></tr>
+  <tr><td><span class="pill p-green">＋MEO支援</span></td><td>—</td><td>True HeartのGoogleビジネスプロフィール整備（写真・投稿・レビュー獲得設計）</td><td>53%の「マップで実在確認」に応える。広告CVRの土台</td></tr>
+</table>
+<div class="note">やらないこと：P-MAX／ディスプレイ／YouTube（発生需要に不適合）、ビッグワード「葬儀」単体、SEO本格投資（年単位）、「追加料金なし」表現（景表法）。</div>
+
+<!-- 8. ロードマップ -->
+<h2>⑧ ロードマップ<small>広告費を1円も使う前にPhase 0</small></h2>
+<div class="phase">
+  <div class="ph" style="border-top-color:var(--red);">
+    <h4><span class="pill p-red">Phase 0</span> 確認・契約（4〜6週）</h4>
+    <ul>
+      <li>前職との競業避止・営業秘密（黒なら全停止）</li>
+      <li>24h受電の実態／安置施設／施行キャパ</li>
+      <li>実勢単価と利益データの整合確認</li>
+      <li>紹介料契約（実勢売上×20%・転嫁禁止・成約報告義務・月間上限）</li>
+    </ul>
+    <div class="gate">🚪 GO/NO-GO決議（嶋田社長・鈴木・True Heart）</div>
+  </div>
+  <div class="ph" style="border-top-color:var(--amber);">
+    <h4><span class="pill p-amber">Phase 1</span> 検証（3ヶ月・月30万）</h4>
+    <ul>
+      <li>集客サイト＋LP3本＋斎場ページ6〜10本</li>
+      <li>3キャンペーン出稿（川崎＋横浜北部）</li>
+      <li>コールトラッキング＋成約報告ループ</li>
+    </ul>
+    <div class="gate">🚪 GO基準：成約CPA≤6万・月3〜5件・取りこぼし&lt;10%<br>✋ 撤退：成約4件未満 or 入電CPA2.8万超×2ヶ月（延長1回まで・再延長禁止）</div>
+  </div>
+  <div class="ph" style="border-top-color:var(--blue);">
+    <h4><span class="pill p-blue">Phase 2</span> 拡張（4〜9ヶ月・月60万）</h4>
+    <ul>
+      <li>斎場ページ・市区別ページ増産、Yahoo!追加</li>
+      <li>レビュー蓄積→MEO本格化</li>
+      <li>月8〜12件成約へ</li>
+    </ul>
+    <div class="gate">🚪 月8件×2ヶ月継続で共同ブランド化（JV）を再検討（商標・分配率縛り・出資を3点セットで）</div>
+  </div>
+  <div class="ph" style="border-top-color:var(--green);">
+    <h4><span class="pill p-green">Phase 3</span> 堀の構築（10ヶ月〜）</h4>
+    <ul>
+      <li>生前名簿への事前割クロージング</li>
+      <li>福祉142事業所×終活セミナー（法務確認後のみ・直接紹介とキックバックは恒久禁止）</li>
+      <li>隣接エリア・複数施行社への横展開</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 9. リスク -->
+<h2>⑨ リスク TOP5<small>批判エージェント（デビルズアドボケイト）の指摘より</small></h2>
+<table>
+  <tr><th style="width:34%;">リスク</th><th style="width:12%;">深刻度</th><th>対策</th></tr>
+  <tr><td>代表の前職との競業避止・営業秘密紛争</td><td><span class="pill p-red">致命的</span></td><td>Phase 0最優先で契約書確認。疑義あれば一切の対外活動をしない</td></tr>
+  <tr><td>景表法違反（総額・追加費用表示）</td><td><span class="pill p-red">致命的</span></td><td>「追加なし」言い切り禁止。全表示物を法務レビュー後に公開。シミュレーション表示で逆に武器化</td></tr>
+  <tr><td>深夜の取りこぼし＝広告費燃焼</td><td><span class="pill p-amber">高</span></td><td>True Heart 24h窓口へ直転送＋CTIで応答率監視。悪化時は広告即停止（権限は斗）</td></tr>
+  <tr><td>成約CPAがポータル水準（5.7〜8.6万）超え継続</td><td><span class="pill p-amber">高</span></td><td>撤退基準を事前明文化。「あと1ヶ月」の再延長禁止</td></tr>
+  <tr><td>施行キャパ超過（集客成功が逆に損失）</td><td><span class="pill p-amber">高</span></td><td>月間送客上限を契約で設定。稼働率80%超で出稿抑制</td></tr>
+</table>
+
+<footer>
+  作成：Claude（5体AIエージェントチーム：イシュー構造化→市場/アナロジー/顧客リサーチ→戦略統合→批判検証→最終統合）／
+  詳細：戦略レポート_神奈川葬儀集客_20260610.md・Web集客プラン_送客モデル_20260610.md ／
+  データ出典：矢野経済研究所・LDT・横浜市統計・消費者庁・鎌倉新書/よりそう調査・カンリー調査・国民生活センター ほか
+</footer>
+
+</div>
+</body>
+</html>
