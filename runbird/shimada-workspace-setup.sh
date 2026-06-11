@@ -22,7 +22,7 @@ cd "$WORKSPACE/ナレッジ"
 for repo in runbird-hr-knowledge runbird-contracts; do
   if [ -d "$repo" ]; then
     echo "[SKIP] $repo は既存（pullで更新）"
-    (cd "$repo" && git pull --rebase --autostash)
+    (cd "$repo" && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main)
   else
     git clone "https://github.com/runbird-inc/$repo.git"
     echo "[OK] $repo clone完了"
@@ -33,7 +33,7 @@ done
 cd "$WORKSPACE"
 if [ -d "共有/.git" ]; then
   echo "[SKIP] 共有/ は既存リポジトリ（pullで更新）"
-  (cd 共有 && git pull --rebase --autostash)
+  (cd 共有 && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main)
 else
   if [ -d "共有" ]; then
     echo "[警告] 共有/ がリポジトリではない形で既に存在します。安全のため処理を中止します。"
@@ -151,7 +151,7 @@ cat > "$WORKSPACE/.vscode/tasks.json" <<'TASKS_EOF'
     {
       "label": "ナレッジを最新に更新（git pull）",
       "type": "shell",
-      "command": "cd ナレッジ/runbird-hr-knowledge && git pull --rebase --autostash; cd ../runbird-contracts && git pull --rebase --autostash; cd ../../共有 && git pull --rebase --autostash",
+      "command": "cd ナレッジ/runbird-hr-knowledge && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main; cd ../runbird-contracts && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main; cd ../../共有 && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main",
       "presentation": {
         "reveal": "silent",
         "panel": "dedicated",
@@ -194,7 +194,7 @@ fi
 cd "$SHARE_DIR"
 
 # pullしてからpush（コンフリクト回避）
-git pull --rebase --autostash 2>&1 >> "$LOG" || {
+git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main 2>&1 >> "$LOG" || {
   echo "[ERROR] git pull failed" >> "$LOG"
   exit 0
 }

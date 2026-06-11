@@ -47,7 +47,7 @@ foreach ($entry in $RepoList) {
     if (Test-Path $repo) {
         Write-Host "[更新] $repo (既存・git pull)" -ForegroundColor Yellow
         Push-Location $repo
-        git pull --rebase --autostash 2>&1 | Select-Object -Last 2
+        git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main 2>&1 | Select-Object -Last 2
         Pop-Location
         $IncludedRepos += $repo
         $IncludedNames += $name
@@ -94,7 +94,7 @@ $tasksJsonContent = @'
     {
       "label": "ナレッジを最新に更新（git pull）",
       "type": "shell",
-      "command": "git pull --rebase --autostash",
+      "command": "git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main",
       "presentation": { "reveal": "silent", "panel": "dedicated", "showReuseMessage": false, "clear": true, "close": true },
       "runOptions": { "runOn": "folderOpen" },
       "problemMatcher": []

@@ -24,7 +24,19 @@ for repo in */; do
   echo "--- $repo_name ---" >> "$LOGFILE"
 
   if [ "$MODE" = "pull" ] || [ "$MODE" = "both" ]; then
-    git pull --rebase --autostash 2>&1 | tail -3 >> "$LOGFILE"
+    # rebase中断が残っていたら自動復旧（過去事故対策）
+    if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+      git rebase --abort 2>/dev/null
+      echo "  [rebase中断を検知 → abortして続行]" >> "$LOGFILE"
+    fi
+    # 設定の重複（Cannot rebase/merge multiple branches の原因）を正規化
+    br=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$(git config --get-all "branch.$br.merge" 2>/dev/null | wc -l)" -gt 1 ]; then
+      git config --unset-all "branch.$br.merge"
+      git config "branch.$br.merge" "refs/heads/$br"
+      echo "  [branch.$br.merge の重複を正規化]" >> "$LOGFILE"
+    fi
+    git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin "$br" 2>&1 | tail -3 >> "$LOGFILE"
   fi
 
   if [ "$MODE" = "push" ] || [ "$MODE" = "both" ]; then

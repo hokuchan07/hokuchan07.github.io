@@ -71,7 +71,7 @@ for repo in */; do
   echo "--- $repo ---" >> "$LOGFILE"
 
   if [ "$MODE" = "pull" ] || [ "$MODE" = "both" ]; then
-    git pull --rebase --autostash >> "$LOGFILE" 2>&1 || echo "[pull失敗] $repo" >> "$LOGFILE"
+    git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main >> "$LOGFILE" 2>&1 || echo "[pull失敗] $repo" >> "$LOGFILE"
   fi
 
   if [ "$MODE" = "push" ] || [ "$MODE" = "both" ]; then

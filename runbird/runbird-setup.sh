@@ -34,7 +34,7 @@ for entry in "${REPO_LIST[@]}"; do
   IFS=':' read -r repo name <<< "$entry"
   if [ -d "$repo" ]; then
     echo "[更新] $repo（既存・git pull）"
-    (cd "$repo" && git pull --rebase --autostash 2>&1 | tail -2)
+    (cd "$repo" && git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main 2>&1 | tail -2)
     INCLUDED_REPOS+=("$repo")
     INCLUDED_NAMES+=("$name")
   else
@@ -94,7 +94,7 @@ for repo in "${INCLUDED_REPOS[@]}"; do
     {
       "label": "ナレッジを最新に更新（git pull）",
       "type": "shell",
-      "command": "git pull --rebase --autostash",
+      "command": "git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main",
       "presentation": { "reveal": "silent", "panel": "dedicated", "showReuseMessage": false, "clear": true, "close": true },
       "runOptions": { "runOn": "folderOpen" },
       "problemMatcher": []

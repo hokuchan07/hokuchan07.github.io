@@ -74,7 +74,7 @@ Get-ChildItem -Path `$workspace -Directory | ForEach-Object {
     Add-Content `$logFile "--- `$(`$_.Name) ---"
 
     if (`$Mode -eq "pull" -or `$Mode -eq "both") {
-        `$out = git pull --rebase --autostash 2>&1 | Out-String
+        `$out = git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin main 2>&1 | Out-String
         Add-Content `$logFile `$out
     }
 

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前田さん向け：RUNBIRDナレッジAIフォルダの一個入り口化</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 44px 24px 36px; text-align: center; }
+  .header .eyebrow { font-size: 11px; letter-spacing: 0.25em; color: #93c5fd; margin-bottom: 12px; }
+  .header h1 { font-size: 22px; margin-bottom: 8px; line-height: 1.4; }
+  .header .sub { font-size: 13px; color: #cbd5e1; max-width: 640px; margin: 0 auto; }
+  .header .os-badge { display: inline-block; margin-top: 14px; padding: 4px 14px; background: #0078d4; color: #fff; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .header .time { display: inline-block; margin-top: 14px; margin-left: 6px; padding: 4px 14px; background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; font-size: 12px; color: #93c5fd; }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  .intro { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .intro h2 { font-size: 17px; color: #1e293b; margin-bottom: 10px; }
+  .intro p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .intro .goal { background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 16px; margin-top: 12px; color: #166534; font-size: 14px; }
+
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0 8px; }
+  .ba-box { padding: 16px 18px; border-radius: 10px; border: 1px solid; }
+  .ba-box.before { background: #fef2f2; border-color: #fecaca; }
+  .ba-box.after { background: #f0fdf4; border-color: #86efac; }
+  .ba-box .ba-label { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+  .ba-box.before .ba-label { background: #fecaca; color: #991b1b; }
+  .ba-box.after .ba-label { background: #bbf7d0; color: #166534; }
+  .ba-box pre { font-family: 'Consolas', 'SF Mono', monospace; font-size: 12px; color: #334155; white-space: pre-wrap; line-height: 1.6; }
+  @media (max-width: 700px) { .ba-grid { grid-template-columns: 1fr; } }
+
+  h2.section { font-size: 20px; color: #1e293b; margin: 32px 0 8px; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+  p.section-sub { font-size: 13px; color: #64748b; margin-bottom: 18px; }
+
+  .step-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin-bottom: 18px; }
+  .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .step-num { width: 34px; height: 34px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+  .step-title { font-size: 17px; font-weight: 700; color: #1e293b; }
+  .step-card p { font-size: 14px; color: #475569; margin-bottom: 8px; }
+  .step-card ul, .step-card ol { font-size: 14px; color: #475569; padding-left: 22px; margin: 8px 0; }
+  .step-card li { margin-bottom: 4px; }
+
+  .keycap { display: inline-block; background: #fff; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 7px; font-family: 'Consolas', monospace; font-size: 12px; color: #334155; margin: 0 2px; }
+
+  .success { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #166534; }
+  .warning { background: #fef3c7; border: 1px solid #fbbf24; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #92400e; }
+  .info { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #1e40af; }
+  .danger { background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #991b1b; }
+
+  .target-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .target-table th { text-align: left; padding: 10px 12px; background: #f1f5f9; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .target-table td { padding: 10px 12px; border-top: 1px solid #f1f5f9; vertical-align: top; color: #334155; }
+  .target-table .icon-name { font-weight: 600; color: #1e293b; }
+
+  .footer { text-align: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #94a3b8; }
+  .footer a { color: #3b82f6; text-decoration: none; }
+
+  code { font-family: 'Consolas', 'SF Mono', monospace; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #334155; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">RUNBIRD KNOWLEDGE BASE</div>
+  <h1>RUNBIRDナレッジAI フォルダの一個入り口化</h1>
+  <div class="sub">前田さん向け / Cursorで使う4フォルダだけを「📁 RUNBIRDナレッジAI」1個にまとめます</div>
+  <div>
+    <span class="os-badge">🪟 Windows版</span>
+    <span class="time">所要時間: 約5分</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== イントロ ===== -->
+<div class="intro">
+  <h2>このガイドで何ができるか</h2>
+  <p>デスクトップに散らばっている <strong>Cursorで使うRUNBIRDナレッジ4フォルダ</strong> を、「📁 RUNBIRDナレッジAI」1個から開けるようにまとめます。</p>
+  <p>その他のフォルダ（前田業務／SV業務マニュアル／弥生／LINE等）は<strong>今回は触りません</strong>。今回はナレッジAI関連の入り口だけを1個に集約します。</p>
+
+  <div class="ba-grid">
+    <div class="ba-box before">
+      <span class="ba-label">BEFORE 今</span>
+<pre>デスクトップ
+├ runbird-welfare-…
+├ runbird-hr-knowl…
+├ runbird-contracts
+├ CORSOR前田用
+└（他のフォルダ・アプリは
+   そのまま）</pre>
+    </div>
+    <div class="ba-box after">
+      <span class="ba-label">AFTER 整理後</span>
+<pre>デスクトップ
+├ 📁 RUNBIRDナレッジAI ← これ1個
+│   ├ welfare（ショートカット）
+│   ├ hr（ショートカット）
+│   ├ contracts（ショートカット）
+│   └ CORSOR前田用（ショートカット）
+└（他のフォルダ・アプリは
+   そのまま）</pre>
+    </div>
+  </div>
+
+  <div class="goal">
+    🎯 <strong>ゴール</strong>：デスクトップから4つのRUNBIRD関連アイコンが消えて、代わりに「📁 RUNBIRDナレッジAI」1個になる。中を開けば4つ全部に1クリックで到達できる。
+  </div>
+</div>
+
+<!-- ===== 重要注意 ===== -->
+<div class="danger">
+  ⚠️ <strong>本体フォルダは動かしません。</strong>これら4つはCursorとGitHubと連動しているので、移動するとCursorで開けなくなります。今回作るのは<strong>「ショートカット」</strong>（入り口だけのリンク）です。本体は今ある場所のままで大丈夫です。
+</div>
+
+<!-- ===== 対象 ===== -->
+<h2 class="section">今回まとめる4フォルダ</h2>
+<p class="section-sub">デスクトップ上にある以下4つだけが対象です。</p>
+<table class="target-table">
+  <thead><tr><th>デスクトップ上のアイコン名</th><th>用途</th></tr></thead>
+  <tbody>
+    <tr><td class="icon-name">runbird-welfare-knowledge</td><td>福祉ナレッジ（OWL/Royal等）</td></tr>
+    <tr><td class="icon-name">runbird-hr-knowledge</td><td>人事面談ナレッジ</td></tr>
+    <tr><td class="icon-name">runbird-contracts</td><td>契約書ナレッジ</td></tr>
+    <tr><td class="icon-name">CORSOR前田用<br><span style="font-weight:400;color:#64748b;">（Cursorで開いている前田さん用フォルダ）</span></td><td>Cursor作業用</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== 手順 ===== -->
+<h2 class="section">手順</h2>
+<p class="section-sub">上から順に。所要時間は約5分です。</p>
+
+<!-- STEP 1 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">1</div>
+    <div class="step-title">「📁 RUNBIRDナレッジAI」フォルダを作る</div>
+  </div>
+  <ol>
+    <li>デスクトップの何もない所で<strong>右クリック</strong></li>
+    <li>「新規作成」→「フォルダー」</li>
+    <li>名前を <code>📁 RUNBIRDナレッジAI</code> にして <span class="keycap">Enter</span><br>
+      （絵文字が打てなければ <code>★RUNBIRDナレッジAI</code> でもOK。デスクトップ上で目立てば何でも）</li>
+  </ol>
+  <div class="success">✅ デスクトップに新しい空のフォルダが1個できればOK</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">2</div>
+    <div class="step-title">4つのアイコンの「ショートカット」を作る</div>
+  </div>
+  <p>対象の4アイコン<strong>それぞれ</strong>に対して、以下を繰り返します（4回）:</p>
+  <ol>
+    <li>アイコンの上で<strong>右クリック</strong></li>
+    <li>「<strong>ショートカットの作成</strong>」をクリック<br>
+      <span style="font-size:12px;color:#64748b;">（Windows 11 で右クリックメニューに無い場合は「その他のオプションを表示」を一度クリック）</span></li>
+    <li>同じデスクトップ上に <code>○○○ - ショートカット</code> という名前で新しいアイコンができる</li>
+  </ol>
+  <div class="success">
+    ✅ デスクトップに以下の4つのショートカットができればOK（左下に小さい矢印マークが付いているのがショートカット）<br>
+    <code>runbird-welfare-knowledge - ショートカット</code><br>
+    <code>runbird-hr-knowledge - ショートカット</code><br>
+    <code>runbird-contracts - ショートカット</code><br>
+    <code>CORSOR前田用 - ショートカット</code>
+  </div>
+  <div class="warning">
+    💡 <strong>本体（矢印マークが付いていない方）はまだ動かさないでください。</strong>次のステップで動かすのは「- ショートカット」が付いている方だけです。
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">3</div>
+    <div class="step-title">4つのショートカットを「📁 RUNBIRDナレッジAI」に入れる</div>
+  </div>
+  <ol>
+    <li>4つの「- ショートカット」を選択<br>
+      <span style="font-size:12px;color:#64748b;">（1個目をクリック → <span class="keycap">Ctrl</span>を押しながら2〜4個目をクリック）</span></li>
+    <li><span class="keycap">Ctrl</span> + <span class="keycap">X</span> で切り取り</li>
+    <li>「📁 RUNBIRDナレッジAI」をダブルクリックで開く</li>
+    <li>フォルダの中で <span class="keycap">Ctrl</span> + <span class="keycap">V</span> で貼り付け</li>
+  </ol>
+  <div class="success">✅ 「📁 RUNBIRDナレッジAI」を開くと中に4つのショートカットが並んでいる状態になればOK</div>
+  <div class="info">
+    💡 <strong>名前を短くしたい場合</strong>：ショートカットを右クリック→「名前の変更」で <code>welfare</code> <code>hr</code> <code>contracts</code> <code>Cursor前田用</code> 等に短縮してもOK（中身は同じ）。
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">4</div>
+    <div class="step-title">本体4フォルダをデスクトップから片付ける（任意）</div>
+  </div>
+  <p>デスクトップに残っている本体4つ（矢印マークの付いていない方）も見えなくしたい場合は、以下のどちらか:</p>
+  <ol>
+    <li><strong>そのまま残す</strong> → 何もしなくてOK。Cursorのために必要。</li>
+    <li><strong>ドキュメント等に移す</strong>（推奨）→ 4つを選択して <span class="keycap">Ctrl</span> + <span class="keycap">X</span> → 「ドキュメント」フォルダや <code>C:\git\</code> に貼り付け。<br>
+      <span style="color:#991b1b;">ただし移動した瞬間に「📁 RUNBIRDナレッジAI」内のショートカットが切れます</span> → 切れたショートカットを右クリック→削除して、新しい場所から再度ショートカットを作り直す必要があります。
+    </li>
+  </ol>
+  <div class="warning">
+    💡 <strong>迷ったら ① そのまま残す</strong> を選んでください。デスクトップが少し賑やかでも、ナレッジAIの入り口は「📁 RUNBIRDナレッジAI」1個に集約された状態になります。本体の片付けは後日やればOK。
+  </div>
+</div>
+
+<!-- ===== 完了確認 ===== -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num">5</div>
+    <div class="step-title">完了確認</div>
+  </div>
+  <ul>
+    <li>✅ デスクトップに「📁 RUNBIRDナレッジAI」が1個ある</li>
+    <li>✅ 中を開くと4つのショートカット（左下に矢印）が並んでいる</li>
+    <li>✅ どれか1つ（例: welfare）をダブルクリックして、いつもどおり Cursor／エクスプローラーで開ければOK</li>
+  </ul>
+  <div class="success">
+    ✅ 完了したらChatWorkで「<strong>RUNBIRDナレッジAIフォルダまとめ終わりました</strong>」と一言鈴木に送ってください。
+  </div>
+  <div class="warning">
+    💡 <strong>もしショートカットをダブルクリックしてエラーが出たら</strong>：本体フォルダが移動／削除されている可能性があります。慌てず鈴木に連絡してください（GitHubから取り直せます）。
+  </div>
+</div>
+
+<div class="footer">
+  <p>RUNBIRD ナレッジAI — 一個入り口化ガイド &nbsp;|&nbsp; 2026/5/9 公開</p>
+  <p style="margin-top:6px;">作成: 株式会社 斗（hishaku）鈴木 / 連絡先: <a href="mailto:s.hokuoto@gmail.com">s.hokuoto@gmail.com</a> または ChatWork</p>
+</div>
+
+</div><!-- container -->
+
+</body>
+</html>

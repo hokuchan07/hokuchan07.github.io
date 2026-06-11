@@ -24,7 +24,20 @@ Get-ChildItem -Path $workspace -Directory | ForEach-Object {
     Add-Content $logFile "--- $repoName ---"
 
     if ($Mode -eq "pull" -or $Mode -eq "both") {
-        $out = (git pull --rebase --autostash 2>&1 | Select-Object -Last 3 | Out-String).TrimEnd()
+        # rebase中断が残っていたら自動復旧（過去事故対策）
+        if ((Test-Path ".git\rebase-merge") -or (Test-Path ".git\rebase-apply")) {
+            git rebase --abort 2>$null
+            Add-Content $logFile "  [rebase中断を検知 → abortして続行]"
+        }
+        # 設定の重複（Cannot rebase/merge multiple branches の原因）を正規化
+        $br = (git rev-parse --abbrev-ref HEAD).Trim()
+        $merges = @(git config --get-all "branch.$br.merge" 2>$null)
+        if ($merges.Count -gt 1) {
+            git config --unset-all "branch.$br.merge"
+            git config "branch.$br.merge" "refs/heads/$br"
+            Add-Content $logFile "  [branch.$br.merge の重複を正規化]"
+        }
+        $out = (git -c pull.rebase=false -c merge.autoStash=true pull --no-edit origin $br 2>&1 | Select-Object -Last 3 | Out-String).TrimEnd()
         Add-Content $logFile $out
     }
 
