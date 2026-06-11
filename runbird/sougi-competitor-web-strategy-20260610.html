@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>他社ウェブ戦略 調査資料（実例集）｜葬儀ネット集客</title>
+<style>
+  :root{
+    --ink:#1a2330; --sub:#5a6678; --line:#dde3ec; --bg:#f4f6fa;
+    --navy:#16335e; --blue:#2563eb; --teal:#0d9488; --red:#dc2626; --amber:#d97706; --green:#15803d; --purple:#7c3aed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; padding:32px 20px 80px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  header{background:var(--navy); color:#fff; border-radius:14px; padding:28px 32px; margin-bottom:28px;}
+  header .tag{display:inline-block; background:rgba(255,255,255,.15); border-radius:999px; padding:2px 14px; font-size:12px; letter-spacing:.1em; margin-bottom:10px;}
+  header h1{font-size:26px; line-height:1.4;}
+  header p{margin-top:8px; font-size:13px; opacity:.85;}
+  h2{font-size:19px; margin:36px 0 14px; padding-left:12px; border-left:5px solid var(--blue);}
+  h2 small{font-size:12px; color:var(--sub); font-weight:normal; margin-left:10px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .grid{display:grid; gap:12px;}
+  .g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr;}}
+  table{width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; font-size:13px;}
+  th{background:var(--navy); color:#fff; padding:9px 10px; text-align:left; font-weight:600;}
+  td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .pill{display:inline-block; border-radius:999px; padding:1px 10px; font-size:11px; font-weight:bold; color:#fff;}
+  .p-red{background:var(--red);} .p-amber{background:var(--amber);} .p-green{background:var(--green);} .p-blue{background:var(--blue);} .p-teal{background:var(--teal);} .p-purple{background:var(--purple);}
+  .note{font-size:12px; color:var(--sub); margin-top:8px;}
+  code{background:#eef2f8; border:1px solid var(--line); border-radius:5px; padding:1px 6px; font-size:12px; color:var(--navy); word-break:break-all;}
+  .insight{border-left:4px solid var(--teal); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .insight b{color:var(--teal);}
+  .danger{border-left:4px solid var(--red); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .danger b{color:var(--red);}
+  /* 個票 */
+  .co{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:14px;}
+  .co .head{padding:12px 18px; color:#fff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;}
+  .co .head h3{font-size:16px;}
+  .co .head .type{font-size:12px; background:rgba(255,255,255,.2); border-radius:999px; padding:2px 12px;}
+  .co .body{padding:14px 18px; display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:760px){.co .body{grid-template-columns:1fr;}}
+  .co h5{font-size:12.5px; color:var(--sub); border-bottom:1px dashed var(--line); padding-bottom:3px; margin-bottom:6px;}
+  .co ul{padding-left:17px; font-size:13px;}
+  .co li{margin-bottom:3px;}
+  .evidence{grid-column:1 / -1; background:#f8fafc; border:1px dashed #b6c2d4; border-radius:8px; padding:10px 12px; font-size:12.5px;}
+  .evidence b{color:var(--purple);}
+  footer{margin-top:48px; font-size:11px; color:var(--sub); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">RUNBIRD 葬儀事業 ／ 調査資料 別紙 ／ 2026-06-10</div>
+  <h1>他社ウェブ戦略 調査資料（実例集）</h1>
+  <p>グループチャットで共有された実際の広告経由URL・各社LPの実査・公開データに基づく、葬儀ネット集客の「他社が実際にやっていること」の分解</p>
+</header>
+
+<!-- 1. URL解剖 -->
+<h2>① 共有URLの解剖<small>広告パラメータに各社の出稿実態がそのまま残っている</small></h2>
+<div class="card">
+  <p style="font-size:13.5px; margin-bottom:10px;">チャットで共有された4本のURLはすべてGoogle広告クリック後のものであり、パラメータから<b>「どのキーワードに・どのマッチタイプで・どんなキャンペーン名で」出稿しているか</b>が読み取れる（＝推測ではなく実出稿の証拠）。</p>
+  <table>
+    <tr><th style="width:18%;">社名</th><th style="width:46%;">URLに残っていた実パラメータ</th><th>読み取れること</th></tr>
+    <tr>
+      <td><b>グランドセレモニー</b></td>
+      <td><code>utm_term=東京 葬儀屋</code> <code>matchtype=e</code> <code>campaign=grandceremony</code> <code>pref=東京都&plan=葬儀屋&city=東京都</code></td>
+      <td>「東京 葬儀屋」を<b>完全一致(e)</b>で買う直球型。さらに<code>pref/plan/city</code>をLPに渡して<b>地域・プラン別にLPの中身を出し分け</b>る動的LP運用</td>
+    </tr>
+    <tr>
+      <td><b>都民のお葬式</b></td>
+      <td><code>gad_campaignid=23885930617</code>（カスタムUTMなし）</td>
+      <td>Google広告は出稿中だが計測は標準パラメータのみ。サイトはbot対策403が強い＝<b>広告流入を主導線に設計</b>している傍証</td>
+    </tr>
+    <tr>
+      <td><b>花葬儀</b></td>
+      <td><code>utm_campaign=dsa-saijo-test</code>／LP=<code>/area/place/seremonimeguro/</code>（斎場個別ページ）</td>
+      <td>キャンペーン名が<b>「DSA（動的検索広告）×斎場（saijo）のテスト」</b>と自白している。斎場個別ページを受け皿に斎場名検索を自動捕捉する戦略の動かぬ証拠</td>
+    </tr>
+    <tr>
+      <td><b>小さなお葬式</b><br><span style="font-size:11px;color:var(--sub);">(osohshiki.jp)</span></td>
+      <td><code>utm_keyword=神奈川 葬儀社</code> <code>utm_matchtype=p</code> <code>utm_locp=9196647</code> <code>utm_loci=20637</code> <code>utm_device=c</code> <code>utm_creative=776317037716</code></td>
+      <td>「神奈川 葬儀社」を<b>部分一致(p)</b>で面取り。ユーザーの<b>物理位置(locp)・関心位置(loci)・デバイスまで自社パラメータで計測</b>する最も高度なトラッキング。広告クリエイティブIDまで管理</td>
+    </tr>
+  </table>
+  <div class="note">※チャット共有のosohshiki.jpは「よりそう」ではなく「小さなお葬式」（ユニクエスト社）のドメイン。よりそうは yoriso.com。</div>
+</div>
+
+<!-- 2. 個票 -->
+<h2>② 各社個票<small>LP実査に基づく戦略の分解</small></h2>
+
+<div class="co">
+  <div class="head" style="background:var(--red);">
+    <h3>グランドセレモニー（grandsougisya.co.jp）</h3><span class="type">型：低価格×ビッグKWリスティング直球型</span>
+  </div>
+  <div class="body">
+    <div>
+      <h5>価格・商品</h5>
+      <ul>
+        <li>火葬式 <b>8.25万円〜</b>／一日葬22万〜／家族葬27万</li>
+        <li>導師紹介パッケージ25万（通夜・告別式・読経・戒名込み）</li>
+        <li>「従来の葬儀費用の3分の1」「完全自社施工・下請けなし」訴求</li>
+      </ul>
+    </div>
+    <div>
+      <h5>集客・LPの実例</h5>
+      <ul>
+        <li>ファーストビューに大型フリーダイヤル<b>0120-99-8499</b>、電話CTAを上・中・下に3回以上反復（スマホタップ発信前提）</li>
+        <li>東京23区＋<b>神奈川（横浜・川崎・藤沢）</b>＋埼玉・千葉の<b>市区別下層ページを量産</b>＝SEOと広告両方の受け皿</li>
+        <li>会員制度なし＝事前囲い込みより<b>緊急流入の即決獲得に全振り</b></li>
+        <li>顧客の声で「実際に支払った費用」を開示し安心訴求</li>
+      </ul>
+    </div>
+    <div class="evidence"><b>⚠ 要注意の実例：</b>「不安な追加費用一切なし」を現役掲示。これは措置命令3社（後述⑤）とまったく同型の表現であり、<b>真似してはいけない部分</b>。同社が続けられているのは法務設計済みかリスクテイクかは不明。</div>
+  </div>
+</div>
+
+<div class="co">
+  <div class="head" style="background:var(--blue);">
+    <h3>都民のお葬式（tomin-osohshiki.jp／株式会社LAB.U）</h3><span class="type">型：地域呼称ブランド×アセットライト型</span>
+  </div>
+  <div class="body">
+    <div>
+      <h5>価格・商品</h5>
+      <ul>
+        <li>火葬式 <b>7.9万円（税別）〜</b>＝今回比較で最安級</li>
+        <li>家族葬は「式場使用料5万円〜」を含む組み立て型</li>
+        <li>オプション単価を明示：遺影18,700円・湯灌104,500円 等（明朗会計の実例）</li>
+      </ul>
+    </div>
+    <div>
+      <h5>集客・LPの実例</h5>
+      <ul>
+        <li><b>「都民の」という公的連想を生む地域呼称</b>で全国ポータルと差別化（都内専門の絞り込み）</li>
+        <li>自社式場ゼロ・<b>都内厳選300ヶ所以上の提携式場</b>を使い分けるアセットライト経営</li>
+        <li><b>臨海斎場・瑞江葬儀所など公営火葬場との連携を明示</b>＝「公営を使えば安い」を知っている層を獲る</li>
+        <li>「会員登録・事前相談を前提としない価格」「強引なオプションなし」訴求</li>
+      </ul>
+    </div>
+    <div class="evidence"><b>本件への示唆：</b>施設を持たずに「地域一番想起」を取るこのモデルは、True Heart（施行）×RUNBIRD（集客）の分業と構造が同じ。<b>「県民の」「かわさきの」神奈川版ポジションは現状空席に見える</b>（参入時は商標調査必須）。</div>
+  </div>
+</div>
+
+<div class="co">
+  <div class="head" style="background:var(--purple);">
+    <h3>花葬儀（hana-sougi.com）</h3><span class="type">型：斎場個別ページ×DSA（動的検索広告）型</span>
+  </div>
+  <div class="body">
+    <div>
+      <h5>価格・商品</h5>
+      <ul>
+        <li>火葬式 <b>22万円〜</b>／一日葬43万／家族葬56万／一般葬81万＋斎場基本料72,200円別途＝4社中最高価格帯</li>
+        <li>プレミアム花祭壇（河津桜の祭壇など事例写真）で高単価を正当化</li>
+      </ul>
+    </div>
+    <div>
+      <h5>集客・LPの実例（セレモニー目黒ページの実査）</h5>
+      <ul>
+        <li>斎場名を<b>title・見出し・パンくず（目黒区の斎場＞セレモニー目黒）に多重配置</b>→DSAが斎場名検索を自動で拾う設計</li>
+        <li><b>座席数42席・駅徒歩7分・宿泊可など斎場スペックを構造化</b>して掲載</li>
+        <li>近隣斎場（桐ヶ谷斎場等）への内部クロスリンクで「面」を形成</li>
+        <li>フリーダイヤル7箇所以上・「24時間365日無料」反復・コンサルタント顔写真＋満点レビュー5件</li>
+      </ul>
+    </div>
+    <div class="evidence"><b>動かぬ証拠：</b>共有URLのキャンペーン名が <code>dsa-saijo-test</code>。<b>「斎場名で検索する遺族を斎場ページで受けて自社施行に転換する」</b>戦略を試験運用中。神奈川の公営斎場（かわさき北部/南部斎苑・横浜市営4斎場・久保山霊堂）は数が限られ、<b>同じ手法を低コストで再現できる最有力の空白</b>。</div>
+  </div>
+</div>
+
+<div class="co">
+  <div class="head" style="background:var(--teal);">
+    <h3>小さなお葬式（osohshiki.jp／ユニクエスト）</h3><span class="type">型：全国ポータル物量×「没前」名簿化型</span>
+  </div>
+  <div class="body">
+    <div>
+      <h5>価格・商品（資料請求割引後・税込）</h5>
+      <ul>
+        <li>お別れ葬9.9万／火葬式<b>17.6万</b>／一日葬33万／家族葬44万／一般葬60.5万</li>
+        <li><b>「火葬料金は別途」を明記</b>（課徴金処分後の表示転換。後述⑤）</li>
+      </ul>
+    </div>
+    <div>
+      <h5>集客・LPの実例</h5>
+      <ul>
+        <li>「受注8年連続No.1」「累計59万件」「提携4,000式場」「レビュー78,000件」の<b>数の暴力</b>＋NHK等メディア実績</li>
+        <li>神奈川を8エリアに細分化し<b>横浜19区を全列挙</b>した地域ページ網＋地域名入り口コミ表示</li>
+        <li><b>資料請求で5万円→対象プラン最大10万円割引</b>：低障壁の資料請求で「没前」に準顧客化→施行時に回収する2段階設計</li>
+      </ul>
+    </div>
+    <div class="evidence"><b>姉妹型・よりそう（yoriso.com）：</b>火葬式8.36万〜／<b>事前割 最大12万円</b>／提携5,000斎場／「業界最安水準」標榜。両社とも<b>緊急需要のCPC競争より「生前の名簿化」に投資の重心</b>を置いている＝発生時検索だけ見ていると彼らの本当の強さを見誤る。</div>
+  </div>
+</div>
+
+<!-- 3. 共通ノウハウ -->
+<h2>③ 全社に共通していた「勝ちパターンの部品」<small>LP実査からの抽出</small></h2>
+<div class="grid g3">
+  <div class="card"><b>📞 電話CV最優先</b><div class="note" style="margin-top:4px;">全社がフリーダイヤルを画面内に複数回反復＋「24時間365日」を必ず併記。CVの主体はフォームではなく深夜の電話（危篤・逝去直後）。</div></div>
+  <div class="card"><b>💴 「〜円」下限表示＋安心の打ち消し</b><div class="note" style="margin-top:4px;">価格は全社「税込○万円〜」の下限表示。その不安を「自社施工」「追加費用の説明」「実際の支払額の開示」「レビュー」で打ち消す構造。</div></div>
+  <div class="card"><b>📍 地域×形式の掛け算ページ量産</b><div class="note" style="margin-top:4px;">「市区別ページ」（グランド・小さな）か「斎場別ページ」（花葬儀）のどちらかを必ず量産し、広告とSEOの両方の受け皿にしている。</div></div>
+</div>
+
+<!-- 4. 周辺実例 -->
+<h2>④ 神奈川・業界の周辺実例<small>ベンチマークになる公開事例</small></h2>
+<table>
+  <tr><th style="width:26%;">実例</th><th>内容</th><th style="width:30%;">本件への示唆</th></tr>
+  <tr>
+    <td><b>和光葬儀社（神奈川）のMEO</b><br><span class="pill p-green">成功例</span></td>
+    <td>2020年7月対策開始で「神奈川 葬儀」「横浜市 葬式」等のマップ1位をキープ、アクション数が対策前比<b>約267%</b>。別事例では月間施行15件規模の葬儀社がマップ経由で月2件以上を獲得</td>
+    <td>神奈川でもMEOは効く。ただし新規GBPはレビュー0からで年単位＝<b>True Heartの既存拠点（溝の口）の整備支援</b>として取り組む</td>
+  </tr>
+  <tr>
+    <td><b>HJT社のリスティング事例</b><br><span class="pill p-green">成功例</span></td>
+    <td>広告費6.5万円で施行5件（<b>CPA12,000円</b>・問合せ→成約62%）。手法＝CPC1,000円超のビッグワードを捨て、日予算上限付きロングテール集中＋リマーケティング（56万imp/3.1万円）</td>
+    <td>CPA1.2万は例外値だが「<b>ビッグKWを捨ててロングテール＋リマケ</b>」の方針はそのまま採用。計画値はCPA2〜5万で見る</td>
+  </tr>
+  <tr>
+    <td><b>いい葬儀（鎌倉新書）のポータル経済</b><br><span class="pill p-blue">構造</span></td>
+    <td>提携葬儀社1,003社・提携式場6,477ヶ所・<b>年間紹介約3万件・成約率約3割</b>。紹介手数料は施行売上の<b>20〜30%</b>が業界相場</td>
+    <td>手数料相場20〜30%が本件の料率設計（20%）と先方説得の基準線。「ポータルと同等以下の料率で集客コストゼロ」が営業トーク</td>
+  </tr>
+  <tr>
+    <td><b>DMMのお葬式</b><br><span class="pill p-red">失敗例</span></td>
+    <td>資金力・ネット集客力のあるDMMが2017年参入→<b>約1年で撤退</b>。お坊さん便のAmazon出品も2019年終了</td>
+    <td>「全国ブランドが施行現場を持たずに上から参入」は死屍累々。<b>地場施行会社（True Heart）が現場を持ち、集客だけ足す逆向き構造</b>で参入する</td>
+  </tr>
+</table>
+
+<!-- 5. 景表法 -->
+<h2>⑤ 表示規制の実例<small>業界大手3社が処分済みの「地雷の正体」</small></h2>
+<div class="grid g3">
+  <div class="danger"><b>小さなお葬式（ユニクエスト）</b><br><span style="font-size:12.5px;">「追加料金一切不要のお葬式」表示 → 2018年12月措置命令 → 2021年7月<b>課徴金1億180万円</b>（消費者庁）。以後「火葬料金は別途」明記に転換</span></div>
+  <div class="danger"><b>よりそう</b><br><span style="font-size:12.5px;">2019年6月、同様の「追加料金不要」表示で<b>措置命令</b></span></div>
+  <div class="danger"><b>イオンライフ（イオンのお葬式)</b><br><span style="font-size:12.5px;">同型の表示で<b>処分歴</b>。最大手ブランドでも逃れられない重点監視領域</span></div>
+</div>
+<div class="insight" style="margin-top:12px;"><b>裏返すと最大のチャンス：</b>処分が相次いだ結果、各社は「総額」を言い切れなくなった。<b>「火葬待ち○日の場合の総額シミュレーション」を内訳付きで先に見せる設計</b>（True Heartのプラン内訳＝搬送km・安置日数・ドライアイス回数が明文化されているから可能）は、法令順守がそのまま差別化になる唯一のポジション。</div>
+
+<!-- 6. まとめ -->
+<h2>⑥ まとめ：他社戦略 5つの型と、RUNBIRDの採否</h2>
+<table>
+  <tr><th style="width:30%;">型（実例）</th><th style="width:12%;">採否</th><th>理由</th></tr>
+  <tr><td>① ビッグKWリスティング直球型（グランドセレモニー「東京 葬儀屋」完全一致）</td><td><span class="pill p-amber">部分採用</span></td><td>ビッグ単体KWは買わず「地域×形式」の複合KW（川崎 火葬式 等）に限定。動的LP出し分けの発想は採用</td></tr>
+  <tr><td>② 地域呼称ブランド型（都民のお葬式）</td><td><span class="pill p-green">採用（中期）</span></td><td>神奈川版ポジションが空席。ただしブランド立ち上げは実績後（商標調査が前提）</td></tr>
+  <tr><td>③ 斎場名DSA型（花葬儀 <code>dsa-saijo-test</code>）</td><td><span class="pill p-green">採用（主力）</span></td><td>神奈川の公営斎場は数が限られ面取りしやすい。CPC安・競合浅・斗の内製でページ量産コスト低</td></tr>
+  <tr><td>④ ポータル物量×事前割名簿型（小さなお葬式・よりそう）</td><td><span class="pill p-amber">部分採用</span></td><td>物量戦は正面衝突しない。「没前の名簿化」（資料請求・事前相談特典）だけ予算3割で模倣</td></tr>
+  <tr><td>⑤ MEO型（和光葬儀社）</td><td><span class="pill p-amber">部分採用</span></td><td>効果は実証済みだがレビュー蓄積は年単位。True Heart拠点のGBP整備支援として並走</td></tr>
+</table>
+
+<footer>
+  出典：チャット共有URLのパラメータ実査／各社公式サイトの実査（2026-06実施）／消費者庁公表資料／鎌倉新書・smart MEO・HJT公開事例 ほか。<br>
+  関連資料：戦略レポート_神奈川葬儀集客_20260610.md ／ Web集客プラン_送客モデル_20260610.md ／ 図解_神奈川葬儀集客_全体像_20260610.html
+</footer>
+
+</div>
+</body>
+</html>
