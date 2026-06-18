@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご提案 ｜ AXT × MiiTel 通話基盤スキーム（2026/6/18）</title>
+<style>
+  :root{
+    --ink:#1a2233; --sub:#5b6577; --line:#e3e8f0; --bg:#f5f7fb;
+    --green:#1f9d6b; --green-bg:#e6f7ef; --red:#d8463c; --red-bg:#fdeceb;
+    --amber:#c98a12; --amber-bg:#fdf4e0; --blue:#2563c9; --blue-bg:#e8f0fd;
+    --purple:#6b46c1; --purple-bg:#f1ebfb;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px 80px;}
+  header{background:linear-gradient(135deg,#16213e,#2b3a5c);color:#fff;padding:50px 22px 42px;}
+  header .wrap{max-width:1000px;margin:0 auto;padding:0 22px;}
+  .kicker{font-size:13px;letter-spacing:.18em;color:#9db4e0;font-weight:700;}
+  h1{font-size:31px;margin:10px 0 14px;line-height:1.38;}
+  header .to{margin:0;color:#c9d6ee;font-size:15px;}
+  .meta{margin-top:20px;font-size:13px;color:#9db4e0;}
+  .meta b{color:#fff;font-weight:600;}
+  section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 32px;margin-top:24px;
+    box-shadow:0 1px 3px rgba(20,30,60,.04);}
+  h2{font-size:21px;margin:0 0 8px;display:flex;align-items:center;gap:11px;}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:9px;
+    background:var(--blue);color:#fff;font-size:15px;flex:none;padding:0 6px;}
+  .lead{color:var(--sub);font-size:14.5px;margin:0 0 18px;}
+  h3{font-size:16px;margin:22px 0 10px;}
+  p{margin:10px 0;}
+
+  .summary{border-left:5px solid var(--green);background:var(--green-bg);border-radius:0 12px 12px 0;
+    padding:18px 22px;margin:4px 0 0;}
+  .summary b{color:var(--ink);}
+
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:14px 0;}
+  .node{flex:1;min-width:120px;background:var(--blue-bg);border:1.5px solid #b9cef5;border-radius:11px;
+    padding:13px 12px;text-align:center;font-size:13px;font-weight:600;}
+  .node small{display:block;font-weight:400;color:var(--sub);font-size:11.5px;margin-top:3px;}
+  .arrow{display:flex;align-items:center;justify-content:center;color:#9aa6bd;font-size:20px;padding:0 5px;flex:none;}
+  .node.brain{background:var(--purple-bg);border-color:#cdbcf0;}
+  .node.phone{background:var(--green-bg);border-color:#aedcc6;}
+  .node.rec{background:var(--amber-bg);border-color:#ecd49a;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:middle;}
+  th{background:#f0f3f9;font-weight:700;font-size:13px;}
+  td.c,th.c{text-align:center;}
+  .now td{background:#fbfbfc;}
+  .new td{background:var(--green-bg);}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--red);font-weight:700;}
+  .big{font-size:19px;font-weight:800;}
+
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
+  .kpi .box{border:1px solid var(--line);border-radius:12px;padding:18px 16px;text-align:center;}
+  .kpi .box .v{font-size:26px;font-weight:800;color:var(--green);line-height:1.2;}
+  .kpi .box .v.gray{color:var(--sub);}
+  .kpi .box .l{font-size:12.5px;color:var(--sub);margin-top:6px;}
+
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0;}
+  ol.steps li{position:relative;padding:11px 0 11px 46px;border-bottom:1px dashed var(--line);font-size:14px;}
+  ol.steps li:last-child{border-bottom:none;}
+  ol.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:10px;
+    width:30px;height:30px;background:var(--blue);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+  ol.steps b{color:var(--ink);}
+
+  .check{list-style:none;padding:0;margin:8px 0;}
+  .check li{padding:6px 0 6px 28px;position:relative;font-size:14px;}
+  .check li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800;}
+
+  .callout{border-left:5px solid var(--amber);background:var(--amber-bg);border-radius:0 10px 10px 0;
+    padding:14px 18px;margin:16px 0;font-size:14px;}
+  .callout.good{border-color:var(--green);background:var(--green-bg);}
+  .callout.blue{border-color:var(--blue);background:var(--blue-bg);}
+
+  .small{font-size:12px;color:var(--sub);}
+  .note{font-size:12px;color:var(--sub);border-top:1px solid var(--line);margin-top:18px;padding-top:12px;}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:30px;}
+  @media(max-width:680px){
+    .flow{flex-direction:column;} .arrow{transform:rotate(90deg);padding:4px 0;}
+    .kpi{grid-template-columns:1fr;} h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">株式会社斗 → 株式会社ランバード ｜ ご提案</div>
+    <h1>テレアポ通話基盤を「AXT × MiiTel」に<br>切り替えるご提案</h1>
+    <p class="to">― 携帯番号(090/080)を維持したまま、録音・文字起こし・分析を一元化し、コストを下げる ―</p>
+    <div class="meta"><b>提出先：</b>嶋田社長　／　<b>作成：</b>2026/6/18　／　<b>作成者：</b>斗（鈴木）</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 結論 -->
+  <section>
+    <h2><span class="n">要旨</span>ご提案の結論</h2>
+    <div class="summary">
+      通話の<b>「090発信・録音・文字起こし」は自前で作らず、既製のAI電話「MiiTel」に任せ</b>、その上に
+      当社開発の<b>AXT（リスト・誰に何を話すか・分析の“頭脳”）をAPIで連携</b>させます。<br>
+      <b>端末（iPhone/Android）の交換は不要、今の携帯番号もそのまま。</b>
+      まずは<b>1台のみのテスト運用</b>から始め、効果を確認してから段階展開します。
+    </div>
+  </section>
+
+  <!-- 背景 -->
+  <section>
+    <h2><span class="n">1</span>背景・課題</h2>
+    <ul class="check">
+      <li>AXT（テレアポシステム）の発信・録音機能を、どう実装するかを検討してきました。</li>
+      <li>当初は「専用Androidアプリで端末録音（Samsung推奨）」案がありましたが、調査の結果<b>端末側録音は機種・OS依存で不安定</b>であることが判明。</li>
+      <li>また<b>050番号は通電率・折り返し率が落ちる</b>ため、<b>090/080での発信維持が必須</b>（社長ご指摘の通りです）。</li>
+      <li>一方、090発信を自前で作る案（SIMバンク）は、<b>2026年3月のドコモ3G停波</b>により安価な機器が使えなくなり、<b>実質的に非現実的</b>になりました。</li>
+    </ul>
+    <div class="callout blue">
+      <b>結論：</b>「090で安く大量に発信し、録音する」部分は自前構築が割に合わない。
+      <b>ここを月数千円で提供する既製サービスが登場した（MiiTel）</b>ため、それを使うのが最適です。
+    </div>
+  </section>
+
+  <!-- スキーム -->
+  <section>
+    <h2><span class="n">2</span>提案スキーム：頭脳(AXT)と電話(MiiTel)の分離</h2>
+    <p class="lead">「売上を作る頭脳」は当社AXTが担い、「電話・090・録音」は実績豊富なMiiTelに任せ、両者をAPIで自動連携します。</p>
+    <div class="flow">
+      <div class="node brain">AXT（頭脳）<small>リスト・誰に架けるか・分析</small></div>
+      <div class="arrow">⇄ API</div>
+      <div class="node phone">MiiTel<small>090発信・端末そのまま</small></div>
+      <div class="arrow">▶</div>
+      <div class="node rec">録音＋文字起こし<small>AI解析つき・自動</small></div>
+      <div class="arrow">▶</div>
+      <div class="node brain">AXTに自動蓄積<small>分析・次の一手</small></div>
+    </div>
+    <ul class="check">
+      <li><b>090/080発信に対応</b>（2025年3月〜）。<b>今の携帯番号を変えずに</b>利用可能。3大キャリア対応。</li>
+      <li><b>専用機器・端末交換は不要</b>（PC＋スマホでOK。Samsung等への買い替え不要）。</li>
+      <li><b>全通話を自動録音＋話者分離の文字起こし＋AI解析</b>（話速・感情・応対スコア）が標準装備。</li>
+      <li><b>Webhook連携で通話ログ・文字起こしをAXTへ自動送信</b>できることを確認済み。</li>
+    </ul>
+  </section>
+
+  <!-- コストメリット -->
+  <section>
+    <h2><span class="n">3</span>導入コストメリット</h2>
+    <p class="lead">現在のコムデスク（25ID・併用プラン・月約40万円）との比較です。</p>
+    <table>
+      <tr><th>項目</th><th>現状：コムデスク</th><th>提案：AXT × MiiTel</th></tr>
+      <tr class="now"><td>発信番号</td><td>090/080</td><td class="yes">090/080（変更なし・端末交換不要）</td></tr>
+      <tr class="now"><td>録音・文字起こし</td><td>あり</td><td class="yes">あり＋AI解析（話速/感情/スコア）</td></tr>
+      <tr class="now"><td>初期費用</td><td>―</td><td class="yes">0円</td></tr>
+      <tr class="now"><td>月額（25ID）</td><td class="big">約40万円</td><td class="big" style="color:var(--green)">MiiTel本体 約17.5万円<br><span class="small" style="font-weight:400">（@6,980円×25）＋通話料</span></td></tr>
+      <tr class="new"><td>頭脳（リスト・分析）</td><td class="no">なし</td><td class="yes">AXTで上乗せ（当社開発済・追加コスト最小）</td></tr>
+    </table>
+    <div class="kpi">
+      <div class="box"><div class="v gray">約40万円</div><div class="l">現状の月額（25ID）</div></div>
+      <div class="box"><div class="v">月10〜20万円</div><div class="l">削減見込み<span class="small">（通話料確定後に精緻化）</span></div></div>
+      <div class="box"><div class="v">0円</div><div class="l">初期費用・1IDから契約可</div></div>
+    </div>
+    <div class="callout">
+      ※通話料は実機の携帯回線分が別途かかります（従量 or パック）。正確な月額は、当社がMiiTelに相見積もりを取って確定させます。
+      <b>コスト削減に加え、コムデスクには無い「リスト×分析の頭脳(AXT)」が乗る</b>のが本提案の最大の価値です。
+    </div>
+  </section>
+
+  <!-- 1台テスト -->
+  <section>
+    <h2><span class="n">4</span>まずは「1台のみ」でテスト運用を推奨</h2>
+    <p class="lead">MiiTelは<b>初期費用0円・1ID/1ヶ月から契約可能</b>。いきなり全台入れ替えず、まず1台で実証してから判断するのが最もリスクが低い進め方です。</p>
+    <h3>テストで確認する3点</h3>
+    <ol class="steps">
+      <li><b>通電率・折り返し率は維持できるか</b> ― 実際に1台で架電し、コムデスクと遜色ないかを数字で確認。</li>
+      <li><b>録音・文字起こしの品質は実用に耐えるか</b> ― 実通話で音質・話者分離・テキスト精度をチェック。</li>
+      <li><b>AXTへデータが流れるか</b> ― Webhook連携で通話ログ・文字起こしがAXTに自動蓄積されるかを実装・検証。</li>
+    </ol>
+    <div class="callout good">
+      <b>リスクはほぼゼロ。</b>初期0円・1ヶ月単位のため、合わなければ止めるだけ。コムデスクは併用のまま残すので、現場の架電は一切止まりません。
+      テストOKなら<b>ID単位で段階的に切り替え、コムデスクを少しずつ解約</b>していきます。
+    </div>
+  </section>
+
+  <!-- 段階展開 -->
+  <section>
+    <h2><span class="n">5</span>段階展開ロードマップ</h2>
+    <ol class="steps">
+      <li><b>1台テスト（〜数週間）</b>：MiiTel 1ID契約＋AXT連携実装＋上記3点を実証。</li>
+      <li><b>小規模展開（数台）</b>：試験運用メンバーへ拡大。コムデスクは併用継続。</li>
+      <li><b>本格移行</b>：効果確認後、ID単位でMiiTelへ切替＋コムデスクを段階解約（月額を圧縮）。</li>
+      <li><b>定着</b>：AXTの分析・リスト機能とフル連携し、「誰にいつ何を話すか」まで含めた運用へ。</li>
+    </ol>
+  </section>
+
+  <!-- 発展：外販 -->
+  <section>
+    <h2><span class="n">6</span>発展：この仕組みは「外販商品」にもなります</h2>
+    <p class="lead">RUNBIRDで実証したこの「AXT × 090電話」パックは、<b>そのまま他社への外販商品</b>に育てられます。</p>
+    <ul class="check">
+      <li>世の中の多くの企業がコムデスク等に<b>月数十万円</b>を払っています。その層に対し、<b>「同じ090で繋がる＋録音＋“誰に架けるべきか”を出すAXTの頭脳」</b>を上位互換として提案できます。</li>
+      <li>MiiTelは<b>再販パートナー制度</b>を公式に持っており、当社が仕入れて<b>RUNBIRD名義のパッケージ</b>として展開する座組が組めます。</li>
+      <li>RUNBIRDが進めるAIコンサル外販・代理店スキームと一体で、<b>新たな収益の柱</b>になり得ます。</li>
+    </ul>
+    <div class="callout blue">
+      まずはRUNBIRD自社で「コムデスク→AXT×MiiTel」の成功事例を1つ作ることが、外販の最強の営業材料になります。<b>自社導入＝外販の実証実験</b>を兼ねます。
+    </div>
+  </section>
+
+  <!-- 次アクション -->
+  <section>
+    <h2><span class="n">7</span>次のアクション（ご承認いただきたいこと）</h2>
+    <ol class="steps">
+      <li><b>本スキームで進める方針のご承認</b>（自前構築はやめ、AXT×MiiTelで進める）。</li>
+      <li><b>現在のコムデスク契約プランの資料共有</b> ― プラン見直しだけでも下がる可能性があるため確認したい。</li>
+      <li>当社にて<b>MiiTelへ相見積もり＋再販条件の確認</b>（通話料・API連携・25席総額・再販条件）。</li>
+      <li><b>MiiTel 1IDでテスト運用開始</b> ― AXT連携を実装し、3点を実証してご報告。</li>
+    </ol>
+  </section>
+
+  <div class="note">
+    【参考・出典】MiiTel 090対応（RevComm 2025/3/28発表）／MiiTel料金 1ID 6,980円・初期0円・通話料別／MiiTel Webhook（developers.miitel.com）／MiiTel再販パートナー制度／ドコモ3G停波 2026/3/31。
+    数値は公開情報に基づく現時点の見込みであり、通話料等は相見積もりで確定します。
+  </div>
+
+  <footer>株式会社斗 ｜ AXT × MiiTel 通話基盤スキーム ご提案 ｜ 2026/6/18</footer>
+</div>
+</body>
+</html>
