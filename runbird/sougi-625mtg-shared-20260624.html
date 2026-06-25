@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>図解：川崎・横浜北部 葬儀ネット集客サイト 構成案＋集客見込み（共有版）</title>
+<style>
+  :root{
+    --ink:#1a2330; --sub:#5a6678; --line:#dde3ec; --bg:#f4f6fa;
+    --navy:#16335e; --blue:#2563eb; --teal:#0d9488; --red:#dc2626; --amber:#d97706; --green:#15803d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; padding:32px 20px 80px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  header{background:var(--navy); color:#fff; border-radius:14px; padding:28px 32px; margin-bottom:28px;}
+  header .tag{display:inline-block; background:rgba(255,255,255,.15); border-radius:999px; padding:2px 14px; font-size:12px; letter-spacing:.1em; margin-bottom:10px;}
+  header h1{font-size:25px; line-height:1.4;}
+  header p{margin-top:8px; font-size:13px; opacity:.85;}
+  h2{font-size:19px; margin:36px 0 14px; padding-left:12px; border-left:5px solid var(--blue);}
+  h2 small{font-size:12px; color:var(--sub); font-weight:normal; margin-left:10px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .grid{display:grid; gap:12px;}
+  .g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);} .g4{grid-template-columns:repeat(4,1fr);}
+  @media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr;}}
+  table{width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; font-size:13px;}
+  th{background:var(--navy); color:#fff; padding:9px 10px; text-align:left; font-weight:600;}
+  td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .ok{color:var(--green); font-weight:bold;} .ng{color:var(--red); font-weight:bold;} .warn{color:var(--amber); font-weight:bold;}
+  .pill{display:inline-block; border-radius:999px; padding:1px 10px; font-size:11px; font-weight:bold; color:#fff;}
+  .p-green{background:var(--green);} .p-blue{background:var(--blue);} .p-navy{background:var(--navy);}
+  .note{font-size:12px; color:var(--sub); margin-top:8px;}
+  .stat{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; text-align:center;}
+  .stat .num{font-size:26px; font-weight:bold; color:var(--navy);}
+  .stat .num span{font-size:13px;}
+  .stat .lbl{font-size:12px; color:var(--sub); margin-top:2px;}
+  .insight{border-left:4px solid var(--teal); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .insight b{color:var(--teal);}
+  .danger{border-left:4px solid var(--red); background:#fff; border-radius:0 12px 12px 0; padding:12px 16px;}
+  .danger b{color:var(--red);}
+  .type{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; border-top:5px solid var(--line);}
+  .type.t1{border-top-color:var(--navy);} .type.t2{border-top-color:var(--green);} .type.t3{border-top-color:var(--amber);}
+  .type h4{font-size:14px; margin-bottom:4px;}
+  .type .who{font-size:12px; color:var(--sub); margin-bottom:8px;}
+  .type ul{padding-left:16px; font-size:12px; color:var(--ink);}
+  .type .verdict{margin-top:8px; font-size:12px; background:var(--bg); border-radius:8px; padding:7px 9px;}
+  .sitemap{font-size:13px;}
+  .sitemap .root{background:var(--navy); color:#fff; border-radius:8px; padding:8px 12px; font-weight:bold; display:inline-block; margin-bottom:10px;}
+  .sitemap .nodes{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  @media(max-width:760px){.sitemap .nodes{grid-template-columns:1fr;}}
+  .sitemap .node{border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:8px; padding:8px 10px; background:#fff;}
+  .sitemap .node b{font-size:12.5px;} .sitemap .node span{font-size:11px; color:var(--sub);}
+  .flow{display:flex; align-items:stretch; gap:0; flex-wrap:wrap;}
+  .fbox{flex:1; min-width:130px; background:#fff; border:2px solid var(--blue); border-radius:10px; padding:11px 12px; text-align:center;}
+  .fbox h4{font-size:13px; color:var(--blue); margin-bottom:3px;}
+  .fbox p{font-size:11px; color:var(--sub);}
+  .arrow{display:flex; align-items:center; justify-content:center; min-width:30px; font-size:18px; color:var(--blue); font-weight:bold;}
+  .decide td:first-child{font-weight:bold; color:var(--navy); white-space:nowrap;}
+  footer{margin-top:48px; font-size:11px; color:var(--sub); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">RUNBIRD × True Heart 協業 ／ 打ち合わせ資料 ／ 2026-06-25</div>
+  <h1>川崎・横浜北部 葬儀ネット集客サイト 構成案＋集客見込み<br><span style="font-size:16px; opacity:.9;">独自ブランドサイトで集客し、提携斎場（True Heart）の施行につなぐ</span></h1>
+  <p>サイトの作り方・価格表示の方針・初期の集客見込み件数をまとめた打ち合わせ用の1枚</p>
+</header>
+
+<!-- 1. 市場の3タイプ -->
+<h2>① 川崎エリアの葬儀サイト 3タイプ<small>どの形で作るかの整理</small></h2>
+<div class="grid g3">
+  <div class="type t1">
+    <h4>A. 自社斎場・地域密着型</h4>
+    <div class="who">例：セレモニア平安会館</div>
+    <ul>
+      <li>創業77年・自社11式場・24h</li>
+      <li>互助会／介護施設経営で地域に密着</li>
+      <li>サイトでは価格は非表示</li>
+    </ul>
+    <div class="verdict">長年の地域基盤とブランドが強み。新規参入が同じ土俵では戦いにくいタイプ</div>
+  </div>
+  <div class="type t2">
+    <h4>B. 自社＋提携斎場 紹介型 <span class="pill p-green">今回つくる形</span></h4>
+    <div class="who">例：登戸の杜</div>
+    <ul>
+      <li>自社ホール＋提携斎場を幅広く紹介</li>
+      <li>価格を<span class="ok">明示</span>（火葬式15.18万〜 等）</li>
+      <li>会員制度（入会で会員価格）</li>
+      <li>葬儀後アンケート→口コミを可視化</li>
+    </ul>
+    <div class="verdict">「お困りの方に提携斎場を紹介する」形。今回つくる独自ブランドサイトの完成イメージに近い</div>
+  </div>
+  <div class="type t3">
+    <h4>C. クチコミ・比較ポータル型</h4>
+    <div class="who">例：葬儀の口コミ</div>
+    <ul>
+      <li>中立を掲げて複数社をランキング</li>
+      <li>火葬式8.8万〜など価格帯を比較表示</li>
+      <li>補助制度の情報も掲載</li>
+    </ul>
+    <div class="verdict">幅広い比較が強み。価格帯の相場感を把握する参考になる</div>
+  </div>
+</div>
+<div class="insight" style="margin-top:14px;">
+  <b>つくる形＝B（独自ブランドサイト＋川崎の提携斎場を紹介）。</b>
+  ポジションは「<b>価格を誠実に提示し、川崎特化・24時間の即対応で選ばれる</b>」。安さ一本でも、ブランド一本でもない、その間を取る。
+</div>
+
+<!-- 2. サイト構成 -->
+<h2>② 独自ブランドサイト 構成案<small>運営：RUNBIRD／施行：提携葬儀社(True Heart)</small></h2>
+<div class="card sitemap">
+  <div class="root">独自ブランド（仮）— 川崎・横浜北部の葬儀相談窓口</div>
+  <div class="nodes">
+    <div class="node"><b>TOP</b><br><span>緊急導線最優先・電話タップ＋「今すぐ相談」固定ボタン</span></div>
+    <div class="node"><b>料金・プラン</b><br><span>火葬式/一日葬/家族葬 ★総額シミュレーション付き</span></div>
+    <div class="node"><b>提携斎場ページ ×6</b><br><span>北部斎苑・南部斎苑・横浜北部斎場 ほか</span></div>
+    <div class="node"><b>葬儀の流れ</b><br><span>深夜入電→お迎え→安置→施行</span></div>
+    <div class="node"><b>事前相談・資料請求</b><br><span>フォーム＝事前のご相談・名簿づくり</span></div>
+    <div class="node"><b>お役立ち記事</b><br><span>病院紹介は断ってよい／火葬待ち中の安置費用</span></div>
+  </div>
+  <div class="note">＋ 広告の受け皿として <b>緊急用LP×3</b>（火葬式／一日葬／「病院に急かされている方へ」）。</div>
+  <div class="note">Bタイプに学び <b>「会員制度」＋「施行後アンケート→口コミ循環」</b> をサイトに組み込む。</div>
+</div>
+
+<!-- 3. 価格表示の作法 -->
+<h2>③ 価格表示の方針（明朗会計 × 法令順守）<small>葬儀業界で最も気をつける点</small></h2>
+<div class="grid g2">
+  <div class="insight">
+    <b>やる：総額シミュレーション併記</b><br>
+    プランごとに「火葬待ち◯日の場合の総額例」を同じ画面に表示。<br>
+    例）火葬式 基本16.5万 ＋（待ち4日＝ドライアイス追加・安置延長）→ <b>総額例 約22〜25万円</b><br>
+    <span class="note">「あとからいくら増えるか」を先に正直に出すことが、かえって信頼と選ばれる理由になる。</span>
+  </div>
+  <div class="danger">
+    <b>やらない（禁止）：言い切り表現</b><br>
+    「追加料金なし」「総額◯円ぽっきり」はNG。<br>
+    過去に大手も含め景表法の措置命令・課徴金の事例がある業界。<br>
+    <span class="note">発生条件（搬送距離・安置日数・ドライアイス・火葬場料金別途）を同一視認範囲に明記する。</span>
+  </div>
+</div>
+
+<!-- 4. 集客見込み件数 -->
+<h2>④ 初期の集客見込み件数<small>電話一次受付（代行）の規模を決めるための目安</small></h2>
+<div class="grid g4" style="margin-bottom:12px;">
+  <div class="stat"><div class="num">20〜30<span>コール/月</span></div><div class="lbl">検証期・安定月の入電目安<br>（広告 月30万）</div></div>
+  <div class="stat"><div class="num">10<span>件前後</span></div><div class="lbl">立ち上がり初月<br>（広告が温まるまで）</div></div>
+  <div class="stat"><div class="num">6〜10<span>件/月</span></div><div class="lbl">フォーム事前相談<br>（電話以外のご相談）</div></div>
+  <div class="stat"><div class="num">40〜60<span>コール/月</span></div><div class="lbl">拡大期（広告 月60万・<br>手応え確認後）</div></div>
+</div>
+<div class="card">
+  <table>
+    <tr><th>広告キャンペーン（月30万）</th><th>月予算</th><th>想定クリック</th><th>電話のご相談</th></tr>
+    <tr><td>①緊急検索（火葬式/家族葬 すぐ）</td><td>15万</td><td>60〜150</td><td><b>8〜12件</b></td></tr>
+    <tr><td>②斎場名 検索</td><td>6万</td><td>75〜200</td><td><b>3〜5件</b></td></tr>
+    <tr><td>③生前・事前相談</td><td>9万</td><td>主にフォーム</td><td>電話2〜3件（＋フォーム6〜10件）</td></tr>
+    <tr><td colspan="3"><b>ご相談の電話 合計</b></td><td><b>14〜19件/月</b></td></tr>
+    <tr><td colspan="3">＋一般的な問い合わせ（価格確認・エリア確認等）込みの実コール</td><td class="warn"><b>→ 約20〜28件/月</b></td></tr>
+  </table>
+  <div class="note"><b>葬儀は深夜・休日に集中</b>するため、一次受付は「24時間 取りこぼさない」体制が要。電話代行はこの<b>コール本数の規模</b>で料金が変わるため、まずこの目安を共有して見積もりを取る。</div>
+</div>
+<div class="danger" style="margin-top:12px;">
+  <b>前提：</b>新規サイトのため、上記は<b>広告費からの見込み（推計）</b>。実際は配信して2〜3ヶ月で実数を計測しながら、広告と代行の規模を調整していく初期の目安。
+</div>
+
+<!-- 5. 進め方 -->
+<h2>⑤ 進め方<small>集客見込み→電話代行→体制づくり</small></h2>
+<div class="card">
+  <div class="flow">
+    <div class="fbox"><h4>① 集客見込みを共有</h4><p>月20〜30コール<br>（初月10件前後）</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>② 電話代行を選定</h4><p>この件数帯で<br>見積もり取得<br>（24h一次受付）</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>③ サイト・LP制作</h4><p>独自ブランド＋<br>提携斎場6ページ<br>（短期で制作可）</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox"><h4>④ 広告配信</h4><p>月30万 ×3ヶ月で<br>検証スタート</p></div>
+    <div class="arrow">→</div>
+    <div class="fbox" style="border-color:var(--green);"><h4 style="color:var(--green);">⑤ 数値を見て拡大</h4><p>手応えを確認し<br>広告・エリアを拡大</p></div>
+  </div>
+</div>
+
+<!-- 6. 6/25で決めること -->
+<h2>⑥ 本日のMTGで決めたいこと</h2>
+<div class="card">
+  <table class="decide">
+    <tr><th>#</th><th>決めること</th><th>たたき台</th></tr>
+    <tr><td>1</td><td>つくる形</td><td>B（独自ブランドサイト＋提携斎場6紹介）で進める</td></tr>
+    <tr><td>2</td><td>ブランド名・ロゴ</td><td>候補を確定（商標の重複がないか確認）</td></tr>
+    <tr><td>3</td><td>掲載する提携斎場6つ</td><td>True Heart提携済みの川崎/横浜北部の斎場リストを確定</td></tr>
+    <tr><td>4</td><td>電話一次受付の体制</td><td>24h窓口へ直転送を基本／代行の規模は見積もり後に決定</td></tr>
+    <tr><td>5</td><td>検証の予算と期間</td><td>月30万 ×3ヶ月（規模は調整可）＋見極めの基準を事前に共有</td></tr>
+    <tr><td>6</td><td>価格表示の方針</td><td>総額シミュレーション併記方式（法務チェック前提）</td></tr>
+  </table>
+</div>
+
+<footer>
+  RUNBIRD × True Heart 葬儀ネット集客 ／ 打ち合わせ用 共有資料 ／ 2026-06-25
+</footer>
+
+</div>
+</body>
+</html>
