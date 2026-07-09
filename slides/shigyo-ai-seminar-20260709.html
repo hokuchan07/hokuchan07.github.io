@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行政書士・司法書士のためのAI活用講座｜RUNBIRD × 斗</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f172a;
+  --navy-2:#1e293b;
+  --purple:#6b21a8;
+  --purple-soft:#f3e8ff;
+  --gold:#d4a017;
+  --magenta:#ec4899;
+  --paper:#faf8f4;
+  --ink:#1f2937;
+  --muted:#6b7280;
+  --serif:'Noto Serif JP',serif;
+  --sans:'Noto Sans JP',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#e8e6e1;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+.slide{
+  aspect-ratio:16/9;
+  max-width:1280px;
+  margin:28px auto;
+  background:var(--paper);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(15,23,42,.18);
+  display:flex;
+  flex-direction:column;
+}
+
+/* ---- 共通装飾 ---- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;
+  color:var(--purple);text-transform:uppercase;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),var(--magenta));}
+.serial{
+  position:absolute;top:34px;right:44px;
+  font-size:11px;letter-spacing:.3em;font-weight:700;color:var(--muted);
+}
+.slide h2{
+  font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.3;
+  color:var(--navy);margin-top:14px;
+}
+.grad-bar{width:72px;height:5px;margin-top:18px;background:linear-gradient(90deg,var(--purple),var(--magenta),var(--gold));}
+.lead{margin-top:20px;font-size:17px;line-height:2;color:var(--ink);max-width:920px;}
+.accent{background:linear-gradient(90deg,var(--purple),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.pad{padding:64px 84px;flex:1;display:flex;flex-direction:column;}
+.slide-footer{
+  padding:0 84px 26px;display:flex;justify-content:space-between;
+  font-size:10px;letter-spacing:.18em;color:var(--muted);
+}
+
+/* ---- HERO ---- */
+.hero{background:radial-gradient(1200px 600px at 80% -10%,rgba(107,33,168,.55),transparent 60%),var(--navy);color:#fff;justify-content:center;}
+.hero .pad{justify-content:center;}
+.hero .ribbon{
+  display:inline-block;background:linear-gradient(90deg,var(--gold),var(--magenta));
+  color:var(--navy);font-weight:900;font-size:12px;letter-spacing:.28em;
+  padding:8px 22px;margin-bottom:34px;width:fit-content;
+}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:60px;line-height:1.28;}
+.hero h1 .gt{background:linear-gradient(90deg,#e9d5ff,var(--magenta) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{margin-top:26px;font-size:18px;line-height:1.9;color:#cbd5e1;}
+.hero .meta{margin-top:44px;display:flex;gap:36px;font-size:14px;color:#e2e8f0;letter-spacing:.06em;}
+.hero .meta b{color:var(--gold);font-weight:700;margin-right:10px;font-size:11px;letter-spacing:.2em;}
+.hero .corner{position:absolute;width:120px;height:120px;border:2px solid rgba(212,160,23,.5);}
+.hero .corner.tl{top:26px;left:26px;border-right:none;border-bottom:none;}
+.hero .corner.br{bottom:26px;right:26px;border-left:none;border-top:none;}
+
+/* ---- 番号付きリスト ---- */
+.numlist{margin-top:34px;display:flex;flex-direction:column;gap:22px;}
+.numlist .item{display:flex;gap:24px;align-items:flex-start;}
+.numlist .no{
+  font-family:var(--serif);font-weight:900;font-size:34px;line-height:1;
+  background:linear-gradient(180deg,var(--purple),var(--magenta));
+  -webkit-background-clip:text;background-clip:text;color:transparent;min-width:56px;
+}
+.numlist .t{font-size:19px;font-weight:700;color:var(--navy);}
+.numlist .d{margin-top:6px;font-size:15px;line-height:1.9;color:var(--muted);}
+
+/* ---- 2×2 / 3列カード ---- */
+.grid2{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.grid3{margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;}
+.card{background:#fff;border:1px solid #e5e0d8;border-top:4px solid var(--purple);padding:26px 28px;}
+.card.alt{border-top-color:var(--gold);}
+.card .k{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--gold);}
+.card h3{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--navy);margin-top:8px;}
+.card p{margin-top:10px;font-size:14px;line-height:1.9;color:var(--ink);}
+.card p b{color:var(--purple);}
+
+/* ---- 事例（大） ---- */
+.case-flow{margin-top:34px;display:flex;align-items:stretch;gap:0;}
+.case-step{flex:1;background:#fff;border:1px solid #e5e0d8;padding:24px;position:relative;}
+.case-step+.case-step{margin-left:34px;}
+.case-step+.case-step::before{
+  content:"→";position:absolute;left:-30px;top:50%;transform:translateY(-50%);
+  font-size:24px;font-weight:900;color:var(--magenta);
+}
+.case-step .s{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--gold);}
+.case-step .t{margin-top:8px;font-size:16px;font-weight:700;color:var(--navy);line-height:1.6;}
+.case-step .d{margin-top:8px;font-size:13px;line-height:1.8;color:var(--muted);}
+.case-note{
+  margin-top:26px;background:var(--purple-soft);border-left:5px solid var(--purple);
+  padding:18px 24px;font-size:15px;line-height:1.9;color:var(--navy);
+}
+.case-note b{color:var(--purple);}
+
+/* ---- STATS BENTO ---- */
+.stats-bento{background:var(--navy);color:#fff;}
+.stats-bento h2{color:#fff;}
+.stats-bento .eyebrow{color:var(--gold);}
+.stats-grid{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;}
+.stat{
+  background:linear-gradient(150deg,var(--navy-2),rgba(107,33,168,.35));
+  border:1px solid rgba(212,160,23,.35);padding:32px 36px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.stat .v{
+  font-family:var(--serif);font-weight:900;font-size:54px;line-height:1;
+  background:linear-gradient(90deg,#fff,var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .v small{font-size:24px;}
+.stat .l{margin-top:14px;font-size:15px;font-weight:700;color:#e2e8f0;}
+.stat .n{margin-top:6px;font-size:12px;color:#94a3b8;line-height:1.7;}
+.stats-bento .slide-footer{color:#64748b;}
+
+/* ---- COMPARE ---- */
+.compare-cols{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;}
+.comp{padding:30px 34px;display:flex;flex-direction:column;}
+.comp.before{background:#eceae5;border:1px solid #d9d5cc;}
+.comp.after{background:linear-gradient(160deg,var(--purple),#4c1d95);color:#fff;}
+.comp .tag{font-size:12px;font-weight:900;letter-spacing:.24em;}
+.comp.before .tag{color:var(--muted);}
+.comp.after .tag{color:var(--gold);}
+.comp h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-top:10px;}
+.comp.before h3{color:var(--navy);}
+.comp ul{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:14px;}
+.comp li{font-size:15px;line-height:1.8;padding-left:26px;position:relative;}
+.comp.before li::before{content:"✕";position:absolute;left:0;color:#b91c1c;font-weight:900;}
+.comp.after li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:900;}
+.comp.after li b{color:#fbcfe8;}
+
+/* ---- QUOTE ---- */
+.quote-slide{background:linear-gradient(140deg,var(--paper),#f1e9f9);}
+.quote-slide .pad{justify-content:center;align-items:center;text-align:center;}
+.qmark{font-family:var(--serif);font-size:130px;line-height:.6;color:var(--gold);opacity:.8;}
+.qtext{font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.7;color:var(--navy);max-width:960px;margin-top:10px;}
+.qauthor{margin-top:32px;font-size:14px;font-weight:700;letter-spacing:.14em;color:var(--purple);}
+.qauthor small{display:block;margin-top:6px;color:var(--muted);font-weight:500;letter-spacing:.08em;}
+
+/* ---- CONCLUSION ---- */
+.conclusion{background:radial-gradient(1000px 500px at 20% 110%,rgba(236,72,153,.35),transparent 60%),var(--navy);color:#fff;}
+.conclusion .pad{justify-content:center;align-items:center;text-align:center;}
+.conclusion .eyebrow{color:var(--gold);justify-content:center;}
+.conclusion h2{color:#fff;font-size:46px;margin-top:22px;}
+.conclusion h2 .gt{background:linear-gradient(90deg,#e9d5ff,var(--magenta) 55%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.conclusion .sub{margin-top:24px;font-size:17px;line-height:2;color:#cbd5e1;max-width:860px;}
+.cta{
+  margin-top:40px;display:inline-block;
+  background:linear-gradient(90deg,var(--gold),var(--magenta));
+  color:var(--navy);font-weight:900;font-size:16px;letter-spacing:.12em;
+  padding:16px 46px;
+}
+.conclusion .slide-footer{color:#64748b;}
+
+/* ---- deck footer ---- */
+.deck-footer{
+  max-width:1280px;margin:10px auto 60px;text-align:center;
+  font-size:11px;letter-spacing:.14em;color:#8a877f;
+}
+
+/* ---- print ---- */
+@media print{
+  body{background:#fff;}
+  .slide{margin:0;box-shadow:none;max-width:100%;page-break-after:always;break-after:page;}
+  .deck-footer{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: HERO -->
+<section class="slide hero">
+  <div class="corner tl"></div><div class="corner br"></div>
+  <div class="pad">
+    <span class="ribbon">AI SEMINAR FOR LEGAL PROFESSIONALS</span>
+    <h1>行政書士・司法書士のための<br><span class="gt">AI活用講座</span></h1>
+    <p class="sub">「AIに仕事を奪われる」のではなく、「AIに仕事をさせる」側へ。<br>書類作成・議事録・リサーチ・顧客対応 —— 現場で実際に動いている自動化を、実例でお見せします。</p>
+    <div class="meta">
+      <span><b>DATE</b>2026年7月9日</span>
+      <span><b>SPEAKER</b>株式会社斗 代表取締役 鈴木 北斗</span>
+      <span><b>HOST</b>株式会社ランバード</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: 本日のゴール -->
+<section class="slide standard">
+  <span class="serial">ISSUE 02</span>
+  <div class="pad">
+    <span class="eyebrow">TODAY'S GOAL</span>
+    <h2>本日、お持ち帰りいただきたい<span class="accent">3つのこと</span></h2>
+    <div class="grad-bar"></div>
+    <div class="numlist">
+      <div class="item">
+        <div class="no">01</div>
+        <div>
+          <div class="t">AIが「いま実務レベルで」何をできるかを知る</div>
+          <div class="d">ニュースの話ではなく、私たちが実際にクライアント業務で毎日動かしている自動化をそのままお見せします。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">02</div>
+        <div>
+          <div class="t">ご自身の業務の「どこがAI化できるか」を見つける</div>
+          <div class="d">書類作成・面談記録・調査・問い合わせ対応・期限管理。先生方の1日の中で、AIに任せられる時間を一緒に棚卸しします。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">03</div>
+        <div>
+          <div class="t">「こんなものがあったら使う」を聞かせていただく</div>
+          <div class="d">士業の現場に本当に必要なツールは、現場の先生方にしか分かりません。最後にヒアリングの時間を設けています。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 3: AIはここまでできる -->
+<section class="slide standard">
+  <span class="serial">ISSUE 03</span>
+  <div class="pad">
+    <span class="eyebrow">WHAT AI CAN DO</span>
+    <h2>いまのAIは「<span class="accent">読む・書く・聞く・調べる</span>」が実務水準</h2>
+    <div class="grad-bar"></div>
+    <div class="grid2">
+      <div class="card">
+        <div class="k">READ ── 読む</div>
+        <h3>長文・大量の書類を一瞬で読解</h3>
+        <p>公募要領100ページ、契約書、法令改正の新旧対照表。<b>要点抽出・要件チェック・矛盾の指摘</b>まで数十秒で返ってきます。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">WRITE ── 書く</div>
+        <h3>申請書・議事録・顧客向け文書のドラフト</h3>
+        <p>ヒアリング内容を渡せば、<b>申請書類や事業計画書の初稿</b>が出てきます。ゼロから書く時間が「直すだけ」の時間に変わります。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">LISTEN ── 聞く</div>
+        <h3>面談・電話の文字起こしと記録化</h3>
+        <p>ICレコーダーで録るだけで、<b>文字起こし→相談記録→やること一覧</b>まで自動生成。記録簿作成の残業がなくなります。</p>
+      </div>
+      <div class="card">
+        <div class="k">SEARCH ── 調べる</div>
+        <h3>制度・要件・最新情報のリサーチ</h3>
+        <p>「この案件、どの許認可が必要？」「今年の様式変更は？」<b>根拠付きの下調べ</b>を任せて、先生は判断に集中できます。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 4: 業務マップ -->
+<section class="slide standard">
+  <span class="serial">ISSUE 04</span>
+  <div class="pad">
+    <span class="eyebrow">AUTOMATION MAP</span>
+    <h2>士業業務の<span class="accent">AI化マップ</span> ── 刺さるのはこの5領域</h2>
+    <div class="grad-bar"></div>
+    <div class="grid3" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="card">
+        <div class="k">CASE 01</div>
+        <h3>ヒアリング→書類ドラフト</h3>
+        <p>お客様がフォームに答えると、申請書・計画書の<b>初稿が自動で立ち上がる</b>。転記作業の廃止。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">CASE 02</div>
+        <h3>面談録音→記録・議事録</h3>
+        <p>録音を放り込むだけで<b>相談記録・議事録・宿題リスト</b>が完成。その日のうちに共有まで。</p>
+      </div>
+      <div class="card">
+        <div class="k">CASE 03</div>
+        <h3>制度・要件リサーチ</h3>
+        <p>補助金公募要領・法改正・自治体ごとの手引きを<b>AIが先に読んで要件表に</b>整理。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">CASE 04</div>
+        <h3>問い合わせ一次対応</h3>
+        <p>「必要書類は？」「費用は？」よくある質問に<b>LINE・HP上のAIが24時間一次回答</b>。電話が鳴る回数を減らす。</p>
+      </div>
+      <div class="card">
+        <div class="k">CASE 05</div>
+        <h3>案件・期限管理</h3>
+        <p>更新期限・許可の有効期間・進捗を一元管理し、<b>期限前に自動でアラート</b>。うっかり失効をゼロに。</p>
+      </div>
+      <div class="card" style="border-top-color:var(--magenta);background:var(--purple-soft);">
+        <div class="k" style="color:var(--magenta);">POINT</div>
+        <h3>共通するのは「定型」</h3>
+        <p>判断は先生、<b>定型はAI</b>。この切り分けが業務時間を最も削ります。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 5: 事例① 融資支援の実話 -->
+<section class="slide standard">
+  <span class="serial">ISSUE 05</span>
+  <div class="pad">
+    <span class="eyebrow">CASE STUDY 01</span>
+    <h2>実話：ヒアリングフォーム→<span class="accent">事業計画書→融資可決</span></h2>
+    <div class="grad-bar"></div>
+    <div class="case-flow">
+      <div class="case-step">
+        <div class="s">STEP 1</div>
+        <div class="t">お客様がWebフォームに回答</div>
+        <div class="d">開業の経緯・自己資金・売上見込みなどを、スマホから普通の言葉で入力してもらうだけ。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">STEP 2</div>
+        <div class="t">AIが計画書・資金繰り表を下書き</div>
+        <div class="d">回答から創業計画書・収支計画・資金繰り表のドラフトを自動生成。人はチェックと仕上げに集中。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">STEP 3</div>
+        <div class="t">公庫へ申請 → 可決</div>
+        <div class="d">障がい者グループホーム開業案件で、日本政策金融公庫900万円の融資可決（2026年6月実行）。</div>
+      </div>
+    </div>
+    <div class="case-note">
+      行政書士の先生方が日常的に扱う<b>創業融資・許認可・補助金の書類づくり</b>と同じ構造です。ヒアリング→転記→清書のうち、<b>転記と清書はもうAIの仕事</b>にできます。
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 6: 事例②③ -->
+<section class="slide standard">
+  <span class="serial">ISSUE 06</span>
+  <div class="pad">
+    <span class="eyebrow">CASE STUDY 02 / 03</span>
+    <h2>面談の記録も、制度の下調べも、<span class="accent">「録る・渡す」だけ</span></h2>
+    <div class="grad-bar"></div>
+    <div class="grid2">
+      <div class="card">
+        <div class="k">CASE 02 ── 議事録・相談記録の自動化</div>
+        <h3>録音がその日のうちに議事録になる</h3>
+        <p>実際にランバード社では、営業や面談の録音がAI経由で<b>自動的に文字起こし→要約→社内ナレッジに蓄積</b>される仕組みが毎日動いています。人は録音ボタンを押すだけ。</p>
+        <p>士業なら：相談記録・面談メモ・打合せ議事録・業務日誌に応用できます。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">CASE 03 ── 制度・要件リサーチ</div>
+        <h3>公募要領はAIが先に読む</h3>
+        <p>補助金の公募要領や自治体の手引きをAIに渡すと、<b>対象要件・必要書類・スケジュール・加点項目</b>が一覧表で返ってきます。</p>
+        <p>「この客先は対象になるか？」の一次判定が数分で終わり、先生は<b>受任判断と戦略</b>に時間を使えます。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 7: 事例④⑤ -->
+<section class="slide standard">
+  <span class="serial">ISSUE 07</span>
+  <div class="pad">
+    <span class="eyebrow">CASE STUDY 04 / 05</span>
+    <h2>電話を減らし、期限を守る ── <span class="accent">事務所の守りの自動化</span></h2>
+    <div class="grad-bar"></div>
+    <div class="grid2">
+      <div class="card">
+        <div class="k">CASE 04 ── 問い合わせ一次対応AI</div>
+        <h3>よくある質問はAIが24時間答える</h3>
+        <p>「車庫証明に必要な書類は？」「相続登記の費用は？」<b>LINE公式アカウントやHPにAI窓口</b>を置き、定型質問への一次回答と面談予約の受付を自動化。</p>
+        <p>電話対応で作業が中断される回数が減り、<b>本当に話すべきお客様との時間</b>が増えます。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">CASE 05 ── 案件・期限管理</div>
+        <h3>許可の失効・更新漏れをゼロに</h3>
+        <p>建設業許可の更新、在留資格の期限、役員変更登記 —— 顧客ごとの期限を一元管理し、<b>期限の3ヶ月前・1ヶ月前に自動通知</b>。</p>
+        <p>さらに「更新のご案内」文面もAIが下書きするので、<b>期限管理がそのまま継続受注の営業</b>になります。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 8: STATS -->
+<section class="slide stats-bento">
+  <span class="serial" style="color:#64748b;">ISSUE 08</span>
+  <div class="pad">
+    <span class="eyebrow">TRACK RECORD</span>
+    <h2>机上の空論ではなく、<span style="background:linear-gradient(90deg,#e9d5ff,#ec4899 55%,#d4a017);-webkit-background-clip:text;background-clip:text;color:transparent;">現場で動いている数字</span></h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="v">900<small>万円</small></div>
+        <div class="l">AIで作成支援した創業融資の可決額</div>
+        <div class="n">日本政策金融公庫・障がい者グループホーム開業案件（2026年6月実行）</div>
+      </div>
+      <div class="stat">
+        <div class="v">142<small>事業所</small></div>
+        <div class="l">ランバードグループの支援先ネットワーク</div>
+        <div class="n">福祉事業所の開業・運営支援で全国に展開</div>
+      </div>
+      <div class="stat">
+        <div class="v">52,804<small>件</small></div>
+        <div class="l">AI化した社内ナレッジ・顧客対応履歴</div>
+        <div class="n">過去のやり取りを全件AIに学習させ「誰でも即答できる」体制に</div>
+      </div>
+      <div class="stat">
+        <div class="v">400<small>万件超</small></div>
+        <div class="l">構築・運用中の営業データ基盤</div>
+        <div class="n">リスト自動収集からコールシステムまで自社開発で運用中</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 9: COMPARE -->
+<section class="slide standard">
+  <span class="serial">ISSUE 09</span>
+  <div class="pad">
+    <span class="eyebrow">BEFORE / AFTER</span>
+    <h2>ある行政書士事務所の<span class="accent">1日の変化</span></h2>
+    <div class="grad-bar"></div>
+    <div class="compare-cols">
+      <div class="comp before">
+        <div class="tag">BEFORE ── AIなしの今</div>
+        <h3>作業に追われる1日</h3>
+        <ul>
+          <li>申請書類のドラフト作成に1件2〜3時間</li>
+          <li>面談後、記録簿の作成が夜の残業に</li>
+          <li>公募要領の読み込みだけで半日つぶれる</li>
+          <li>定型質問の電話で作業が何度も中断</li>
+          <li>更新期限の管理はExcelと記憶頼み</li>
+        </ul>
+      </div>
+      <div class="comp after">
+        <div class="tag">AFTER ── AI導入後</div>
+        <h3>判断に集中する1日</h3>
+        <ul>
+          <li>ドラフトはAIが生成、先生は<b>確認と仕上げだけ</b></li>
+          <li>記録簿は録音から<b>自動生成、その日に完了</b></li>
+          <li>要件チェックは<b>AIの一覧表を確認するだけ</b></li>
+          <li>定型質問は<b>AI窓口が24時間一次対応</b></li>
+          <li>期限は<b>自動アラート＋案内文まで下書き</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 10: QUOTE -->
+<section class="slide quote-slide">
+  <span class="serial">ISSUE 10</span>
+  <div class="pad">
+    <div class="qmark">“</div>
+    <div class="qtext">これがあれば、<br>もう社長に聞かなくて済む</div>
+    <div class="qauthor">嶋田 代表取締役 ── 株式会社ランバード<small>社内の判断ノウハウをAI化した「社長クローン」導入時の言葉</small></div>
+  </div>
+</section>
+
+<!-- SLIDE 11: ご一緒できる形 -->
+<section class="slide standard">
+  <span class="serial">ISSUE 11</span>
+  <div class="pad">
+    <span class="eyebrow">HOW WE WORK</span>
+    <h2>先生方と<span class="accent">ご一緒できる3つの形</span></h2>
+    <div class="grad-bar"></div>
+    <div class="grid3">
+      <div class="card">
+        <div class="k">PLAN 01 ── まずはここから</div>
+        <h3>無料AI診断</h3>
+        <p>事務所の業務を棚卸しし、<b>「どこをAI化すると一番効くか」</b>を診断レポートでお渡しします。費用はかかりません。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">PLAN 02 ── 伴走型</div>
+        <h3>AI顧問（月額）</h3>
+        <p>月額5万円〜。ツールの導入・使い方研修・業務フローの改善まで、<b>事務所専属のAI推進室</b>として伴走します。</p>
+      </div>
+      <div class="card">
+        <div class="k">PLAN 03 ── 開発型</div>
+        <h3>専用システム構築</h3>
+        <p>ヒアリングフォーム→書類生成、期限管理、AI窓口など、<b>事務所専用のツールを個別開発</b>。内容に応じてお見積り。</p>
+      </div>
+    </div>
+    <div class="case-note" style="margin-top:28px;">
+      <b>顧問先へのご紹介も歓迎です。</b>先生方の顧問先・お知り合いの事業者様へのAI導入をご紹介いただいた場合、紹介パートナーとして還元する仕組みもご用意しています。「自分の顧問先にこんな相談が来ている」というお話も、ぜひお聞かせください。
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 12: ヒアリング -->
+<section class="slide standard">
+  <span class="serial">ISSUE 12</span>
+  <div class="pad">
+    <span class="eyebrow">HEARING</span>
+    <h2>ここからは、<span class="accent">先生方に教えてください</span></h2>
+    <div class="grad-bar"></div>
+    <div class="numlist" style="gap:18px;">
+      <div class="item">
+        <div class="no">Q1</div>
+        <div><div class="t">1週間の中で、いちばん時間を取られている作業は何ですか？</div></div>
+      </div>
+      <div class="item">
+        <div class="no">Q2</div>
+        <div><div class="t">「毎回ほぼ同じなのに、毎回作っている」書類はありますか？</div></div>
+      </div>
+      <div class="item">
+        <div class="no">Q3</div>
+        <div><div class="t">お客様とのやり取りは何を使っていますか？（電話・メール・LINE・FAX）</div></div>
+      </div>
+      <div class="item">
+        <div class="no">Q4</div>
+        <div><div class="t">「こんなツールがあったら絶対使う」と思うものはありますか？</div></div>
+      </div>
+      <div class="item">
+        <div class="no">Q5</div>
+        <div><div class="t">顧問先や同業の先生から、IT・AIの相談を受けることはありますか？</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<!-- SLIDE 13: CONCLUSION -->
+<section class="slide conclusion">
+  <div class="pad">
+    <span class="eyebrow">CONCLUSION</span>
+    <h2>まずは<span class="gt">1つの業務</span>から、<br>無料でAI化を体験してください</h2>
+    <p class="sub">AI導入は「いつかやる」ではなく「先にやった事務所が勝つ」領域です。<br>本日のヒアリング内容をもとに、先生の事務所に効く自動化を1つ、無料診断でご提案します。</p>
+    <span class="cta">無料AI診断のお申し込みは本日この場で</span>
+  </div>
+  <div class="slide-footer"><span>AI活用講座 for 士業</span><span>RUNBIRD × hishaku</span></div>
+</section>
+
+<footer class="deck-footer">株式会社斗 hishaku ｜ 代表取締役 鈴木 北斗 ｜ h.suzuki@hishaku.co.jp ｜ 090-6894-4907 ｜ CONFIDENTIAL</footer>
+
+</body>
+</html>
