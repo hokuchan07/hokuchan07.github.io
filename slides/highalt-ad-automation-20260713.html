@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>広告自動化・CPA最適化システム御提案｜High Altitude Management株式会社 御中</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f172a;
+  --navy-2:#1e293b;
+  --purple:#6b21a8;
+  --purple-soft:#f3e8ff;
+  --gold:#d4a017;
+  --magenta:#ec4899;
+  --paper:#faf8f4;
+  --ink:#1f2937;
+  --muted:#6b7280;
+  --serif:'Noto Serif JP',serif;
+  --sans:'Noto Sans JP',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#e8e6e1;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+.slide{
+  aspect-ratio:16/9;
+  max-width:1280px;
+  margin:28px auto;
+  background:var(--paper);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(15,23,42,.18);
+  display:flex;
+  flex-direction:column;
+}
+
+/* ---- 共通装飾 ---- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;
+  color:var(--purple);text-transform:uppercase;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),var(--magenta));}
+.serial{
+  position:absolute;top:34px;right:44px;
+  font-size:11px;letter-spacing:.3em;font-weight:700;color:var(--muted);
+}
+.slide h2{
+  font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.3;
+  color:var(--navy);margin-top:14px;
+}
+.grad-bar{width:72px;height:5px;margin-top:18px;background:linear-gradient(90deg,var(--purple),var(--magenta),var(--gold));}
+.lead{margin-top:20px;font-size:17px;line-height:2;color:var(--ink);max-width:920px;}
+.accent{background:linear-gradient(90deg,var(--purple),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.pad{padding:64px 84px;flex:1;display:flex;flex-direction:column;}
+.slide-footer{
+  padding:0 84px 26px;display:flex;justify-content:space-between;
+  font-size:10px;letter-spacing:.18em;color:var(--muted);
+}
+
+/* ---- HERO ---- */
+.hero{background:radial-gradient(1200px 600px at 80% -10%,rgba(107,33,168,.55),transparent 60%),var(--navy);color:#fff;justify-content:center;}
+.hero .pad{justify-content:center;}
+.hero .ribbon{
+  display:inline-block;background:linear-gradient(90deg,var(--gold),var(--magenta));
+  color:var(--navy);font-weight:900;font-size:12px;letter-spacing:.28em;
+  padding:8px 22px;margin-bottom:34px;width:fit-content;
+}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:60px;line-height:1.28;}
+.hero h1 .gt{background:linear-gradient(90deg,#e9d5ff,var(--magenta) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{margin-top:26px;font-size:18px;line-height:1.9;color:#cbd5e1;}
+.hero .meta{margin-top:44px;display:flex;gap:36px;font-size:14px;color:#e2e8f0;letter-spacing:.06em;}
+.hero .meta b{color:var(--gold);font-weight:700;margin-right:10px;font-size:11px;letter-spacing:.2em;}
+.hero .corner{position:absolute;width:120px;height:120px;border:2px solid rgba(212,160,23,.5);}
+.hero .corner.tl{top:26px;left:26px;border-right:none;border-bottom:none;}
+.hero .corner.br{bottom:26px;right:26px;border-left:none;border-top:none;}
+
+/* ---- 番号付きリスト ---- */
+.numlist{margin-top:34px;display:flex;flex-direction:column;gap:22px;}
+.numlist .item{display:flex;gap:24px;align-items:flex-start;}
+.numlist .no{
+  font-family:var(--serif);font-weight:900;font-size:34px;line-height:1;
+  background:linear-gradient(180deg,var(--purple),var(--magenta));
+  -webkit-background-clip:text;background-clip:text;color:transparent;min-width:56px;
+}
+.numlist .t{font-size:19px;font-weight:700;color:var(--navy);}
+.numlist .d{margin-top:6px;font-size:15px;line-height:1.9;color:var(--muted);}
+
+/* ---- 2×2 / 3列カード ---- */
+.grid2{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.grid3{margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;}
+.card{background:#fff;border:1px solid #e5e0d8;border-top:4px solid var(--purple);padding:26px 28px;}
+.card.alt{border-top-color:var(--gold);}
+.card .k{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--gold);}
+.card h3{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--navy);margin-top:8px;}
+.card p{margin-top:10px;font-size:14px;line-height:1.9;color:var(--ink);}
+.card p b{color:var(--purple);}
+
+/* ---- 事例（大） ---- */
+.case-flow{margin-top:34px;display:flex;align-items:stretch;gap:0;}
+.case-step{flex:1;background:#fff;border:1px solid #e5e0d8;padding:24px;position:relative;}
+.case-step+.case-step{margin-left:34px;}
+.case-step+.case-step::before{
+  content:"→";position:absolute;left:-30px;top:50%;transform:translateY(-50%);
+  font-size:24px;font-weight:900;color:var(--magenta);
+}
+.case-step .s{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--gold);}
+.case-step .t{margin-top:8px;font-size:16px;font-weight:700;color:var(--navy);line-height:1.6;}
+.case-step .d{margin-top:8px;font-size:13px;line-height:1.8;color:var(--muted);}
+.case-note{
+  margin-top:26px;background:var(--purple-soft);border-left:5px solid var(--purple);
+  padding:18px 24px;font-size:15px;line-height:1.9;color:var(--navy);
+}
+.case-note b{color:var(--purple);}
+
+/* ---- STATS BENTO ---- */
+.stats-bento{background:var(--navy);color:#fff;}
+.stats-bento h2{color:#fff;}
+.stats-bento .eyebrow{color:var(--gold);}
+.stats-grid{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;}
+.stat{
+  background:linear-gradient(150deg,var(--navy-2),rgba(107,33,168,.35));
+  border:1px solid rgba(212,160,23,.35);padding:32px 36px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.stat .v{
+  font-family:var(--serif);font-weight:900;font-size:54px;line-height:1;
+  background:linear-gradient(90deg,#fff,var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .v small{font-size:24px;}
+.stat .l{margin-top:14px;font-size:15px;font-weight:700;color:#e2e8f0;}
+.stat .n{margin-top:6px;font-size:12px;color:#94a3b8;line-height:1.7;}
+.stats-bento .slide-footer{color:#64748b;}
+
+/* ---- COMPARE ---- */
+.compare-cols{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;}
+.comp{padding:30px 34px;display:flex;flex-direction:column;}
+.comp.before{background:#eceae5;border:1px solid #d9d5cc;}
+.comp.after{background:linear-gradient(160deg,var(--purple),#4c1d95);color:#fff;}
+.comp .tag{font-size:12px;font-weight:900;letter-spacing:.24em;}
+.comp.before .tag{color:var(--muted);}
+.comp.after .tag{color:var(--gold);}
+.comp h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-top:10px;}
+.comp.before h3{color:var(--navy);}
+.comp ul{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:14px;}
+.comp li{font-size:15px;line-height:1.8;padding-left:26px;position:relative;}
+.comp.before li::before{content:"✕";position:absolute;left:0;color:#b91c1c;font-weight:900;}
+.comp.after li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:900;}
+.comp.after li b{color:#fbcfe8;}
+
+/* ---- QUOTE ---- */
+.quote-slide{background:linear-gradient(140deg,var(--paper),#f1e9f9);}
+.quote-slide .pad{justify-content:center;align-items:center;text-align:center;}
+.qmark{font-family:var(--serif);font-size:130px;line-height:.6;color:var(--gold);opacity:.8;}
+.qtext{font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.7;color:var(--navy);max-width:960px;margin-top:10px;}
+.qauthor{margin-top:32px;font-size:14px;font-weight:700;letter-spacing:.14em;color:var(--purple);}
+.qauthor small{display:block;margin-top:6px;color:var(--muted);font-weight:500;letter-spacing:.08em;}
+
+/* ---- CONCLUSION ---- */
+.conclusion{background:radial-gradient(1000px 500px at 20% 110%,rgba(236,72,153,.35),transparent 60%),var(--navy);color:#fff;}
+.conclusion .pad{justify-content:center;align-items:center;text-align:center;}
+.conclusion .eyebrow{color:var(--gold);justify-content:center;}
+.conclusion h2{color:#fff;font-size:46px;margin-top:22px;}
+.conclusion h2 .gt{background:linear-gradient(90deg,#e9d5ff,var(--magenta) 55%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.conclusion .sub{margin-top:24px;font-size:17px;line-height:2;color:#cbd5e1;max-width:860px;}
+.cta{
+  margin-top:40px;display:inline-block;
+  background:linear-gradient(90deg,var(--gold),var(--magenta));
+  color:var(--navy);font-weight:900;font-size:16px;letter-spacing:.12em;
+  padding:16px 46px;
+}
+.conclusion .slide-footer{color:#64748b;}
+
+/* ---- deck footer ---- */
+.deck-footer{
+  max-width:1280px;margin:10px auto 60px;text-align:center;
+  font-size:11px;letter-spacing:.14em;color:#8a877f;
+}
+
+/* ---- print ---- */
+@page{size:1280px 720px;margin:0;}
+@media print{
+  body{background:#fff;}
+  .slide{margin:0;box-shadow:none;max-width:100%;page-break-after:always;break-after:page;}
+  .deck-footer{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: HERO -->
+<section class="slide hero">
+  <div class="corner tl"></div><div class="corner br"></div>
+  <div class="pad">
+    <span class="ribbon">AD AUTOMATION & CPA OPTIMIZATION</span>
+    <h1>広告自動化・<span class="gt">CPA最適化システム</span><br>御提案</h1>
+    <p class="sub">来期の通期黒字化に向けて ── 広告費 年間▲1,000万円へ。<br>「店舗ごとに、どの広告から、1人いくらで来たか」を毎日自動で見える化し、予算の無駄を止めます。</p>
+    <div class="meta">
+      <span><b>FOR</b>High Altitude Management株式会社 御中</span>
+      <span><b>DATE</b>2026年7月13日</span>
+      <span><b>FROM</b>株式会社斗 代表取締役 鈴木 北斗</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: ゴール（STATS） -->
+<section class="slide stats-bento">
+  <span class="serial" style="color:#64748b;">ISSUE 02</span>
+  <div class="pad">
+    <span class="eyebrow">GOAL</span>
+    <h2>ゴールは<span style="background:linear-gradient(90deg,#e9d5ff,#ec4899 55%,#d4a017);-webkit-background-clip:text;background-clip:text;color:transparent;">数字で</span>置きます</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="v">▲1,000<small>万円/年</small></div>
+        <div class="l">広告予算の削減目標</div>
+        <div class="n">または同等のCPA改善（同じ予算でより多くの入会獲得）。来期通期黒字化の柱</div>
+      </div>
+      <div class="stat">
+        <div class="v">9<small>月末</small></div>
+        <div class="l">年度末までに完成・運用開始</div>
+        <div class="n">10月（来期初月）から削減サイクルをフル稼働させる逆算スケジュール</div>
+      </div>
+      <div class="stat">
+        <div class="v">7<small>店舗</small></div>
+        <div class="l">全店舗×全媒体を一元管理</div>
+        <div class="n">Google広告・Meta広告（Instagram/Facebook）を店舗別に横断比較</div>
+      </div>
+      <div class="stat">
+        <div class="v">毎朝<small>自動</small></div>
+        <div class="l">レポートと打ち手の自動提案</div>
+        <div class="n">「止める広告・予算を寄せる広告」まで毎日提案。判断の頻度を月次→日次へ</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 3: 現状の課題 -->
+<section class="slide standard">
+  <span class="serial">ISSUE 03</span>
+  <div class="pad">
+    <span class="eyebrow">PROBLEM</span>
+    <h2>いま起きているのは「<span class="accent">見えないまま出稿し続ける</span>」構造</h2>
+    <div class="grad-bar"></div>
+    <div class="numlist">
+      <div class="item">
+        <div class="no">01</div>
+        <div>
+          <div class="t">店舗ごとに、どの広告からの流入が多いか分からない</div>
+          <div class="d">効果の低い広告にも予算が流れ続け、削るべき場所が特定できない。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">02</div>
+        <div>
+          <div class="t">CPA（1人の獲得にかかる広告費）が店舗別に把握できていない</div>
+          <div class="d">「どの店舗のどの広告を増やす／止めるか」の判断根拠がなく、感覚での予算配分になる。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">03</div>
+        <div>
+          <div class="t">広告データの集計・分析が手作業</div>
+          <div class="d">判断の頻度が月次以下になり、無駄な出稿が数週間単位で放置される。</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-note">
+      黒字化のボトルネックは広告の量ではなく<b>「配分の根拠がないこと」</b>。まず全店舗のCPAを毎日見える状態にすることが出発点です。
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 4: 削減サイクル図 -->
+<section class="slide standard">
+  <span class="serial">ISSUE 04</span>
+  <div class="pad">
+    <span class="eyebrow">SOLUTION CYCLE</span>
+    <h2>毎日まわる「<span class="accent">削減サイクル</span>」を自動化します</h2>
+    <div class="grad-bar"></div>
+    <div class="case-flow">
+      <div class="case-step">
+        <div class="s">CYCLE 1</div>
+        <div class="t">見える化</div>
+        <div class="d">店舗別×広告別のCPAを毎日自動算出。「1人いくらで来たか」が全店舗で並ぶ。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">CYCLE 2</div>
+        <div class="t">自動提案</div>
+        <div class="d">CPA悪化をアラートで検知し、「止める候補」「予算を寄せる候補」を毎朝提案。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">CYCLE 3</div>
+        <div class="t">寄せ直し</div>
+        <div class="d">低効率広告を止め、CPAの良い店舗・広告に予算を再配分。無駄の放置が最短1日で止まる。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">CYCLE 4</div>
+        <div class="t">CPA自体を下げる</div>
+        <div class="d">勝ちパターンを分析し、AIが広告文・画像案を生成。効率の天井を引き上げる。</div>
+      </div>
+    </div>
+    <div class="case-note">
+      このサイクルが<b>毎日・自動で</b>まわることが本システムの本体です。削減は一度きりの施策ではなく、日次の運用構造として定着します。
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 5: システム構成図（データフロー） -->
+<section class="slide standard">
+  <span class="serial">ISSUE 05</span>
+  <div class="pad">
+    <span class="eyebrow">SYSTEM FLOW</span>
+    <h2>データは<span class="accent">全部自動</span>で流れます ── CSV手作業ゼロ</h2>
+    <div class="grad-bar"></div>
+    <div class="case-flow">
+      <div class="case-step">
+        <div class="s">STEP 1 ── 自動収集</div>
+        <div class="t">Google広告・Meta広告<br>API連携</div>
+        <div class="d">費用・クリック・コンバージョンを店舗別×キャンペーン別×広告別に毎日自動取得。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">STEP 2 ── 突合</div>
+        <div class="t">計測パラメータ（UTM）<br>× hacomono</div>
+        <div class="d">広告URLの識別情報と体験予約・入会データを突合。「どの広告→どの店舗の予約か」を特定。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">STEP 3 ── 算出</div>
+        <div class="t">店舗別CPA<br>ダッシュボード</div>
+        <div class="d">体験CPA・入会CPA・体験→入会率を7店舗横断で自動算出・比較。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">STEP 4 ── 提案</div>
+        <div class="t">毎朝レポート<br>＋予算配分提案</div>
+        <div class="d">アラートと「今日やるべき打ち手」を毎朝自動生成。会議資料にも広告サマリを追加。</div>
+      </div>
+    </div>
+    <div class="case-note">
+      電話・来店などネット計測に乗らない流入は、入会時の<b>「きっかけ」記録で補完</b>する運用ルールもセットでご提案します。取りこぼしを前提に設計します。
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 6: 機能マップ -->
+<section class="slide standard">
+  <span class="serial">ISSUE 06</span>
+  <div class="pad">
+    <span class="eyebrow">FUNCTION MAP</span>
+    <h2>ご提供する<span class="accent">5つの機能</span></h2>
+    <div class="grad-bar"></div>
+    <div class="grid3">
+      <div class="card">
+        <div class="k">FUNCTION 01</div>
+        <h3>広告データ自動収集</h3>
+        <p>Google・Meta広告の成果をAPIで毎日自動取得。<b>CSVダウンロード作業ゼロ</b>で全媒体を一元蓄積。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">FUNCTION 02</div>
+        <h3>店舗別CPA見える化</h3>
+        <p>「どの店舗に、どの広告から、1人いくらで来たか」を<b>7店舗マトリクス</b>で毎日更新。</p>
+      </div>
+      <div class="card">
+        <div class="k">FUNCTION 03</div>
+        <h3>毎朝レポート＋予算提案</h3>
+        <p>CPA悪化アラートと<b>「止める・寄せる」候補を毎朝自動提案</b>。判断を日次サイクルに。</p>
+      </div>
+      <div class="card alt">
+        <div class="k">FUNCTION 04</div>
+        <h3>AIクリエイティブ生成</h3>
+        <p>勝ちパターン分析から<b>入稿できる広告文・画像案</b>を店舗別・訴求別に自動生成。</p>
+      </div>
+      <div class="card">
+        <div class="k">FUNCTION 05</div>
+        <h3>計測基盤の整備</h3>
+        <p>UTM設計・店舗別導線・きっかけ記録の運用まで<b>「正しく測れる土台」</b>を導入時に構築。</p>
+      </div>
+      <div class="card" style="border-top-color:var(--magenta);background:var(--purple-soft);">
+        <div class="k" style="color:var(--magenta);">POINT</div>
+        <h3>運用の手間は増えない</h3>
+        <p>収集も算出も提案も自動。御社がやることは<b>提案を見て予算を動かすだけ</b>です。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 7: BEFORE/AFTER -->
+<section class="slide standard">
+  <span class="serial">ISSUE 07</span>
+  <div class="pad">
+    <span class="eyebrow">BEFORE / AFTER</span>
+    <h2>広告運用は<span class="accent">こう変わります</span></h2>
+    <div class="grad-bar"></div>
+    <div class="compare-cols">
+      <div class="comp before">
+        <div class="tag">BEFORE ── 現在</div>
+        <h3>見えないまま出稿する</h3>
+        <ul>
+          <li>店舗別の流入元・CPAが分からない</li>
+          <li>予算配分は感覚と前例で決めるしかない</li>
+          <li>効果の低い広告が数週間放置される</li>
+          <li>集計は手作業、分析は月次以下</li>
+          <li>広告費が本部コストを圧迫し続ける</li>
+        </ul>
+      </div>
+      <div class="comp after">
+        <div class="tag">AFTER ── 導入後</div>
+        <h3>数字で毎日判断する</h3>
+        <ul>
+          <li>店舗×広告別CPAが<b>毎朝自動で並ぶ</b></li>
+          <li>配分は<b>データに基づく自動提案</b>から選ぶだけ</li>
+          <li>低効率広告は<b>最短1日で止められる</b></li>
+          <li>集計・分析・レポートは<b>全自動</b></li>
+          <li>削減効果が<b>店舗PLで毎月確認できる</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 8: PL統合図 -->
+<section class="slide standard">
+  <span class="serial">ISSUE 08</span>
+  <div class="pad">
+    <span class="eyebrow">INTEGRATION</span>
+    <h2>既存PLダッシュボードと接続 ── <span class="accent">黒字化まで一気通貫</span></h2>
+    <div class="grad-bar"></div>
+    <div class="case-flow">
+      <div class="case-step">
+        <div class="s">LAYER 1</div>
+        <div class="t">広告費</div>
+        <div class="d">媒体別・店舗別に自動取得（本システム）。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">LAYER 2</div>
+        <div class="t">体験予約 → 入会</div>
+        <div class="d">hacomonoの店舗別データと自動突合（本システム）。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">LAYER 3</div>
+        <div class="t">店舗別PL</div>
+        <div class="d">既にご利用中のPL管理ダッシュボード（7店舗）の販促費に自動反映。</div>
+      </div>
+      <div class="case-step">
+        <div class="s">LAYER 4</div>
+        <div class="t">通期黒字化</div>
+        <div class="d">広告効率の改善が店舗PL・本部コストにどう効いたかを毎月確認。</div>
+      </div>
+    </div>
+    <div class="case-note">
+      広告の投資対効果を<b>最終的なPL（黒字化）まで一気通貫</b>で追えるのは、既にPLダッシュボードをお持ちの御社ならではの構成です。広告レポートだけを納品する会社との最大の違いです。
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 9: スケジュール -->
+<section class="slide standard">
+  <span class="serial">ISSUE 09</span>
+  <div class="pad">
+    <span class="eyebrow">SCHEDULE</span>
+    <h2><span class="accent">9月末（年度末）完成</span>から逆算したスケジュール</h2>
+    <div class="grad-bar"></div>
+    <div class="numlist" style="gap:16px;">
+      <div class="item">
+        <div class="no">7月<span style="font-size:16px;">下旬</span></div>
+        <div>
+          <div class="t">要件定義・現状分析</div>
+          <div class="d">広告アカウント拝見・現状CPA算出。<b style="color:var(--purple);">▲1,000万円へ届く道筋を実数でご提示します。</b></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">8月<span style="font-size:16px;">上旬</span></div>
+        <div>
+          <div class="t">計測基盤整備</div>
+          <div class="d">UTM設計・店舗別導線整理・きっかけ記録の運用設計。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">8月</div>
+        <div>
+          <div class="t">開発①（収集・見える化）＋ 開発②（レポート・提案・生成）</div>
+          <div class="d">広告API連携・hacomono突合・店舗別CPAダッシュボード → 毎朝レポート・予算配分提案・AIクリエイティブ生成。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="no">9月</div>
+        <div>
+          <div class="t">テスト・調整 → 納品・運用開始（9月中旬〜下旬）</div>
+          <div class="d">実データ検証・基準値チューニングの上、年度末までに完成。10月（来期初月）から削減サイクルをフル稼働。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 10: 費用・ROI（STATS） -->
+<section class="slide stats-bento">
+  <span class="serial" style="color:#64748b;">ISSUE 10</span>
+  <div class="pad">
+    <span class="eyebrow">INVESTMENT & RETURN</span>
+    <h2>投資は<span style="background:linear-gradient(90deg,#e9d5ff,#ec4899 55%,#d4a017);-webkit-background-clip:text;background-clip:text;color:transparent;">初月で回収</span>できる規模を狙います</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="v">44<small>万円（税込）</small></div>
+        <div class="l">開発費用（Google＋Meta広告自動化）</div>
+        <div class="n">各200,000円×2（税別計400,000円）。お見積書どおり。計測基盤整備・AIクリエイティブ生成も込み</div>
+      </div>
+      <div class="stat">
+        <div class="v">0<small>円/月</small></div>
+        <div class="l">月額費用なし</div>
+        <div class="n">AIクリエイティブ生成の実費（月数百円〜数千円程度・生成量による）のみ別途</div>
+      </div>
+      <div class="stat">
+        <div class="v">▲1,000<small>万円/年</small></div>
+        <div class="l">削減目標 ＝ 開発費の約23倍</div>
+        <div class="n">低効率停止・再配分・クリエイティブ改善の3つの積み上げで実現</div>
+      </div>
+      <div class="stat">
+        <div class="v">初月<small>回収</small></div>
+        <div class="l">月割の削減額で開発費を回収</div>
+        <div class="n">年間▲1,000万円ペース＝月▲83万円。開発費44万円は初月の削減で回収できる計算</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<!-- SLIDE 11: CONCLUSION -->
+<section class="slide conclusion">
+  <div class="pad">
+    <span class="eyebrow">NEXT STEP</span>
+    <h2>まずは現状の広告データから、<br><span class="gt">▲1,000万円への道筋</span>を数値でお見せします</h2>
+    <p class="sub">最初の要件定義ミーティング（30分・オンライン）で広告アカウントと実数を拝見し、<br>「どこを止め、どこに寄せると、いくら削れるか」の初期試算をその場でご提示します。</p>
+    <span class="cta">要件定義MTG ── 7月中の30分をご指定ください</span>
+  </div>
+  <div class="slide-footer"><span>広告自動化・CPA最適化システム</span><span>High-Alti × hishaku</span></div>
+</section>
+
+<footer class="deck-footer">株式会社斗 hishaku ｜ 代表取締役 鈴木 北斗 ｜ h.suzuki@hishaku.co.jp ｜ 090-6894-4907 ｜ CONFIDENTIAL</footer>
+
+</body>
+</html>
