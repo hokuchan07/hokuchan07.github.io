@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>20秒呼吸トレーニング（タイマー）| ANDANTE</title>
+<style>
+  :root {
+    --gold: #b3922e;
+    --gold-pale: #f6f0dd;
+    --ink: #1c1c1c;
+    --gray: #777;
+    --line: #ddd4bc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+    color: var(--ink);
+    background: #fdfbf5;
+    -webkit-user-select: none; user-select: none;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 0 20px 40px; }
+  header {
+    text-align: center; padding: 26px 0 18px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 22px;
+  }
+  header .brand {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 15px; letter-spacing: 8px; text-indent: 8px;
+    color: var(--gold); font-weight: 600;
+  }
+  header h1 {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 22px; margin-top: 8px; letter-spacing: 2px;
+  }
+  /* メッセージ */
+  .messages { text-align: center; min-height: 108px; margin-bottom: 6px; }
+  #msg1 { font-size: 14px; color: var(--gray); letter-spacing: 1px; }
+  #msg2 {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 46px; font-weight: 700; color: var(--gold); line-height: 1.3;
+  }
+  #msg3 { font-size: 15px; line-height: 1.5; }
+  #msg3 .em { color: #c0392b; font-weight: bold; }
+  /* リングタイマー */
+  .clock { position: relative; width: 260px; height: 260px; margin: 10px auto 18px; }
+  .clock svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--gold-pale); stroke-width: 10; }
+  .ring-fg { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.9s linear; }
+  .clock .sec {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .clock .sec .big { font-size: 64px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+  .clock .sec .small { font-size: 13px; color: var(--gray); margin-top: 6px; letter-spacing: 1px; }
+  .clock .mark { position: absolute; font-size: 12px; color: var(--gray); }
+  .mark.m0  { top: 2px; left: 50%; transform: translateX(-50%); }
+  .mark.m20 { bottom: 56px; right: 8px; }
+  .mark.m40 { bottom: 56px; left: 12px; }
+  /* セットドット */
+  .sets { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+  .sets .dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1.5px solid var(--line); color: var(--gray);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold; background: #fff;
+  }
+  .sets .dot.on { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .sets .dot.done { background: var(--gold-pale); border-color: var(--gold); color: var(--gold); }
+  /* ボタン */
+  .buttons { display: flex; gap: 10px; justify-content: center; margin-bottom: 34px; }
+  .buttons button {
+    font-size: 16px; font-weight: bold; letter-spacing: 1px;
+    padding: 13px 0; width: 118px; border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--gold); font-family: inherit;
+  }
+  #start { background: var(--gold); color: #fff; }
+  #stop  { background: #fff; color: var(--gold); }
+  #reset { background: #fff; color: var(--gray); border-color: #ccc; }
+  .buttons button:disabled { opacity: 0.35; cursor: default; }
+  /* ガイド */
+  .guide h2 {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 17px; margin: 26px 0 8px; padding-left: 10px;
+    border-left: 4px solid var(--gold);
+  }
+  .guide table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; }
+  .guide td { border: 1px solid var(--line); padding: 9px 10px; }
+  .guide .c1 { width: 64px; text-align: center; color: var(--gray); white-space: nowrap; }
+  .guide .c2 { width: 52px; text-align: center; font-weight: bold; color: var(--gold); font-size: 16px; white-space: nowrap; }
+  .guide .arrow { text-align: center; color: var(--gold); border: none; padding: 2px; font-size: 12px; }
+  .guide .em { color: #c0392b; font-weight: bold; }
+  .point {
+    margin-top: 26px; background: var(--gold-pale);
+    border-radius: 10px; padding: 16px 18px; font-size: 14px; line-height: 1.8;
+  }
+  .point b.title { display: block; color: var(--gold); margin-bottom: 4px; letter-spacing: 1px; }
+  footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--gray); line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">ANDANTE</div>
+    <h1>20秒呼吸トレーニング</h1>
+  </header>
+
+  <div class="messages">
+    <p id="msg1">1 セット目（60秒）</p>
+    <p id="msg2">準備</p>
+    <p id="msg3">スタートを押したら始まります</p>
+  </div>
+
+  <div class="clock">
+    <svg width="260" height="260" viewBox="0 0 260 260">
+      <circle class="ring-bg" cx="130" cy="130" r="118"></circle>
+      <circle class="ring-fg" id="ring" cx="130" cy="130" r="118"
+              stroke-dasharray="741.4" stroke-dashoffset="741.4"></circle>
+    </svg>
+    <div class="sec">
+      <div class="big" id="secDisp">0</div>
+      <div class="small">秒</div>
+    </div>
+  </div>
+
+  <div class="sets" id="sets">
+    <div class="dot" data-set="0">1</div>
+    <div class="dot" data-set="1">2</div>
+    <div class="dot" data-set="2">3</div>
+    <div class="dot" data-set="3">4</div>
+  </div>
+
+  <div class="buttons">
+    <button id="start">スタート</button>
+    <button id="stop" disabled>ストップ</button>
+    <button id="reset" disabled>リセット</button>
+  </div>
+
+  <div class="guide">
+    <h2>1セット目（60秒）</h2>
+    <table>
+      <tr><td class="c1">20秒間</td><td class="c2">吐く</td><td>ゆっくり息を<u>吐き続ける</u></td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">凹</td><td>お腹を<span class="em">へこませた</span>状態で息を止める</td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">調整</td><td>お腹を元に戻し、自然な呼吸に戻す</td></tr>
+    </table>
+    <h2>2セット目（60秒）</h2>
+    <table>
+      <tr><td class="c1">20秒間</td><td class="c2">吐く</td><td>ゆっくり息を<u>吐き続ける</u></td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">凸</td><td>お腹を<span class="em">ふくらませた</span>状態で息を止める</td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">調整</td><td>お腹を元に戻し、自然な呼吸に戻す</td></tr>
+    </table>
+    <h2>3セット目（60秒）</h2>
+    <table>
+      <tr><td class="c1">20秒間</td><td class="c2">吸う</td><td>ゆっくり息を<u>吸い続ける</u></td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">凹</td><td>お腹を<span class="em">へこませた</span>状態で息を止める</td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">調整</td><td>お腹を元に戻し、自然な呼吸に戻す</td></tr>
+    </table>
+    <h2>4セット目（60秒）</h2>
+    <table>
+      <tr><td class="c1">20秒間</td><td class="c2">吸う</td><td>ゆっくり息を<u>吸い続ける</u></td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">凸</td><td>お腹を<span class="em">ふくらませた</span>状態で息を止める</td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1">20秒間</td><td class="c2">調整</td><td>お腹を元に戻し、自然な呼吸に戻す</td></tr>
+    </table>
+
+    <div class="point">
+      <b class="title">ポイント</b>
+      息を止めてお腹をふくらませる・へこませるときは、お腹の前側だけでなく、
+      お腹まわり360°（横・背中側まで）を動かす意識で行いましょう。<br>
+      20秒がきつい場合は10秒からでOK。少しずつ伸ばして、最終的に20秒を目指しましょう。
+    </div>
+  </div>
+
+  <footer>
+    本ページはANDANTE受講者限定のトレーニング補助ツールです。無断共有はご遠慮ください。<br>
+    Copyright &copy; 2026 ANDANTE / 株式会社斗 All rights reserved.
+  </footer>
+</div>
+
+<script>
+(() => {
+  const TOTAL = 240; // 60秒×4セット
+  const CIRC = 741.4;
+  const msg1 = document.getElementById('msg1');
+  const msg2 = document.getElementById('msg2');
+  const msg3 = document.getElementById('msg3');
+  const ring = document.getElementById('ring');
+  const secDisp = document.getElementById('secDisp');
+  const dots = document.querySelectorAll('#sets .dot');
+  const startBtn = document.getElementById('start');
+  const stopBtn = document.getElementById('stop');
+  const resetBtn = document.getElementById('reset');
+
+  let startTime = 0;   // 実行開始時刻
+  let carried = 0;     // ストップまでの累積経過ms
+  let timerID = null;
+  let lastSec = -1;
+  let audioCtx = null;
+  let wakeLock = null;
+
+  // ビープ音（Web Audio・外部ファイル不要）
+  function beep(freq = 880, dur = 0.18, when = 0) {
+    if (!audioCtx) return;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.frequency.value = freq;
+    o.connect(g); g.connect(audioCtx.destination);
+    const t = audioCtx.currentTime + when;
+    g.gain.setValueAtTime(0.25, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.start(t); o.stop(t + dur);
+  }
+  function beepFinish() { beep(880, .15, 0); beep(1100, .15, .2); beep(1320, .4, .4); }
+
+  async function requestWake() {
+    try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (e) {}
+  }
+
+  function phaseText(m, s) {
+    if (s < 20) {
+      return m < 2 ? ['吐く', 'ゆっくり息を吐き続ける']
+                   : ['吸う', 'ゆっくり息を吸い続ける'];
+    } else if (s < 40) {
+      return m % 2 === 0 ? ['凹', 'お腹をへこませた状態で息を止める']
+                         : ['凸', 'お腹をふくらませた状態で息を止める'];
+    }
+    return ['調整', 'お腹を元に戻し、自然な呼吸に戻す'];
+  }
+
+  function render(elapsedSec) {
+    const m = Math.floor(elapsedSec / 60);
+    const s = elapsedSec % 60;
+    if (elapsedSec >= TOTAL) { finish(); return; }
+    msg1.textContent = (m + 1) + ' セット目（60秒）';
+    const [p, desc] = phaseText(m, s);
+    msg2.textContent = p;
+    msg3.textContent = desc;
+    secDisp.textContent = s;
+    ring.style.strokeDashoffset = CIRC * (1 - s / 60);
+    dots.forEach((d, i) => {
+      d.classList.toggle('on', i === m);
+      d.classList.toggle('done', i < m);
+    });
+    // 切替3秒前ビープ
+    if (s !== lastSec && (s === 17 || s === 37 || s === 57)) beep();
+    lastSec = s;
+  }
+
+  function tick() {
+    const elapsed = Math.floor((Date.now() - startTime + carried) / 1000);
+    render(elapsed);
+    if (elapsed < TOTAL) timerID = setTimeout(tick, 200);
+  }
+
+  function finish() {
+    clearTimeout(timerID); timerID = null;
+    msg1.textContent = '終了！';
+    msg2.textContent = 'お疲れ様！';
+    msg3.textContent = '4セット完了。よく頑張りました！';
+    secDisp.textContent = '0';
+    ring.style.strokeDashoffset = 0;
+    dots.forEach(d => { d.classList.remove('on'); d.classList.add('done'); });
+    beepFinish();
+    startBtn.disabled = true; stopBtn.disabled = true; resetBtn.disabled = false;
+    wakeLock?.release(); wakeLock = null;
+  }
+
+  startBtn.onclick = () => {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx.resume();
+    startTime = Date.now();
+    startBtn.disabled = true; stopBtn.disabled = false; resetBtn.disabled = true;
+    requestWake();
+    tick();
+  };
+  stopBtn.onclick = () => {
+    clearTimeout(timerID); timerID = null;
+    carried += Date.now() - startTime;
+    startBtn.disabled = false; stopBtn.disabled = true; resetBtn.disabled = false;
+    wakeLock?.release(); wakeLock = null;
+  };
+  resetBtn.onclick = () => {
+    clearTimeout(timerID); timerID = null;
+    carried = 0; lastSec = -1;
+    msg1.textContent = '1 セット目（60秒）';
+    msg2.textContent = '準備';
+    msg3.textContent = 'スタートを押したら始まります';
+    secDisp.textContent = '0';
+    ring.style.strokeDashoffset = CIRC;
+    dots.forEach(d => d.classList.remove('on', 'done'));
+    startBtn.disabled = false; stopBtn.disabled = true; resetBtn.disabled = true;
+  };
+})();
+</script>
+</body>
+</html>
