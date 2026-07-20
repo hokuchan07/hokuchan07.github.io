@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>1:4:2 呼吸トレーニング（タイマー）| ANDANTE</title>
+<style>
+  :root {
+    --gold: #b3922e;
+    --gold-pale: #f6f0dd;
+    --ink: #1c1c1c;
+    --gray: #777;
+    --line: #ddd4bc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    color: var(--ink);
+    background: #fdfbf5;
+    -webkit-user-select: none; user-select: none;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 0 20px 40px; }
+  header {
+    text-align: center; padding: 26px 0 18px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 18px;
+  }
+  header .brand {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 15px; letter-spacing: 8px; text-indent: 8px;
+    color: var(--gold); font-weight: 600;
+  }
+  header h1 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 22px; margin-top: 8px; letter-spacing: 2px;
+  }
+  /* パターン選択 */
+  .selector { margin-bottom: 16px; }
+  .selector .label { font-size: 12px; color: var(--gray); text-align: center; margin-bottom: 7px; letter-spacing: 1px; }
+  .patterns { display: flex; gap: 8px; justify-content: center; }
+  .patterns button {
+    flex: 1; max-width: 100px;
+    padding: 9px 0 7px; border-radius: 12px; cursor: pointer;
+    border: 1.5px solid var(--line); background: #fff; color: var(--ink);
+    font-family: inherit; line-height: 1.3;
+  }
+  .patterns button .big { display: block; font-size: 17px; font-weight: bold; }
+  .patterns button .sub { display: block; font-size: 10px; color: var(--gray); }
+  .patterns button.on { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .patterns button.on .sub { color: rgba(255,255,255,0.85); }
+  .patterns button:disabled { opacity: 0.4; cursor: default; }
+  /* メッセージ */
+  .messages { text-align: center; min-height: 104px; margin-bottom: 4px; }
+  #msg1 { font-size: 14px; color: var(--gray); letter-spacing: 1px; }
+  #msg2 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 46px; font-weight: 700; color: var(--gold); line-height: 1.3;
+  }
+  #msg3 { font-size: 15px; line-height: 1.5; }
+  /* リングタイマー */
+  .clock { position: relative; width: 250px; height: 250px; margin: 8px auto 16px; }
+  .clock svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--gold-pale); stroke-width: 10; }
+  .ring-fg { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.9s linear; }
+  .clock .sec {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .clock .sec .big { font-size: 62px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+  .clock .sec .small { font-size: 13px; color: var(--gray); margin-top: 6px; letter-spacing: 1px; }
+  /* サイクル表示 */
+  .cycles { text-align: center; font-size: 14px; color: var(--gray); margin-bottom: 18px; letter-spacing: 1px; }
+  .cycles b { color: var(--gold); font-size: 17px; }
+  /* ボタン */
+  .buttons { display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; }
+  .buttons > button {
+    font-size: 16px; font-weight: bold; letter-spacing: 1px;
+    padding: 13px 0; width: 118px; border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--gold); font-family: inherit;
+  }
+  #start { background: var(--gold); color: #fff; }
+  #stop  { background: #fff; color: var(--gold); }
+  #reset { background: #fff; color: var(--gray); border-color: #ccc; }
+  .buttons > button:disabled { opacity: 0.35; cursor: default; }
+  /* ガイド */
+  .guide h2 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 17px; margin: 24px 0 8px; padding-left: 10px;
+    border-left: 4px solid var(--gold);
+  }
+  .guide table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; }
+  .guide td { border: 1px solid var(--line); padding: 9px 10px; }
+  .guide .c1 { width: 72px; text-align: center; color: var(--gray); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .guide .c2 { width: 62px; text-align: center; font-weight: bold; color: var(--gold); font-size: 16px; white-space: nowrap; }
+  .guide .arrow { text-align: center; color: var(--gold); border: none; padding: 2px; font-size: 12px; }
+  .point {
+    margin-top: 24px; background: var(--gold-pale);
+    border-radius: 10px; padding: 16px 18px; font-size: 14px; line-height: 1.8;
+  }
+  .point b.title { display: block; color: var(--gold); margin-bottom: 4px; letter-spacing: 1px; }
+  footer { text-align: center; margin-top: 38px; font-size: 11px; color: var(--gray); line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">ANDANTE</div>
+    <h1>1:4:2 呼吸トレーニング</h1>
+  </header>
+
+  <div class="selector">
+    <div class="label">パターンを選ぶ（吸う：止める：吐く）</div>
+    <div class="patterns" id="patterns">
+      <button data-n="7" class="on"><span class="big">7秒</span><span class="sub">7・28・14</span></button>
+      <button data-n="8"><span class="big">8秒</span><span class="sub">8・32・16</span></button>
+      <button data-n="9"><span class="big">9秒</span><span class="sub">9・36・18</span></button>
+      <button data-n="10"><span class="big">10秒</span><span class="sub">10・40・20</span></button>
+    </div>
+  </div>
+
+  <div class="messages">
+    <p id="msg1">準備ができたらスタート</p>
+    <p id="msg2">準備</p>
+    <p id="msg3">1サイクル = 吸う → 止める → 吐く</p>
+  </div>
+
+  <div class="clock">
+    <svg width="250" height="250" viewBox="0 0 250 250">
+      <circle class="ring-bg" cx="125" cy="125" r="113"></circle>
+      <circle class="ring-fg" id="ring" cx="125" cy="125" r="113"
+              stroke-dasharray="709.9" stroke-dashoffset="709.9"></circle>
+    </svg>
+    <div class="sec">
+      <div class="big" id="secDisp">0</div>
+      <div class="small">残り秒</div>
+    </div>
+  </div>
+
+  <div class="cycles" id="cycleDisp">サイクル <b>-</b> / 4</div>
+
+  <div class="buttons">
+    <button id="start">スタート</button>
+    <button id="stop" disabled>ストップ</button>
+    <button id="reset" disabled>リセット</button>
+  </div>
+
+  <div class="guide">
+    <h2>1サイクルの流れ（<span id="gTitle">7秒パターン</span>）</h2>
+    <table>
+      <tr><td class="c1" id="g1">7秒間</td><td class="c2">吸う</td><td>鼻からゆっくり<u>吸い続ける</u></td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1" id="g2">28秒間</td><td class="c2">止める</td><td>息を止める（力まずリラックス）</td></tr>
+      <tr><td colspan="3" class="arrow">▼</td></tr>
+      <tr><td class="c1" id="g3">14秒間</td><td class="c2">吐く</td><td>口から細く長く<u>吐き続ける</u></td></tr>
+    </table>
+
+    <div class="point">
+      <b class="title">ポイント</b>
+      「吸う1：止める4：吐く2」の比率で行う呼吸法です。これを4サイクル繰り返します。<br>
+      止めている間も、吐くときも、肩や首の力を抜いてリラックス。苦しい場合は無理をせず、短い秒数のパターンから始めて、慣れてきたら8秒→9秒→10秒と伸ばしていきましょう。
+    </div>
+  </div>
+
+  <footer>
+    本ページはANDANTE受講者限定のトレーニング補助ツールです。無断共有はご遠慮ください。<br>
+    Copyright &copy; 2026 ANDANTE / 株式会社斗 All rights reserved.
+  </footer>
+</div>
+
+<script>
+(() => {
+  const CIRC = 709.9;
+  const CYCLES = 4;
+  const msg1 = document.getElementById('msg1');
+  const msg2 = document.getElementById('msg2');
+  const msg3 = document.getElementById('msg3');
+  const ring = document.getElementById('ring');
+  const secDisp = document.getElementById('secDisp');
+  const cycleDisp = document.getElementById('cycleDisp');
+  const startBtn = document.getElementById('start');
+  const stopBtn = document.getElementById('stop');
+  const resetBtn = document.getElementById('reset');
+  const patternBox = document.getElementById('patterns');
+  const patternBtns = [...patternBox.querySelectorAll('button')];
+
+  let baseN = 7;
+  let startTime = 0, carried = 0, timerID = null;
+  let lastPhaseKey = '';
+  let audioCtx = null, wakeLock = null;
+
+  const PHASES = n => ([
+    { name: '吸う',   desc: '鼻からゆっくり吸い続ける',            dur: n },
+    { name: '止める', desc: '息を止める（力まずリラックス）',      dur: n * 4 },
+    { name: '吐く',   desc: '口から細く長く吐き続ける',            dur: n * 2 },
+  ]);
+
+  function beep(freq = 880, dur = 0.18, when = 0) {
+    if (!audioCtx) return;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.frequency.value = freq;
+    o.connect(g); g.connect(audioCtx.destination);
+    const t = audioCtx.currentTime + when;
+    g.gain.setValueAtTime(0.25, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.start(t); o.stop(t + dur);
+  }
+  function beepFinish() { beep(880, .15, 0); beep(1100, .15, .2); beep(1320, .4, .4); }
+  function buzz(pattern) { try { navigator.vibrate && navigator.vibrate(pattern); } catch (e) {} }
+
+  async function requestWake() {
+    try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (e) {}
+  }
+
+  function setPattern(n) {
+    baseN = n;
+    patternBtns.forEach(b => b.classList.toggle('on', +b.dataset.n === n));
+    document.getElementById('gTitle').textContent = n + '秒パターン';
+    document.getElementById('g1').textContent = n + '秒間';
+    document.getElementById('g2').textContent = (n * 4) + '秒間';
+    document.getElementById('g3').textContent = (n * 2) + '秒間';
+    resetView();
+  }
+
+  function cycleLen() { return baseN * 7; }
+  function total() { return cycleLen() * CYCLES; }
+
+  function locate(elapsed) {
+    const cycle = Math.floor(elapsed / cycleLen());
+    let t = elapsed % cycleLen();
+    const phases = PHASES(baseN);
+    for (let i = 0; i < phases.length; i++) {
+      if (t < phases[i].dur) return { cycle, phaseIdx: i, inPhase: t, phase: phases[i] };
+      t -= phases[i].dur;
+    }
+  }
+
+  function render(elapsed) {
+    if (elapsed >= total()) { finish(); return; }
+    const { cycle, phaseIdx, inPhase, phase } = locate(elapsed);
+    const remain = phase.dur - inPhase;
+    msg1.textContent = 'サイクル ' + (cycle + 1) + ' / ' + CYCLES;
+    msg2.textContent = phase.name;
+    msg3.textContent = phase.desc;
+    secDisp.textContent = remain;
+    cycleDisp.innerHTML = 'サイクル <b>' + (cycle + 1) + '</b> / ' + CYCLES;
+    ring.style.strokeDashoffset = CIRC * (1 - (inPhase + 1) / phase.dur);
+    const key = cycle + '-' + phaseIdx;
+    if (key !== lastPhaseKey) {
+      if (lastPhaseKey !== '') {
+        beep(phaseIdx === 0 ? 1100 : 880);
+        buzz(phaseIdx === 0 ? [120, 80, 120] : [200]);
+      }
+      lastPhaseKey = key;
+    }
+  }
+
+  function tick() {
+    const elapsed = Math.floor((Date.now() - startTime + carried) / 1000);
+    render(elapsed);
+    if (elapsed < total()) timerID = setTimeout(tick, 200);
+  }
+
+  function finish() {
+    clearTimeout(timerID); timerID = null;
+    msg1.textContent = '終了！';
+    msg2.textContent = 'お疲れ様！';
+    msg3.textContent = CYCLES + 'サイクル完了。よく頑張りました！';
+    secDisp.textContent = '0';
+    ring.style.strokeDashoffset = 0;
+    beepFinish();
+    buzz([200, 100, 200, 100, 400]);
+    startBtn.disabled = true; stopBtn.disabled = true; resetBtn.disabled = false;
+    wakeLock?.release(); wakeLock = null;
+  }
+
+  function resetView() {
+    clearTimeout(timerID); timerID = null;
+    carried = 0; lastPhaseKey = '';
+    msg1.textContent = '準備ができたらスタート';
+    msg2.textContent = '準備';
+    msg3.textContent = '1サイクル = 吸う → 止める → 吐く';
+    secDisp.textContent = baseN;
+    cycleDisp.innerHTML = 'サイクル <b>-</b> / ' + CYCLES;
+    ring.style.strokeDashoffset = CIRC;
+    startBtn.disabled = false; stopBtn.disabled = true; resetBtn.disabled = true;
+    patternBtns.forEach(b => b.disabled = false);
+    wakeLock?.release(); wakeLock = null;
+  }
+
+  patternBox.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b || b.disabled) return;
+    setPattern(+b.dataset.n);
+  });
+
+  startBtn.onclick = () => {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx.resume();
+    startTime = Date.now();
+    startBtn.disabled = true; stopBtn.disabled = false; resetBtn.disabled = true;
+    patternBtns.forEach(b => b.disabled = true);
+    lastPhaseKey = '';
+    buzz([120]);
+    requestWake();
+    tick();
+  };
+  stopBtn.onclick = () => {
+    clearTimeout(timerID); timerID = null;
+    carried += Date.now() - startTime;
+    startBtn.disabled = false; stopBtn.disabled = true; resetBtn.disabled = false;
+    wakeLock?.release(); wakeLock = null;
+  };
+  resetBtn.onclick = resetView;
+
+  setPattern(7);
+})();
+</script>
+</body>
+</html>
