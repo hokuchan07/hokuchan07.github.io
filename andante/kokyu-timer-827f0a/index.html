@@ -203,6 +203,8 @@
   let startTime = 0;   // 実行開始時刻
   let carried = 0;     // ストップまでの累積経過ms
   let timerID = null;
+  let countdownID = null;
+  let countdownAborted = false;
   let lastSec = -1;
   let audioCtx = null;
   let wakeLock = null;
@@ -220,6 +222,7 @@
     o.start(t); o.stop(t + dur);
   }
   function beepFinish() { beep(880, .15, 0); beep(1100, .15, .2); beep(1320, .4, .4); }
+  function buzz(pattern) { try { navigator.vibrate && navigator.vibrate(pattern); } catch (e) {} }
 
   async function requestWake() {
     try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (e) {}
@@ -274,23 +277,60 @@
     wakeLock?.release(); wakeLock = null;
   }
 
+  // 「用意 → 3・2・1 → スタート」のカウントダウン
+  function countdownThen(cb) {
+    let n = 3;
+    msg1.textContent = 'まもなく開始';
+    msg2.textContent = '用意';
+    msg3.textContent = '姿勢を整えてお待ちください';
+    ring.style.strokeDashoffset = CIRC;
+    secDisp.textContent = n;
+    beep(660, .12);
+    buzz([80]);
+    countdownID = setInterval(() => {
+      n--;
+      if (n > 0) {
+        secDisp.textContent = n;
+        beep(660, .12); buzz([80]);
+      } else {
+        clearInterval(countdownID); countdownID = null;
+        msg2.textContent = 'スタート！';
+        msg3.textContent = ' ';
+        secDisp.textContent = '0';
+        beep(1100, .3); buzz([220]);
+        setTimeout(() => { if (!countdownAborted) cb(); }, 700);
+      }
+    }, 1000);
+  }
+  function stopCountdown() {
+    if (countdownID) { clearInterval(countdownID); countdownID = null; }
+    countdownAborted = true;
+    setTimeout(() => { countdownAborted = false; }, 800);
+  }
+
   startBtn.onclick = () => {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     audioCtx.resume();
-    startTime = Date.now();
+    countdownAborted = false;
     startBtn.disabled = true; stopBtn.disabled = false; resetBtn.disabled = true;
     requestWake();
-    tick();
+    countdownThen(() => {
+      startTime = Date.now();
+      tick();
+    });
   };
   stopBtn.onclick = () => {
+    stopCountdown();
     clearTimeout(timerID); timerID = null;
-    carried += Date.now() - startTime;
+    if (startTime) carried += Date.now() - startTime;
+    startTime = 0;
     startBtn.disabled = false; stopBtn.disabled = true; resetBtn.disabled = false;
     wakeLock?.release(); wakeLock = null;
   };
   resetBtn.onclick = () => {
+    stopCountdown();
     clearTimeout(timerID); timerID = null;
-    carried = 0; lastSec = -1;
+    carried = 0; lastSec = -1; startTime = 0;
     msg1.textContent = '1 セット目（60秒）';
     msg2.textContent = '準備';
     msg3.textContent = 'スタートを押したら始まります';
