@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>High-Alti様 サイト内製化支援 お見積りのご説明</title>
+<style>
+  :root {
+    --navy: #1b2a4a;
+    --teal: #0e7c7b;
+    --teal-light: #e6f4f4;
+    --amber: #b45309;
+    --amber-light: #fef3e2;
+    --gray: #5b6472;
+    --line: #dde3ea;
+    --bg: #f7f9fb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color: var(--navy); background: var(--bg); line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+  header { text-align: center; padding: 36px 0 28px; }
+  header .eyebrow { color: var(--teal); font-weight: 700; letter-spacing: .18em; font-size: 13px; }
+  header h1 { font-size: 26px; margin: 10px 0 6px; letter-spacing: .04em; }
+  header .date { color: var(--gray); font-size: 13px; }
+  section { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; margin-top: 26px; }
+  h2 { font-size: 18px; border-left: 5px solid var(--teal); padding-left: 12px; margin-bottom: 18px; letter-spacing: .03em; }
+  p.lead { font-size: 15px; }
+  .hero {
+    background: linear-gradient(135deg, var(--navy), #2c4270);
+    color: #fff; border-radius: 14px; padding: 30px 28px; margin-top: 26px; text-align: center;
+  }
+  .hero .big { font-size: 21px; font-weight: 700; line-height: 1.6; }
+  .hero .sub { margin-top: 10px; font-size: 14px; opacity: .85; }
+  .hero .accent { color: #7fd8d6; }
+
+  /* 現状→内製化後 */
+  .compare { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+  .compare .box { flex: 1 1 240px; border-radius: 12px; padding: 20px 18px; text-align: center; }
+  .compare .before { background: #f1f3f6; border: 1px solid var(--line); }
+  .compare .after { background: var(--teal-light); border: 1px solid #bfe3e2; }
+  .compare .label { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: .1em; }
+  .compare .after .label { color: var(--teal); }
+  .compare .num { font-size: 26px; font-weight: 800; margin: 8px 0 4px; }
+  .compare .after .num { color: var(--teal); }
+  .compare .note { font-size: 12.5px; color: var(--gray); }
+  .arrow-mid { align-self: center; font-size: 26px; color: var(--teal); font-weight: 700; padding: 0 2px; }
+
+  /* プラン */
+  .plans { display: flex; gap: 14px; flex-wrap: wrap; }
+  .plan { flex: 1 1 240px; border: 2px solid var(--line); border-radius: 12px; padding: 22px 18px; position: relative; }
+  .plan.set { border-color: var(--teal); background: var(--teal-light); }
+  .plan .tag {
+    position: absolute; top: -12px; left: 16px; background: var(--teal); color: #fff;
+    font-size: 11.5px; font-weight: 700; padding: 2px 12px; border-radius: 999px; letter-spacing: .08em;
+  }
+  .plan .tag.opt { background: var(--gray); }
+  .plan h3 { font-size: 15.5px; margin-bottom: 6px; }
+  .plan .price { font-size: 26px; font-weight: 800; color: var(--navy); }
+  .plan.set .price { color: var(--teal); }
+  .plan .price small { font-size: 12px; font-weight: 600; color: var(--gray); }
+  .plan ul { list-style: none; margin-top: 12px; }
+  .plan li { font-size: 13px; padding: 5px 0 5px 22px; position: relative; border-top: 1px dashed var(--line); }
+  .plan li::before { content: "✓"; position: absolute; left: 2px; color: var(--teal); font-weight: 700; }
+
+  /* 7手順フロー */
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; counter-reset: step; }
+  .flow .step {
+    flex: 1 1 100px; min-width: 96px; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 8px 10px; text-align: center; position: relative; counter-increment: step;
+  }
+  .flow .step::before {
+    content: counter(step); display: inline-block; width: 22px; height: 22px; line-height: 22px;
+    background: var(--navy); color: #fff; border-radius: 50%; font-size: 12px; font-weight: 700; margin-bottom: 6px;
+  }
+  .flow .step.danger::before { background: var(--amber); }
+  .flow .step .t { font-size: 12.5px; font-weight: 700; display: block; }
+  .flow .step .d { font-size: 11px; color: var(--gray); display: block; margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--bg); font-size: 12.5px; letter-spacing: .05em; white-space: nowrap; }
+  td .price-strong { font-weight: 800; color: var(--teal); white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+
+  .callout { background: var(--amber-light); border: 1px solid #f3ddb9; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; margin-top: 16px; }
+  .callout strong { color: var(--amber); }
+  .free-note { background: var(--teal-light); border: 1px solid #bfe3e2; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; margin-top: 12px; }
+  .free-note strong { color: var(--teal); }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+  .skill { border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: var(--bg); }
+  .skill .name { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: var(--teal); font-weight: 700; }
+  .skill h4 { font-size: 14.5px; margin: 4px 0 6px; }
+  .skill p { font-size: 12.5px; color: var(--gray); }
+  .skill .say { margin-top: 8px; font-size: 12px; background: #fff; border-radius: 8px; padding: 8px 10px; border: 1px dashed var(--line); }
+  .skill .say::before { content: "使い方："; color: var(--teal); font-weight: 700; }
+
+  footer { text-align: center; color: var(--gray); font-size: 12px; margin-top: 40px; }
+  @media (max-width: 620px) {
+    header h1 { font-size: 21px; }
+    .arrow-mid { width: 100%; text-align: center; transform: rotate(90deg); padding: 0; }
+    .hero .big { font-size: 17px; }
+    /* 表はカード積みに切替（列潰れ防止） */
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td { display: block; width: 100%; }
+    .table-wrap tr:first-child { display: none; }
+    .table-wrap tr { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 12px; overflow: hidden; background: #fff; }
+    .table-wrap td { border: none; border-top: 1px dashed var(--line); }
+    .table-wrap td:first-child { border-top: none; background: var(--bg); }
+    .table-wrap td[data-label]::before {
+      content: attr(data-label); display: block; font-size: 11px; color: var(--gray);
+      font-weight: 700; letter-spacing: .06em; margin-bottom: 2px;
+    }
+    td .price-strong { white-space: normal; }
+  }
+  @media print {
+    body { background: #fff; }
+    section, .hero { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">HIGH-ALTI × 斗</div>
+    <h1><span style="display:inline-block">サイト内製化支援</span>　<span style="display:inline-block">お見積りのご説明</span></h1>
+    <div class="date">2026年8月　High Altitude Management株式会社 御中</div>
+  </header>
+
+  <div class="hero">
+    <div class="big">坪井様はすでに<span class="accent">「作る力」</span>をお持ちです。<br>
+    ご提供するのは、<span class="accent">安全に本番へ出す仕組み</span>だけ。</div>
+    <div class="sub">Hyrox LPを自力で完成された実力があれば、教えることはほとんどありません。<br>
+    足りないのは「ファイルの下ろし方」と「上げ方」——そこだけをお渡しします。</div>
+  </div>
+
+  <section>
+    <h2>1. 何が変わるか</h2>
+    <div class="compare">
+      <div class="box before">
+        <div class="label">現在</div>
+        <div class="num">約10万円<span style="font-size:14px;">／件</span></div>
+        <div class="note">修正のたびに制作会社へ依頼<br>数日〜数週間待ち</div>
+      </div>
+      <div class="arrow-mid">→</div>
+      <div class="box after">
+        <div class="label">内製化後</div>
+        <div class="num">0円<span style="font-size:14px;">／件</span></div>
+        <div class="note">思い立ったその日に社内で修正完了<br>難しい改修だけ斗がバックアップ</div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:13.5px; color:var(--gray);">
+      初期費用は従来の修正1件（約10万円）の<strong style="color:var(--navy);">半額</strong>。<strong style="color:var(--navy);">最初の修正1件で元が取れる</strong>計算です。
+    </p>
+  </section>
+
+  <section>
+    <h2>2. プランと料金（税別）</h2>
+    <div class="plans">
+      <div class="plan set">
+        <div class="tag">おすすめ</div>
+        <h3>A. 既存サイト編集の内製化（スキル＋研修）</h3>
+        <div class="price">¥50,000 <small>（税別）</small></div>
+        <ul>
+          <li>FTP本番反映スキル（ZIP納品）</li>
+          <li>復旧スキル（壊しても戻せる）</li>
+          <li>自動バックアップの整備</li>
+          <li>研修1回（実サイトで7手順を1周）＋予備1回</li>
+          <li><strong>できるようになるまで伴走</strong>（チャット・LINEでいつでも質問OK）</li>
+          <li>= 従来の修正<strong>1件の半額</strong>で、以後の修正が社内で完結</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <div class="tag opt">オプション</div>
+        <h3>B. LP量産の型化</h3>
+        <div class="price">+¥50,000 <small>（税別）</small></div>
+        <ul>
+          <li>Hyrox LPを「型」としてスキル化</li>
+          <li>派生LP1本をご一緒に制作</li>
+          <li>画像生成・公開手順・スマホ検証の型</li>
+          <li>社員展開の時期のご追加でもOK</li>
+        </ul>
+      </div>
+    </div>
+    <div class="free-note">
+      <strong>Hyrox LPの計測タグ設置は無償です。</strong>お打ち合わせでお約束したとおり、本見積りとは別にサービスで対応いたします。
+    </div>
+    <div class="callout">
+      <strong>この価格の理由：</strong>広告自動化のように「システムを組む」案件ではなく、スキル（Claudeへの手順書）と研修で実現するため、この価格でご提供できます。すでにシステム開発・広告自動化でお付き合いいただいていることも踏まえ、内製化の立ち上げは最低限の価格に設定しました。
+    </div>
+  </section>
+
+  <section>
+    <h2>3. お渡しする「スキル」（Claudeが覚える定型業務）</h2>
+    <div class="skills">
+      <div class="skill">
+        <span class="name">highalt-wp-edit</span>
+        <h4>本番サイトを安全に直す【A】</h4>
+        <p>バックアップ→FTP取得→編集→確認→本番反映→キャッシュ削除→確認、の7手順をClaudeが毎回同じ順番で実行。危険な操作のNGリストも内蔵。</p>
+        <div class="say">「料金ページの月額表示を直して」</div>
+      </div>
+      <div class="skill">
+        <span class="name">highalt-recovery</span>
+        <h4>困ったときの復旧【A】</h4>
+        <p>ページが真っ白になった等の緊急時に、バックアップから即座に戻す判断フロー。「これがあるから怖くない」の保険。</p>
+        <div class="say">「ページが真っ白になった！」</div>
+      </div>
+      <div class="skill">
+        <span class="name">highalt-lp-create</span>
+        <h4>LPを型から量産する【B・オプション】</h4>
+        <p>Hyrox LPのトンマナ・構成・画像生成の役割分担・公開手順・スマホ検証までを型として登録。ストーリー差し替えで派生LPを作成。</p>
+        <div class="say">「ビギナー向けLPを作って。ストーリーはこれ」</div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:var(--gray);">
+      スキルは使うほど育ちます。詰まった箇所はZoomで解消し、その内容をスキルに書き足してお返しします。
+    </p>
+  </section>
+
+  <section>
+    <h2>4. 安全の型（研修で身につく7手順）</h2>
+    <div class="flow">
+      <div class="step danger"><span class="t">バックアップ</span><span class="d">触る前に必ず</span></div>
+      <div class="step"><span class="t">FTPで取得</span><span class="d">触る分だけ</span></div>
+      <div class="step"><span class="t">ローカル編集</span><span class="d">Claude Code</span></div>
+      <div class="step danger"><span class="t">表示確認</span><span class="d">スマホ幅まで</span></div>
+      <div class="step"><span class="t">本番へ反映</span><span class="d">FTPで戻す</span></div>
+      <div class="step"><span class="t">キャッシュ削除</span><span class="d">忘れがち</span></div>
+      <div class="step"><span class="t">本番で確認</span><span class="d">PC＋スマホ</span></div>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:var(--gray);">
+      オレンジの手順（バックアップ・表示確認）を飛ばさない限り、<strong style="color:var(--navy);">壊れても必ず戻せます</strong>。この2つをスキルが強制するので、「間違えたら怖い」がなくなります。
+    </p>
+  </section>
+
+  <section>
+    <h2>5. 対象範囲</h2>
+    <div class="table-wrap">
+    <table>
+      <tr><th>サイト</th><th>内製化できること</th></tr>
+      <tr>
+        <td><strong>high-alti.jp</strong><br><span style="font-size:12px;color:var(--gray);">サービスサイト</span></td>
+        <td data-label="内製化できること">ファイル編集すべて（文言・画像・デザイン調整）<br><strong style="color:var(--teal);">◎ 内製化のメイン対象</strong></td>
+      </tr>
+      <tr>
+        <td><strong>high-alti.co.jp</strong><br><span style="font-size:12px;color:var(--gray);">コーポレート</span></td>
+        <td data-label="内製化できること">管理画面での更新（ニュース・採用・社員インタビュー）</td>
+      </tr>
+      <tr>
+        <td><strong>Hyrox LP</strong><br><span style="font-size:12px;color:var(--gray);">Railway</span></td>
+        <td data-label="内製化できること">すべて（坪井様の自作サイトのため既に自走可能）</td>
+      </tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. 進め方</h2>
+    <div class="flow">
+      <div class="step"><span class="t">FTP情報の共有</span><span class="d">サーバーパネル権限<br>or 制作会社発行</span></div>
+      <div class="step"><span class="t">スキル納品</span><span class="d">斗が実地検証済みで<br>ZIPお渡し</span></div>
+      <div class="step"><span class="t">研修</span><span class="d">実サイトで<br>7手順を1周</span></div>
+      <div class="step"><span class="t">予備回</span><span class="d">詰まった箇所を<br>まとめて解消</span></div>
+      <div class="step"><span class="t">自走開始</span><span class="d">できるまで<br>伴走フォロー</span></div>
+    </div>
+    <div class="callout" style="margin-top:16px;">
+      <strong>着手の前提：</strong>FTPアカウント情報のご共有が必要です（エックスサーバーのサーバーパネル権限、または制作会社様からのFTPアカウント発行）。ご共有いただき次第、スキルを検証してお渡しします。
+    </div>
+  </section>
+
+  <footer>
+    本資料は御見積書（No.15）の補足説明資料です。金額はすべて税別表記。<br>
+    ご不明点はお気軽にご連絡ください。
+  </footer>
+
+</div>
+</body>
+</html>
