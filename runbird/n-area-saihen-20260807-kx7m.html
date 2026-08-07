@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N収集エリア再編案（2026-08-07）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background:#f4f6f9; color:#1a2333; line-height:1.7; padding:32px 16px;
+  }
+  .page { max-width:960px; margin:0 auto; }
+  .card { background:#fff; border-radius:14px; padding:28px 32px; margin-bottom:24px; box-shadow:0 1px 4px rgba(20,40,80,.08); }
+  h1 { font-size:22px; margin-bottom:4px; }
+  h2 { font-size:17px; margin-bottom:14px; padding-left:10px; border-left:5px solid #2563eb; }
+  .sub { color:#5b6b82; font-size:13px; }
+  .lead { font-size:14px; margin-top:10px; }
+  .badge { display:inline-block; background:#2563eb; color:#fff; font-size:12px; font-weight:700; border-radius:999px; padding:2px 12px; margin-right:6px; vertical-align:2px; }
+
+  /* Before/After */
+  .ba-wrap { display:flex; gap:14px; align-items:stretch; flex-wrap:wrap; }
+  .ba-col { flex:1; min-width:280px; }
+  .ba-col h3 { font-size:14px; text-align:center; margin-bottom:10px; color:#5b6b82; }
+  .ba-col.after h3 { color:#2563eb; }
+  .pc-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .pc-name { width:88px; flex-shrink:0; text-align:center; font-size:12px; font-weight:700; background:#eef2f8; border-radius:8px; padding:6px 4px; }
+  .area { flex:1; border-radius:8px; padding:6px 12px; font-size:13px; font-weight:600; }
+  .kanto  { background:#e8f0fe; color:#1d4ed8; }
+  .kansai { background:#fdeaea; color:#b91c1c; }
+  .kyushu { background:#e9f7ef; color:#15803d; }
+  .keep   { background:#f1f5f9; color:#475569; }
+  .arrow-mid { display:flex; align-items:center; justify-content:center; font-size:26px; color:#94a3b8; padding:0 2px; }
+  .weight { font-size:11px; font-weight:400; color:#666; }
+  .cycle { font-size:11px; color:#5b6b82; width:64px; flex-shrink:0; text-align:right; }
+  .legend { margin-top:10px; font-size:12px; color:#5b6b82; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:3px; margin:0 4px 0 12px; vertical-align:-1px; }
+
+  /* 3 reasons */
+  .reasons { display:flex; gap:14px; flex-wrap:wrap; }
+  .reason { flex:1; min-width:260px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px 18px; }
+  .reason .num { font-size:12px; font-weight:800; color:#2563eb; }
+  .reason h4 { font-size:14px; margin:2px 0 8px; }
+  .big { font-size:26px; font-weight:800; color:#1a2333; }
+  .big small { font-size:13px; font-weight:600; color:#5b6b82; }
+  .down { color:#b91c1c; }
+  .up { color:#15803d; }
+  .note { font-size:12px; color:#5b6b82; margin-top:6px; }
+
+  /* timeline */
+  .timeline { position:relative; margin:18px 0 6px; padding-left:8px; }
+  .tl-bar { position:absolute; left:15px; top:6px; bottom:6px; width:3px; background:#dbe3ef; border-radius:2px; }
+  .tl-item { position:relative; padding-left:36px; margin-bottom:14px; }
+  .tl-item::before { content:""; position:absolute; left:9px; top:6px; width:15px; height:15px; border-radius:50%; background:#fff; border:4px solid #2563eb; }
+  .tl-item.goal::before { border-color:#b91c1c; }
+  .tl-date { font-weight:800; font-size:14px; }
+  .tl-body { font-size:13px; color:#3b4a63; }
+
+  table.cmp { width:100%; border-collapse:collapse; font-size:13px; }
+  table.cmp th, table.cmp td { border:1px solid #dbe3ef; padding:8px 10px; text-align:center; }
+  table.cmp th { background:#eef2f8; font-size:12px; }
+  table.cmp td.head { background:#f8fafc; text-align:left; font-weight:700; }
+  .win { background:#e9f7ef; font-weight:700; }
+  .lose { color:#b91c1c; }
+
+  .foot { font-size:12px; color:#8895aa; text-align:center; margin-top:8px; }
+  @media print { body { background:#fff; padding:0; } .card { box-shadow:none; border:1px solid #e2e8f0; break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="card">
+    <h1><span class="badge">提案</span>N収集（新店ハンター）エリア再編</h1>
+    <div class="sub">2026-08-07 ／ 対象: N収集専任6台 ／ 根拠データ: CTI架電ログ42,070件（4/23〜8/7）＋N系リスト6,984件＋各PC稼働実測</div>
+    <p class="lead"><b>結論: 関東3台・関西2台・九州1台。</b>打ち合わせ案（関西3台）から関西を1台減らし、その分を関東に残します。<b>関西2台でもお盆明け（8/17）の営業開始に間に合うことが逆算で確認できた</b>ため、実績の出ている関東の供給を守る配置がベストです。</p>
+  </div>
+
+  <div class="card">
+    <h2>1. 配置の変更（6台の Before → After）</h2>
+    <div class="ba-wrap">
+      <div class="ba-col">
+        <h3>現在</h3>
+        <div class="pc-row"><div class="pc-name">プー</div><div class="area kanto">東京</div></div>
+        <div class="pc-row"><div class="pc-name">しまじろう</div><div class="area kanto">神奈川</div></div>
+        <div class="pc-row"><div class="pc-name">おれんじ</div><div class="area kanto">埼玉</div></div>
+        <div class="pc-row"><div class="pc-name">ふくろう</div><div class="area kanto">千葉</div></div>
+        <div class="pc-row"><div class="pc-name">めんだこ</div><div class="area kanto">茨城・栃木・群馬</div></div>
+        <div class="pc-row"><div class="pc-name">ミッキー</div><div class="area kyushu">福岡</div></div>
+      </div>
+      <div class="arrow-mid">➜</div>
+      <div class="ba-col after">
+        <h3>再編後（提案）</h3>
+        <div class="pc-row"><div class="pc-name">プー</div><div class="area kanto">東京＋千葉 <span class="weight">(3:2)</span></div><div class="cycle">約6日/周</div></div>
+        <div class="pc-row"><div class="pc-name">しまじろう</div><div class="area kanto">神奈川＋埼玉 <span class="weight">(2:1)</span></div><div class="cycle">6〜7日/周</div></div>
+        <div class="pc-row"><div class="pc-name">おれんじ</div><div class="area kansai">大阪＋和歌山 <span class="weight">(5:1)</span></div><div class="cycle">約9日/周</div></div>
+        <div class="pc-row"><div class="pc-name">ふくろう</div><div class="area kansai">兵庫＋奈良＋京都 <span class="weight">(5:1:1)</span></div><div class="cycle">8〜9日/周</div></div>
+        <div class="pc-row"><div class="pc-name">めんだこ</div><div class="area kanto">茨城・栃木・群馬 <span class="weight">継続</span></div><div class="cycle">5.5日/周</div></div>
+        <div class="pc-row"><div class="pc-name">ミッキー</div><div class="area kyushu">福岡＋長崎＋佐賀 <span class="weight">(7:2:1)</span></div><div class="cycle">約6日/周</div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="dot kanto"></span>関東 4台 <span class="dot kansai"></span>関西 2台（新規） <span class="dot kyushu"></span>九州 1台
+      ／ ( ) 内は時間配分の比重。<b>ローテ組（かに・ぱんだ等5台）はN収集に参加していないため変更なし。</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. なぜ「関西3台」ではなく「関西2台」か — 実データ3点</h2>
+    <div class="reasons">
+      <div class="reason">
+        <div class="num">DATA 1</div>
+        <h4>関東はNリストの主力供給源</h4>
+        <div class="big">50<small>%</small></div>
+        <div class="note">N供給の半分は東京1台（287件/日）。Nアポ8件中6件が東京発。関西3台案だと関東供給は<b class="lose">577→279件/日（半減）</b>、北関東は停止してしまう。</div>
+      </div>
+      <div class="reason">
+        <div class="num">DATA 2</div>
+        <h4>関西は攻める価値あり（アポ率が関東超え）</h4>
+        <div class="big up">0.99<small>%</small> <small>＞ 関東0.79%</small></div>
+        <div class="note">GM系リストのアポ率実測（関西3,127架電・31アポ）。ただし大阪の「新店・即かけ」鮮度リストはまだゼロ → そこにNハンターを入れる。</div>
+      </div>
+      <div class="reason">
+        <div class="num">DATA 3</div>
+        <h4>3台目を入れても8/17の件数は増えない</h4>
+        <div class="big">2,600〜3,800<small>件</small></div>
+        <div class="note">8/17時点の関西リスト見込み（うち即かけ級400〜600件）。初回収集の総量は同じで、3台にしても完了が3日早まるだけ。<b>浮く1台は関東に残す方が得。</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3. お盆明けスケジュール（8/8 稼働開始の場合）</h2>
+    <div class="timeline">
+      <div class="tl-bar"></div>
+      <div class="tl-item"><div class="tl-date">8/8（金）</div><div class="tl-body">再編を反映して収集開始（大阪市24区・神戸市9区から着手）</div></div>
+      <div class="tl-item"><div class="tl-date">8/10〜11</div><div class="tl-body"><b>大阪市内・神戸市内のリストが立ち上がる</b>（営業が最初に使うエリア）</div></div>
+      <div class="tl-item"><div class="tl-date">8/16（日）</div><div class="tl-body">大阪・兵庫の初回スイープ完了（関西全域を一巡）</div></div>
+      <div class="tl-item goal"><div class="tl-date">8/17（月）お盆明け</div><div class="tl-body"><b>営業チーム関西入り。関西リスト約2,600〜3,800件が手元にある状態</b></div></div>
+    </div>
+    <div class="note">※ 検出率は関東・福岡の実測値からの類推のためレンジ表記。稼働開始が8/11以降にずれる場合のみ、関東の1台を一時的に大阪へ回す保険プランに切り替え。</div>
+  </div>
+
+  <div class="card">
+    <h2>4. 案の比較まとめ</h2>
+    <table class="cmp">
+      <tr><th></th><th>打ち合わせ案<br>（関東2・関西3・重複あり）</th><th class="win">提案C案<br>（関東3+北関東・関西2）</th></tr>
+      <tr><td class="head">8/17 関西リスト</td><td>提案と同等以下※</td><td class="win">2,600〜3,800件</td></tr>
+      <tr><td class="head">関東の供給維持</td><td class="lose">48%に半減・北関東停止</td><td class="win">63%を維持・北関東継続</td></tr>
+      <tr><td class="head">大阪の周回</td><td class="lose">実効14.5日/周（2台が同じ町を二重収集）</td><td class="win">8.7日/周（重複なし）</td></tr>
+      <tr><td class="head">福岡の周回</td><td class="lose">12日/周（極小県に時間を等分する仕様のため悪化）</td><td class="win">5.8日/周（比重で解消）</td></tr>
+      <tr><td class="head">反映作業</td><td>設定差替のみ</td><td class="win">設定差替のみ（同等・システム改修ゼロ）</td></tr>
+    </table>
+    <div class="note">※ 打ち合わせ案の「大阪＋兵庫」「大阪＋和歌山」は2台が同じ大阪を二重に回る構成になり、台数の割に速くならない（システムが県の大きさに関係なく時間を等分するため）。提案では担当を重複させず、比重設定で大きい県に時間を寄せて解決。</div>
+  </div>
+
+  <div class="card">
+    <h2>5. 反映に必要な作業</h2>
+    <ol style="font-size:13px; padding-left:20px;">
+      <li>設定ファイル（担当県プリセット）を各PCに配布 — <b>5台×2分程度</b>、システム改修なし</li>
+      <li>AXT管理画面（hunter_config）の担当県も同じ内容に更新 — <b>不一致だと30分で旧設定に戻るため必須</b></li>
+      <li>関西の町データ（7府県・267市区町村分）は作成・検証済み</li>
+    </ol>
+    <div class="note">8/17以降、関西のNアポ実績を見て「3台目を関西へ」を改めて判断（その際はローテ組の転換も選択肢）。</div>
+  </div>
+
+  <div class="foot">株式会社柄杓 ／ 作成 2026-08-07 ／ 根拠: CTI call_logs・stores 実測＋PC稼働カーソル逆算</div>
+</div>
+</body>
+</html>
