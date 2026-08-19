@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行政書士AI 使い方ガイド — 株式会社ランバード</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a1a;
+  line-height: 1.85;
+  padding: 20px 16px 48px;
+  -webkit-text-size-adjust: 100%;
+}
+.container { max-width: 880px; margin: 0 auto; }
+
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 34px 28px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-size: 12px;
+  color: #cfd6e4;
+  margin-bottom: 14px;
+}
+.hero h1 { font-size: 26px; font-weight: 800; line-height: 1.5; margin-bottom: 8px; }
+.hero h1 span { color: #4ea8ff; }
+.hero .hero-sub { font-size: 14px; color: #aab4c8; }
+/* 助詞1文字の行頭落ち・単語の途中改行を防ぐ（フレーズ単位でのみ折る） */
+.hero .hero-sub span { display: inline-block; }
+.hero .hero-url {
+  display: inline-block;
+  margin-top: 16px;
+  background: rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+  word-break: break-all;
+}
+
+/* 3ステップ概要 */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.flow-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+}
+.flow-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 9px;
+  background: #0f3460; color: #fff; font-weight: 800; font-size: 14px;
+  margin-bottom: 8px;
+}
+.flow-item .t { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.flow-item .d { font-size: 12.5px; color: #667; line-height: 1.6; }
+
+.section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+}
+.section-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.section-num {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: #0f3460; color: #fff; font-size: 13px; font-weight: 800;
+  margin-top: 3px;
+}
+.section-title { font-size: 19px; font-weight: 800; line-height: 1.5; }
+.section p { margin-bottom: 12px; }
+.section p:last-child { margin-bottom: 0; }
+h3 { font-size: 15.5px; font-weight: 700; margin: 18px 0 8px; color: #0f3460; }
+
+ul, ol { margin: 0 0 12px 1.4em; }
+li { margin-bottom: 6px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 14px; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 14px; }
+.table-wrap table { margin-bottom: 0; min-width: 480px; }
+th, td { border: 1px solid #e2e6ee; padding: 9px 11px; text-align: left; vertical-align: top; }
+th { background: #f6f8fb; font-weight: 700; white-space: nowrap; }
+
+.tag {
+  display: inline-block; border-radius: 5px; padding: 1px 8px;
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.tag.ext { background: #e6f4ea; color: #137333; }
+.tag.hear { background: #fef3c7; color: #92400e; }
+.tag.fix { background: #e8eaf6; color: #303f9f; }
+.tag.ng { background: #fce8e6; color: #c5221f; }
+
+.callout {
+  border-radius: 10px;
+  padding: 15px 18px;
+  margin: 14px 0;
+  font-size: 14.5px;
+}
+.callout .ttl { font-weight: 800; margin-bottom: 4px; }
+.callout.warn { background: #fff7ed; border-left: 4px solid #ea8600; }
+.callout.danger { background: #fdecea; border-left: 4px solid #c5221f; }
+.callout.info { background: #eef4ff; border-left: 4px solid #0f3460; }
+
+.note { font-size: 13.5px; color: #667; }
+.nb { white-space: nowrap; }  /* 閉じ括弧だけが次行に落ちるのを防ぐ */
+.ui { background: #f6f8fb; border: 1px solid #e2e6ee; border-radius: 6px; padding: 1px 7px; font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+
+.footer {
+  text-align: center; font-size: 12.5px; color: #7a8296;
+  margin-top: 28px; line-height: 1.9;
+}
+
+@media (max-width: 640px) {
+  body { padding: 14px 12px 40px; line-height: 1.8; }
+  .hero { padding: 26px 18px; border-radius: 14px; }
+  .hero h1 { font-size: 21px; }
+  .hero .hero-url { font-size: 13px; }
+  .flow { grid-template-columns: 1fr; gap: 10px; }
+  .flow-item { display: flex; align-items: flex-start; gap: 12px; text-align: left; padding: 14px 16px; }
+  .flow-num { margin-bottom: 0; }
+  .section { padding: 20px 17px; border-radius: 12px; }
+  .section-title { font-size: 17px; }
+  ul, ol { margin-left: 1.2em; }
+  /* 表は枠内で横スクロールする。切れて見えるだけと誤解されないよう明示 */
+  .table-wrap::before {
+    content: "→ 表は横にスクロールできます";
+    display: block;
+    font-size: 12px;
+    color: #7a8296;
+    margin-bottom: 5px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-badge">SKY行政書士事務所様 モニターご利用向け</div>
+    <h1>行政書士AI <span>使い方ガイド</span></h1>
+    <div class="hero-sub"><span>書類を入れるだけで、</span><span>電子申請の入力値シートと</span><span>不備チェックができあがります</span></div>
+    <div class="hero-url">https://gyosei-ai.vercel.app</div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-item">
+      <div class="flow-num">1</div>
+      <div>
+        <div class="t">業務を選ぶ</div>
+        <div class="d">ビザ申請／補助金</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">2</div>
+      <div>
+        <div class="t">書類を入れる</div>
+        <div class="d">PDF・写真をまとめてドラッグ</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">3</div>
+      <div>
+        <div class="t">作成するを押す</div>
+        <div class="d">4〜5分で結果が出ます</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="ttl">ご用意いただくもの</div>
+    パソコン（ブラウザ）とお客様の書類だけです。インストールは不要で、Chrome・Safari・Edge のどれでも動きます。スマホでも開けますが、結果の表が横に広いためパソコンを推奨します。
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <div class="section-title">ログインする</div>
+    </div>
+    <ol>
+      <li><strong>https://gyosei-ai.vercel.app</strong> を開きます。</li>
+      <li>お伝えしたアクセスコードを入力し、<span class="ui">はじめる</span> を押します。</li>
+    </ol>
+    <p>一度入力すれば、<strong>同じパソコンの同じブラウザなら次回から入力は不要</strong>です（ブラウザに記憶されます）。</p>
+    <div class="callout warn">
+      <div class="ttl">コードの正誤は「作成する」を押した時に分かります</div>
+      アクセスコードは <span class="ui">はじめる</span> の時点では照合していません。もし間違っていると、書類を入れて <span class="ui">作成する</span> を押した瞬間に「アクセスコードが正しくありません」と表示され、最初のログイン画面に戻ります。その場合は<strong>正しいコードを入れ直し、お手数ですが書類をもう一度入れ直してください</strong>（書類は消えます）。
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <div class="section-title">業務を選ぶ</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>選ぶボタン</th><th>入れるもの</th><th>できあがるもの</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ビザ申請<br><span class="nb">（経営管理）</span></strong></td>
+            <td>お客様の書類一式（PDF・写真）</td>
+            <td>在留申請オンラインシステムの入力値シート（約56項目）＋照合チェック＋不備リスト＋お客様確認シート</td>
+          </tr>
+          <tr>
+            <td><strong>補助金<br><span class="nb">（小規模持続化）</span></strong></td>
+            <td>会社資料＋ヒアリングメモ</td>
+            <td>経営計画書・補助事業計画書のドラフト＋要確認事項</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>選んだボタンが青く囲まれます。押し間違えたら、もう一方を押し直せば切り替わります。</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <div class="section-title">書類を入れる</div>
+    </div>
+    <p>点線の枠の中に<strong>ファイルをまとめてドラッグ</strong>するか、枠をクリックして選びます。何回でも追加でき、入れたファイルは一覧に出ます。間違えたファイルは <span class="ui">削除</span> で外せます。</p>
+
+    <h3>入れられるファイル</h3>
+    <ul>
+      <li><strong>PDF と 写真（JPEG・PNG など）のみ</strong>です。Word・Excel は入れられないので、PDFに書き出してからお入れください</li>
+      <li><strong>合計24MBまで</strong>（超えると「ファイル合計が大きすぎます」と出ます）</li>
+      <li>1つのPDFに何十ページ入っていても大丈夫です（実績: 85ページ）</li>
+    </ul>
+
+    <h3>ビザ申請で入れていただきたい書類</h3>
+    <p>多ければ多いほど精度が上がります。<strong>足りない書類があっても動きます</strong>（埋まらない項目は「要確認」として出ます）。</p>
+    <ul>
+      <li>パスポート（顔写真のページ・<strong>出入国スタンプのページも</strong>）</li>
+      <li>在留カード（お持ちの場合）</li>
+      <li>登記事項証明書、定款</li>
+      <li>株主総会議事録（役員報酬が分かるもの）</li>
+      <li>卒業証書・学位証明</li>
+      <li>在職証明書、自己紹介書（職歴が分かるもの）</li>
+      <li>事業計画書</li>
+      <li>建物の賃貸借契約書・使用承諾書（事務所の面積・所在地が分かるもの）</li>
+      <li>資本金の送金計算書・払込証明</li>
+    </ul>
+    <div class="callout info">
+      <div class="ttl">外国語の書類は、日本語訳も一緒に入れてください</div>
+      訳が付いていない書類は、AIが「和訳が欠落している」と不備として指摘します。<strong>これは誤作動ではなく、申請前に気づけるチェック機能</strong>としてあえてそう作っています。
+    </div>
+
+    <h3>メモ欄（枠の下のテキスト欄）</h3>
+    <ul>
+      <li><strong>ビザ申請では任意</strong>です。入国予定日・滞在予定期間など、すでに決まっていることがあれば書いておくと、その分「要確認」が減ります</li>
+      <li><strong>補助金ではここが中心</strong>です。事業内容・やりたい取組・売上状況をお書きください（書類がなくてもメモだけで動きます）</li>
+    </ul>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <div class="section-title">作成する（4〜5分お待ちください）</div>
+    </div>
+    <p><span class="ui">作成する</span> を押すと、経過時間が表示されます。書類85ページの実案件で<strong>約4分半</strong>でした。</p>
+    <div class="callout danger">
+      <div class="ttl">この間、タブを閉じない・別ページに移動しない</div>
+      画面を閉じると処理が中断され、最初からやり直しになります。他のアプリでの作業は問題ありませんが、<strong>このタブは開いたままにしてください</strong>。また、システムの制限で<strong>5分を超えると止まります</strong>。書類が非常に多い案件で止まる場合は、書類を半分に分けて2回に分けてお試しください（それでも改善しない場合はご連絡ください）。
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <div class="section-title">結果の読み方（おすすめの順番）</div>
+    </div>
+    <p>結果は4つのブロックで出ます。<strong>上から順ではなく、下記の順に見ていただくのが効率的</strong>です。</p>
+
+    <h3>① まず「不備・注意点」を見る</h3>
+    <p>書類の欠落・和訳漏れ・日付の矛盾・審査上の懸念を、<span class="tag ng">重要</span> <span class="tag hear">中</span> <span class="tag fix">軽微</span> で並べています。お客様に追加で書類をお願いする必要があるかが、ここで最初に分かります。</p>
+
+    <h3>② 次に「照合チェック」を見る</h3>
+    <p><strong>パスポートを正</strong>として、氏名・生年月日・番号類を全書類で突き合わせた結果です。<span class="tag ng">不一致</span> が付いている項目は、書類間で記載がズレています。<span class="tag fix">確認不可</span> は、照合できる書類が揃っていないという意味です。</p>
+
+    <h3>③ 「入力値シート」を転記する</h3>
+    <p>各項目の右端の <span class="ui">コピー</span> を押すと入力値がコピーされるので、在留申請オンラインシステムに貼り付けてください。<strong>状態タグの意味は次の3つ</strong>です。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>タグ</th><th>意味</th><th>先生にお願いすること</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="tag ext">書類から抽出</span></td>
+            <td>書類に書いてあった値です。「根拠」列に、どの書類から取ったかが出ます</td>
+            <td>根拠列を見て、そのまま転記</td>
+          </tr>
+          <tr>
+            <td><span class="tag hear">要確認</span></td>
+            <td>書類からは確定できない項目です（入国予定日・犯罪歴・メールアドレスなど）</td>
+            <td>お客様に確認して手入力（下記④で質問文が用意されています）</td>
+          </tr>
+          <tr>
+            <td><span class="tag fix">固定値</span></td>
+            <td>毎回同じ値になる項目です（受領方法＝メールなど）</td>
+            <td>そのまま転記</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <div class="ttl">実務経験年数など、あえて断定していない項目があります</div>
+      通算の判断が分かれる項目は、AIが勝手に合算せず<strong>候補となる職歴と通算パターンを備考に並べて、先生のご判断に委ねる</strong>作りにしています。備考欄が長い項目は、そこをお読みください。
+    </div>
+
+    <h3>④ 「お客様確認シート」をそのまま送る</h3>
+    <p>③で <span class="tag hear">要確認</span> になった項目が、お客様にそのまま送れる質問文になっています。<span class="ui">全文コピー</span> でメールやチャットに貼り付けてご利用ください。</p>
+    <p class="note">※ 補助金を選んだ場合は、「計画書ドラフト（章ごとにコピー可）」「お客様への確認事項」「注意点」の3ブロックで出ます。</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <div class="section-title">結果を保存する（画面を閉じる前に必ず）</div>
+    </div>
+    <div class="callout danger">
+      <div class="ttl">結果はサーバーに保存されません。閉じると消えます</div>
+      お客様情報をお預かりしない設計にしているため、<strong>結果を後から呼び出すことはできません</strong>。作業が終わったら、必ず <span class="ui">結果をダウンロード（Markdown）</span> を押してお手元に保存してください。案件フォルダに残しておけば、後から見返せます。
+    </div>
+    <p>ダウンロードされるファイルには、入力値シート・照合チェック・不備リスト・お客様確認シートがすべて入っています。ファイル名は <strong>gyosei-ai_visa_日付.md</strong> です（メモ帳やWordで開けます）。</p>
+    <p>画面下部の「入力／出力トークン」は、私どもがAI利用量を把握するための表示です。先生のご負担はモニター期間中ありません。</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <div class="section-title">うまくいかない時</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>画面に出るメッセージ</th><th>原因と対処</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>アクセスコードが正しくありません</td>
+            <td>コードの入れ間違いです。ログイン画面に戻るので、正しいコードを入れて書類を入れ直してください</td>
+          </tr>
+          <tr>
+            <td>書類またはメモを入力してください</td>
+            <td>ファイルもメモも空です。どちらかを入れてください</td>
+          </tr>
+          <tr>
+            <td>ファイル合計が大きすぎます（上限24MB）</td>
+            <td>書類を2回に分けてお試しください。写真が多い場合は、写真だけ先に処理する方法もあります</td>
+          </tr>
+          <tr>
+            <td>未対応のファイル形式です（PDF/画像のみ）</td>
+            <td>Word・Excel・ZIPなどが混ざっています。PDFに書き出してから入れ直してください</td>
+          </tr>
+          <tr>
+            <td>混み合っています。1分ほど待って再実行してください</td>
+            <td>AI側の混雑です。1分ほど置いてもう一度 <span class="ui">作成する</span> を押してください</td>
+          </tr>
+          <tr>
+            <td>出力が長すぎて途中で切れました</td>
+            <td>書類が非常に多い案件です。書類を分割して2回に分けてください</td>
+          </tr>
+          <tr>
+            <td>AI呼び出しエラー／結果が返りませんでした</td>
+            <td>一時的な通信エラーです。もう一度お試しいただき、続く場合はChatWorkにメッセージのスクリーンショットをお送りください</td>
+          </tr>
+          <tr>
+            <td>5分近く待って画面が止まった</td>
+            <td>処理時間の上限です。書類を分割してお試しください。頻発する案件があればご連絡ください（設定側で調整します）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>上記で解決しない場合は、<strong>ChatWorkの専用窓口</strong>へ「どの業務を選んだか・書類の数・出たメッセージ」をお知らせください。お客様情報は送っていただかなくて大丈夫です。</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <div class="section-title">お客様情報の扱いと、ご注意いただきたいこと</div>
+    </div>
+    <ul>
+      <li><strong>アップロードいただいた書類はサーバーに保存しません</strong>。処理が終わると自動的に破棄され、結果は先生のお手元にダウンロードされるだけです</li>
+      <li>解析はAnthropic社のAPIで行い、<strong>同社は入力データをAIの学習に使用しません</strong></li>
+      <li>アクセスコードは事務所内でのみご利用ください（第三者への共有はお控えください）</li>
+    </ul>
+    <div class="callout danger">
+      <div class="ttl">最終確認と申請の送信は、必ず先生ご自身でお願いします</div>
+      本サービスは<strong>入力作業の補助</strong>であり、行政書士業務の代行ではありません。AIの抽出精度は実案件の検証で97.5%でしたが、<strong>100%ではありません</strong>。特に <span class="tag ext">書類から抽出</span> の項目も、「根拠」列に示された書類と突き合わせてご確認のうえ送信してください。
+    </div>
+  </div>
+
+  <div class="footer">
+    行政書士AI 使い方ガイド（2026年8月17日版）<br>
+    株式会社ランバード ／ 開発協力: 株式会社斗<br>
+    ご不明点・改善のご要望は ChatWork 専用窓口までお気軽にお寄せください
+  </div>
+
+</div>
+</body>
+</html>
