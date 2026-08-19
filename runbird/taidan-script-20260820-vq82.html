@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台本図解｜8/20 河合さん対談・当日カンペ</title>
+<style>
+  :root{
+    --ink:#1a2332; --sub:#5a6b80; --line:#dde4ec; --bg:#f4f6f9; --card:#fff;
+    --blue:#2563eb; --blue-bg:#eaf1fe;
+    --red:#dc2626; --red-bg:#fdeaea;
+    --green:#158a5a; --green-bg:#e7f6ef;
+    --amber:#b45309; --amber-bg:#fdf3e3;
+    --purple:#7c3aed; --purple-bg:#f1eafe;
+    --say:#fff8e6; --say-line:#e8d9a8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:28px 16px 60px}
+  .wrap{max-width:980px;margin:0 auto}
+  h1{font-size:23px}
+  .lead{color:var(--sub);font-size:12.5px;margin-top:4px}
+
+  /* 収録前の3点セット */
+  .pre{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .pre>div{flex:1;min-width:280px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12.5px}
+  .pre h2{font-size:14px;margin-bottom:8px}
+  .pre .hot{border:1.5px solid #eda6a6;background:#fffafa}
+  .pre .hot h2{color:var(--red)}
+  .rule{display:flex;gap:8px;margin-top:6px;align-items:flex-start}
+  .rule .n{flex:none;width:20px;height:20px;border-radius:6px;background:var(--ink);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .formula{font-size:12px;margin-top:4px;line-height:2.1}
+  .fp{border-radius:6px;padding:3px 8px;font-weight:600;white-space:nowrap}
+  .f1{background:var(--purple-bg);color:var(--purple)}
+  .f2{background:var(--amber-bg);color:var(--amber)}
+  .f3{background:var(--red-bg);color:var(--red)}
+  .f4{background:var(--blue-bg);color:var(--blue)}
+
+  /* Block cards */
+  .blocks{margin-top:22px;position:relative}
+  .blocks::before{content:"";position:absolute;left:57px;top:10px;bottom:10px;width:3px;background:linear-gradient(#94a9c9,#1a4390 80%,#7c3aed);border-radius:2px}
+  .blk{display:flex;gap:16px;margin-bottom:16px;position:relative}
+  .tcol{flex:none;width:118px;text-align:right;padding-top:14px}
+  .tcol .bn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;color:#fff;font-weight:700;font-size:15px;position:relative;z-index:1;box-shadow:0 0 0 4px var(--bg)}
+  .tcol .tm{font-size:10.5px;color:var(--sub);margin-top:4px;font-variant-numeric:tabular-nums}
+  .b1{background:#94a9c9}.b2{background:#5f83b8}.b3{background:#3f6db4}.b4{background:#2f5da8}.b5{background:#24509c}.b6{background:#1a4390}.b7{background:#7c3aed}
+  .bcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .bcard h3{font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .aim{font-size:11.5px;color:var(--sub);margin:3px 0 10px}
+  .aim b{color:var(--ink)}
+  .star{background:var(--red);color:#fff;border-radius:5px;font-size:10.5px;padding:1.5px 8px;font-weight:600}
+  .roleTag{font-size:10.5px;border-radius:99px;padding:1.5px 9px;font-weight:600}
+  .roleTag.k{background:var(--say);border:1px solid var(--say-line);color:#8a6d1a}
+  .roleTag.q{background:var(--blue-bg);color:var(--blue)}
+  /* セリフ（読み上げ）box */
+  .say{background:var(--say);border:1.5px solid var(--say-line);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-top:6px;position:relative}
+  .say::before{content:"🎤 河合さんのセリフ（このまま言ってOK）";display:block;font-size:10.5px;font-weight:700;color:#8a6d1a;margin-bottom:5px}
+  /* 質問リスト */
+  .qs{list-style:none;margin-top:6px;font-size:12.5px}
+  .qs li{padding:5px 10px 5px 30px;position:relative;border-radius:8px}
+  .qs li::before{content:"Q";position:absolute;left:8px;top:6px;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-bg);border-radius:5px;padding:1px 5px}
+  .qs li.must{background:var(--red-bg)}
+  .qs li.must::before{content:"★";color:#fff;background:var(--red)}
+  .qs li .memo{display:block;font-size:11px;color:var(--sub)}
+  /* 技 bubble */
+  .waza{margin-top:9px;background:var(--green-bg);border-radius:9px;padding:7px 12px;font-size:11.5px;color:var(--green)}
+  .waza b{font-size:11.5px}
+  /* digest strip */
+  .digest{margin:4px 0 20px 134px;border:1.5px dashed #e08c8c;background:var(--red-bg);border-radius:11px;padding:10px 16px;font-size:12px}
+  .digest b{color:var(--red)}
+  /* type table */
+  .sec{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 20px;margin-top:8px}
+  .sec h2{font-size:15px;margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;font-size:11.5px}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  th{background:var(--bg);font-size:11px}
+  .warnC{margin-top:8px;background:var(--amber-bg);border:1px solid #ecd3a8;border-radius:8px;padding:8px 12px;font-size:11.5px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-size:11px;color:var(--sub);align-items:center}
+  .foot{margin-top:20px;color:var(--sub);font-size:11px;text-align:center}
+  @media print{body{background:#fff;padding:0}.bcard,.sec,.pre>div{box-shadow:none;break-inside:avoid}}
+  @media (max-width:640px){.blocks::before{display:none}.blk{flex-direction:column;gap:6px}.tcol{width:auto;text-align:left;display:flex;gap:10px;align-items:center;padding-top:0}.digest{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>🎤 台本図解｜8/20 河合さん対談・当日カンペ</h1>
+  <p class="lead">Aタイプ（実績オーナー）前提。🟡＝そのまま読むセリフ／🔵＝質問（実話を引き出す）／🔴★＝録り逃し厳禁。正本: <code>撮影パッケージ_20260820_河合さん対談撮影用.md</code></p>
+
+  <!-- 収録前の3点セット -->
+  <div class="pre">
+    <div class="hot">
+      <h2>⏱ 収録前15分｜数字の正本を作る（最重要）</h2>
+      雑談しながら<b>数字メモを全部埋めてから</b>回す。<br>
+      <b>本人が確認した数字だけが「言っていい数字」</b>。未確認の数字は掘らない・タイトルにもテロップにも使わない。出せない数字・顔出し範囲もここで確認。
+    </div>
+    <div>
+      <h2>📐 タイトルの式（収録後に流し込むだけ）</h2>
+      <div class="formula">
+        <span class="fp f1">【加盟オーナー実績】</span>＋<span class="fp f2">属性フック</span>＋<span class="fp f3">期間で！数字</span>＋<span class="fp f4">【河合×◯◯さん対談】</span>
+      </div>
+      <div style="font-size:11px;color:var(--sub);margin-top:5px">フック候補: 福祉未経験／元◯◯／自己資金◯◯万から／専業主婦から／夫婦で経営／再出発／◯歳・子育て中</div>
+    </div>
+    <div>
+      <h2>🧭 大原則3つ</h2>
+      <div class="rule"><span class="n">1</span><span><b>ゲストのセリフは決めない</b>（台本っぽい対談は借り物に見える）</span></div>
+      <div class="rule"><span class="n">2</span><span><b>★印は絶対に録り逃さない</b>（冒頭15秒は編集で作る）</span></div>
+      <div class="rule"><span class="n">3</span><span>4技術: <b>①復唱驚き ②言い換え ③視聴者代弁 ④抽象化</b></span></div>
+    </div>
+  </div>
+
+  <!-- Blocks -->
+  <div class="blocks">
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b1">1</span><div class="tm">0:00-0:40</div></div>
+      <div class="bcard">
+        <h3>冒頭・実績の言い切り <span class="roleTag k">🎤 台本通り・カメラ目線</span></h3>
+        <p class="aim">狙い: オーナーに自慢させない。<b>河合さんが数字を言い切る</b>ことで謙遜の余地をなくす</p>
+        <div class="say">「今日はですね、RUNBIRDの障がい者グループホームFCに加盟して、<b>福祉未経験から◯ヶ月で1棟目を満室</b>にされた、◯◯県の◯◯さんに来ていただいています。——最初に僕から紹介してしまうと、◯◯さんは前職◯◯で福祉は完全未経験。自己資金◯◯万円からスタートして、加盟から◯ヶ月で開設、開設から◯ヶ月で定員◯名満室。現在月商◯◯万円です。じゃあ◯◯さん、軽く自己紹介をお願いしてもいいですか」</div>
+        <p style="font-size:11px;color:var(--sub);margin-top:6px">→ オーナーは名前・地域・前職・家族構成だけ話せばいい状態にする</p>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b2">2</span><div class="tm">0:40-4:00</div></div>
+      <div class="bcard">
+        <h3>ビフォー: 努力×結果のギャップ <span class="star">★どん底セリフ</span></h3>
+        <p class="aim">狙い: 「調べたのにダメだった」の努力量と感情を取る。<b>感情の言葉が出るまで粘る</b></p>
+        <ul class="qs">
+          <li>福祉をやろうと思ってから、まず何から始めました?</li>
+          <li>それ、どのくらいの期間やってました?<span class="memo">（努力量を数字で）</span></li>
+          <li>で、結果どうでした?<span class="memo">（ギャップ）</span></li>
+          <li>その時、正直どういう気持ちでした? 家族には何て言われてました?</li>
+          <li>その時点で、正直"自分には無理かも"って思いました?<span class="memo">（心理的天井を言わせる）</span></li>
+          <li class="must">一番しんどかった場面って、具体的にどういう状況だったんですか? <b>相手、何て言ったんですか?</b><span class="memo">銀行・家族の一言をセリフのまま再現させる → 冒頭ダイジェスト＋テロップ最大の見せ場（例:「"赤字ですよね"って言われて——」）</span></li>
+        </ul>
+        <div class="waza">💬 「うわ、それキツいですね…」／<b>④抽象化</b>「それ、福祉参入考える人ほぼ全員が同じところで詰まるんですよ」</div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b3">3</span><div class="tm">4:00-7:00</div></div>
+      <div class="bcard">
+        <h3>転機: RUNBIRDとの出会いと「迷い」</h3>
+        <p class="aim">狙い: <b>迷った人が決めた理由</b>こそ検討者が一番聞きたい。加盟を迷った話を飛ばさない</p>
+        <ul class="qs">
+          <li>RUNBIRDはどこで知ったんですか?</li>
+          <li>最初どう思いました? 正直、FCって怪しいと思いませんでした?<span class="memo">（あえて河合さんから言う）</span></li>
+          <li>加盟を決めるまで、どのくらい迷いました? 何がネックでした?</li>
+          <li>最後、何が決め手だったんですか?</li>
+          <li>初回の面談って覚えてます? 最初に何を言われました?</li>
+        </ul>
+        <div class="say">加盟金0円の話が出たら必ずワンセットで——「そこ、ちゃんと言っておくと、加盟金は0円です。<b>ただ、開業には物件や人の準備で自己資金の目安が◯◯◯万円くらいは必要</b>です。そこを『足りないから無理』で終わらせないために、<b>◯◯さんの時も実際にやった、融資の伴走支援</b>があります。◯◯さんも融資は——?」<br><span style="font-size:10.5px;color:var(--sub)">※目安数字は収録前にRUNBIRD正本で確認（2026年7月時点の社内資料では約230〜560万円）。0円の切り取り＝資金頓挫の再生産を防ぐ。そのままBlock 4の融資実話へつなぐ</span></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b4">4</span><div class="tm">7:00-11:00</div></div>
+      <div class="bcard">
+        <h3>変化: 何をしたら何が変わったか</h3>
+        <p class="aim">狙い: 支援を再現可能なメソッドとして<b>「やったこと→変わった数字」を1対1セット</b>で。該当するものだけ聞く（収録前メモで選ぶ）</p>
+        <ul class="qs">
+          <li><b>事業計画</b>: 1人で作ってた計画と、本部と作り直した計画、何が一番違いました?<span class="memo">（部屋数・人件費設計・管理者兼務…数字の差まで言わせる）</span></li>
+          <li><b>融資</b>: 銀行対策は具体的に何をしました? 面談では実際何を聞かれました?</li>
+          <li><b>入居者集め</b>: 満室まで◯ヶ月って早い方だと思うんですが、何が一番効きました?<span class="memo">（相談支援事業所への挨拶回り等、開設前から動いた話）</span></li>
+          <li class="must" style="background:var(--amber-bg)"><b>正直なマイナス（必ず1つ）</b>: 逆に、想定と違ったこと・大変だったことって何ですか?<span class="memo">良い話だけの対談は借り物に見える。正直さが信頼の核</span></li>
+        </ul>
+        <div class="waza">💬 <b>①復唱驚き</b>「え、それだけで月◯万変わるんですか?」／<b>④抽象化</b>「要は"感覚じゃなくて数字で説明する"ってことなんですよね」</div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b5">5</span><div class="tm">11:00-14:00</div></div>
+      <div class="bcard">
+        <h3>アフター: 数字の確定と生活の変化 <span class="star">★数字の復唱驚き</span></h3>
+        <p class="aim">狙い: 数字をレイヤーごとに確定 ＋ お金以外の変化＝<b>福祉はここが一番刺さる</b></p>
+        <ul class="qs">
+          <li class="must">改めて整理させてください。今、入居◯名で、月商が——?<span class="memo">→ 出た数字を河合さんが驚きながら復唱「え、月商◯◯万円ですか」。<b>このカットが無いと冒頭15秒が作れない</b></span></li>
+          <li>経費を引いて、手元にはどのくらい残る感覚ですか? 言える範囲で<span class="memo">（言えなければ「前職の収入と比べてどうですか?」に切替）</span></li>
+          <li>収入以外で、生活って変わりました? ご家族は今、何て言ってます?</li>
+          <li><b>入居者さんやご家族から言われて、印象に残ってる言葉ってありますか?</b><span class="memo">福祉の鉄板・厚めに。1つ出たら「他にもあります?」ともう1つ掘る</span></li>
+          <li>2棟目の計画は?<span class="memo">（成長の続きを見せて締めない）</span></li>
+        </ul>
+        <div class="waza">💬 <b>①復唱驚き</b>を数字のたびに必ず／<b>②言い換え</b>「要は生活の安定と、やりがいの両方ってことですね」</div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b6">6</span><div class="tm">14:00-17:00</div></div>
+      <div class="bcard">
+        <h3>後悔・時間価値 → これからの人へ <span class="star">★ショート30秒×3</span></h3>
+        <p class="aim">狙い: 「なぜもっと早くやらなかったんだろう」を<b>本人の言葉</b>で（3ヶ条を与えない）</p>
+        <ul class="qs">
+          <li>もし加盟してなかったら、今どうなってたと思います?</li>
+          <li>1人で調べてた◯ヶ月って、今振り返るとどうですか?<span class="memo">（時間価値を言わせる）</span></li>
+          <li>最後に、これから福祉参入を考えてる人に、◯◯さんから伝えたいことをお願いします<span class="memo">（薄かったら「もし過去の自分に1つだけ言えるとしたら?」）</span></li>
+          <li class="must">「これだけは伝えたいことを30秒で言い切ってもらっていいですか」×3テーマ:<span class="memo">① 1人で調べてる最中の人へ ／ ② お金の不安がある人へ ／ ③ 家族に反対されてる人へ<br>→ ショートのタイトルはゲストの一言をそのまま鍵括弧で（対談1本＝本編＋ショート3本＋記事の1セット）</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="tcol"><span class="bn b7">7</span><div class="tm">17:00-18:00</div></div>
+      <div class="bcard">
+        <h3>締め・CTA <span class="roleTag k">🎤 台本通り・河合さんのみ・別撮り可</span></h3>
+        <div class="say">「ということで◯◯さんでした。今日の話で一番大事なのは、◯◯さんが特別だったんじゃなくて、<b>"1人で調べる"のをやめて、数字で設計するやり方に切り替えた</b>ことだと思います。<b>正直に言うと、この事業は全員には勧めません。</b>楽して儲かる話ではないですし、入居者さんの生活を預かる仕事です。ただ、◯◯さんのように<b>『自分でちゃんと調べた上で、数字で判断したい』という方</b>には、◯◯さんの案件で実際に使った収支シミュレーション（3パターン）のサンプルを、概要欄のLINEからそのままお送りしています。まずは資料だけでも見てください。次回は◯◯で◯棟運営されている別のオーナーさんの対談です。チャンネル登録してお待ちください」</div>
+        <p style="font-size:11px;color:var(--sub);margin-top:6px">「全員には勧めません」＝選別メッセージ。堅実ポジションの信頼づくり＋問い合わせの質フィルタ。煽りの逆をやるのがうちの差別化</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="digest"><b>🎬 冒頭15秒ダイジェストの作り方（編集）</b> — ★Block 5「え、月商◯◯万円ですか」＋ ★Block 2「"赤字ですよね"って言われて——」を先頭に配置 → Block 1へ。<b>★2つが録れていないと動画が成立しない</b></div>
+
+  <!-- 差し替え早見表 -->
+  <div class="sec">
+    <h2>🔄 ゲストがAタイプじゃなかったら（進行そのまま・質問だけ差し替え）</h2>
+    <table>
+      <tr><th style="width:84px"></th><th>B. 準備中オーナー</th><th>C. 本部・専門家</th><th>D. 現場スタッフ</th></tr>
+      <tr><td><b>冒頭【】</b></td><td>【密着】</td><td>【完全解説】</td><td>【現場のリアル】</td></tr>
+      <tr><td><b>Block 1</b></td><td>「加盟◯ヶ月目・物件契約済み、開業準備まっただ中の◯◯さん」</td><td>「融資支援◯件、◯◯を担当してきた◯◯です」</td><td>「開設◯年、入居者◯名を見てきたサビ管の◯◯さん」</td></tr>
+      <tr><td><b>B2 ビフォー</b></td><td>「加盟前、何ヶ月1人で調べてました? 何が一番わからなかった?」「正直、<b>今も</b>不安なことは?」</td><td>「福祉参入の相談で一番多い失敗パターンは?」</td><td>「入る前、障がい者グループホームってどんなイメージでした?」</td></tr>
+      <tr><td><b>B3 転機</b></td><td>「なぜこのタイミングで決めた?」「家族には何て説明しました?」</td><td>「なぜそうなるんですか?」（構造の解説）</td><td>「実際に働いてみて、一番違ったことは?」</td></tr>
+      <tr><td><b>B4 変化</b></td><td>「今ちょうど何をやってる段階?」「本部とは今週何をやりとりしました?」</td><td>「じゃあ具体的にどうすれば?」（資料を画面に映してよい回）</td><td>「未経験のオーナーと働くって、現場から見てどうですか?」</td></tr>
+      <tr><td><b>B5 アフター</b></td><td>「開設予定はいつ? 目標の満室時期は?」→ 満室達成後にAタイプで再登場＝続編化</td><td>「実際それでどうなった事例があります?」</td><td>「入居者さんとのエピソードで印象に残ってるものは?」（個人が特定されない形で）</td></tr>
+      <tr><td><b>B6 メッセージ</b></td><td>「同じように今調べてる人に、途中経過の立場から一言」</td><td>「最初にやるべきことを1つだけ挙げるなら?」</td><td>「どんなオーナーとなら、現場は気持ちよく働けますか?」</td></tr>
+    </table>
+    <div class="warnC">⚠️ <b>Cタイプ注意（同業実測）</b>: 本部スタッフ紹介型の対談は最低再生帯（146〜232回）。「人の紹介」ではなく<b>検索されるノウハウ</b>（例: 【完全解説】障がい者グループホームの融資が通る事業計画の作り方【河合×◯◯対談】）として組む。</div>
+  </div>
+
+  <div class="legend">
+    凡例: <span class="roleTag k">🎤 台本通り読む</span> <span class="roleTag q">Q 質問（実話を引き出す）</span> <span class="star">★録り逃し厳禁</span> <span style="background:var(--green-bg);color:var(--green);border-radius:6px;padding:2px 8px">💬 返し技（4技術）</span> <span style="background:var(--amber-bg);color:var(--amber);border-radius:6px;padding:2px 8px">正直なマイナス＝必須</span>
+  </div>
+
+  <p class="foot">作成: 斗 2026-08-19（鈴木さんレビュー用）／全体像は「撮影パッケージ_20260820_図解.html」、チェックリストはMD正本 Part 3 を参照</p>
+</div>
+</body>
+</html>
