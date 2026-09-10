@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+ 葬儀 広告テスト 戦略モック（家族葬の光・検証キャンペーン）
+ 作成: 2026-07-29 ／ 斗（hishaku）
+ 出典: 広告テスト設計_5万〜10万版_20260725.md ／ ローンチ計画_来週開始_20260725.md
+ 用途: 鈴木さん確認用。ランバード既存アカウント内に作る検証キャンペーンの設計を1枚可視化
+ ★ 数値はテスト設計時点の想定。7/30 MTGで予算が5万に下がる可能性あり（その場合§縮小設計へ）
+ ★ 景表法：広告文に「追加料金なし」「総額○円ぽっきり」「これ以上かかりません」は入れない
+================================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>葬儀 広告テスト 戦略モック｜家族葬の光 検証キャンペーン</title>
+<style>
+:root{
+  --ink:#22201d; --ink-2:#4a453e; --sub:#6e675e; --line:#e3ddd2;
+  --bg:#fbf9f5; --card:#ffffff; --accent:#1f5c4d; --accent-2:#e8f0ec;
+  --gold:#a8894f; --gold-2:#f4ecdd; --alert:#b9463a; --alert-2:#fbeeeb;
+  --radius:12px; --maxw:1080px;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+  font-size:16px; line-height:1.85; letter-spacing:.02em;}
+.sans{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,sans-serif;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 18px;}
+h1,h2,h3{font-weight:600; margin:0;}
+
+/* header */
+.hd{background:linear-gradient(180deg,#f3efe6,var(--bg)); border-bottom:1px solid var(--line); padding:26px 0 22px;}
+.hd .kicker{font-size:12px; letter-spacing:.2em; color:var(--gold); font-family:"Hiragino Kaku Gothic ProN",sans-serif;}
+.hd h1{font-size:clamp(22px,5.6vw,32px); line-height:1.4; margin:6px 0 4px;}
+.hd .sub{font-size:13px; color:var(--sub);}
+.hd .em{color:var(--accent); border-bottom:3px solid var(--gold); padding-bottom:2px;}
+
+section{padding:30px 0;}
+section+section{border-top:1px solid var(--line);}
+.ey{display:block; font-size:11px; letter-spacing:.2em; color:var(--gold); font-family:"Hiragino Kaku Gothic ProN",sans-serif; margin-bottom:6px;}
+h2{font-size:clamp(19px,4.6vw,25px); margin-bottom:14px;}
+.lead{color:var(--ink-2); font-size:14.5px; margin:0 0 18px;}
+
+/* 結論ボックス（最上部・TOP要点） */
+.concl{background:var(--accent); color:#fff; border-radius:var(--radius); padding:20px 18px; margin-top:18px;}
+.concl h2{color:#fff; font-size:18px; margin-bottom:12px;}
+.concl ol{margin:0; padding-left:1.2em;}
+.concl li{margin-bottom:8px; font-size:15px; line-height:1.7;}
+.concl li b{color:var(--gold-2);}
+
+/* KPIタイル */
+.kpis{display:grid; gap:12px; grid-template-columns:repeat(2,1fr);}
+@media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr);}}
+.kpi{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:15px;}
+.kpi .lb{font-size:12px; color:var(--sub); font-family:"Hiragino Kaku Gothic ProN",sans-serif;}
+.kpi .v{font-size:clamp(20px,5vw,26px); font-weight:700; color:var(--accent); font-family:"Hiragino Kaku Gothic ProN",sans-serif; line-height:1.3;}
+.kpi .n{font-size:11px; color:var(--sub);}
+
+/* キャンペーン構造 */
+.struct{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px;}
+.struct .camp{text-align:center; background:var(--accent-2); border:1px solid #cfe0d8; border-radius:9px; padding:12px; font-family:"Hiragino Kaku Gothic ProN",sans-serif; font-weight:600; color:var(--accent); margin-bottom:14px;}
+.groups{display:grid; gap:12px; grid-template-columns:1fr;}
+@media(min-width:720px){.groups{grid-template-columns:repeat(3,1fr);}}
+.grp{border:1px solid var(--line); border-radius:9px; overflow:hidden;}
+.grp .gh{padding:11px 13px; color:#fff; font-family:"Hiragino Kaku Gothic ProN",sans-serif;}
+.grp.a .gh{background:var(--accent);}
+.grp.b .gh{background:var(--gold);}
+.grp.c .gh{background:#7a8a70;}
+.grp .gh b{display:block; font-size:15px;}
+.grp .gh span{font-size:12px; opacity:.92;}
+.grp .gb{padding:12px 13px; font-size:13px;}
+.grp .gb .cpc{font-family:"Hiragino Kaku Gothic ProN",sans-serif; color:var(--accent); font-weight:700;}
+.kwlist{margin:8px 0 0; padding:0; list-style:none;}
+.kwlist li{background:var(--bg); border:1px solid var(--line); border-radius:7px; padding:5px 9px; margin-bottom:5px; font-size:12.5px; font-family:"Hiragino Kaku Gothic ProN",sans-serif;}
+.kwlist li small{color:var(--sub);}
+
+/* 表 */
+table{width:100%; border-collapse:collapse; font-size:13.5px; background:var(--card); border-radius:var(--radius); overflow:hidden;}
+th,td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top;}
+th{background:#f4f1ea; font-family:"Hiragino Kaku Gothic ProN",sans-serif; font-weight:600; font-size:12.5px; color:var(--ink-2);}
+td .sans{font-size:13px;}
+tr:last-child td{border-bottom:0;}
+
+/* チップ（除外KW・設定） */
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none;}
+.chips li{font-size:12.5px; font-family:"Hiragino Kaku Gothic ProN",sans-serif; background:var(--alert-2); color:var(--alert); border:1px solid #edd3cd; border-radius:999px; padding:4px 11px;}
+.setgrid{display:grid; gap:12px; grid-template-columns:1fr;}
+@media(min-width:640px){.setgrid{grid-template-columns:repeat(2,1fr);}}
+.setcard{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:15px;}
+.setcard b{display:block; font-family:"Hiragino Kaku Gothic ProN",sans-serif; font-size:13px; color:var(--accent); margin-bottom:5px;}
+.setcard span{font-size:13.5px; color:var(--ink-2);}
+
+/* 広告文 */
+.ad{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:15px; margin-bottom:12px;}
+.ad .at{font-family:"Hiragino Kaku Gothic ProN",sans-serif; font-size:12px; letter-spacing:.08em; color:var(--gold); margin-bottom:8px;}
+.ad ul{margin:0 0 6px; padding-left:1.15em; font-size:13.5px;}
+.ad ul li{margin-bottom:3px;}
+.ad .desc{font-size:13px; color:var(--ink-2); border-top:1px dashed var(--line); padding-top:8px; margin-top:4px;}
+
+/* 判定表 */
+.judge td:first-child{white-space:nowrap; font-family:"Hiragino Kaku Gothic ProN",sans-serif;}
+.tag{display:inline-block; font-size:11px; font-family:"Hiragino Kaku Gothic ProN",sans-serif; border-radius:5px; padding:2px 7px; color:#fff;}
+.tag.go{background:var(--accent);} .tag.hold{background:var(--gold);} .tag.stop{background:var(--alert);} .tag.change{background:#7a8a70;}
+
+.note{background:var(--alert-2); border:1px solid #edd3cd; border-left:4px solid var(--alert); border-radius:8px; padding:13px 15px; font-size:13px; line-height:1.8; margin-top:14px;}
+.note b{color:var(--alert);}
+.disc{font-size:12px; color:var(--sub); margin-top:12px; line-height:1.75;}
+footer{background:var(--ink); color:#d8d2c8; font-size:12.5px; padding:22px 0 26px;}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <span class="kicker sans">GOOGLE ADS ｜ 検証キャンペーン設計</span>
+    <h1>葬儀 広告テスト 戦略モック<br><span class="em">家族葬の光 検証キャンペーン</span></h1>
+    <p class="sub sans">川崎市・横浜市北部／ランバード既存アカウント内に新規1本／月¥100,000テスト（2026-07-29 時点の設計）</p>
+
+    <div class="concl">
+      <h2 class="sans">結論（まずこの3点）</h2>
+      <ol class="sans">
+        <li><b>1キャンペーン・広告グループ3つ</b>に集約（緊急50%／斎場名35%／事前相談15%）。低予算は分けると学習に届かないため束ねる。</li>
+        <li><b>主戦場は「斎場名キーワード」</b>（CPC ¥300〜800）。ビッグワード『葬儀』単体や部分一致は使わず、溶けない語だけ完全/フレーズ一致で買う。</li>
+        <li><b>1ヶ月目は学習期間で判定に使わない。</b>月¥10万で入電5〜6件／成約1〜2件が想定。良し悪しは3ヶ月合計で見る。</li>
+      </ol>
+    </div>
+  </div>
+</header>
+
+<!-- 予算・目標 -->
+<section><div class="wrap">
+  <span class="ey">BUDGET & TARGET</span>
+  <h2>予算と目標</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="lb sans">月予算</div><div class="v">¥100,000</div><div class="n">日予算 ¥3,300</div></div>
+    <div class="kpi"><div class="lb sans">上限CPC</div><div class="v">¥1,800</div><div class="n">クリック数最大化で開始</div></div>
+    <div class="kpi"><div class="lb sans">想定クリック</div><div class="v">40〜66<span style="font-size:13px">/月</span></div><div class="n">緊急CPC¥1.5〜2.5千前提</div></div>
+    <div class="kpi"><div class="lb sans">想定入電</div><div class="v">月5〜6件</div><div class="n">成約1〜2件（入電の約30%）</div></div>
+  </div>
+  <p class="disc">※¥5万でも回せるが「電話が鳴るか」を見るだけの金額。良し悪しの判定は<strong>¥10万×3ヶ月</strong>が最低ライン。7/30 MTGで¥5万に下がる場合は「斎場名KW中心・夜間土日特化」の縮小設計に切替。</p>
+</div></section>
+
+<!-- キャンペーン構造 -->
+<section><div class="wrap">
+  <span class="ey">STRUCTURE</span>
+  <h2>キャンペーン構造とキーワード</h2>
+  <p class="lead">キャンペーン『葬儀_家族葬の光_検証』を1本だけ作成。広告グループを3つに分け、キーワードは<strong>フレーズ一致・完全一致のみ</strong>（部分一致は使わない）。</p>
+  <div class="struct">
+    <div class="camp">キャンペーン：葬儀_家族葬の光_検証（1本）</div>
+    <div class="groups">
+      <div class="grp a">
+        <div class="gh"><b>A 緊急</b><span>配分 50%</span></div>
+        <div class="gb">
+          <div>想定CPC <span class="cpc">¥1,500〜2,500</span></div>
+          <ul class="kwlist">
+            <li>川崎 火葬式</li><li>川崎 家族葬 費用</li><li>溝の口 葬儀社</li><li>横浜 直葬 費用</li><li>葬儀 すぐ 川崎</li>
+          </ul>
+          <small class="disc">今すぐ決めたい層。単価は高いが即決。</small>
+        </div>
+      </div>
+      <div class="grp b">
+        <div class="gh"><b>B 斎場名</b><span>配分 35% ★主戦場</span></div>
+        <div class="gb">
+          <div>想定CPC <span class="cpc">¥300〜800</span></div>
+          <ul class="kwlist">
+            <li>かわさき北部斎苑 家族葬</li><li>かわさき南部斎苑 葬儀</li><li>横浜市北部斎場 予約</li>
+          </ul>
+          <small class="disc">単価が1/3〜1/5。クリック数を確保できる中心。</small>
+        </div>
+      </div>
+      <div class="grp c">
+        <div class="gh"><b>C 事前相談</b><span>配分 15%</span></div>
+        <div class="gb">
+          <div>想定CPC <span class="cpc">¥400〜900</span></div>
+          <ul class="kwlist">
+            <li>葬儀 事前相談 川崎</li><li>葬儀 費用 いくら 川崎</li><li>親 危篤 準備</li>
+          </ul>
+          <small class="disc">没前の名簿づくり（フォームCV）。</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 除外KW -->
+<section><div class="wrap">
+  <span class="ey">NEGATIVE KEYWORDS</span>
+  <h2>除外キーワード（初日から投入）</h2>
+  <p class="lead">情報収集・無関係クエリでクリックを溶かさないため、初日から除外。週次でクエリレポート→追加運用。</p>
+  <ul class="chips">
+    <li>求人</li><li>バイト</li><li>募集</li><li>年収</li><li>互助会 解約</li><li>意味</li><li>マナー</li><li>服装</li><li>香典</li><li>挨拶</li><li>弔電</li><li>喪主 挨拶</li><li>無料</li><li>テンプレート</li><li>イラスト</li><li>家族葬とは</li><li>補助金 いくら</li>
+  </ul>
+  <p class="disc">※ビッグワード『葬儀』『葬式』単体は入れない（部分一致も使わない）。</p>
+</div></section>
+
+<!-- 設定 -->
+<section><div class="wrap">
+  <span class="ey">SETTINGS</span>
+  <h2>入札・地域・時間帯・デバイス</h2>
+  <div class="setgrid">
+    <div class="setcard"><b>地域</b><span>川崎市全域＋横浜市6区（港北・都筑・青葉・緑・鶴見・神奈川区）。市区指定・半径指定は使わない。</span></div>
+    <div class="setcard"><b>入札</b><span>開始＝クリック数の最大化＋上限CPC¥1,800 → 電話CV15件を超えたら「コンバージョン数の最大化」へ切替。</span></div>
+    <div class="setcard"><b>時間帯</b><span>20時〜翌9時・土日祝を +40%（葬儀の発生需要は深夜・早朝・休日に集中）。</span></div>
+    <div class="setcard"><b>デバイス</b><span>スマホ +30% ／ PC −30%（受け皿LPはスマホファースト）。</span></div>
+  </div>
+</div></section>
+
+<!-- 広告文 -->
+<section><div class="wrap">
+  <span class="ey">AD COPY</span>
+  <h2>広告文（RSA・作り置き）</h2>
+  <p class="lead">見出し全角15字以内／説明文45字以内。<strong>「追加料金なし」「総額○円」等の言い切りは全グループ禁止（景表法）。</strong></p>
+  <div class="ad">
+    <div class="at">グループA 緊急｜見出し（一部）</div>
+    <ul>
+      <li>川崎・横浜北部の葬儀相談</li><li>24時間365日 深夜も対応</li><li>総額の目安を先にご案内</li>
+      <li>増える費用も先にお伝えします</li><li>まずご搬送とご安置だけでも</li><li>火葬式 基本16.5万円〜税込</li>
+    </ul>
+    <p class="desc">説明文：火葬までお待ちいただく日数で増える費用も、ご依頼の前にお伝えします。24時間ご相談無料。／基本料金と別途かかる費用を分けてご説明します。</p>
+  </div>
+  <div class="ad">
+    <div class="at">グループB 斎場名｜見出し（一部）</div>
+    <ul>
+      <li>かわさき北部斎苑での家族葬</li><li>斎場の空き状況をお調べします</li><li>火葬待ち日数の目安をご案内</li>
+    </ul>
+    <p class="desc">説明文：市営斎場のご利用手続きと空き状況の確認を代行します。費用の内訳も事前にご説明します。</p>
+  </div>
+  <div class="ad">
+    <div class="at">グループC 事前相談｜見出し（一部）</div>
+    <ul>
+      <li>葬儀の事前相談を無料で</li><li>もしもの前に費用の把握を</li><li>お見積りに内訳を明記します</li>
+    </ul>
+    <p class="desc">説明文：事前にご相談いただくと、日程・費用・段取りを落ち着いて準備できます。しつこい営業はしません。</p>
+  </div>
+  <p class="disc">＋各グループに電話専用広告1本・通話アセット（IVRy番号）を設定。</p>
+</div></section>
+
+<!-- 計測 -->
+<section><div class="wrap">
+  <span class="ey">MEASUREMENT</span>
+  <h2>計測（このキャンペーン専用で新設）</h2>
+  <table>
+    <tr><th>CVアクション</th><th>定義</th><th>備考</th></tr>
+    <tr><td class="sans">電話（主CV）</td><td>通話 <strong>60秒以上</strong>＝成約見込みコール</td><td>通話アセットにIVRy番号／既存案件のCVと混ぜない</td></tr>
+    <tr><td class="sans">フォーム（副CV）</td><td>事前相談・資料請求の送信</td><td>没前名簿づくり</td></tr>
+    <tr><td class="sans">電話タップ</td><td>LP上の電話タップ（GA4イベント）</td><td>タップ→通話の歩留まり把握</td></tr>
+  </table>
+  <div class="note"><b>重要：</b>コンバージョン目標は必ず「キャンペーン単位」で設定。アカウント既定の目標には葬儀CVを含めない（既存OWL福祉等のスマート入札の学習と混ぜない）。</div>
+</div></section>
+
+<!-- 撤退・継続基準 -->
+<section><div class="wrap">
+  <span class="ey">CRITERIA</span>
+  <h2>撤退・継続基準（出稿前に固定）</h2>
+  <p class="lead">1ヶ月目は学習期間として判定に使わない。判定は2〜3ヶ月目の実数で行う。</p>
+  <table class="judge">
+    <tr><th>判定</th><th>条件</th><th>アクション</th></tr>
+    <tr><td><span class="tag go">継続・増額</span></td><td>3ヶ月で入電 ≥9件（月3件）かつ成約 ≥2件</td><td>月30万へ増額（拡張フェーズへ）</td></tr>
+    <tr><td><span class="tag hold">保留</span></td><td>入電はあるが成約0〜1件</td><td>広告でなく電話対応が原因の可能性。録音で応答率・一次対応を確認。増額しない</td></tr>
+    <tr><td><span class="tag change">設計変更</span></td><td>入電CPA ≥4万が2ヶ月連続</td><td>KWをB斎場名中心へ寄せる／LPのCVR改善（1回だけ）</td></tr>
+    <tr><td><span class="tag stop">撤退</span></td><td>3ヶ月で入電 ≤3件</td><td>撤退。再延長はしない（延長1回まで）</td></tr>
+  </table>
+  <p class="disc">応答率90%割れを検知したら、判断で即出稿停止（取りこぼし＝広告費の燃焼のため）。</p>
+</div></section>
+
+<footer><div class="wrap">
+  葬儀 広告テスト 戦略モック（家族葬の光 検証キャンペーン）｜ランバード既存アカウント内・月¥100,000テスト<br>
+  出典：広告テスト設計_5万〜10万版_20260725 ／ ローンチ計画_来週開始_20260725　※7/30 MTGで予算・条件が変わる可能性あり
+</div></footer>
+
+</body>
+</html>
