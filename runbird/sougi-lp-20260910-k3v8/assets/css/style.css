@@ -620,7 +620,14 @@ footer{background:#26322e; padding-block:38px; font-size:14px;}
   width:fit-content; padding:9px 13px; border-radius:999px;
   background:rgba(255,255,255,.68); box-shadow:inset 0 0 0 1px rgba(29,91,75,.13);
 }
-.fv .h1sub .icon{width:16px; height:16px; margin-left:3px;}
+.fv .h1sub .icon{width:16px; height:16px; margin-left:3px; flex-shrink:0;}
+.fv .h1sub-item{display:inline-flex; align-items:center; gap:5px;}
+@media(max-width:767px){
+  .fv .h1sub{flex-direction:column; align-items:flex-start; gap:4px; border-radius:14px; font-size:13px; padding:8px 10px;}
+  .fv .h1sub .icon{margin-left:0;}
+  .fv .h1sub .nowrap{white-space:nowrap;}
+  .fv .h1sub-sep{display:none;}
+}
 .fv-visual{position:relative;}
 .fv-visual::after{
   content:""; position:absolute; inset:12px; pointer-events:none;
