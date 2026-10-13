@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>図解 — Claude アプリで「経営室」をつくる</title>
+<style>
+:root{
+  --ink:#111827;--sub:#6b7280;--line:#e5e7eb;--line2:#cbd5e1;--soft:#f8fafc;--bg:#fff;
+  --c1:#4f46e5;--c2:#059669;--c3:#ea580c;--c4:#db2777;--c5:#0d9488;--c6:#7c3aed;--c7:#475569;--c9:#d97706;
+  --c1b:#eef2ff;--c2b:#ecfdf5;--c3b:#fff7ed;--c4b:#fdf2f8;--c5b:#f0fdfa;--c6b:#f5f3ff;--c7b:#f1f5f9;--c9b:#fffbeb;
+  --bad:#dc2626;--badb:#fef2f2;--good:#16a34a;--goodb:#f0fdf4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding:0;font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:15px}
+.page{max-width:960px;margin:0 auto;padding:28px 20px}
+section{margin:0 0 56px}
+h1{font-size:30px;line-height:1.3;margin:0 0 6px}
+h2{font-size:22px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h2 .num{display:inline-flex;width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;align-items:center;justify-content:center;font-size:16px;flex:0 0 34px}
+h3{font-size:16px;margin:18px 0 8px}
+.sub{color:var(--sub);margin:0 0 18px}
+p{margin:8px 0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.badge{border:1.5px solid var(--ink);border-radius:999px;padding:3px 12px;font-weight:700;font-size:13px}
+.badge.no{border-color:var(--bad);color:var(--bad)}
+.badge.ok{border-color:var(--good);color:var(--good)}
+.hero{border:2px solid var(--ink);border-radius:16px;padding:22px 24px;margin:18px 0 0;background:var(--soft)}
+.hero .big{font-size:20px;font-weight:800;margin:0 0 6px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{border:1.5px solid var(--line2);border-radius:14px;padding:14px 16px;background:#fff}
+.card h4{margin:0 0 6px;font-size:15px}
+.cap{font-size:13px;color:var(--sub)}
+.small{font-size:13px;color:var(--sub)}
+.center{text-align:center}
+/* color helpers */
+.f1{--fc:var(--c1);--fb:var(--c1b)}.f2{--fc:var(--c2);--fb:var(--c2b)}.f3{--fc:var(--c3);--fb:var(--c3b)}.f4{--fc:var(--c4);--fb:var(--c4b)}
+.f5{--fc:var(--c5);--fb:var(--c5b)}.f6{--fc:var(--c6);--fb:var(--c6b)}.f7{--fc:var(--c7);--fb:var(--c7b)}.f9{--fc:var(--c9);--fb:var(--c9b)}
+.tag{display:inline-block;background:var(--fb);color:var(--fc);border:1px solid var(--fc);border-radius:6px;padding:0 7px;font-size:12px;font-weight:700;line-height:1.6;vertical-align:middle}
+/* sidebar mock */
+.side{border:1.5px solid var(--line2);border-radius:12px;background:#fff;padding:12px 14px;font-size:13.5px;line-height:1.95}
+.side .h{font-weight:800;font-size:14px;margin-bottom:4px}
+.side .g{color:var(--sub);font-size:12px;margin-top:8px;font-weight:700}
+.side .g.col{color:var(--fc);display:flex;align-items:center;gap:6px}
+.side .g.col::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--fc);display:inline-block}
+.side .it{padding-left:16px;position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side .it::before{content:"";position:absolute;left:2px;top:.75em;width:8px;height:8px;border-radius:50%;border:1.5px solid #9ca3af}
+.side .it.on::before{background:#f59e0b;border-color:#f59e0b}
+.side .it .m{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--fc);margin-left:6px;vertical-align:middle}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:8px 0;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:12px;height:12px;border-radius:3px;background:var(--fc);display:inline-block}
+.vs{display:grid;grid-template-columns:1fr 60px 1fr;gap:10px;align-items:center}
+.vs .arrow{font-size:34px;text-align:center;color:var(--ink)}
+@media (max-width:700px){.vs{grid-template-columns:1fr}.vs .arrow{transform:rotate(90deg)}}
+/* big picture */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr;gap:8px;align-items:stretch}
+.flow .ar{display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--ink)}
+@media (max-width:760px){.flow{grid-template-columns:1fr}.flow .ar{transform:rotate(90deg);height:40px}}
+.box{border:2px solid var(--ink);border-radius:14px;padding:12px 14px;background:#fff;height:100%}
+.box .t{font-weight:800;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.ic{display:inline-block;width:22px;height:18px;border-radius:3px;background:var(--fc,#f59e0b);position:relative;vertical-align:middle}
+.ic.folder::before{content:"";position:absolute;left:0;top:-5px;width:10px;height:6px;border-radius:3px 3px 0 0;background:inherit}
+.ic.doc{width:16px;height:20px;background:#fff;border:2px solid var(--fc,#4b5563);border-radius:2px}
+.ic.doc::after{content:"";position:absolute;left:3px;top:4px;width:6px;height:2px;box-shadow:0 0 0 0 #000,0 4px 0 0 var(--fc,#4b5563),0 8px 0 0 var(--fc,#4b5563);background:var(--fc,#4b5563)}
+.ic.chat{border-radius:10px 10px 10px 2px;background:#cbd5e1}
+.mini{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.6;white-space:pre;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow-x:auto}
+/* layers */
+.layers{display:flex;flex-direction:column;gap:10px}
+.layer{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:stretch}
+.layer .k{border-radius:10px;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:15px}
+.layer .v{border:1.5px solid var(--line2);border-radius:10px;padding:10px 14px;background:#fff}
+.layer .v b{color:var(--ink)}
+/* merge diagram */
+.merge{display:grid;grid-template-columns:1fr 60px 1fr 60px 1fr;gap:8px;align-items:center}
+@media (max-width:760px){.merge{grid-template-columns:1fr}.merge .ar{transform:rotate(90deg);height:40px}}
+.merge .ar{display:flex;align-items:center;justify-content:center;font-size:30px}
+.stack{display:flex;flex-direction:column;gap:8px}
+.docbox{border:1.5px solid var(--fc,#9ca3af);background:var(--fb,#f9fafb);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.docbox b{display:block;color:var(--fc,#111827);font-size:13px}
+.brain{border:2px dashed var(--ink);border-radius:14px;padding:14px;background:#fff;text-align:center}
+.bubble{border:2px solid var(--ink);border-radius:14px;padding:12px 14px;background:#fff;position:relative}
+.bubble::before{content:"";position:absolute;left:-12px;top:22px;border:6px solid transparent;border-right-color:var(--ink)}
+/* function cards */
+.fcard{border-top:6px solid var(--fc);border:1.5px solid var(--line2);border-top:6px solid var(--fc);border-radius:14px;padding:12px 14px;background:#fff;display:flex;flex-direction:column;gap:6px}
+.fcard .nm{font-weight:800;font-size:16px;color:var(--fc)}
+.fcard .what{font-size:13.5px}
+.fcard .ex{font-size:12.5px;background:var(--fb);border-radius:8px;padding:6px 9px;border-left:3px solid var(--fc)}
+.fcard .ex::before{content:"入力例：";font-weight:700;color:var(--fc)}
+/* steps with screen mocks */
+.step{display:grid;grid-template-columns:56px 1fr 300px;gap:14px;border:1.5px solid var(--line2);border-radius:16px;padding:14px 16px;background:#fff;margin:0 0 14px;align-items:start}
+@media (max-width:760px){.step{grid-template-columns:56px 1fr}.step .scr{grid-column:1/-1}}
+.step .n{width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center}
+.step .b b{font-size:16px}
+.step .b .where{display:inline-block;background:var(--soft);border:1px solid var(--line2);border-radius:6px;padding:0 8px;font-size:13px;margin:2px 3px 2px 0;font-weight:600}
+.scr{border:2px solid #374151;border-radius:12px;overflow:hidden;background:#fff;font-size:12px;line-height:1.5}
+.scr .bar{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f3f4f6;border-bottom:1px solid var(--line2)}
+.scr .bar i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.scr .bar .tg{margin-left:auto;display:flex;border:1px solid var(--line2);border-radius:7px;overflow:hidden}
+.scr .bar .tg span{padding:1px 8px}
+.scr .bar .tg .sel{background:#111827;color:#fff;font-weight:700}
+.scr .in{padding:10px}
+.hl{outline:3px solid #f59e0b;outline-offset:1px;border-radius:6px;background:#fef3c7}
+.scr .tg .hl{outline-offset:-2px}
+.lbar .g.hl{outline-offset:0;margin:3px 0}
+.btn{display:inline-block;border:1px solid var(--line2);border-radius:7px;padding:2px 9px;background:#fff}
+.btn.dark{background:#111827;color:#fff;border-color:#111827}
+.finder{display:grid;grid-template-columns:90px 1fr;min-height:120px}
+.finder .fl{background:#f3f4f6;border-right:1px solid var(--line2);padding:8px;font-size:11.5px;line-height:1.9}
+.finder .fr{padding:8px 10px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.fi{text-align:center;font-size:11px;width:70px}
+.fi .ic{width:36px;height:28px;display:block;margin:0 auto 3px;--fc:#60a5fa}
+.fi .ic.folder::before{width:16px;height:8px;top:-7px}
+.zipi{display:block;width:30px;height:36px;margin:0 auto 3px;border:2px solid #6b7280;border-radius:3px;background:repeating-linear-gradient(0deg,#fff 0 4px,#9ca3af 4px 6px)}
+.ddl{border:1px solid var(--line2);border-radius:8px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.12);display:inline-block;padding:4px 0;min-width:190px}
+.ddl div{padding:2px 12px}
+.ddl .pick{background:#eef2ff;font-weight:700}
+.lbar{border-right:1px solid var(--line2);padding:6px 8px;font-size:11.5px;line-height:1.8}
+.lbar .g{font-weight:800;display:flex;justify-content:space-between}
+.lbar .s{padding-left:10px;color:#374151}
+.app{display:grid;grid-template-columns:120px 1fr;min-height:150px}
+.app .main{padding:8px 10px;display:flex;flex-direction:column}
+.app .inp{margin-top:auto;border:1px solid var(--line2);border-radius:8px;padding:6px 8px;color:var(--sub)}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.tl .t{border:1.5px solid var(--line2);border-radius:12px;padding:10px 12px;background:#fff;position:relative}
+.tl .t .when{font-weight:800;font-size:13px;color:var(--sub)}
+.tl .t .fn{font-weight:800;color:var(--fc);margin:2px 0}
+.tl .t .do{font-size:13px}
+/* cycle */
+.cycle{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:0 auto}
+.cycle .c{border:2px solid var(--ink);border-radius:14px;padding:10px 12px;background:#fff;text-align:center;font-weight:700}
+.cycle .c small{display:block;font-weight:400;color:var(--sub);font-size:12.5px}
+.cycle .c.g{background:var(--c9b);border-color:var(--c9)}
+/* do/dont */
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.dd{grid-template-columns:1fr}}
+.dd .col{border-radius:14px;padding:14px 16px;border:2px solid}
+.dd .do{border-color:var(--good);background:var(--goodb)}
+.dd .dont{border-color:var(--bad);background:var(--badb)}
+.dd h4{margin:0 0 8px;font-size:18px}
+.dd ul{margin:0;padding-left:0;list-style:none}
+.dd li{padding-left:28px;position:relative;margin:6px 0}
+.dd .do li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:900}
+.dd .dont li::before{content:"✕";position:absolute;left:0;color:var(--bad);font-weight:900}
+/* shield */
+.shield{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.shield .s{border:2px solid var(--c9);background:var(--c9b);border-radius:14px;padding:12px 14px}
+.shield .s b{display:block;font-size:15px;margin-bottom:4px}
+/* flowchart */
+.fc{display:flex;flex-direction:column;gap:10px;max-width:720px;margin:0 auto}
+.fc .q{border:2px solid var(--ink);border-radius:999px;padding:8px 16px;text-align:center;font-weight:700;background:#fff}
+.fc .yn{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fc .a{border:1.5px solid var(--line2);border-radius:12px;padding:8px 12px;background:var(--soft);font-size:13.5px}
+.fc .a b{display:block;font-size:12px;color:var(--sub)}
+.fc .dn{text-align:center;font-size:22px;line-height:1}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.road .r{border:2px solid var(--line2);border-radius:14px;padding:12px 14px;background:#fff}
+.road .r.now{border-color:var(--ink);background:var(--soft)}
+.road .r .w{font-weight:900;font-size:16px}
+.road .r ul{margin:6px 0 0;padding-left:18px;font-size:13.5px}
+table{border-collapse:collapse;width:calc(100% - 3px);margin:10px 0;font-size:14px}
+th,td{border:1px solid var(--line2);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.check li{margin:4px 0}
+.foot{margin-top:40px;color:var(--sub);font-size:12.5px;border-top:1px solid var(--line);padding-top:12px}
+@page{size:A4;margin:14mm 12mm}
+@media print{
+  body{font-size:12.5px}.page{padding:0;max-width:none}
+  section{break-before:page;margin-bottom:0}section.first{break-before:auto}
+  .card,.step,.fcard,.box,.layers,.merge,.cycle,.dd,.shield,.fc,.road,.tl,table,.vs{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .hl{outline-color:#b45309}
+}
+</style></head><body><div class="page">
+
+<section class="first">
+<h1>図解 — Claude アプリで「経営室」をつくる</h1>
+<p class="sub">坪井様用 ／ 株式会社斗 鈴木 ／ 2026-10-13</p>
+<div class="hero">
+  <p class="big">相談のたびに会社の前提を説明する時間を、ゼロにする。</p>
+  <p>やることは「<b>フォルダを置いて、Claude アプリに登録する</b>」だけです。フォルダには「前提の説明書（CLAUDE.md）」が入っていて、そのフォルダで相談を始めると Claude が自動で読みます。</p>
+  <div class="badges"><span class="badge">所要 30 分</span><span class="badge">費用 追加なし（Pro 以上なら今のまま）</span><span class="badge no">GitHub 不要</span><span class="badge no">Cursor 不要</span><span class="badge ok">今日から使える</span></div>
+</div>
+<h3>この資料の読み方</h3>
+<p>図だけを上から順に追えば分かるように作っています。文章は補足です。<b>手順は 5 章</b>、実際に手を動かすのはそこだけです。</p>
+<div class="grid4">
+  <div class="card"><h4>1〜4 章</h4><p class="cap">なぜ散らかるのか／どう変わるのか／仕組みの絵</p></div>
+  <div class="card"><h4>5 章</h4><p class="cap">手順 5 つ（画面の模型つき）</p></div>
+  <div class="card"><h4>6〜9 章</h4><p class="cap">毎日の使い方・やる／やらない・困った時</p></div>
+  <div class="card"><h4>10〜11 章</h4><p class="cap">この先の道筋・最初の週に埋める空欄</p></div>
+</div>
+</section>
+
+<section>
+<h2><span class="num">1</span>なぜ散らかるのか、どう変わるのか</h2>
+<p class="sub">今の Claude は「日付」でしか並びません。頭の中の引き出し（会社／数字／広告／社外／個人）と合っていないのが原因です。</p>
+<div class="legend"><span class="f1"><i></i>戦略</span><span class="f2"><i></i>数字</span><span class="f3"><i></i>集客</span><span class="f4"><i></i>人と組織</span><span class="f6"><i></i>社外活動</span><span class="f7"><i></i>個人</span></div>
+<div class="vs">
+  <div class="side">
+    <div class="h">今：日付順（色がバラバラ）</div>
+    <div class="g">ピン留め済み</div>
+    <div class="it f7">Unreplied emails<span class="m"></span></div>
+    <div class="it f2">週報フォーマット<span class="m"></span></div>
+    <div class="it f1">上場会社の事業分析<span class="m"></span></div>
+    <div class="it f2">今日のブリーフィング<span class="m"></span></div>
+    <div class="g">本日</div>
+    <div class="it f7">1Password へのインポート<span class="m"></span></div>
+    <div class="it f3">Meta広告のテストマーケ戦略<span class="m"></span></div>
+    <div class="g">10月9日</div>
+    <div class="it f6">委員エンゲージメントチーム<span class="m"></span></div>
+    <div class="it f6">フォーラムメンバー企画<span class="m"></span></div>
+    <div class="it f3">WordPress・GA4連携<span class="m"></span></div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="side">
+    <div class="h">これから：引き出し順（色がそろう）</div>
+    <div class="g col f1">01_戦略</div><div class="it">FC展開の論点整理</div><div class="it">上場会社の事業分析</div>
+    <div class="g col f2">02_数字</div><div class="it on">10月PLの店舗別確認</div><div class="it">週報</div>
+    <div class="g col f3">03_集客</div><div class="it">Meta テストマーケ</div><div class="it">HYROX LP ビギナー版</div>
+    <div class="g col f4">04_人と組織</div><div class="it">渡辺さん引き継ぎ</div>
+    <div class="g col f6">06_社外活動</div><div class="it">委員企画プレゼン</div>
+    <div class="g col f7">07_個人</div><div class="it">1Password 移行</div>
+  </div>
+</div>
+<p class="cap center">左：同じ色が散らばっている ／ 右：色ごとにまとまり、しかも各引き出しに「前提」が付いている</p>
+</section>
+
+<section>
+<h2><span class="num">2</span>全体像（この 1 枚だけ覚える）</h2>
+<p class="sub">Mac のフォルダ → Claude アプリに登録 → 左バーがフォルダ順に並ぶ。それだけです。</p>
+<div class="flow">
+  <div class="box"><div class="t"><span class="ic folder" style="--fc:#60a5fa"></span>① Mac のフォルダ</div>
+    <div class="mini">坪井さんの経営室/
+├ CLAUDE.md   ← 共通の前提
+├ 01_戦略/    CLAUDE.md
+├ 02_数字/    CLAUDE.md
+├ 03_集客/    CLAUDE.md
+├ 04_人と組織/ CLAUDE.md
+├ 05_店舗/    （店舗カルテ）
+├ 06_社外活動/ CLAUDE.md
+├ 07_個人/    CLAUDE.md
+└ 99_決定事項/</div>
+    <p class="cap">「書類」か Dropbox に置く。zip を解凍すると出てきます。</p></div>
+  <div class="ar">→</div>
+  <div class="box"><div class="t"><span class="btn dark">&lt;/&gt;</span>② Claude アプリに登録</div>
+    <p>アプリの「コード側」で <b>＋ リポジトリを選択</b> → フォルダを選ぶ。6 回繰り返す。</p>
+    <p class="cap">「リポジトリ」と書いてあるが、ただのフォルダで OK。GitHub は無関係。</p></div>
+  <div class="ar">→</div>
+  <div class="box"><div class="t"><span style="font-size:18px">💬</span>③ 左バーが整う</div>
+    <div class="side" style="padding:8px 10px;font-size:12.5px;line-height:1.7">
+      <div class="g col f1">01_戦略</div>
+      <div class="g col f2">02_数字</div><div class="it on">10月PLの確認</div>
+      <div class="g col f3">03_集客</div>
+      <div class="g col f4">04_人と組織</div>
+      <div class="g col f6">06_社外活動</div>
+      <div class="g col f7">07_個人</div>
+    </div></div>
+</div>
+</section>
+
+<section>
+<h2><span class="num">3</span>CLAUDE.md が「自動で効く」仕組み</h2>
+<h3>まず 3 つの役割</h3>
+<div class="layers">
+  <div class="layer"><div class="k" style="background:#60a5fa">引き出し</div><div class="v"><b>フォルダ</b>。経営の機能ごとに 1 つ。相談はまずここを選ぶ。</div></div>
+  <div class="layer"><div class="k" style="background:#f59e0b">説明書</div><div class="v"><b>CLAUDE.md</b>。会社の前提・言葉の定義・答え方の型。<b>一度書けば、そのフォルダの全相談に効く。</b></div></div>
+  <div class="layer"><div class="k" style="background:#9ca3af">使い捨て</div><div class="v"><b>セッション（相談）</b>。毎回の会話。終わったら忘れてよい。残す価値のある結論だけ 99_決定事項 に 1 ファイル。</div></div>
+</div>
+
+<h3>合流の絵</h3><p class="sub">02_数字 で相談を始めると、共通の前提と 02_数字 の前提が両方 Claude に入ってから答えます。あなたは何も貼りません。</p>
+<div class="merge">
+  <div class="stack">
+    <div class="docbox" style="--fc:#111827;--fb:#f8fafc"><b>坪井さんの経営室/CLAUDE.md（共通）</b>7 店舗・チーム・主要システム／結論から・出典つき／機密を貼らない／斗に確認する 3 つ</div>
+    <div class="docbox f2"><b>02_数字/CLAUDE.md</b>店舗別 PL の見方／総務経理の定例（上旬・中旬・下旬）／突合は差異だけ表に／最終承認は人</div>
+    <div class="docbox f9"><b>99_決定事項/（過去の決定）</b>例：広告費は本部一括で計上する</div>
+  </div>
+  <div class="ar">→</div>
+  <div class="brain"><div style="font-size:34px">🧠</div><b>Claude</b><br><span class="cap">全部読んでから考える</span></div>
+  <div class="ar">→</div>
+  <div class="bubble"><b>あなたの入力</b><br>「この精算書を前月と突合して」<br><hr style="border:0;border-top:1px dashed var(--line2);margin:8px 0"><b>Claude の答え</b><br>結論 → 差異 3 件の表 → 松尾さんに確認する 2 点 → 「金額確定は斗に確認」と添える</div>
+</div>
+<p class="cap center">親フォルダの CLAUDE.md は、どのサブフォルダで作業していても一緒に読まれます。</p>
+</section>
+
+<section>
+<h2><span class="num">4</span>フォルダの地図（どこで何を聞くか）</h2>
+<p class="sub">迷ったら「その相談は会社のどの機能か」で選びます。1 つの相談が 2 つにまたがる時は、数字が絡めば 02、人が絡めば 04。</p>
+<div class="grid4">
+  <div class="fcard f1"><div class="nm">01_戦略</div><div class="what">方向・新規事業（FC 展開など）・競合・投資判断・他社分析</div><div class="ex">FC パッケージ化の論点を、判断基準つきで 3 案に</div></div>
+  <div class="fcard f2"><div class="nm">02_数字</div><div class="what">月次 PL・店舗別・経費・総務経理の定例（交通費／請求確認／精算書／シフト登録）</div><div class="ex">この精算書 CSV を前月分と突合して、差異だけ表に</div></div>
+  <div class="fcard f3"><div class="nm">03_集客</div><div class="what">Meta／Google 広告・LP・HP・チラシ・テストマーケ</div><div class="ex">下北沢の CPA が全体の 1.5 倍。止める／寄せるの判断材料を</div></div>
+  <div class="fcard f4"><div class="nm">04_人と組織</div><div class="what">採用・シフト・評価面談・店長への連絡文・引き継ぎ・社内研修</div><div class="ex">店長向けに、シフト提出を 25 日締めに変える連絡文を</div></div>
+  <div class="fcard f5"><div class="nm">05_店舗</div><div class="what">店ごとの事情（店舗カルテ）。7 店舗＋加盟店のフォルダ</div><div class="ex">船橋のカルテを読んで、今月の体験数低下の仮説を 3 つ</div></div>
+  <div class="fcard f6"><div class="nm">06_社外活動</div><div class="what">フォーラム委員などの社外の役割。企画書・議事メモ・案内文</div><div class="ex">委員会の議事メモを、決定・保留・宿題に分けて整形</div></div>
+  <div class="fcard f7"><div class="nm">07_個人</div><div class="what">ツール設定・調べもの・学習・メールの下書き</div><div class="ex">1Password にブラウザの保存パスワードを移す手順を画面つきで</div></div>
+  <div class="fcard f9"><div class="nm">99_決定事項</div><div class="what">決まったことの台帳。1 決定 1 ファイル。全フォルダが参照</div><div class="ex">今の結論を決定事項に残して</div></div>
+</div>
+</section>
+
+<section>
+<h2><span class="num">5</span>手順（30 分・手を動かすのはここだけ）</h2>
+<p class="sub">右側の模型は「画面のどこを押すか」です。黄色の枠が押す場所。</p>
+
+<div class="step"><div class="n">1</div><div class="b"><b>Claude の Mac アプリを入れる</b><br>ブラウザで <span class="where">claude.ai/download</span> を開き、Mac 用をダウンロードして開く。<span class="where">今お使いの Claude アカウント</span>でログイン。<p class="cap">すでに入っていれば最新版に更新だけ。コード側（手順 3）は <b>Pro か Max</b> のプランで使えます。無料プランの場合は Pro への切り替えが必要です。</p></div>
+  <div class="scr"><div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span style="margin-left:6px;color:#6b7280">claude.ai/download</span></div><div class="in"><div style="font-weight:800;font-size:14px">Claude をダウンロード</div><div class="cap">デスクトップで、いつでも。</div><div style="margin-top:10px"><span class="btn dark hl">Mac 用をダウンロード</span></div><div class="cap" style="margin-top:8px">→ 開いたらログイン</div></div></div></div>
+
+<div class="step"><div class="n">2</div><div class="b"><b>zip を解凍して、フォルダを「書類」に置く</b><br>同封の zip をダブルクリック → 出てきた <span class="where">坪井さんの経営室</span> を <span class="where">書類</span>（または Dropbox の中）へドラッグ。<p class="cap">場所は後から変えられます。</p></div>
+  <div class="scr"><div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span style="margin-left:6px;color:#6b7280">Finder</span></div><div class="finder"><div class="fl">よく使う項目<br>デスクトップ<br><span class="hl">書類</span><br>ダウンロード</div><div class="fr"><div class="fi"><span class="zipi"></span>ハイアルチ_Claude経営室.zip</div><div style="font-size:20px;align-self:center">→</div><div class="fi hl"><span class="ic folder"></span>坪井さんの経営室</div></div></div></div></div>
+
+<div class="step"><div class="n">3</div><div class="b"><b>アプリを「コード側」に切り替える</b><br>アプリ上部の切り替えで <span class="where">&lt;/&gt;</span> を押す（左の吹き出しが「チャット」、右が「コード」）。<p class="cap">初回だけセットアップが出ることがあります。表示どおり「続ける」で OK。</p></div>
+  <div class="scr"><div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span style="color:#6b7280">← →</span><div class="tg"><span>💬</span><span class="sel hl">&lt;/&gt;</span></div></div><div class="in" style="text-align:center;padding:22px 10px"><div style="font-size:15px;font-weight:800">おかえりなさい、坪井さん</div><div class="cap">セッション：まだありません</div></div></div></div>
+
+<div class="step"><div class="n">4</div><div class="b"><b>フォルダを登録する（6 回）</b><br>入力欄の上の <span class="where">＋ リポジトリを選択…</span> → <span class="where">書類 › 坪井さんの経営室 › 01_戦略</span> を選ぶ。同じ操作で <b>02_数字・03_集客・04_人と組織・06_社外活動・07_個人</b> も。<p class="cap">git の初期化を聞かれたら「はい」。パソコンの中だけで完結します。05_店舗 と 99_決定事項 は登録不要（他のフォルダから読めます）。</p></div>
+  <div class="scr"><div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><div class="tg"><span>💬</span><span class="sel">&lt;/&gt;</span></div></div><div class="in"><span class="btn">Default</span> <span class="btn hl">＋ リポジトリを選択…</span><div style="margin-top:6px"><div class="ddl"><div>📁 坪井さんの経営室</div><div class="pick">　📁 01_戦略</div><div>　📁 02_数字</div><div>　📁 03_集客</div><div>　📁 04_人と組織</div><div>　📁 06_社外活動</div><div>　📁 07_個人</div></div></div></div></div></div>
+
+<div class="step"><div class="n">5</div><div class="b"><b>最初の相談をしてみる</b><br>左バーで <span class="where">02_数字</span> を選び、入力欄にこう書く：<br>「<b>このフォルダの CLAUDE.md を読んで、あなたが何を手伝えるか 5 行で。空欄【 】も列挙して</b>」<p class="cap">会社の前提を踏まえた答えが返れば成功。</p></div>
+  <div class="scr"><div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><div class="tg"><span>💬</span><span class="sel">&lt;/&gt;</span></div></div><div class="app"><div class="lbar"><div class="g f1" style="color:var(--c1)">01_戦略<span>＋</span></div><div class="g hl" style="color:var(--c2)">02_数字<span>＋</span></div><div class="g" style="color:var(--c3)">03_集客<span>＋</span></div><div class="g" style="color:var(--c4)">04_人と組織<span>＋</span></div><div class="g" style="color:var(--c6)">06_社外活動<span>＋</span></div><div class="g" style="color:var(--c7)">07_個人<span>＋</span></div></div><div class="main"><div class="cap">02_数字</div><div class="inp hl">このフォルダの CLAUDE.md を読んで…</div></div></div></div></div>
+</section>
+
+<section>
+<h2><span class="num">6</span>ある 1 日の流れ</h2>
+<p class="sub">相談するフォルダを変えるだけで、Claude の「前提」も切り替わります。</p>
+<div class="tl">
+  <div class="t f2"><div class="when">朝 9:00</div><div class="fn">02_数字</div><div class="do">「昨日までの体験数を店舗別に。全体平均と比べて」→ 船橋が低い</div></div>
+  <div class="t f5"><div class="when">9:20</div><div class="fn">05_店舗/船橋</div><div class="do">「カルテを読んで、低下の仮説を 3 つ」→ 広告セット停止中が判明</div></div>
+  <div class="t f3"><div class="when">昼</div><div class="fn">03_集客</div><div class="do">「船橋の広告を再開する案を、予算・期間・判断基準つきで」</div></div>
+  <div class="t f9"><div class="when">決まった</div><div class="fn">99_決定事項</div><div class="do">「この結論を決定事項に残して」→ 1 ファイルできる</div></div>
+  <div class="t f4"><div class="when">夕方</div><div class="fn">04_人と組織</div><div class="do">「船橋店長への連絡文を。結論→理由→お願い→期限で」</div></div>
+  <div class="t f6"><div class="when">夜</div><div class="fn">06_社外活動</div><div class="do">「委員会の企画書の構成案を」（会社の数字は持ち込まれない）</div></div>
+</div>
+</section>
+
+<section>
+<h2><span class="num">7</span>決定が「溜まる」ループ</h2>
+<p class="sub">これが「Claude が賢くなっていく」仕組みの正体です。チャットは消えても、決定はファイルで残り、次の相談の前提になります。</p>
+<div class="cycle">
+  <div class="c">① 相談する<small>そのフォルダで</small></div>
+  <div class="c">② 結論が出る<small>Claude が整理</small></div>
+  <div class="c g">④ 次の相談が<br>それを前提に動く<small>矛盾した提案をしなくなる</small></div>
+  <div class="c g">③ 決定事項に 1 ファイル<small>「決定事項に残して」と言うだけ</small></div>
+</div>
+<p class="cap center">① → ② → ③ → ④ → ①（時計回り）</p>
+<h3>決定事項ファイルの形（雛形あり）</h3>
+<div class="mini">99_決定事項/2026-10-02_広告費は本部一括で計上する.md
+
+決定   ：店舗別 PL の広告費は按分せず本部一括で計上する
+理由   ：店舗ごとに管理するコストが成果に見合わない
+次にやる：斗 ／ ダッシュボードの既定を本部一括に ／ 反映済み
+見直す条件：店舗ごとの広告判断を頻繁にするようになった時</div>
+</section>
+
+<section>
+<h2><span class="num">8</span>やること・やらないこと</h2>
+<div class="dd">
+  <div class="col do"><h4>やること</h4><ul>
+    <li><b>相談はフォルダを選んでから。</b>上部の「新規」からは始めない。</li>
+    <li><b>決まったら「決定事項に残して」。</b>1 件 1 ファイル。</li>
+    <li><b>CLAUDE.md は月 1 回見直す。</b>人の入れ替わり・方針変更は 1 行直すだけ。</li>
+    <li><b>店舗カルテを最初の週に埋める。</b>店長・特徴・広告セット・直近の決定。</li>
+    <li><b>詰まったら「どこで止まったか」を鈴木へ。</b>スクショ 1 枚で十分。</li>
+  </ul></div>
+  <div class="col dont"><h4>やらないこと</h4><ul>
+    <li><b>パスワード・API キーを貼らない。</b>1Password の中身も。Claude は手順だけ案内します。</li>
+    <li><b>会員・社員の氏名・メール・住所を貼らない。</b>「会員A」「店長B」に伏せる。</li>
+    <li><b>個人別の給与を出させない。</b>集計値だけ。</li>
+    <li><b>社外活動のフォルダに会社の数字を持ち込まない。</b></li>
+    <li><b>計測・本番システム・金額確定は自分で触らない。</b>下の 3 つは斗へ。</li>
+  </ul></div>
+</div>
+<h3>Claude が自動で「斗に確認」と添える 3 つ</h3>
+<div class="shield">
+  <div class="s"><b>① 広告の計測を変える</b>ピクセル・コンバージョン定義・GA4・タグ。配信の学習が壊れ、数字が止まる。</div>
+  <div class="s"><b>② 本番システムの設定</b>hacomono・ダッシュボード・アプリの設定変更や連携追加。</div>
+  <div class="s"><b>③ 金額の確定</b>請求・支払・給与の最終判断。Claude は「ここまで準備した」で止まる。</div>
+</div>
+<p class="cap">CLAUDE.md に書いてあるので、Claude の方から「これは斗に確認してください」と言います。そのまま鈴木へ転送してください。</p>
+</section>
+
+<section>
+<h2><span class="num">9</span>困った時の分岐</h2>
+<div class="fc">
+  <div class="q">Claude の答えが「会社の前提を知らない」感じ？</div>
+  <div class="yn">
+    <div class="a"><b>はい</b>左バーで正しいフォルダを選んでいるか確認。「新規」から始めていないか。</div>
+    <div class="a"><b>いいえ</b>次へ</div>
+  </div>
+  <div class="dn">↓</div>
+  <div class="q">それでも前提を知らない？</div>
+  <div class="yn">
+    <div class="a"><b>はい</b>「このフォルダの CLAUDE.md を読んでから答えて」と一言。直らなければ鈴木へ。</div>
+    <div class="a"><b>いいえ</b>解決</div>
+  </div>
+  <div class="dn">↓</div>
+  <div class="q">「リポジトリを選択」でフォルダが出ない？</div>
+  <div class="yn">
+    <div class="a"><b>はい</b>フォルダが「書類」か Dropbox にあるか確認。iCloud なら雲マークを押して先にダウンロード。</div>
+    <div class="a"><b>いいえ</b>次へ</div>
+  </div>
+  <div class="dn">↓</div>
+  <div class="q">&lt;/&gt; を押したらセットアップ画面が出た？</div>
+  <div class="yn">
+    <div class="a"><b>はい</b>表示どおり「続ける」。5 分で終わる。終わらなければスクショを鈴木へ。</div>
+    <div class="a"><b>いいえ</b>解決</div>
+  </div>
+</div>
+</section>
+
+<section>
+<h2><span class="num">10</span>この先の道筋</h2>
+<p class="sub">今日やるのは左だけ。GitHub や全社展開は、必要になった時に初めて考えます。</p>
+<div class="road">
+  <div class="r now"><div class="w">今日</div><div class="cap">アプリ＋フォルダ</div><ul><li>6 フォルダを登録</li><li>【 】の空欄を埋める</li><li>相談はフォルダから</li></ul></div>
+  <div class="r"><div class="w">1 か月後</div><div class="cap">資産が溜まり始める</div><ul><li>店舗カルテが全店そろう</li><li>決定事項が 10 件を超える</li><li>月次の定例（02_数字）が型になる</li></ul></div>
+  <div class="r"><div class="w">社員にも広げる時</div><div class="cap">ここで初めて GitHub</div><ul><li>同じフォルダを社員へ配布</li><li>全員のナレッジを 1 か所に</li><li>設計は斗が行う</li></ul></div>
+</div>
+<h3>チャット側との使い分け</h3>
+<table><tr><th style="width:200px">用途</th><th>どちらで</th></tr>
+<tr><td>ちょっと聞きたい・調べたい</td><td>チャット側（今までどおり）</td></tr>
+<tr><td>会社の前提が要る相談・ファイルを残したい仕事</td><td>コード側（フォルダを選んで）</td></tr>
+<tr><td>決まったことを残す</td><td>コード側 →「決定事項に残して」</td></tr></table>
+</section>
+
+<section>
+<h2><span class="num">11</span>最初の週に埋める空欄【 】</h2>
+<p class="sub">こちらで分からない箇所だけ空欄にしています。埋めるほど答えの精度が上がります。</p>
+<table>
+<tr><th style="width:230px">どこ</th><th>何を</th></tr>
+<tr><td>CLAUDE.md（共通）</td><td>チームの役割（安蒜・山本羅衣・松尾・山﨑・北・高木）。推定で入れてあるので直してください</td></tr>
+<tr><td>03_集客/CLAUDE.md</td><td>WordPress の URL、GTM の ID、HYROX の予算をどの店舗で持っているか</td></tr>
+<tr><td>05_店舗/各店/店舗カルテ.md</td><td>店長・開店・特徴・設備・広告セット名・プログラム・強み・課題・直近の決定</td></tr>
+<tr><td>05_店舗/加盟店/店舗カルテ.md</td><td>加盟店ごとの窓口・広告セット名・取り決め</td></tr>
+<tr><td>06_社外活動/CLAUDE.md</td><td>団体名・役職・任期・メンバー・今期のテーマ・次回の予定</td></tr>
+</table>
+<p class="cap">「【 】を列挙して」と Claude に頼むと、未記入の箇所を一覧にしてくれます。</p>
+<div class="foot">株式会社斗 鈴木北斗 ／ この資料と雛形フォルダは、坪井様の社内利用に限りご自由に改変ください。</div>
+</section>
+
+</div></body></html>
