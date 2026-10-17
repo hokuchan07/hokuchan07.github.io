@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>競合分析 — 株式会社エスコーポレーション（九州・動画広告）</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#111c33; --panel2:#16213d; --line:#243352;
+  --text:#e6edf7; --muted:#9fb0cc; --dim:#6b7a99;
+  --red:#ff5a5f; --orange:#ff9f43; --yellow:#ffd166; --green:#2ecc8f; --blue:#4da3ff; --purple:#b388ff; --cyan:#3fd6e0;
+  --rb:#4da3ff; --es:#ff5a5f; --as:#ffd166;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;line-height:1.65;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:clamp(22px,3.6vw,38px);line-height:1.3;letter-spacing:.01em}
+h2{font-size:clamp(18px,2.6vw,26px);margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h2 .n{display:inline-flex;width:34px;height:34px;border-radius:10px;background:var(--blue);color:#06101f;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:none}
+h3{font-size:16px;margin:0 0 8px;color:var(--text)}
+p{color:var(--muted)}
+.sub{color:var(--muted);font-size:14px}
+section{margin-top:44px}
+.lead{margin:0 0 10px;color:var(--muted);font-size:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:480px){.g4{grid-template-columns:1fr}}
+.kpi{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden}
+.kpi .v{font-size:clamp(30px,4vw,44px);font-weight:900;line-height:1.1;letter-spacing:-.02em}
+.kpi .l{color:var(--muted);font-size:13px;margin-top:4px}
+.kpi.red .v{color:var(--red)} .kpi.yel .v{color:var(--yellow)} .kpi.grn .v{color:var(--green)} .kpi.blu .v{color:var(--blue)} .kpi.pur .v{color:var(--purple)} .kpi.org .v{color:var(--orange)}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--line);color:var(--muted);background:#0c1527}
+.tag.red{color:var(--red);border-color:rgba(255,90,95,.4)} .tag.grn{color:var(--green);border-color:rgba(46,204,143,.4)} .tag.yel{color:var(--yellow);border-color:rgba(255,209,102,.4)} .tag.blu{color:var(--blue);border-color:rgba(77,163,255,.4)}
+.hero{background:linear-gradient(135deg,#132044 0%,#0f172a 60%);border:1px solid var(--line);border-radius:20px;padding:28px 24px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,95,.25),transparent 65%)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.verdict{margin-top:18px;display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.verdict{grid-template-columns:1fr}}
+.verdict div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.verdict b{display:block;font-size:15px;margin-bottom:2px}
+.verdict span{color:var(--muted);font-size:13px}
+/* bars */
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:150px 1fr 52px;align-items:center;gap:10px;font-size:13px}
+@media(max-width:600px){.bar{grid-template-columns:118px 1fr 40px;font-size:12px}.bars .bar .lab{white-space:normal;line-height:1.25}}
+.bar .lab{color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .tr{height:16px;background:#0b1326;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.bar .fl{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.bar .fl.red{background:linear-gradient(90deg,var(--red),var(--orange))}
+.bar .fl.yel{background:linear-gradient(90deg,var(--yellow),var(--orange))}
+.bar .fl.grn{background:linear-gradient(90deg,var(--green),var(--cyan))}
+.bar .fl.pur{background:linear-gradient(90deg,var(--purple),var(--blue))}
+.bar .val{font-weight:800;text-align:right}
+/* stacked */
+.stack{display:flex;height:42px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:10px 0 8px}
+.stack div{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#06101f}
+@media(max-width:600px){.stack{height:36px}.stack div{font-size:11px;white-space:nowrap;overflow:hidden}.stack div.sm{font-size:0}.stack div.sm:after{content:attr(data-n);font-size:11px}}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* flow */
+.flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr;align-items:stretch;gap:0}
+@media(max-width:860px){.flow{grid-template-columns:1fr}.flow .arr{transform:rotate(90deg);height:40px}}
+.node{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative}
+.node b{display:block;font-size:15px;margin-bottom:4px}
+.node small{color:var(--muted);display:block;font-size:12.5px;line-height:1.5}
+.node.as{border-color:rgba(255,209,102,.5);box-shadow:0 0 0 1px rgba(255,209,102,.15) inset}
+.node.es{border-color:rgba(255,90,95,.55);box-shadow:0 0 0 1px rgba(255,90,95,.15) inset}
+.node.sh{border-color:rgba(46,204,143,.5)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:26px}
+/* timeline */
+.tl{position:relative;padding-left:22px;border-left:2px solid var(--line);display:grid;gap:14px;margin-top:8px}
+.ev{position:relative}
+.ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--dim);border:2px solid var(--bg)}
+.ev.es:before{background:var(--es)} .ev.rb:before{background:var(--rb)} .ev.win:before{background:var(--green)}
+.ev .d{font-size:12px;color:var(--dim);font-weight:700;letter-spacing:.04em}
+.ev .t{font-size:14px}
+.ev .t b{color:var(--text)}
+.who{font-size:11px;font-weight:800;padding:1px 7px;border-radius:6px;margin-right:6px;vertical-align:1px}
+.who.es{background:rgba(255,90,95,.18);color:var(--red)} .who.rb{background:rgba(77,163,255,.18);color:var(--blue)} .who.st{background:rgba(46,204,143,.18);color:var(--green)}
+.case{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.case h3{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.gap{margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(255,90,95,.08);border:1px dashed rgba(255,90,95,.45);font-size:13px}
+.gap b{color:var(--red)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:10px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{color:var(--muted);font-weight:700;font-size:12.5px;background:#0c1527}
+td.c{text-align:center}
+.vs td:first-child{color:var(--muted);width:150px}
+@media(max-width:600px){.vs td:first-child{width:auto;white-space:nowrap;padding-right:4px}.vs th,.vs td{padding:8px 5px;font-size:12.5px}}
+.vs .es{color:var(--red);font-weight:700}.vs .rb{color:var(--blue);font-weight:700}
+/* list */
+ol.rank{list-style:none;display:grid;gap:10px;counter-reset:r}
+ol.rank li{display:grid;grid-template-columns:44px 1fr;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+ol.rank li:before{counter-increment:r;content:counter(r);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--orange));color:#06101f;font-weight:900;font-size:18px}
+ol.rank b{display:block;margin-bottom:2px}
+ol.rank span{color:var(--muted);font-size:13px}
+ul.chk{list-style:none;display:grid;gap:8px}
+ul.chk li{padding-left:28px;position:relative;color:var(--muted);font-size:14px}
+ul.chk li:before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:6px;background:rgba(46,204,143,.18);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+ul.chk li b{color:var(--text)}
+.note{font-size:12.5px;color:var(--dim);margin-top:10px}
+.callout{border-left:4px solid var(--yellow);background:rgba(255,209,102,.07);padding:12px 14px;border-radius:0 12px 12px 0;margin-top:14px}
+.callout b{color:var(--yellow)}
+.big{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.35}
+.big em{font-style:normal;color:var(--red)}
+.big em.b{color:var(--blue)}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pill{font-size:12px;padding:3px 9px;border-radius:999px;background:#0c1527;border:1px solid var(--line);color:var(--muted)}
+.pill.x{border-color:rgba(255,90,95,.45);color:var(--red)}
+.footer{margin-top:50px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.toc a{color:var(--blue);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:4px 10px;border-radius:999px;background:#0c1527}
+.toc a:hover{border-color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="tag red">競合分析</span> <span class="tag">RUNBIRD IT事業 × リスト収集</span>
+  <h1 style="margin-top:10px">株式会社エスコーポレーション（博多）は<br>「既存店の総当たり × テレアポ」で九州の動画広告を取っている</h1>
+  <div class="meta">
+    <span class="tag">調査日 2026/10/15〜16</span>
+    <span class="tag">出典: Google広告の透明性センター（広告主ID AR00505075612705095681）</span>
+    <span class="tag">照合先: CTI本番 stores / call_logs（九州7県＋山口＋沖縄）</span>
+  </div>
+  <div class="verdict">
+    <div><b>Q1. どうやってリストを集めている？</b><span>Googleマップの<u>既存店</u>を業種を絞らず郡部まで舐め、テレアポの人海戦術で売る。新店狙いではない。</span></div>
+    <div><b>Q2. 直近の獲得先はランバードで取れていた？</b><span>直近44件のうち <b style="color:var(--red)">20件（45%）はCTIに無い</b>。あった19件も <b style="color:var(--orange)">14件は未架電</b>。</span></div>
+    <div><b>Q3. なぜ負けた？</b><span>語の穴（教室・スナック・塾がゼロ）、通常収集の3か月周期、開業時の経路が未稼働、そして見つけた後の架電が0〜1回。</span></div>
+  </div>
+  <div class="toc">
+    <a href="#s1">① 会社の素性</a><a href="#s2">② 構造（メーカーと販売店）</a><a href="#s3">③ 広告の実態</a><a href="#s4">④ 新店ではない証拠</a><a href="#s5">⑤ リスト収集の推定</a><a href="#s6">⑥ CTI照合</a><a href="#s7">⑦ 負けた3件の時系列</a><a href="#s8">⑧ 負け方の構造</a><a href="#s9">⑨ 打ち手</a>
+  </div>
+</div>
+
+<!-- 1 会社 -->
+<section id="s1">
+  <h2><span class="n">1</span>会社の素性（公開情報）</h2>
+  <p class="lead">福岡市博多区神屋町4-5／代表 馬塲要輔／2006年11月設立／従業員30名（2022年6月・エン転職）</p>
+  <div class="grid g4">
+    <div class="kpi org"><div class="v">30<span style="font-size:18px">名</span></div><div class="l">従業員（2022年時点）。テレアポ研修2〜6か月→専門部署へ引き継ぎ</div></div>
+    <div class="kpi red"><div class="v">1,000<span style="font-size:18px">件+</span></div><div class="l">年間導入実績（求人票の自己申告）＝月80件超の成約を支える架電量</div></div>
+    <div class="kpi yel"><div class="v">9<span style="font-size:18px">事業</span></div><div class="l">動画・SNS広告・HP・特定技能人材・業務用エアコン・電気代削減・光回線・コンサル・飲食店運営</div></div>
+    <div class="kpi blu"><div class="v">OEM</div><div class="l">代理店募集あり（アプリ/HP/LPを自社ブランドで販売・ビジネスクレジット提案）</div></div>
+  </div>
+  <div class="callout"><b>営業手法は求人票に明記。</b>「アウトバウンド型のアポイント取得が中心」「アポ取得→商談→アフターフォロー」「九州中心、関西・関東は翌年以降」「取引先は美容・飲食など」。</div>
+</section>
+
+<!-- 2 構造 -->
+<section id="s2">
+  <h2><span class="n">2</span>構造 — エス社は九州の販売店</h2>
+  <p class="lead">エス社の代理店ページの文言は、飯田橋の株式会社アシスト（導入8万社・保有顧客3万件・全国40社超の販売店）の代理店ページとほぼ同一。</p>
+  <div class="panel">
+    <div class="flow">
+      <div class="node as"><b>株式会社アシスト（飯田橋）</b><small>メーカー。従業員180名・フィリピン拠点・名古屋支店。MEO/Google広告/HP/アプリ/動画を商材化。透明性センターの広告は約3万件（全国・全業種・1店1広告）</small></div>
+      <div class="arr">→</div>
+      <div class="node"><b>全国40社超の販売店</b><small>「営業に専念、メーカー業務はアシスト」「アプリ・HP・LPをOEMで自社ブランド販売」「ビジネスクレジット10万〜350万・最大96回」</small></div>
+      <div class="arr">→</div>
+      <div class="node es"><b>エスコーポレーション（博多）</b><small>九州の手足。テレアポ部隊。動画は YouTube にクライアント名義のチャンネルを作って載せ、Google広告で配信。月6〜10社</small></div>
+      <div class="arr">→</div>
+      <div class="node sh"><b>九州の個人事業主</b><small>塾・バレエ・遊漁船・神社・窯元・犬舎・B型事業所・建設・電気工事…。<b>Googleマップに載っていれば何でも</b></small></div>
+    </div>
+    <p class="note">含意: 相手の母体は3万件の顧客基盤を持つメーカー。動画以外の商材（エアコン・光回線・HP）の既存客にもクロスセルできる。</p>
+  </div>
+</section>
+
+<!-- 3 広告の実態 -->
+<section id="s3">
+  <h2><span class="n">3</span>広告の実態（透明性センター 2024/3〜2026/10）</h2>
+  <div class="grid g4" style="margin-bottom:14px">
+    <div class="kpi blu"><div class="v">388</div><div class="l">広告（クリエイティブ）数</div></div>
+    <div class="kpi pur"><div class="v">321</div><div class="l">動画＝クライアント数（1本1社）</div></div>
+    <div class="kpi org"><div class="v">6〜10<span style="font-size:18px">社/月</span></div><div class="l">2026年の新規ペース（広告初出）</div></div>
+    <div class="kpi yel"><div class="v">100%</div><div class="l">YouTube動画広告（1〜1.5分・スキップ可・店舗紹介）</div></div>
+  </div>
+  <div class="grid g2">
+    <div class="panel">
+      <h3>業種（タイトル語の機械分類・321本）</h3>
+      <div class="bars">
+        <div class="bar"><span class="lab">分類不能・その他</span><div class="tr"><div class="fl pur" style="width:100%"></div></div><span class="val">125</span></div>
+        <div class="bar"><span class="lab">士業・法人サービス</span><div class="tr"><div class="fl" style="width:35%"></div></div><span class="val">44</span></div>
+        <div class="bar"><span class="lab">美容・サロン・整体</span><div class="tr"><div class="fl" style="width:29%"></div></div><span class="val">36</span></div>
+        <div class="bar"><span class="lab">教室・スクール・塾</span><div class="tr"><div class="fl" style="width:25%"></div></div><span class="val">31</span></div>
+        <div class="bar"><span class="lab">小売・ショップ</span><div class="tr"><div class="fl" style="width:21%"></div></div><span class="val">26</span></div>
+        <div class="bar"><span class="lab">建設・住宅・職人</span><div class="tr"><div class="fl" style="width:18%"></div></div><span class="val">22</span></div>
+        <div class="bar"><span class="lab">スポーツ・レジャー</span><div class="tr"><div class="fl" style="width:10%"></div></div><span class="val">13</span></div>
+        <div class="bar"><span class="lab">自動車・バイク</span><div class="tr"><div class="fl" style="width:8%"></div></div><span class="val">10</span></div>
+        <div class="bar"><span class="lab">飲食・バー・スナック</span><div class="tr"><div class="fl red" style="width:7%"></div></div><span class="val">9</span></div>
+        <div class="bar"><span class="lab">医療・福祉・保育</span><div class="tr"><div class="fl" style="width:4%"></div></div><span class="val">5</span></div>
+      </div>
+      <p class="note">「その他」の中身: 占い、犬舎、遊漁船、神社、窯元、ペット霊園、幼稚園、B型事業所、フリースクール、合気道、グランピング…。<b style="color:var(--red)">飲食・美容に寄っていない。</b></p>
+    </div>
+    <div class="panel">
+      <h3>地域（CTI一致190件の県分布）</h3>
+      <div class="bars">
+        <div class="bar"><span class="lab">福岡</span><div class="tr"><div class="fl grn" style="width:100%"></div></div><span class="val">75</span></div>
+        <div class="bar"><span class="lab">沖縄</span><div class="tr"><div class="fl grn" style="width:36%"></div></div><span class="val">27</span></div>
+        <div class="bar"><span class="lab">熊本</span><div class="tr"><div class="fl grn" style="width:31%"></div></div><span class="val">23</span></div>
+        <div class="bar"><span class="lab">鹿児島</span><div class="tr"><div class="fl grn" style="width:27%"></div></div><span class="val">20</span></div>
+        <div class="bar"><span class="lab">山口</span><div class="tr"><div class="fl grn" style="width:16%"></div></div><span class="val">12</span></div>
+        <div class="bar"><span class="lab">宮崎</span><div class="tr"><div class="fl grn" style="width:15%"></div></div><span class="val">11</span></div>
+        <div class="bar"><span class="lab">佐賀</span><div class="tr"><div class="fl grn" style="width:13%"></div></div><span class="val">10</span></div>
+        <div class="bar"><span class="lab">長崎</span><div class="tr"><div class="fl grn" style="width:11%"></div></div><span class="val">8</span></div>
+        <div class="bar"><span class="lab">大分</span><div class="tr"><div class="fl grn" style="width:5%"></div></div><span class="val">4</span></div>
+      </div>
+      <p class="note">郡部・離島まで届く: 宇久島（佐世保）・由布市・苅田町・朝倉市・みやま市・小郡市・諫早市・下関市。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 新店ではない -->
+<section id="s4">
+  <h2><span class="n">4</span>「新店」狙いではない</h2>
+  <div class="grid g3">
+    <div class="kpi red"><div class="v">54%</div><div class="l">CTI一致190件のうち103件が<b>2020〜23年の旧Comdeskリスト</b>に既にあった店＝3年以上営業している既存店</div></div>
+    <div class="kpi org"><div class="v">9<span style="font-size:18px">/19</span></div><div class="l">直近44件で「既にCTIにあった」19件のうち9件は 2020〜23年投入（待鳥塾・藤の院・まよみ堂・ライセンス・茶紬・占い船ホヌ…）</div></div>
+    <div class="kpi yel"><div class="v">7<span style="font-size:18px">本</span></div><div class="l">広告より1〜3年前に公開された動画（占い船ホヌ 2023/6、ライセンス 2023/6、グラシア 2023/11…）＝古い客の動画を回し続けている</div></div>
+  </div>
+  <div class="callout" style="margin-top:14px"><b>新店ハンター由来の一致はゼロ。</b>ただし新店も一部は取る: Drums-Cool（6/1開業→6月中に契約）、Nauraa・Lounge J-Collection（口コミ0件）。44件中3〜5件で主戦場ではない。</div>
+</section>
+
+<!-- 5 推定 -->
+<section id="s5">
+  <h2><span class="n">5</span>リスト収集手法の推定（根拠つき・確度順）</h2>
+  <ol class="rank">
+    <li><div><b>Googleマップ（GBP）の既存店を、業種を絞らず・郡部まで総当たり</b><span>根拠: 業種が極端に広い／離島・郡部まで届く／CTI一致の54%が3年以上前からある既存店。ランバードが2020〜23年に手打ちで集めた母集団と同じ。</span></div></li>
+    <li><div><b>テレアポの人海戦術</b><span>根拠: 求人票に「テレアポ中心・研修2〜6か月」「年1,000件導入」。月80件超の成約＝それに見合う架電量。</span></div></li>
+    <li><div><b>他事業の既存顧客へのクロスセル</b><span>根拠: エアコン・電気代削減・光回線・HP制作の顧客。建設・塗装・造園・内装・電気工事の法人が多いのはこの入口の匂い。</span></div></li>
+    <li><div><b>メーカー（アシスト）の販売店網と代理店紹介</b><span>根拠: 代理店ページが同文。アシストの保有顧客3万件からの流入もあり得る。</span></div></li>
+    <li><div><b>YouTube上の実績321本がそのまま営業素材</b><span>根拠: 「同じ市の〇〇さんも出しています」で押せる。クライアント名義チャンネルに置くので検索でも見つかる。</span></div></li>
+  </ol>
+</section>
+
+<!-- 6 CTI照合 -->
+<section id="s6">
+  <h2><span class="n">6</span>CTI照合 — 直近44件（2026年4月以降に広告初出・全件手判定）</h2>
+  <div class="panel">
+    <div class="big">44件のうち <em>20件（45%）はCTIに無い</em>。<br>既にあった <em class="b">19件</em> も、架電記録があるのは <em>5件だけ</em>。</div>
+    <div class="stack">
+      <div style="width:43%;background:var(--blue)">既にあった 19</div>
+      <div class="sm" data-n="5" style="width:11%;background:var(--yellow)">後追い 5</div>
+      <div style="width:46%;background:var(--red)">無い 20</div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--blue)"></i>既にあった（動画公開より前）… 自動収集10・旧手打ち9</span>
+      <span><i style="background:var(--yellow)"></i>後から入った（取り逃し）… 憩音 1.5か月後／かもす酒店 7か月後／J-Collection 10日後／スナックJJ 2か月後／Nauraa 3日後</span>
+      <span><i style="background:var(--red)"></i>無い</span>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div>
+        <h3>既にあった19件の架電状況</h3>
+        <div class="stack" style="height:34px">
+          <div class="sm" data-n="5" style="width:26%;background:var(--green)">架電あり 5</div>
+          <div style="width:74%;background:var(--orange)">未架電 14</div>
+        </div>
+        <p class="note">リストにあるだけで一度も電話していない店が14件。相手はそこを取っている。</p>
+      </div>
+      <div>
+        <h3>CTIに無い20件の中身（＝語の穴）</h3>
+        <div class="pill-row">
+          <span class="pill x">バレエ教室（小郡）</span><span class="pill x">書道塾</span><span class="pill x">学習塾（維新ゼミ）</span><span class="pill x">ドラム教室</span><span class="pill x">フラメンコ教室</span><span class="pill x">片付けサービス</span><span class="pill x">電気工事（尾中電気）</span><span class="pill x">コンテナハウス</span><span class="pill x">B型事業所（大分）</span><span class="pill x">占い</span><span class="pill x">スナック×3</span><span class="pill x">アニメバー（黒崎）</span><span class="pill x">サロン（下関・諫早）</span><span class="pill x">ギャラリー（由布）</span>
+        </div>
+        <p class="note">「スナック」「塾」は今も語グループに1語も無い。「ドラムスクール」「バレエ教室」は10/14に初めて追加。</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <h3>全321本の照合（機械判定・参考）</h3>
+    <div class="stack" style="height:34px">
+      <div style="width:42%;background:var(--blue)">自動収集 135</div>
+      <div class="sm" data-n="55" style="width:17%;background:var(--cyan)">旧手打ち 55</div>
+      <div class="sm" data-n="23" style="width:7%;background:var(--dim)">弱 23</div>
+      <div style="width:34%;background:var(--red)">無い 108</div>
+    </div>
+    <p class="note">機械判定に誤一致を含むため「約6割は存在、3〜4割は無い」と読む。</p>
+  </div>
+</section>
+
+<!-- 7 負けた3件 -->
+<section id="s7">
+  <h2><span class="n">7</span>負けた事例の時系列 — 「相手が速い」のではなく「見ていなかった」</h2>
+  <p class="lead">CTIの stores / call_logs とYouTube公開日を突き合わせた実録。<span class="who es">エス社</span>＝相手の動き、<span class="who rb">RB</span>＝ランバードの動き、<span class="who st">店</span>＝店側の出来事。</p>
+  <div class="grid g2">
+    <div class="case">
+      <h3>Drums-Cool ドラムスクール（長崎市）<span class="tag red">新店・25日遅れ</span></h3>
+      <div class="tl">
+        <div class="ev win"><div class="d">2026-06-01</div><div class="t"><span class="who st">店</span>正式開業（楽天ペイの紹介文に明記）</div></div>
+        <div class="ev es"><div class="d">6月中旬</div><div class="t"><span class="who es">エス社</span>契約（店主「先日 広告契約した」）</div></div>
+        <div class="ev rb"><div class="d">2026-06-25</div><div class="t"><span class="who rb">RB</span>楽天ペイ新規で投入（AIリストA長崎）。<b>GM収集では一度も拾っていない</b></div></div>
+        <div class="ev rb"><div class="d">2026-06-26</div><div class="t"><span class="who rb">RB</span>架電 → 決裁者 NG「先日 広告契約した」</div></div>
+        <div class="ev es"><div class="d">2026-08-14 / 09-08</div><div class="t"><span class="who es">エス社</span>動画公開 → 広告開始</div></div>
+      </div>
+      <div class="gap"><b>穴:</b> 設定N/A/B/C/Mに「ドラム」「音楽教室」の語が無い（10/14に初追加）／楽天ペイ日次は6月下旬に始まったばかり／長崎のN収集は8/8開始。開業時点で店を見る経路が長崎に無かった。</div>
+    </div>
+    <div class="case">
+      <h3>藤の院（みやま市）<span class="tag red">既存店・3日差</span></h3>
+      <div class="tl">
+        <div class="ev rb"><div class="d">2021-11-08</div><div class="t"><span class="who rb">RB</span>CTIに投入（旧手打ちリスト）。<b>以後4年半、未架電</b></div></div>
+        <div class="ev es"><div class="d">2026-06-15</div><div class="t"><span class="who es">エス社</span>PR動画を公開</div></div>
+        <div class="ev rb"><div class="d">2026-06-18</div><div class="t"><span class="who rb">RB</span>初架電 → 決裁者 NG「最近CM契約した」</div></div>
+      </div>
+      <div class="gap"><b>穴:</b> リストは4年半前からあった。架電が動画公開の3日後。「リストの有無」ではなく「架電の順番」で負けた。</div>
+    </div>
+    <div class="case">
+      <h3>米ぬか酵素風呂すながりぃ（苅田町）<span class="tag red">既存店・翌日</span></h3>
+      <div class="tl">
+        <div class="ev rb"><div class="d">2025-08-03</div><div class="t"><span class="who rb">RB</span>福岡県A（GM）で投入</div></div>
+        <div class="ev es"><div class="d">2026-05-21</div><div class="t"><span class="who es">エス社</span>体験動画を公開</div></div>
+        <div class="ev rb"><div class="d">2026-05-22</div><div class="t"><span class="who rb">RB</span>架電 → 接触薄（Comdeskメモ）</div></div>
+        <div class="ev rb"><div class="d">2026-09-29</div><div class="t"><span class="who rb">RB</span>再架電 → F（現アナ）</div></div>
+      </div>
+      <div class="gap"><b>穴:</b> 投入から初架電まで9か月半。相手の動画公開の翌日に初めて電話した。</div>
+    </div>
+    <div class="case">
+      <h3>LOGiCAL Palette（久留米市・プログラミング教室）<span class="tag red">詰め×の2か月後</span></h3>
+      <div class="tl">
+        <div class="ev rb"><div class="d">2026-03-01</div><div class="t"><span class="who rb">RB</span>B福岡県（GM）で投入</div></div>
+        <div class="ev rb"><div class="d">2026-04-06</div><div class="t"><span class="who rb">RB</span>本田さん「翌々アポ 決裁」→ list_status <b>詰め×</b>（失注）</div></div>
+        <div class="ev es"><div class="d">2026-06-03</div><div class="t"><span class="who es">エス社</span>CM動画を公開（＝受注）</div></div>
+      </div>
+      <div class="gap"><b>穴:</b> 詰めて落とした店を、2か月後に相手が取った。失注店の再コールが無い。</div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="case">
+      <h3>Nauraa（長崎市・カウンセラー）<span class="tag yel">新店・3か月周期の谷間</span></h3>
+      <div class="tl">
+        <div class="ev rb"><div class="d">2026-05-25</div><div class="t"><span class="who rb">RB</span>通常収集Bが長崎市をまとめて回る（80件）。以後は1日2〜14件の歩み</div></div>
+        <div class="ev es"><div class="d">8月上旬〜08-24</div><div class="t"><span class="who es">エス社</span>契約→動画公開</div></div>
+        <div class="ev rb"><div class="d">2026-08-27</div><div class="t"><span class="who rb">RB</span>B長崎県の次の周回で投入（317件の一括）。特特上即かけで同日架電 → F（不在）。<b>再コールなし</b></div></div>
+      </div>
+      <div class="gap"><b>穴:</b> B組が長崎市を回るのは約3か月に1回。8/8〜のN長崎県も拾えず（設定Nは「カウンセリング」、GBP業種は「カウンセラー」）。</div>
+    </div>
+    <div class="case">
+      <h3>Lounge J-Collection（小郡市・ラウンジ）<span class="tag yel">新店・10日遅れ、架電ゼロ</span></h3>
+      <div class="tl">
+        <div class="ev es"><div class="d">2026-08-07</div><div class="t"><span class="who es">エス社</span>紹介動画を公開</div></div>
+        <div class="ev rb"><div class="d">2026-08-17</div><div class="t"><span class="who rb">RB</span>旧福岡県（GM）で投入。<b>架電ゼロ</b></div></div>
+      </div>
+      <div class="gap"><b>穴:</b> 福岡のN収集（フラミンゴ2本・約4日周期）は美容・健康の語だけでラウンジは構造的に見つからない。「ラウンジ」「スナック」はどの語グループにも無かった（ラウンジバーは新設の追加・飲食のみ）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 構造 -->
+<section id="s8">
+  <h2><span class="n">8</span>負け方の構造 — 4つの穴</h2>
+  <div class="grid g4">
+    <div class="kpi red"><div class="v">語</div><div class="l"><b>速い周回（N収集）は美容・健康の語だけ。</b>飲食・教室・スナック・塾は遅い通常収集か、語そのものが無い。取り逃し20件の業種はここに集中。</div></div>
+    <div class="kpi org"><div class="v">周期</div><div class="l"><b>通常収集は長崎や福岡郡部の1つの町を約3か月に1回。</b>相手のテレアポはその谷間に入る。</div></div>
+    <div class="kpi yel"><div class="v">入口</div><div class="l"><b>開業時点で店を見る経路（楽天ペイ等）は6月下旬開始</b>、開業から25日遅れ。長崎のN収集は8/8開始。</div></div>
+    <div class="kpi pur"><div class="v">架電</div><div class="l"><b>見つけた後の架電が0〜1回、再コール無し。</b>既にあった19件中14件が未架電。リストの有無ではなく架電量と順番で負けている。</div></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <h3>相手 vs ランバード</h3>
+    <table class="vs">
+      <tr><th></th><th>エスコーポレーション</th><th>ランバード（現状）</th></tr>
+      <tr><td>狙う店</td><td class="es">既存店（3年以上営業も多い）＋若い店も拾う</td><td class="rb">新店ハンター（N）は美容・健康中心、既存店は通常収集</td></tr>
+      <tr><td>業種</td><td class="es">Googleマップに載る個人事業主なら何でも</td><td class="rb">語グループ依存。スナック・塾は語ゼロ（10/14に教室系を追加）</td></tr>
+      <tr><td>地域</td><td class="es">九州全県＋山口＋沖縄、離島・郡部まで</td><td class="rb">福岡は厚い。長崎・大分・郡部は3か月周期</td></tr>
+      <tr><td>速さ</td><td class="es">開業3週間で契約した例あり</td><td class="rb">投入→架電まで中央値3日だが、投入が遅い／未架電が多い</td></tr>
+      <tr><td>架電</td><td class="es">テレアポ部隊（年1,000件導入）</td><td class="rb">既にあった19件のうち架電5件</td></tr>
+      <tr><td>母体</td><td class="es">アシスト（3万件顧客・40社超の販売店）</td><td class="rb">自前の収集PC53本＋CTI</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 9 打ち手 -->
+<section id="s9">
+  <h2><span class="n">9</span>ランバード側の打ち手</h2>
+  <div class="grid g2">
+    <div class="panel">
+      <ul class="chk">
+        <li><b>相手は既存店を取っている。</b>N収集では当たらない。通常収集（C）の語の広さと郡部の深さで勝負する。</li>
+        <li><b>語の穴＝取り逃しと一致。</b>10/14の推奨25語・追加グループ（ダンス/書道/バレエ/空手/サウナ/ドラム/音楽講師）は方向が合っている。「スナック」「塾」「ラウンジ」を足す。</li>
+        <li><b>リストにあるのに架電されていない14/19が最大の穴。</b>旧Comdeskリスト（2020〜23）の九州分は眠っている。GBP口コミ・写真の鮮度で「上物」へ昇格させる仕組みを回す。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <ul class="chk">
+        <li><b>速さで負けた3例（3日差・翌日・25日差）。</b>楽天ペイ新規・ココイロ・GBP新規は投入当日架電の「特特上即かけ」を九州へ広げる。</li>
+        <li><b>失注（詰め×）店の再アタック。</b>競合が同じ店に動画を売る以上、60〜90日後の再コールは拾える。</li>
+        <li><b>効果測定:</b> 1か月後に同じ44件で再照合（語追加・特特上の効き目が数字で出る）。相手の実績動画はYouTubeで誰でも見られるので現場トークにも使える。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  正本: 受託事業/クライアント/RUNBIRD/IT事業/リスト収集/_調査_20261015_エスコーポレーション_広告主分析.md（明細CSV 321本）／アシスト側: _調査_20261016_アシスト_広告主分析.md。
+  取得の型: 透明性センター SearchSuggestions → SearchCreatives（返却"2"→送信"4"でページング）→ プレビュー content.js の i.ytimg.com/vi/&lt;id&gt; → YouTube oEmbed。CTI照合は import_to_cti.load_env ＋ .venvs/runbird（prefecture 絞りで ilike が実用速度）。
+  要確認2件: 現人神社（人竜）・片付けHappy Labo は同一店か未確定。
+</div>
+</div>
+</body>
+</html>
