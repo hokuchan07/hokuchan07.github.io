@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>図解 — アシストに自社で対抗する（検索順位・AI検索露出）</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#111c33; --panel2:#16213d; --line:#243352; --line2:#34466b;
+  --text:#e6edf7; --muted:#9fb0cc; --dim:#6b7a99;
+  --red:#ff5a5f; --orange:#ff9f43; --yellow:#ffd166; --green:#2ecc8f; --blue:#4da3ff; --purple:#b388ff; --cyan:#3fd6e0;
+  --rb:#4da3ff; --as:#ffd166;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;line-height:1.65;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 90px}
+h1{font-size:clamp(22px,3.6vw,38px);line-height:1.3}
+h2{font-size:clamp(18px,2.6vw,26px);margin:0 0 6px;display:flex;align-items:flex-start;gap:10px}
+h2 .n{display:inline-flex;margin-top:.1em;width:34px;height:34px;border-radius:10px;background:var(--yellow);color:#06101f;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:0 0 34px}
+h3{font-size:16px;margin:0 0 8px}
+p{color:var(--muted)}
+.lead{margin:0 0 14px;color:var(--muted);font-size:14px}
+section{margin-top:48px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:960px){.g5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:480px){.g4,.g5{grid-template-columns:1fr}}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--line);color:var(--muted);background:#0c1527;white-space:nowrap}
+.tag.red{color:var(--red);border-color:rgba(255,90,95,.45)} .tag.grn{color:var(--green);border-color:rgba(46,204,143,.45)} .tag.yel{color:var(--yellow);border-color:rgba(255,209,102,.45)} .tag.blu{color:var(--blue);border-color:rgba(77,163,255,.45)} .tag.pur{color:var(--purple);border-color:rgba(179,136,255,.45)} .tag.org{color:var(--orange);border-color:rgba(255,159,67,.45)}
+.hero{background:linear-gradient(135deg,#1a2344 0%,#0f172a 60%);border:1px solid var(--line);border-radius:20px;padding:28px 24px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,209,102,.22),transparent 65%)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;position:relative;z-index:1}
+.verdict{margin-top:18px;display:grid;gap:10px;grid-template-columns:repeat(3,1fr);position:relative;z-index:1}
+@media(max-width:860px){.verdict{grid-template-columns:1fr}}
+.verdict div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.verdict>div>b{display:block;font-size:15px;margin-bottom:2px}
+.verdict span{color:var(--muted);font-size:13px}
+.verdict span b{color:var(--text)}
+.kpi{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi .v{font-size:clamp(28px,4vw,42px);font-weight:900;line-height:1.1;letter-spacing:-.02em}
+.kpi .l{color:var(--muted);font-size:13px;margin-top:4px}
+.kpi.red .v{color:var(--red)} .kpi.yel .v{color:var(--yellow)} .kpi.grn .v{color:var(--green)} .kpi.blu .v{color:var(--blue)} .kpi.pur .v{color:var(--purple)}
+.note{font-size:12.5px;color:var(--dim);margin-top:10px}
+.big{font-size:clamp(17px,2.2vw,22px);font-weight:800;color:var(--text);line-height:1.5}
+
+/* ---- 1. 被リンク100 ---- */
+.ban{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px}
+@media(max-width:860px){.ban{grid-template-columns:1fr}.ban .arr{transform:rotate(90deg);justify-self:center}}
+.ban .box{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.ban .box b{display:block;font-size:17px;margin-bottom:4px}
+.ban .box span{color:var(--muted);font-size:13px}
+.arr{font-size:30px;color:var(--dim);text-align:center}
+.sites{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:10px auto 0;max-width:240px}
+.sites i{display:block;height:14px;border-radius:3px;background:#2a3a5c;border:1px solid var(--line2)}
+.sites i:nth-child(3n){background:#3b4a6b}
+.xmark{color:var(--red);font-weight:900;font-size:40px;line-height:1}
+.quote{border-left:3px solid var(--red);padding:8px 14px;background:rgba(255,90,95,.06);border-radius:0 10px 10px 0;color:var(--muted);font-size:13.5px}
+.quote.ok{border-color:var(--green);background:rgba(46,204,143,.06)}
+.quote.yel{border-color:var(--yellow);background:rgba(255,209,102,.06)}
+.quote b{color:var(--text)}
+
+/* ---- 2. スタック図 ---- */
+.stack{display:grid;gap:10px}
+.layer{display:grid;grid-template-columns:54px 1.2fr 1.6fr 1.2fr;gap:14px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;border-left:6px solid var(--as)}
+.layer.base{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(255,159,67,.10),var(--panel2) 50%)}
+@media(max-width:860px){.layer{grid-template-columns:44px 1fr}.layer .what,.layer .weak{grid-column:2}}
+.layer .no{font-size:30px;font-weight:900;color:var(--as);line-height:1;white-space:nowrap}
+.layer.base .no{font-size:17px;color:var(--orange)}
+.layer .ttl b{display:block;font-size:17px}
+.layer .ttl span{color:var(--muted);font-size:12.5px}
+.layer .what{color:var(--muted);font-size:13.5px}
+.layer .what b{color:var(--text)}
+.layer .weak{font-size:13px;color:var(--muted);background:rgba(255,90,95,.07);border:1px dashed rgba(255,90,95,.4);border-radius:10px;padding:8px 10px}
+.layer .weak b{color:var(--red)}
+.callout{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.35);border-radius:14px;padding:14px 16px}
+.callout .ic{font-size:30px}
+.callout b{color:var(--yellow)}
+
+/* ---- 3. Google 3要素 ---- */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+@media(max-width:860px){.three{grid-template-columns:1fr}}
+.pill{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center;position:relative}
+.pill .ic{font-size:36px;line-height:1;margin-bottom:6px}
+.pill>b{display:block;font-size:19px}
+.pill .do b{color:var(--green)}
+.pill .d{color:var(--muted);font-size:13px;margin-top:4px}
+.pill .do{margin-top:10px;font-size:13px;color:var(--text);background:rgba(46,204,143,.08);border:1px solid rgba(46,204,143,.35);border-radius:10px;padding:8px}
+.pill.hot{border-color:rgba(46,204,143,.6);box-shadow:0 0 0 3px rgba(46,204,143,.12)}
+.pill.hot:before{content:"ここが勝負";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#06101f;font-weight:900;font-size:12px;padding:2px 12px;border-radius:999px}
+.equal{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;margin-top:14px}
+@media(max-width:860px){.equal{grid-template-columns:1fr}.equal .eq{justify-self:center}}
+.equal .side{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.equal .side>b{display:block;font-size:16px;margin-bottom:6px}
+.equal .side p{font-size:13.5px}
+.equal .eq{font-size:34px;font-weight:900;color:var(--green)}
+
+/* ---- 4. 4つの行動 × 箱 ---- */
+.map4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:960px){.map4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.map4{grid-template-columns:1fr}}
+.act{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.act .h{font-size:16px;font-weight:800}
+.act .h small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+.act .row{display:grid;grid-template-columns:62px 1fr;gap:8px;font-size:13px;align-items:start}
+.act .row .k{color:var(--dim);font-size:11.5px;padding-top:2px}
+.act .row.as .v{color:var(--yellow)}
+.act .row.rb .v{color:var(--blue)}
+.act .row .v b{color:var(--text)}
+
+/* ---- 5. 資産と穴 ---- */
+.boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:860px){.boxes{grid-template-columns:repeat(2,1fr)}}
+.bx{background:rgba(77,163,255,.08);border:1px solid rgba(77,163,255,.45);border-radius:14px;padding:14px;text-align:center}
+.bx b{display:block;font-size:17px;color:var(--blue)}
+.bx span{color:var(--muted);font-size:12.5px}
+.holes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+@media(max-width:960px){.holes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.holes{grid-template-columns:1fr}}
+.hole{background:rgba(255,90,95,.06);border:2px dashed rgba(255,90,95,.5);border-radius:14px;padding:14px;text-align:center}
+.hole b{display:block;font-size:15px;color:var(--red)}
+.hole span{color:var(--muted);font-size:12.5px;display:block;margin-top:4px}
+.hole .fix{margin-top:8px;font-size:12.5px;color:var(--green);background:rgba(46,204,143,.08);border-radius:8px;padding:6px}
+
+/* ---- 6. 自動化フロー ---- */
+.flow{display:grid;gap:0}
+.src{background:linear-gradient(135deg,rgba(77,163,255,.2),rgba(63,214,224,.08));border:1px solid rgba(77,163,255,.55);border-radius:16px;padding:16px 18px;text-align:center}
+.src b{display:block;font-size:18px;color:var(--blue)}
+.src span{color:var(--muted);font-size:13px}
+.src .fx{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.src .fx i{font-style:normal;font-size:12px;background:#0c1527;border:1px solid var(--line2);border-radius:6px;padding:2px 8px;color:var(--text)}
+.fan{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;position:relative;padding-top:34px}
+.fan:before{content:"";position:absolute;left:8%;right:8%;top:16px;height:2px;background:var(--line2)}
+.fan>div{position:relative}
+.fan>div:before{content:"";position:absolute;left:50%;top:-18px;width:2px;height:18px;background:var(--line2)}
+.fan>div:after{content:"▼";position:absolute;left:50%;transform:translateX(-50%);top:-6px;color:var(--line2);font-size:10px}
+@media(max-width:960px){.fan{grid-template-columns:repeat(3,1fr);padding-top:10px}.fan:before{display:none}.fan>div:before,.fan>div:after{display:none}}
+@media(max-width:560px){.fan{grid-template-columns:1fr}}
+.stem{height:22px;width:2px;background:var(--line2);margin:0 auto}
+.fanhint{display:none;text-align:center;color:var(--cyan);font-size:13px;font-weight:700;padding:6px 0 2px}
+@media(max-width:960px){.stem{display:none}.fanhint{display:block}}
+.node{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px;height:100%;display:flex;flex-direction:column;gap:6px}
+.node .ab{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:15px}
+.node .ab i{font-style:normal;display:inline-flex;width:24px;height:24px;border-radius:7px;background:var(--blue);color:#06101f;align-items:center;justify-content:center;font-size:13px}
+.node p{font-size:12.5px}
+.node .auto{margin-top:auto;font-size:11.5px;color:var(--green);border-top:1px dashed var(--line);padding-top:6px}
+.node.star{border-color:rgba(46,204,143,.6);box-shadow:0 0 0 3px rgba(46,204,143,.12)}
+.sink{margin-top:22px;background:linear-gradient(135deg,rgba(46,204,143,.16),rgba(63,214,224,.06));border:1px solid rgba(46,204,143,.5);border-radius:16px;padding:16px 18px;text-align:center}
+.sink b{display:block;font-size:17px;color:var(--green)}
+.sink span{color:var(--muted);font-size:13px}
+
+/* ---- 7. 2段サイテーション ---- */
+.tier{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.tier table td:first-child{white-space:nowrap}
+@media(max-width:560px){
+  .tier table tr:first-child{display:none}
+  .tier table tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}
+  .tier table td{display:block;border:0;padding:2px 0;white-space:normal}
+  .tier table td:first-child{font-size:14px}
+  .tier table td:nth-child(2):before{content:"公開情報: ";color:var(--dim)}
+  .tier table td:nth-child(3):before{content:"向き: ";color:var(--dim)}
+}
+@media(max-width:860px){.tier{grid-template-columns:1fr}}
+.tier .t{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.tier .t b.h{display:block;font-size:16px;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12.5px;background:#0c1527;border:1px solid var(--line2);border-radius:8px;padding:3px 9px}
+.chips span.free{border-color:rgba(46,204,143,.45);color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th,td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:700;font-size:12px}
+td b{color:var(--text)}
+.vs th:first-child,.vs td:first-child{width:38%}
+.vs td.as{color:var(--yellow)} .vs td.rb{color:var(--blue)}
+.vs td.rb b{color:var(--text)}
+
+/* ---- 8. ロードマップ ---- */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:10px}
+@media(max-width:860px){.road{grid-template-columns:1fr}}
+.ph{padding:14px 14px 14px 18px;border-left:4px solid var(--line2);position:relative}
+.ph:nth-child(1){border-left-color:var(--green)} .ph:nth-child(2){border-left-color:var(--cyan)} .ph:nth-child(3){border-left-color:var(--blue)} .ph:nth-child(4){border-left-color:var(--purple)}
+.ph .w{font-size:12px;color:var(--dim)}
+.ph b{display:block;font-size:17px}
+.ph ul{margin:6px 0 0 16px;color:var(--muted);font-size:13px}
+.ph .ok{margin-top:8px;font-size:12.5px;color:var(--green);background:rgba(46,204,143,.08);border-radius:8px;padding:6px 8px}
+.ask{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:860px){.ask{grid-template-columns:1fr}}
+.ask>div{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start}
+.ask>div>div{display:block;min-width:0}
+.ask i{font-style:normal;display:inline-flex;width:32px;height:32px;border-radius:10px;background:var(--purple);color:#06101f;font-weight:900;align-items:center;justify-content:center}
+.ask>div>div>b{display:block;font-size:15px}
+.ask span{color:var(--muted);font-size:13px}
+.src-list{font-size:12.5px;color:var(--dim);line-height:1.8;overflow-wrap:anywhere;word-break:break-all}
+.src-list a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--dim);word-break:break-all}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="tag yel">RUNBIRD 競合対策</span> <span class="tag">2026/10/20</span> <span class="tag">社内限り・noindex</span>
+  <h1 style="margin-top:10px">アシストに自社で対抗する<br><span style="color:var(--yellow)">検索順位</span> と <span style="color:var(--cyan)">AI検索露出</span> の取り方</h1>
+  <p class="lead" style="margin-top:8px">社長案「被リンク先を100個作ってビズクラウド顧客を載せる」から出発し、アシストの中身を公式サイトまで分解。Google 公式の条件に照らして「ランバードが今からやること」を1枚にした。</p>
+  <div class="verdict">
+    <div><b>❌ 被リンク100サイトは作らない</b><span>Google のリンクスパムに該当。評価を落とすのはリンクを受ける<b>お客さんのサイト</b>。</span></div>
+    <div><b>🔍 アシストは被リンクを自作していない</b><span>正体は「テレアポ部隊 × GBP広告 × Synup一括登録 × AIブログ」の束。技術は全部、公開APIと既存SaaS。</span></div>
+    <div><b>✅ 勝ち筋は「新店に・速く・全部入りで・自動で」</b><span>箱は既に4つ持っている。MEO CLOUD の中身を「1顧客1レコードから全自動」に作り替える。</span></div>
+  </div>
+  <div class="meta">
+    <span class="tag blu">■ ランバード</span><span class="tag yel">■ アシスト</span><span class="tag grn">■ Google 公式の記載</span><span class="tag red">■ やってはいけない</span>
+  </div>
+</div>
+
+<!-- ================= 1 ================= -->
+<section>
+  <h2><span class="n">1</span><span>「被リンク先を100個」はなぜダメか</span></h2>
+  <p class="lead">構造を描くと一目で分かる。同じ会社が同じ型で100ドメインを立てて顧客へリンクする＝Google が名指しで禁止している型。</p>
+  <div class="panel">
+    <div class="ban">
+      <div class="box"><b>自社で100サイト</b><span>同じ所有者・同じテンプレ・同じサーバー</span>
+        <div class="sites"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="arr">→</div>
+      <div class="box"><b>お客さんのHP</b><span>ビズクラウド制作サイト</span><div class="xmark" style="margin-top:6px">✕</div><span style="color:var(--red)">ここが評価を落とす</span></div>
+      <div class="arr">→</div>
+      <div class="box"><b>Google</b><span>SpamBrain が「ネットワーク」として検出。<br>リンクスパムで落ちた効果は<b style="color:var(--text)">後から直しても戻らない</b>と明記</span></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="quote"><b>Google スパムポリシー（リンクスパム）</b><br>「自動化されたプログラムやサービスを使用して自分のサイトへのリンクを作成する」／「質の低いディレクトリやブックマーク サイトのリンク」／「さまざまなサイトのフッターやテンプレートに埋め込まれて広く配布されるリンク」／「リンクとランキング シグナルの操作を主な目的とした価値の低いコンテンツの作成」</div>
+      <div class="quote yel"><b>技術的には作れる</b><br>顧客DB → 静的生成 → 100ドメイン配信は1本のスクリプト。費用はドメイン年15〜20万円。<b>作れることと効くことは別</b>。費用対効果もリスクも悪い。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section>
+  <h2><span class="n">2</span><span>アシストの正体 — 4層＋土台</span></h2>
+  <p class="lead">10/20 に公式サイト（事業案内・代理店募集・InfoBiz・サイテーション・Synup・AIブログ・導入事例）を確認。被リンク自作のページは無い。</p>
+  <div class="stack">
+    <div class="layer">
+      <div class="no">④</div>
+      <div class="ttl"><b>AIブログ</b><span>/service/ai/blog/</span></div>
+      <div class="what">自社サイトをAIがスキャンしてテーマ提案。<b>登録電話から掛けて文字数を押すと5分で3,000字</b>の下書き。顧客の自社サイトに掲載。</div>
+      <div class="weak"><b>弱点</b> 量産すると Google の「大量生成コンテンツの悪用」に触れる。LLMO効果の記載なし。</div>
+    </div>
+    <div class="layer">
+      <div class="no">③</div>
+      <div class="ttl"><b>サイテーション一括登録</b><span>Synup 代理店「国内初」・導入1万拠点</span></div>
+      <div class="what">管理画面で1回更新→<b>「国内100以上」「世界113」「180媒体」</b>へ反映（数字が揺れる）。例示は OpenAI/Gemini/Copilot・Siri/Alexa・Amazon/バイトル/HOT PEPPER Beauty/PayPay。「高品質なバックリンク獲得」と謳う。</div>
+      <div class="weak"><b>穴</b> Synup本体の日本ページは「日本は現地パートナー対応」で公開媒体は海外中心。<b>食べログ・エキテン・NAVITIME・Yahoo!プレイスに同期されるかは公開情報で確認できない</b>。自動化はNAPまで。</div>
+    </div>
+    <div class="layer">
+      <div class="no">②</div>
+      <div class="ttl"><b>GBP連動 Google広告</b><span>1店1広告・約3万件（10/16分析）</span></div>
+      <div class="what">「【市区町村】業種」型のローカル広告を全業種・全国に。月額の広告運用商材。顧客母集団は<b>ランバードの2020〜23年手打ちリストと同じ既存店</b>。</div>
+      <div class="weak"><b>弱点</b> 広告を止めると露出も止まる（資産が残らない）。新店は5%（10/17分析）。</div>
+    </div>
+    <div class="layer">
+      <div class="no">①</div>
+      <div class="ttl"><b>MEO（InfoBiz）</b><span>「80,000店舗」「継続率96%」自称</span></div>
+      <div class="what">店舗情報・口コミ返信・写真・順位計測を一括運用。<b>「良い口コミだけを集めたい」店向け</b>と明記。料金・保証は非公開。</div>
+      <div class="weak"><b>違反</b> 良い口コミの選別（レビューゲーティング）は Google のポリシー違反。効果の事例は「AI Overviewsに出た」1件で<b>数値ゼロ・検索語なし</b>。</div>
+    </div>
+    <div class="layer base">
+      <div class="no">土台</div>
+      <div class="ttl"><b>販売の仕組み</b><span>/agent/・採用ページ</span></div>
+      <div class="what"><b>社員180名＋フィリピン拠点＋販売店40社超</b>（営業会社100社超の記載も）。OEMで自社ブランド販売可。<b>ビジネスクレジット 10〜350万円・最大96回</b>、納品翌月に一括入金。初期費用なし・専任担当・資料とデモ無償。</div>
+      <div class="weak"><b>弱点</b> 販売店任せで「ツール売って運用放棄」が起きる（代理店向け記事が自ら指摘）。解約の波は3〜6か月目。</div>
+    </div>
+  </div>
+  <div class="callout"><div class="ic">💡</div><div><b>読み:</b> アシストの強さは技術ではなく <b>販売の仕組み（人数 × クレジット × OEM）と商材の束</b>。技術部分は公開APIと既存SaaSの組み合わせで、ランバード＋斗で再現できる。逆に、アシストが数値で示せていない「AIに出た」を<b>計測して見せる</b>ことが差別化になる。</div></div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section>
+  <h2><span class="n">3</span><span>Google が公式に言っている「順位」と「AI露出」の条件</span></h2>
+  <p class="lead">推測ではなく Google の文書そのまま。ここが全ての設計の根拠。</p>
+  <div class="panel">
+    <h3>マップ（ローカル）順位は3要素だけ</h3>
+    <div class="three">
+      <div class="pill"><div class="ic">🎯</div><b>関連性</b><div class="d">検索語とビジネスプロフィールがどれだけ合致するか</div><div class="do">→ 業種・属性・説明・サービスを<b>埋め切る</b></div></div>
+      <div class="pill"><div class="ic">📍</div><b>距離</b><div class="d">検索している人から店までの距離</div><div class="do">→ 動かせない。だから<b>「地域×業種」の正確な登録</b>が前提</div></div>
+      <div class="pill hot"><div class="ic">📣</div><b>知名度</b><div class="d">「関連するウェブサイトの数」「クチコミの数と評価」で判断</div><div class="do">→ <b>口コミを正攻法で増やす</b>＋<b>正確な店舗情報を多くの媒体に載せる</b>（＝サイテーション）</div></div>
+    </div>
+    <div class="note">Google 推奨施策: オーナー確認／正確な住所／営業時間（特別営業時間）／業種／属性／口コミ返信／口コミ増／写真・動画。「ランキングを上げる依頼や金銭には応じない」と明記。</div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <h3>AI による概要・AI モードに出る条件</h3>
+    <div class="equal">
+      <div class="side"><b style="color:var(--green)">Google 検索セントラル「AI機能とウェブサイト」</b><p>「AI による概要や AI モードにコンテンツが表示されるための<b style="color:var(--text)">追加の要件はなく、別途特別な最適化を行う必要もありません</b>」「特別な schema.org の構造化データを追加する必要もありません」。前提は インデックス済み・スニペット表示可・重要な内容をテキストで。「<b style="color:var(--text)">ビジネス プロフィールの情報を最新に</b>」。</p></div>
+      <div class="eq">＝</div>
+      <div class="side"><b style="color:var(--cyan)">つまり</b><p><b style="color:var(--text)">通常のSEO＋GBPの最新化 がそのまま AI露出の条件。</b>「LLMO対策」という特別な商品は存在しない。アシストの LLMO も中身はサイテーション（正確な情報の拡散）＋サイト評価。</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="quote ok"><b>ChatGPT 検索</b> Bing のインデックス＋OAI-SearchBot のクロール。商用の質問では第三者サイト（比較・口コミ）由来の引用が多い（国内SEO業者の調査・独立検証なし）。→ <b>Bing Places 登録／クローラーを拒否しない／口コミ媒体と地域メディアに載る</b>。</div>
+      <div class="quote"><b>やってはいけない（Google 明記）</b> リンクの売買・自動生成リンク・低品質ディレクトリ・テンプレ配布リンク・大量生成コンテンツ・口コミの選別。→ 被リンク自作なし／AIブログ量産なし／「良い口コミだけ」なし。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section>
+  <h2><span class="n">4</span><span>効くのは4つの行動 — アシストの箱とランバードの箱を並べる</span></h2>
+  <p class="lead">順位とAI露出に効く行動は4つしかない。アシストのツール群は、この4つを人手ゼロで回す「箱」に過ぎない。</p>
+  <div class="map4">
+    <div class="act"><div class="h">① プロフィールを埋め切る<small>関連性・最新化</small></div>
+      <div class="row as"><span class="k">アシスト</span><span class="v">InfoBiz（一括運用ツール）</span></div>
+      <div class="row rb"><span class="k">ランバード</span><span class="v"><b>MEO CLOUD</b>（規約で管理者権限・API連携を取得済み）</span></div>
+    </div>
+    <div class="act"><div class="h">② 口コミを正攻法で増やす<small>知名度の本体</small></div>
+      <div class="row as"><span class="k">アシスト</span><span class="v">「良い口コミだけ」（違反）</span></div>
+      <div class="row rb"><span class="k">ランバード</span><span class="v"><b>無い</b> → LINE/QR で全員に依頼（bizlink-line-bot 流用）</span></div>
+    </div>
+    <div class="act"><div class="h">③ 正確な店舗情報を広く載せる<small>知名度・AIの学習元</small></div>
+      <div class="row as"><span class="k">アシスト</span><span class="v">Synup 代理店（日本媒体は未確認）</span></div>
+      <div class="row rb"><span class="k">ランバード</span><span class="v"><b>無い</b> → 無料媒体は直接＋有料配信は日本媒体を書面確認して選定</span></div>
+    </div>
+    <div class="act"><div class="h">④ サイトに店の事実をテキストで<small>AIが引用する元</small></div>
+      <div class="row as"><span class="k">アシスト</span><span class="v">HP制作＋AIブログ（量産）</span></div>
+      <div class="row rb"><span class="k">ランバード</span><span class="v"><b>BIZ CLOUD</b> に店舗情報ページ＋FAQ＋構造化データを必須化</span></div>
+    </div>
+  </div>
+  <div class="callout" style="border-color:rgba(77,163,255,.4);background:rgba(77,163,255,.08)"><div class="ic">➕</div><div><b style="color:var(--blue)">5つ目＝アシストに無い武器:</b> 「AIに出た」を<b>計測して証拠で見せる</b>。{地域}{業種} おすすめ を ChatGPT／Gemini／Google AIモードに定期投入し、店名の出現日・検索語・スクショを月次レポートに自動で載せる。</div></div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section>
+  <h2><span class="n">5</span><span>ランバードの現有資産と、埋めるべき穴</span></h2>
+  <p class="lead">箱は4つ既にある。足りないのは「中身の自動化」と「つなぐ基盤」。</p>
+  <div class="panel">
+    <h3 style="color:var(--blue)">持っている4つの箱</h3>
+    <div class="boxes">
+      <div class="bx"><b>BIZ CLOUD</b><span>HP制作＋自動投稿＋LINE保守（BIZ LINK統合）</span></div>
+      <div class="bx"><b>MEO CLOUD</b><span>GBP の投稿・管理代行</span></div>
+      <div class="bx"><b>BUZZ+</b><span>YouTube広告の企画〜運用一括</span></div>
+      <div class="bx"><b>ADMOVE</b><span>AI動画（横・縦）</span></div>
+    </div>
+    <h3 style="color:var(--red);margin-top:18px">足りない5つ（＝斗が作るもの）</h3>
+    <div class="holes">
+      <div class="hole"><b>a. サイテーション配信</b><span>店舗情報を多媒体へ一括登録・同期・解約時削除</span><div class="fix">無料媒体は直接登録＋有料SaaS連携</div></div>
+      <div class="hole"><b>b. 口コミ獲得</b><span>依頼の導線と返信の自動化</span><div class="fix">LINE/QR依頼＋AI返信下書き</div></div>
+      <div class="hole"><b>c. AIに読まれる形</b><span>店舗情報ページ・FAQ・構造化データ</span><div class="fix">BIZ CLOUD 必須テンプレ化</div></div>
+      <div class="hole"><b>d. 証拠の計測</b><span>GBP指標・順位・AI露出ログ</span><div class="fix">月次レポート自動（経営参謀の型）</div></div>
+      <div class="hole"><b>e. 1顧客1レコード基盤</b><span>契約で開始・解約で全削除</span><div class="fix">顧客管理に facts 列を追加</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section>
+  <h2><span class="n">6</span><span>対抗の設計 — 「1顧客1レコードから全部自動」</span></h2>
+  <p class="lead">AI動画で既に使っている facts.json の考え方（正本からコピー・手打ち禁止）を、MEO CLOUD の中身に横展開する。</p>
+  <div class="panel">
+    <div class="src"><b>顧客管理システム＝正本</b><span>契約状態（有効／解約）＋ facts</span>
+      <div class="fx"><i>店名</i><i>住所</i><i>電話</i><i>営業時間</i><i>特別営業時間</i><i>カテゴリ</i><i>属性</i><i>写真</i><i>メニュー/料金</i><i>特色</i><i>FAQ</i><i>公式URL</i></div>
+    </div>
+    <div class="stem"></div>
+    <div class="fanhint">▼ 正本から下の6つの箱へ自動で反映 ▼</div>
+    <div class="fan">
+      <div><div class="node"><div class="ab"><i>B</i>GBP 自動維持</div><p>Business Profile API で情報・特別営業時間・属性・写真・投稿・Q&amp;A を機械更新。口コミ返信はAI下書き→投稿（否定的なものは人が確認）。</p><div class="auto">自動化 ◎（契約変更不要）</div></div></div>
+      <div><div class="node star"><div class="ab"><i>C</i>口コミ獲得</div><p>会計時 QR／LINE で<b>全員に</b>依頼。選別しない。bizlink-line-bot の受付基盤を流用。</p><div class="auto">自動化 ○（店の声掛けだけ人）</div></div></div>
+      <div><div class="node"><div class="ab"><i>D</i>サイテーション</div><p>無料媒体は契約時に直接登録、有料配信はSaaS API。解約で全媒体から削除。</p><div class="auto">自動化 ◎（下の2段構え）</div></div></div>
+      <div><div class="node"><div class="ab"><i>E</i>サイト（BIZ CLOUD）</div><p>店舗情報ページ（NAP・営業時間・アクセス・料金・FAQ）＋表示テキストと一致する LocalBusiness 構造化データ。記事は facts と口コミから月数本。</p><div class="auto">自動化 ◎（テンプレ生成）</div></div></div>
+      <div><div class="node star"><div class="ab"><i>F</i>計測＝営業武器</div><p>GBP の表示・経路・通話を API 取得。順位計測。AI露出は定期クエリで店名出現を記録。</p><div class="auto">自動化 ◎（月次レポート）</div></div></div>
+      <div><div class="node"><div class="ab"><i>G</i>広告</div><p>BUZZ+／ADMOVE に加え、GBP連動ローカル広告を facts から1店1広告で自動生成（アシストの本体②と同じ土俵）。</p><div class="auto">自動化 ○（予算は人が決める）</div></div></div>
+    </div>
+    <div class="sink"><b>毎月、人手ゼロで「順位・口コミ・AIに出た証拠」が店に届く</b><span>アシストが出せていない数値を、ランバードは毎月出す。止めても残る資産（GBP・口コミ・サイト）が先、広告は上乗せ。</span></div>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section>
+  <h2><span class="n">7</span><span>サイテーションは2段構え — 「先に確かめてから買う」</span></h2>
+  <p class="lead">Synup を含め、日本の主要媒体に本当に同期されるかを各社に書面で確認してから選ぶ。アシストの穴がここ。</p>
+  <div class="tier">
+    <div class="t"><b class="h" style="color:var(--green)">1段目: 無料・直接（契約時に斗が登録）</b>
+      <div class="chips"><span class="free">Google ビジネスプロフィール</span><span class="free">Apple Business Connect</span><span class="free">Bing Places</span><span class="free">Yahoo!プレイス</span><span class="free">Facebook / Instagram</span><span class="free">食べログ・ぐるなび（飲食）</span><span class="free">ホットペッパー（美容）</span><span class="free">エキテン</span><span class="free">業種ポータル</span></div>
+      <p style="margin-top:10px;font-size:13px">手順書＋Playwright の半自動。Apple は25拠点以上の事業者向け API があり、ランバード名義で多店舗管理すれば候補。ChatGPT は Bing を見るので Bing Places は必須。</p></div>
+    <div class="t"><b class="h" style="color:var(--yellow)">2段目: 有料配信（上乗せ・選定前に書面確認）</b>
+      <table>
+        <tr><th>候補</th><th>公開情報</th><th>向き</th></tr>
+        <tr><td><b>Synup 直契約</b></td><td>Agency $249/月（100拠点）・Scale $999/月（500拠点）＋拠点別 Listings Pro $35/月（第三者サイトの数字・要確認）。白ラベル・API あり</td><td>アシストと同じ看板を自社名義で。日本媒体は要確認</td></tr>
+        <tr><td><b>Yext</b></td><td>日本法人あり。料金は要問合せ</td><td>大手向け・高い</td></tr>
+        <tr><td><b>ローカルミエルカ</b></td><td>1店 1,480〜2,980円/月（掲載情報）</td><td>国内媒体中心・安い</td></tr>
+        <tr><td><b>MEOチェキ</b></td><td>3,278〜16,500円/月</td><td>順位計測寄り</td></tr>
+        <tr><td><b>カンリー</b></td><td>要問合せ・食べログ連携あり</td><td>多店舗チェーン向け</td></tr>
+      </table></div>
+  </div>
+</section>
+
+<!-- ================= 8 ================= -->
+<section>
+  <h2><span class="n">8</span><span>営業で勝つ場所 — 技術と対にする</span></h2>
+  <div class="panel">
+    <table class="vs">
+      <tr><th>アシスト</th><th>ランバード</th></tr>
+      <tr><td class="as">既存店の総当たり（新店5%）。旧リストと同じ母集団</td><td class="rb"><b>新店に先に着く</b>（収集PC＋CTI＋特上即かけ）。開業時に全部入りで入ると囲い込める</td></tr>
+      <tr><td class="as">広告3万件が主力＝止めると消える</td><td class="rb"><b>止めても残る資産</b>（GBP・口コミ・サイト）を先に積み、広告は上乗せ</td></tr>
+      <tr><td class="as">「AIに出ました」事例1件・数値なし</td><td class="rb"><b>AI露出ログと GBP 数値を毎月自動で証拠提示</b></td></tr>
+      <tr><td class="as">ツール売り切り→運用放棄・3〜6か月で解約の波</td><td class="rb">LINE 受付（保守5か所・口コミ依頼・修正）で<b>接点を持ち続ける</b></td></tr>
+      <tr><td class="as">「良い口コミだけ」「高品質バックリンク」</td><td class="rb">正攻法だけ。<b>言わない: 必ず上位／良い口コミだけ／被リンク100本</b></td></tr>
+      <tr><td class="as">求人動画20%・B2B（建設・製造・運送・士業）が厚い</td><td class="rb">求人動画を商材化。通常収集 設定B（建築・塗装・リフォーム・運送）を会社側へ広げる</td></tr>
+      <tr><td class="as">ランバードCTI内の既存社の6割を未架電のまま放置されている</td><td class="rb"><b>未架電142社から先に当たる</b>（10/17 照合）</td></tr>
+      <tr><td class="as">人数180名＋販売店で量を取る・96回クレジット</td><td class="rb">量は自動化で代替。価格は「資産が残る月額」で説明</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 9 ================= -->
+<section>
+  <h2><span class="n">9</span><span>ロードマップ（斗側）</span></h2>
+  <div class="panel">
+    <div class="road">
+      <div class="ph"><div class="w">2週間</div><b>Phase 0 試作</b><ul><li>顧客管理に facts 列</li><li>GBP API 接続</li><li>AI露出計測スクリプト</li><li>既存 MEO CLOUD 客 10社で回す</li></ul><div class="ok">合格: 10社の AI露出ログと GBP 指標が毎週出る</div></div>
+      <div class="ph"><div class="w">1か月</div><b>Phase 1 基盤</b><ul><li>無料媒体の一括登録（手順書＋半自動）</li><li>口コミ依頼 LINE</li><li>BIZ CLOUD 店舗情報テンプレ＋構造化データ</li><li>解約時の全媒体削除</li></ul><div class="ok">合格: 新規1社が契約から3営業日で全媒体に載る</div></div>
+      <div class="ph"><div class="w">2か月</div><b>Phase 2 拡張</b><ul><li>有料配信の選定（日本媒体の書面確認→契約→API）</li><li>月次レポート自動（経営参謀の配信の型）</li><li>GBP連動広告の自動生成</li></ul><div class="ok">合格: 月次レポートが人手ゼロで出る</div></div>
+      <div class="ph"><div class="w">その後</div><b>Phase 3 商品化</b><ul><li>MEO CLOUD の価格・パッケージ</li><li>4選3パッケージに「MEO」を加えるか</li><li>代理店 OEM は当面やらない</li></ul><div class="ok">IS 側判断</div></div>
+    </div>
+    <div class="note">費用の目安: 有料配信は1店あたり月1,500〜5,000円（国内）または Synup 系で月$35前後（要確認）。無料媒体は斗の登録工数のみ。Phase 0〜1 は通常コンサル枠、Phase 2 の有料配信連携は別見積。</div>
+  </div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section>
+  <h2><span class="n">10</span><span>社長・IS側に判断してほしい4点</span></h2>
+  <div class="ask">
+    <div><i>1</i><div><b>商品の置き場</b><span>MEO CLOUD の中身を上記に作り替える（既存客にも適用）か、新商品にするか</span></div></div>
+    <div><i>2</i><div><b>有料配信の契約主体</b><span>RUNBIRD 名義で SaaS 契約するか。斗は日本媒体の実効性を各社に書面確認してから推奨を出す</span></div></div>
+    <div><i>3</i><div><b>試作10社の選定</b><span>既存 MEO CLOUD／BIZ CLOUD 客から協力店10社（新店寄りが望ましい）</span></div></div>
+    <div><i>4</i><div><b>口コミ依頼の運用</b><span>店側で QR を置く・会計時に声掛けできるか。ここだけは人が要る</span></div></div>
+  </div>
+</section>
+
+<!-- ================= SOURCES ================= -->
+<section>
+  <h2><span class="n">出</span><span>出典（10/20 確認）</span></h2>
+  <div class="panel src-list">
+    Google ローカル検索のランキング改善: <a href="https://support.google.com/business/answer/7091?hl=ja">support.google.com/business/answer/7091</a><br>
+    Google 検索の AI 機能とウェブサイト: <a href="https://developers.google.com/search/docs/appearance/ai-features?hl=ja">developers.google.com/search/docs/appearance/ai-features</a><br>
+    Google スパムに関するポリシー: <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=ja">developers.google.com/search/docs/essentials/spam-policies</a><br>
+    アシスト 事業案内／代理店募集／InfoBiz／サイテーション／Synup／連携メディア／AIブログ／導入事例: <a href="https://assist-all.co.jp/service/">assist-all.co.jp/service/</a> ・ /agent/ ・ /service/infobiz/ ・ /service/infobiz/citation/ ・ /citation_synup/ ・ /citation_synup/link/ ・ /service/ai/blog/ ・ /citation_synup/record/20251121-11685/<br>
+    Synup 日本ページ（現地パートナー対応）: <a href="https://synup.com/japan">synup.com/japan</a>／価格は第三者サイト（frontdeskreview・toolradar）<br>
+    代理店向け解説（第三者・販促記事）: bizforce-neo.com ・ edgeconnect.co.jp／ChatGPT 引用調査（国内SEO業者・独立検証なし）: sender.works<br>
+    国内ツール価格: itreview.jp（ローカルミエルカ・MEOチェキ）<br>
+    社内: _調査_20261016_アシスト_広告主分析.md ・ _調査_20261017_アシスト_動画広告分析.md ・ _戦略_20261020_アシスト対抗_検索順位とAI検索露出.md ・ HP制作/_検討_20261020_被リンク先100サイト_全自動管理の可否.md
+  </div>
+</section>
+
+</div>
+</body>
+</html>
