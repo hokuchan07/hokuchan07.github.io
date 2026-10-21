@@ -382,9 +382,11 @@ td b{color:var(--text)}
   <h2><span class="n">7</span><span>サイテーションは2段構え — 「先に確かめてから買う」</span></h2>
   <p class="lead">Synup を含め、日本の主要媒体に本当に同期されるかを各社に書面で確認してから選ぶ。アシストの穴がここ。</p>
   <div class="tier">
-    <div class="t"><b class="h" style="color:var(--green)">1段目: 無料・直接（契約時に斗が登録）</b>
-      <div class="chips"><span class="free">Google ビジネスプロフィール</span><span class="free">Apple Business Connect</span><span class="free">Bing Places</span><span class="free">Yahoo!プレイス</span><span class="free">Facebook / Instagram</span><span class="free">食べログ・ぐるなび（飲食）</span><span class="free">ホットペッパー（美容）</span><span class="free">エキテン</span><span class="free">業種ポータル</span></div>
-      <p style="margin-top:10px;font-size:13px">手順書＋Playwright の半自動。Apple は25拠点以上の事業者向け API があり、ランバード名義で多店舗管理すれば候補。ChatGPT は Bing を見るので Bing Places は必須。</p></div>
+    <div class="t"><b class="h" style="color:var(--green)">1段目: 無料・直接（契約時に斗が登録）<span class="tag grn" style="margin-left:8px;vertical-align:middle">方針: やる（10/21）</span></b>
+      <p style="font-size:13px;margin-bottom:8px">「180媒体」ではなく、順位とAI露出に効く<b style="color:var(--text)">10前後に絞る</b>。Google の知名度要素は「関連サイトの数」と口コミ、ChatGPT は Bing を見る。アシストの100〜180媒体のうち日本の店に意味があるのは実質この数。</p>
+      <div class="chips"><span class="free">① Google ビジネスプロフィール</span><span class="free">② Bing Places（ChatGPT）</span><span class="free">③ Apple Business Connect</span><span class="free">④ Yahoo!プレイス</span><span class="free">⑤ Facebook / Instagram</span><span class="free">⑥ 業種ポータル上位1〜2本（食べログ・ぐるなび／ホットペッパー／エキテン）</span><span class="free">⑦ 公式サイトの店舗情報ページ（BIZ CLOUD）</span></div>
+      <div class="quote yel" style="margin-top:10px"><b>注意点3つ</b><br>(1) <b>完全自動にはならない部分がある</b> — 主要媒体はオーナー確認（はがき・電話・動画）が要る。登録は斗が代行、確認コードの受け取りだけは店。<br>(2) <b>アカウントの持ち主は店</b> — RUNBIRD名義で作ると解約時に店が自分の情報を触れない。店のアカウントにRUNBIRDを管理者追加。<br>(3) <b>登録台帳を必ず持つ</b> — どの店がどの媒体に載っているかを顧客管理に記録し、解約で消す・変更で直すを機械で回す。</div>
+      <p style="margin-top:10px;font-size:13px">工数: 初回1店 2〜3時間 → 手順書＋Playwright 半自動で約1時間。商品では「初期費用」の項目に載せる。有料配信（右）は、この10媒体を回してから「足したい媒体があるか」で判断。</p></div>
     <div class="t"><b class="h" style="color:var(--yellow)">2段目: 有料配信（上乗せ・選定前に書面確認）</b>
       <table>
         <tr><th>候補</th><th>公開情報</th><th>向き</th></tr>
