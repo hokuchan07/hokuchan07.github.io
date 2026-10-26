@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>スタイル・エッジ図解 — HPを売らない会社が70億になった構造</title>
+<meta name="description" content="株式会社スタイル・エッジ（士業・医業向け総合支援）の成長・収益・継続の構造を図解し、ランバードへの応用を整理した資料。株式会社斗作成・公開情報ベース。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16213a; --navy2:#223358; --ink:#1f2430; --sub:#5b6474; --line:#dfe3ea; --bg:#f4f6fa; --paper:#ffffff;
+  --se:#1a7f7a; --se-bg:#e6f4f3; --rb:#e8651b; --rb-bg:#fff0e6; --warn:#c0392b; --warn-bg:#fdecea; --gold:#c9a227; --gold-bg:#fff8e1;
+  --fact:#2c5fcc; --guess:#8a6d1f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+h1,h2,h3,h4{line-height:1.3;font-weight:900}
+h2{font-size:clamp(22px,3.2vw,32px);margin:0 0 6px}
+h3{font-size:clamp(16px,2vw,20px);margin:0 0 10px}
+p{margin:0}
+small,.small{font-size:12px;color:var(--sub)}
+strong{font-weight:700}
+.num{font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:middle;letter-spacing:.02em}
+.tag.fact{background:#e6edfb;color:var(--fact)}
+.tag.guess{background:#fbf3dc;color:var(--guess)}
+.tag.rb{background:var(--rb-bg);color:var(--rb)}
+.tag.se{background:var(--se-bg);color:var(--se)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+
+/* ===== hero ===== */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#2a4a7a 100%);color:#fff;padding:48px 0 40px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero .kicker{font-size:13px;font-weight:700;letter-spacing:.12em;opacity:.8;margin-bottom:10px}
+.hero h1{font-size:clamp(26px,4.6vw,46px);line-height:1.25;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:#ffd166}
+.hero .lead{font-size:clamp(14px,1.6vw,17px);opacity:.92;max-width:760px}
+.hero .meta{margin-top:18px;font-size:12px;opacity:.75;line-height:1.8}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:28px}
+.kpi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 14px 12px}
+.kpi .l{font-size:11px;opacity:.75;font-weight:700;letter-spacing:.04em}
+.kpi .v{font-size:clamp(22px,3vw,30px);font-weight:900;line-height:1.2;margin:4px 0 2px}
+.kpi .v span{font-size:14px;font-weight:700;opacity:.85}
+.kpi .s{font-size:11px;opacity:.7}
+
+/* ===== sections ===== */
+section{padding:44px 0}
+section+section{border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px}
+.sec-no{flex:none;width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;font-weight:900;font-size:18px;display:grid;place-items:center}
+.sec-head p{color:var(--sub);font-size:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:860px){.g3,.g2{grid-template-columns:1fr}}
+
+/* answer cards */
+.ans{border-top:6px solid var(--navy);position:relative}
+.ans .q{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.05em;margin-bottom:6px}
+.ans h3{font-size:19px;margin-bottom:10px}
+.ans h3 b{color:var(--se)}
+.ans .body{font-size:14px}
+.ans .one{margin-top:12px;padding:10px 12px;background:var(--se-bg);border-radius:10px;font-size:13px;font-weight:700;color:var(--se)}
+
+/* staircase */
+.stairs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;margin-top:8px}
+.stair{background:var(--paper);border:1px solid var(--line);border-radius:10px 10px 4px 4px;padding:10px 10px 8px;position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+.stair .y{font-size:11px;font-weight:700;color:var(--sub)}
+.stair .t{font-weight:900;font-size:14px;line-height:1.3;margin:2px 0 4px}
+.stair .d{font-size:11.5px;color:var(--sub);line-height:1.5}
+.stair .why{margin-top:6px;font-size:11px;background:var(--gold-bg);color:#7a5c00;border-radius:6px;padding:3px 6px;font-weight:700}
+.stair::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:6px;border-radius:0 0 4px 4px;background:var(--se)}
+.stair.rb-hl::after{background:var(--rb)}
+.s1{min-height:150px}.s2{min-height:185px}.s3{min-height:220px}.s4{min-height:255px}.s5{min-height:290px}.s6{min-height:325px}.s7{min-height:360px}
+@media(max-width:860px){.stairs{grid-template-columns:1fr;align-items:stretch}.stair{min-height:0!important;border-radius:10px;border-left:6px solid var(--se)}.stair::after{display:none}}
+.stairs-note{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.pill{font-size:12px;padding:6px 12px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.pill b{color:var(--se)}
+
+/* ladder (customer growth) */
+.ladder{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:8px}
+.rung{position:relative;padding:12px 10px 12px 12px;background:var(--paper);border:1px solid var(--line);border-right:none}
+.rung:first-child{border-radius:12px 0 0 12px}
+.rung:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.rung .pain{font-size:11px;font-weight:700;color:var(--warn);background:var(--warn-bg);display:inline-block;padding:1px 7px;border-radius:999px;margin-bottom:6px}
+.rung .sell{font-weight:900;font-size:14px;line-height:1.3}
+.rung .svc{font-size:11.5px;color:var(--sub);margin-top:4px;line-height:1.5}
+.rung::after{content:"";position:absolute;right:-9px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:9px solid var(--se);border-top:9px solid transparent;border-bottom:9px solid transparent;z-index:2}
+.rung:last-child::after{display:none}
+.rung.core{background:var(--se-bg);border-color:#bfe3e0}
+.rung.core .sell{color:var(--se)}
+@media(max-width:860px){.ladder{grid-template-columns:1fr}.rung{border:1px solid var(--line);border-radius:10px!important;margin-bottom:8px}.rung::after{right:auto;left:20px;top:auto;bottom:-13px;transform:none;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid var(--se);border-bottom:none}}
+.ladder-note{margin-top:14px;padding:12px 14px;background:var(--paper);border-left:5px solid var(--se);border-radius:8px;font-size:13.5px}
+
+/* trinity */
+.trinity{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-top:8px}
+.tri{background:var(--paper);border:2px solid var(--se);border-radius:16px;padding:16px;text-align:center}
+.tri .ico{font-size:28px;line-height:1}
+.tri .h{font-size:18px;font-weight:900;color:var(--se);margin:6px 0 4px}
+.tri .se-l{font-size:12.5px;color:var(--sub);line-height:1.55}
+.tri .rb-l{margin-top:10px;font-size:12.5px;background:var(--rb-bg);color:#9a3e07;border-radius:8px;padding:6px 8px;font-weight:700;line-height:1.45}
+.tri-arrow{display:grid;place-items:center;font-size:26px;color:var(--se);font-weight:900}
+@media(max-width:860px){.trinity{grid-template-columns:1fr}.tri-arrow{transform:rotate(90deg)}}
+.glue{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.glue .card{border-top:4px solid var(--navy);font-size:13px}
+.glue .card b{display:block;font-size:14px;margin-bottom:4px}
+@media(max-width:860px){.glue{grid-template-columns:1fr}}
+
+/* charts */
+.chart-row{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+@media(max-width:900px){.chart-row{grid-template-columns:1fr}}
+.bars{display:flex;align-items:flex-end;gap:14px;height:220px;padding:0 6px;border-bottom:2px solid var(--line);margin-top:10px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar .col{width:100%;max-width:70px;background:var(--se);border-radius:6px 6px 0 0;position:relative}
+.bar .col.muted{background:#9ccfcb}
+.bar .col.ghost{background:repeating-linear-gradient(45deg,#9ccfcb 0 6px,#d6ecea 6px 12px)}
+.bar .val{font-weight:900;font-size:15px;margin-bottom:4px}
+.bar .lab{font-size:11px;color:var(--sub);margin-top:6px;text-align:center;line-height:1.3}
+.sales{display:flex;gap:14px;align-items:flex-end;height:120px;margin-top:10px;border-bottom:2px solid var(--line);padding:0 6px}
+.sales .bar .col{background:var(--navy)}
+.callout{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--gold-bg);border:1px solid #f1e3a6;font-size:13.5px}
+.callout b{color:#7a5c00}
+
+/* balance sheet stacked bars */
+.bs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:10px}
+.bs-col{display:flex;flex-direction:column}
+.bs-col .ttl{font-weight:900;text-align:center;margin-bottom:6px;font-size:14px}
+.stack{height:380px;display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.seg{display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12.5px;font-weight:700;color:#fff;line-height:1.2;min-height:30px;text-shadow:0 1px 1px rgba(0,0,0,.15)}
+.seg small{font-weight:700;opacity:1;font-size:11px;background:rgba(255,255,255,.28);padding:1px 7px;border-radius:999px;margin-left:6px;flex:none}
+.seg.ar{background:var(--warn)}
+.seg.fa{background:#5a6b8c}.seg.ca{background:#7f8da8}.seg.inv{background:#a2adc2}.seg.oth{background:#c2c9d8;color:var(--ink)}
+.seg.ap{background:#b23b2e}.seg.std{background:#d8663f}.seg.ol{background:#e9a07f;color:var(--ink);text-shadow:none}.seg.fl{background:#9aa6bd}.seg.eq{background:var(--se)}
+.bs-note{margin-top:10px;font-size:12px;color:var(--sub)}
+.verdict{margin-top:14px;padding:14px 16px;border-radius:12px;background:var(--warn-bg);border:1px solid #f3c2bd;font-size:14px}
+.verdict b{color:var(--warn)}
+@media(max-width:600px){.bs{grid-template-columns:1fr}.stack{height:300px}}
+
+/* profit structure */
+.why5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.why5 .card{padding:14px;font-size:13px}
+.why5 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-weight:900;font-size:14px;margin-bottom:6px}
+.why5 b{display:block;font-size:14px;margin-bottom:4px}
+@media(max-width:1000px){.why5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.why5{grid-template-columns:1fr}}
+
+/* services */
+.svc5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.svc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.svc .h{font-weight:900;font-size:15px;color:var(--navy)}
+.svc .items{font-size:12px;color:var(--sub);line-height:1.55}
+.svc .fee{font-size:12px;background:var(--bg);border-radius:8px;padding:6px 8px;line-height:1.5}
+.svc .role{margin-top:auto;font-size:12px;font-weight:700;padding:4px 8px;border-radius:999px;display:inline-block;align-self:flex-start}
+.role.stock{background:var(--se-bg);color:var(--se)}.role.glue{background:#e6edfb;color:var(--fact)}.role.heavy{background:var(--warn-bg);color:var(--warn)}.role.new{background:var(--gold-bg);color:#7a5c00}
+@media(max-width:1000px){.svc5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.svc5{grid-template-columns:1fr}}
+
+/* vs table */
+.vs{display:grid;grid-template-columns:150px 1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
+.vs>div{padding:11px 12px;font-size:13px;border-bottom:1px solid var(--line)}
+.vs .h{font-weight:900;background:var(--bg)}
+.vs .h.se{color:var(--se)}.vs .h.rb{color:var(--rb)}
+.vs .k{font-weight:700;background:#fafbfd;color:var(--sub)}
+.vs>div:nth-last-child(-n+3){border-bottom:none}
+.vs>div[data-co]::before{display:none;content:attr(data-co);font-size:11px;font-weight:900;margin-right:6px;padding:1px 7px;border-radius:999px;vertical-align:middle}
+.vs>div[data-co="SE"]::before{content:"スタイル・エッジ";background:var(--se-bg);color:var(--se)}
+.vs>div[data-co="RB"]::before{content:"ランバード";background:var(--rb-bg);color:var(--rb)}
+@media(max-width:700px){.vs{grid-template-columns:1fr}.vs .h{display:none}.vs .k{background:var(--navy);color:#fff;font-weight:900}.vs>div[data-co]::before{display:inline-block}}
+
+/* mapping */
+.map{display:grid;gap:10px}
+.maprow{display:grid;grid-template-columns:40px 1fr 36px 1.2fr 1fr;gap:10px;align-items:stretch}
+.maprow .no{display:grid;place-items:center;font-weight:900;color:#fff;background:var(--navy);border-radius:10px;font-size:16px}
+.maprow .se-b{background:var(--se-bg);border:1px solid #bfe3e0;border-radius:10px;padding:10px 12px;font-size:13px}
+.maprow .se-b b{color:var(--se)}
+.maprow .arr{display:grid;place-items:center;color:var(--rb);font-weight:900;font-size:22px}
+.maprow .rb-b{background:var(--rb-bg);border:1px solid #f6cdb3;border-radius:10px;padding:10px 12px;font-size:13px}
+.maprow .rb-b b{color:var(--rb)}
+.maprow .as{background:var(--paper);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--sub)}
+.maprow .as b{color:var(--ink);display:block;font-size:11px;letter-spacing:.05em;margin-bottom:2px}
+@media(max-width:900px){.maprow{grid-template-columns:1fr}.maprow .no{width:36px;height:36px}.maprow .arr{transform:rotate(90deg);justify-self:start;margin-left:10px}}
+
+/* 100億 */
+.hundred{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.hundred{grid-template-columns:1fr}}
+.hbar{margin:10px 0}
+.hbar .l{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:3px}
+.hbar .track{height:26px;background:var(--bg);border-radius:6px;overflow:hidden;position:relative}
+.hbar .fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;color:#fff;font-weight:900;font-size:12.5px;white-space:nowrap;overflow:hidden}
+.fill.se{background:var(--se)}.fill.sk{background:var(--navy)}.fill.rb{background:var(--rb)}
+.fill.rb.range{background:linear-gradient(90deg,var(--rb) 0 83%,#f6b48f 83% 100%)}
+.formula{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.formula .card{text-align:center;padding:12px 8px}
+.formula .big{font-size:22px;font-weight:900;line-height:1.2}
+.formula .se .big{color:var(--se)}.formula .sk .big{color:var(--navy)}.formula .rbx .big{color:var(--rb)}
+.formula .s{font-size:11.5px;color:var(--sub)}
+@media(max-width:600px){.formula{grid-template-columns:1fr}}
+
+/* don't */
+.dont{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.dont .card{border-top:4px solid var(--warn);font-size:12.5px;padding:12px 14px}
+.dont .card b{display:block;font-size:14px;color:var(--warn);margin-bottom:4px}
+@media(max-width:1000px){.dont{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.dont{grid-template-columns:1fr}}
+
+/* opinion */
+.opinion{background:var(--paper);border:2px dashed var(--rb);border-radius:16px;padding:22px 22px 18px;position:relative}
+.opinion .badge{position:absolute;top:-12px;left:18px;background:var(--rb);color:#fff;font-size:12px;font-weight:900;padding:3px 12px;border-radius:999px}
+.opinion .conc{font-size:17px;font-weight:900;margin:6px 0 14px}
+.opinion .conc em{font-style:normal;color:var(--rb)}
+.op-list{display:grid;gap:10px}
+.op{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.op .n{width:30px;height:30px;border-radius:50%;background:var(--rb);color:#fff;display:grid;place-items:center;font-weight:900}
+.op b{display:block;font-size:14.5px;margin-bottom:2px}
+.op p{font-size:13px;color:#3b4250}
+
+/* misc */
+.foot{padding:30px 0 50px;color:var(--sub);font-size:12px}
+.srcs{columns:2;column-gap:24px;font-size:12px;color:var(--sub)}
+@media(max-width:700px){.srcs{columns:1}}
+details summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.toc a{font-size:12px;color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 10px;border-radius:999px}
+.toc a:hover{background:rgba(255,255,255,.22)}
+@media print{body{background:#fff}.hero{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">株式会社ランバード 嶋田社長 向け ／ 事業拡大ベンチマーク ／ 株式会社斗 作成（公開情報ベース）</div>
+    <h1>「HPだけ」を断り続けた会社が、<br>17年で<em>売上70億・純利益13億</em>になった構造</h1>
+    <p class="lead">株式会社スタイル・エッジ（士業・医業向け総合支援）を、<strong>どう大きくしたか／何で稼ぐか／どう継続売上を作るか</strong>の3点で分解し、ランバードに持ち込める「売り方の構造」だけを抜き出した図解です。</p>
+    <div class="kpis">
+      <div class="kpi"><div class="l">創業</div><div class="v num">2008<span>年6月</span></div><div class="s">弁護士・司法書士向けWebマーケから</div></div>
+      <div class="kpi"><div class="l">売上高</div><div class="v num" style="font-size:clamp(20px,2.3vw,26px);white-space:nowrap">30<span>億</span> → 70<span>億</span></div><div class="s">2023/5期 → 2025/5期（2年で2.3倍）</div></div>
+      <div class="kpi"><div class="l">当期純利益</div><div class="v num">13.5<span>億</span></div><div class="s">2025/5期・公式決算公告（純利益率 約19%）</div></div>
+      <div class="kpi"><div class="l">従業員</div><div class="v num">450<span>名</span></div><div class="s">2025/6・約200名（2018）から倍増</div></div>
+      <div class="kpi"><div class="l">取引継続率</div><div class="v num">9<span>割以上</span></div><div class="s">17年間（島田社長談）</div></div>
+      <div class="kpi"><div class="l">外部資本</div><div class="v num">Zenken 14.9<span>%</span></div><div class="s">2023年・9.6億で取得。IPO準備中</div></div>
+    </div>
+    <div class="toc">
+      <a href="#a">3つの答え</a><a href="#b">成長の階段</a><a href="#c">顧客を離さない階段設計</a><a href="#d">三位一体</a><a href="#e">数字で見る</a><a href="#f">利益の構造</a><a href="#g">5つのサービス</a><a href="#h">AI事業の違い</a><a href="#i">ランバードへの応用</a><a href="#j">100億への型</a><a href="#k">真似ないもの</a><a href="#l">見解（下書き）</a>
+    </div>
+    <div class="meta">作成 2026/10/25・公式サイト原文と決算公告PDF（第15〜17期）で10/26照合済み。<span class="tag fact">事実</span>＝出典のある公開情報、<span class="tag guess">推測</span>＝公開情報からの読み。正本: 競合調査_スタイル・エッジ_20261025.md</div>
+  </div>
+</header>
+
+<!-- ================= A. 3つの答え ================= -->
+<section id="a">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">A</div><div><h2>先に結論 — 3つの問いへの答え</h2><p>嶋田社長との話に出た「どう大きくしたか／何で利益を出すか／どう継続売上を作るか」に、それぞれ一言で。</p></div></div>
+    <div class="grid g3">
+      <div class="card ans">
+        <div class="q">Q1 どうやって会社を大きくしたか</div>
+        <h3>顧客の「次の困りごと」を<b>順番に商品化</b>した</h3>
+        <p class="body"><span class="tag fact">事実</span> Webマーケで集客 → 集客した相談者を依頼に変えるため<strong>事務所に常駐する営業支援</strong> → 人手不足で<strong>採用・派遣</strong> → 案件管理で<strong>自社CRM</strong> → 同じ型を<strong>美容クリニックへ横展開</strong>（2025年に祖業を超える）。</p>
+        <div class="one">段階拡大 × 1業界で完成させてから横展開</div>
+      </div>
+      <div class="card ans">
+        <div class="q">Q2 何で利益を出しているか</div>
+        <h3>高単価市場に<b>人を常駐させて</b>人月で稼ぐ</h3>
+        <p class="body"><span class="tag fact">事実</span> 営業利益9億/売上30億（2023）、純利益5.3→9.7→13.5→14.9億と4期連続増益。<span class="tag guess">推測</span> 債務整理・交通事故・美容医療という「1件あたり報酬が高い市場」に特化し、未経験採用→教育→常駐の人月課金と、広告・CRMのストックが源泉。</p>
+        <div class="one">高LTV市場 × 規制の堀 × 教育で粗利</div>
+      </div>
+      <div class="card ans">
+        <div class="q">Q3 どうやって継続売上を作っているか</div>
+        <h3>集客→一次対応→管理を<b>1社で握る</b></h3>
+        <p class="body"><span class="tag fact">事実</span> 継続率は17年で9割以上。「HP制作のみ」の依頼は基本的に断る。<span class="tag guess">推測</span> 広告・常駐・CRMの三位一体で<strong>顧客の業務フローの中に入り込む</strong>ため、切ると業務が止まる。単品を売らず、成長段階ごとに次の商材を乗せる。</p>
+        <div class="one">単品を売らない × データを握る × 責任の切れ目がない</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B. 成長の階段 ================= -->
+<section id="b">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">B</div><div><h2>成長の階段 — 17年で7段</h2><p>各段は「前の段で生まれた顧客の困りごと」が起点。黄色が「なぜ次へ進んだか」。</p></div></div>
+    <div class="stairs">
+      <div class="stair s1"><div class="y">2008</div><div class="t">Webマーケ</div><div class="d">弁護士・司法書士向けの広告運用・HP制作で創業</div><div class="why">集客しても依頼に変わらない</div></div>
+      <div class="stair s2"><div class="y">〜2017</div><div class="t">営業支援・常駐</div><div class="d">事務所に常駐して電話・メール対応、コールセンター。1人1日約10件の相談対応</div><div class="why">人が足りない</div></div>
+      <div class="stair s3"><div class="y">2016〜</div><div class="t">採用・派遣</div><div class="d">一般労働者派遣・有料職業紹介の許可。グループ会社CAREER</div><div class="why">案件が溜まって管理できない</div></div>
+      <div class="stair s4"><div class="y">2019〜20</div><div class="t">自社CRM LeadU+</div><div class="d">債務整理特化。電子決済等代行業に登録し銀行API直結、2020年に特許</div><div class="why">士業で型が完成</div></div>
+      <div class="stair s5"><div class="y">2021〜</div><div class="t">医業へ横展開</div><div class="d">島田社長就任。美容クリニック向けにRaKKaR・転貸・機器リース。2025年に祖業を超える</div><div class="why">属人化した問い合わせ対応</div></div>
+      <div class="stair s6"><div class="y">2025/7</div><div class="t">AI戦略室（AX）</div><div class="d">社内ユニコーン部署。既存顧客へAI導入支援を追加提案</div><div class="why">集客を媒体に頼らない</div></div>
+      <div class="stair s7 rb-hl"><div class="y">2026/1</div><div class="t">ツナガル</div><div class="d">専門家×相談者のB2Cマッチング。自前の集客装置を持ち始めた</div><div class="why">→ IPO準備（2026/8 監査役会設置会社へ）</div></div>
+    </div>
+    <div class="stairs-note">
+      <span class="pill">従業員 <b>約200名（2018）→ 450名（2025）</b></span>
+      <span class="pill">売上 <b>30億（2023/5）→ 約70億（2025/5）</b></span>
+      <span class="pill">外部資本 <b>Zenken 14.9%（2023/3）</b></span>
+      <span class="pill">3社合併で1社体制 <b>2023/6</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C. 顧客の成長段階 ================= -->
+<section id="c">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">C</div><div><h2>顧客を離さない階段設計 — 事務所が育つほど取引額が増える</h2><p>顧客（法律事務所・クリニック）の成長段階ごとに「次に困ること」を先に商品化しておく。赤＝顧客の痛み、太字＝売るもの。</p></div></div>
+    <div class="ladder">
+      <div class="rung"><span class="pain">開業したい</span><div class="sell">インフラ</div><div class="svc">事業計画・物件転貸・機器リース・医師ローン</div></div>
+      <div class="rung"><span class="pain">客が来ない</span><div class="sell">マーケティング</div><div class="svc">リスティング・LINE・SNS・ラジオCM・HP・オウンドメディア</div></div>
+      <div class="rung core"><span class="pain">相談が捌けない</span><div class="sell">営業支援・常駐</div><div class="svc">常駐スタッフ・コールセンター・LINE/メール一次対応<br><b>← 粗利の中心</b></div></div>
+      <div class="rung"><span class="pain">人が足りない</span><div class="sell">HR</div><div class="svc">採用支援・派遣・紹介・教育・パラリーガル常駐</div></div>
+      <div class="rung"><span class="pain">案件が溜まる</span><div class="sell">システム</div><div class="svc">LeadU+／RaKKaR で問い合わせ→受任→入出金まで一元管理</div></div>
+      <div class="rung"><span class="pain">多拠点にしたい</span><div class="sell">インフラ再び</div><div class="svc">転貸・リース・ローン＋医師・弁護士の人材紹介</div></div>
+      <div class="rung"><span class="pain">AIで効率化したい</span><div class="sell">AX</div><div class="svc">問い合わせ対応AI・広告運用AI・導入支援</div></div>
+    </div>
+    <div class="ladder-note"><strong>ポイント:</strong> 「ストックの上に単発を乗せる」のではなく、<strong>単発を入口にせず最初から運用セットで契約する</strong>。だから「HPだけ」は断る。各段階で顧客の業務データ（広告効果・対応履歴・入出金）がCRMに溜まり、<strong>データを握った会社を切ると業務が止まる</strong>。</div>
+  </div>
+</section>
+
+<!-- ================= D. 三位一体 ================= -->
+<section id="d">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">D</div><div><h2>三位一体 — 集客・一次対応・管理を1社で持つ</h2><p>上段＝スタイル・エッジの形、オレンジ＝ランバードでの対応物。集客会社・受電会社・システム会社が別だと押し付け合いになる。</p></div></div>
+    <div class="trinity">
+      <div class="tri"><div class="ico">📣</div><div class="h">集客</div><div class="se-l">広告運用（規程順守が売り）・HP・SNS・ラジオCM・オウンドメディア・ツナガル</div><div class="rb-l">RUNBIRD: HP／MEO／AI動画／YouTube広告／リスト収集</div></div>
+      <div class="tri-arrow">→</div>
+      <div class="tri"><div class="ico">☎️</div><div class="h">一次対応</div><div class="se-l">事務所常駐スタッフ・コールセンター・インサイドセールス・LINE/メール対応で「相談→依頼」に変える</div><div class="rb-l">RUNBIRD: AXT／CTI／テレアポ／AI店長・LINE自動応答／AI担当者派遣</div></div>
+      <div class="tri-arrow">→</div>
+      <div class="tri"><div class="ico">🗄️</div><div class="h">管理</div><div class="se-l">LeadU+／RaKKaR で受任〜和解〜入出金まで一元管理。広告ごとの成果を可視化してレポート</div><div class="rb-l">RUNBIRD: 顧客管理SaaS／マイページ／ロボペイ連携／月次成果レポート</div></div>
+    </div>
+    <div class="glue">
+      <div class="card"><b>① 責任の切れ目がない</b>「問い合わせが来ない」「来たのに取れない」「取ったのに管理できない」のどこで漏れているかを1社で特定できる。</div>
+      <div class="card"><b>② データを握る＝スイッチングコスト</b>広告→対応→受任→入金が自社CRMに全部入る。CPA・受任率・回収率を自社で最適化でき、広告運用の精度も上がる。</div>
+      <div class="card"><b>③ 単品を売らない</b>「HP制作のみ」は断る。常駐・広告は月次更新だが実質無期限。<strong>売上の大半がストック</strong>（継続率9割と整合）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= E. 数字 ================= -->
+<section id="e">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">E</div><div><h2>数字で見る — 4期連続増益と、資産の「正体」</h2><p>公式決算公告（第15〜17期）は10/26に原文確認。第18期は catr.jp 引用（利益剰余金の積み上がりで整合）。</p></div></div>
+    <div class="chart-row">
+      <div class="card">
+        <h3>当期純利益の推移 <span class="tag fact">事実</span></h3>
+        <div class="bars">
+          <div class="bar"><div class="val num">5.3億</div><div class="col" style="height:35%"></div><div class="lab">2023/5期<br>第15期</div></div>
+          <div class="bar"><div class="val num">9.7億</div><div class="col" style="height:65%"></div><div class="lab">2024/5期<br>第16期</div></div>
+          <div class="bar"><div class="val num">13.5億</div><div class="col" style="height:91%"></div><div class="lab">2025/5期<br>第17期</div></div>
+          <div class="bar"><div class="val num">14.9億</div><div class="col ghost" style="height:100%"></div><div class="lab">2026/5期<br>第18期（引用）</div></div>
+        </div>
+        <h3 style="margin-top:18px">売上高（取材記事ベース） <span class="tag fact">事実</span></h3>
+        <div class="sales">
+          <div class="bar"><div class="val num">30億</div><div class="col" style="height:43%"></div><div class="lab">2023/5期・営業利益9億</div></div>
+          <div class="bar"><div class="val num">非開示</div><div class="col muted" style="height:8%"></div><div class="lab">2024/5期</div></div>
+          <div class="bar"><div class="val num">約70億</div><div class="col" style="height:100%"></div><div class="lab">2025/5期「ネット売上高」</div></div>
+        </div>
+        <div class="callout"><b>読み方:</b> 「ネット売上高」＝広告費の立替分（グロス）を除いた純額と読める。2023/5期の純利益5.3億と営業利益9億は税引後として整合。純利益率は約19%（2025/5期）、<strong>1人あたり純利益 約300万円</strong>。</div>
+      </div>
+      <div class="card">
+        <h3>貸借対照表 2025/5期・総資産169.7億 <span class="tag fact">事実</span></h3>
+        <div class="bs">
+          <div class="bs-col"><div class="ttl">資産</div>
+            <div class="stack">
+              <div class="seg ar" style="flex:65.3"><span>売掛金 110.8億</span><small>65%</small></div>
+              <div class="seg fa" style="flex:13.7"><span>有形固定資産 23.2億</span><small>14%</small></div>
+              <div class="seg ca" style="flex:10.6"><span>現預金 17.9億</span><small>11%</small></div>
+              <div class="seg inv" style="flex:10.4"><span>投資その他＋その他 17.7億</span><small>10%</small></div>
+            </div>
+          </div>
+          <div class="bs-col"><div class="ttl">負債・純資産</div>
+            <div class="stack">
+              <div class="seg ap" style="flex:24.8"><span>買掛金 42.1億</span><small>25%</small></div>
+              <div class="seg std" style="flex:18"><span>短期借入 30.5億</span><small>18%</small></div>
+              <div class="seg ol" style="flex:21.6"><span>その他流動負債 36.7億</span><small>22%</small></div>
+              <div class="seg fl" style="flex:14.1"><span>固定負債 24.0億</span><small>14%</small></div>
+              <div class="seg eq" style="flex:21.5"><span>純資産 36.5億</span><small>21%</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="bs-note">内訳: 投資その他10.1億（敷金保証金7.1億・繰延税金資産2.3億ほか）、その他7.6億（前渡金5.6億・前払費用1.7億・リース債権0.3億）。売掛金は年間売上（約70億）の<strong>1.6倍</strong>。預り金はわずか0.8億。建物附属設備17.8億は転貸オフィス・クリニック内装と読める。</div>
+        <div class="verdict"><b>資産が重い正体は「売掛金」。</b> 固定資産でも預り金でもない。<span class="tag guess">推測</span> 広告費を媒体に立替払いして顧客へグロス請求していること、債務整理・美容医療は顧客側の報酬回収が分割・後払いで支払サイトが長いこと、の2つで説明がつく。買掛金42億＋短期借入30億で回す<strong>「成長するほど運転資金が要る」モデル</strong>。ランバードが広告運用を受けるなら、媒体直接払い＋ネット手数料で受ける。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= F. 利益の構造 ================= -->
+<section id="f">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">F</div><div><h2>利益が出る5つの構造 <span class="tag guess">推測</span></h2><p>公開情報からの読み。ランバードに移植できるのは②③④、移植できないのは①と「身内最大顧客」。</p></div></div>
+    <div class="why5">
+      <div class="card"><span class="n">1</span><b>高LTV市場に特化</b>債務整理は1件数十万円の報酬、美容医療は自由診療で高単価。広告費も人件費も吸収できる顧客側の経済圏がある。</div>
+      <div class="card"><span class="n">2</span><b>規制が堀</b>弁護士法・医療法・広告規程に踏み込むほど競合が入れない。「広告規制の解釈に助言できる会社」という立ち位置が集客装置。</div>
+      <div class="card"><span class="n">3</span><b>教育で粗利</b>常駐スタッフは未経験採用（年収280〜450万）→自社教育→配置。請求は人月（士業派遣の相場 月50〜80万/人）。人数×単価で売上が積む。</div>
+      <div class="card"><span class="n">4</span><b>データの内製</b>広告→対応→受任→入金が自社CRMに全部入る。CPA・受任率・回収率を自社で最適化でき、他社より広告の精度が高い。</div>
+      <div class="card"><span class="n">5</span><b>固定費を抱えない</b>常駐・広告は変動費型。不況時は人を減らせば利益が守れる。弱点は過払い金の減少、人依存、最大顧客依存、売掛金の重さ。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= G. 5つのサービス ================= -->
+<section id="g">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">G</div><div><h2>5つのサービス領域と、推定課金形態</h2><p>領域と中身は公式サービスページ（原文確認）。料金は全て個別見積のため課金形態は<span class="tag guess">推測</span>。</p></div></div>
+    <div class="svc5">
+      <div class="svc"><div class="h">01 マーケティング</div><div class="items">広告制作・分析・運用／SEO・SNS・MA／HP制作（公開後もPDCA運用）／ラジオCM／オウンドメディア</div><div class="fee">広告費＋運用手数料（20%前後）or 問い合わせ件数連動。HP単品は受けない</div><span class="role stock">毎月のストック</span></div>
+      <div class="svc"><div class="h">02 コンサル・実行支援</div><div class="items">営業支援（相談窓口の導入〜現場営業）／採用・教育／業務コンサル／人材派遣・紹介</div><div class="fee">人月単価（派遣・業務委託）。粗利率40〜50%が出る構造</div><span class="role stock">売上の最大（人月）</span></div>
+      <div class="svc"><div class="h">03 システム</div><div class="items">LeadU+（士業CRM・特許）／RaKKaR（医業CRM）／コーポレートIT・セキュアDX／クリエイティブ・UI/UX</div><div class="fee">月額ライセンス（SaaS型）。CSが導入後の効果測定・定期訪問まで担当</div><span class="role glue">顧客を離さない接着剤</span></div>
+      <div class="svc"><div class="h">04 インフラ</div><div class="items">事業計画策定／オフィス・クリニック転貸／機器リース／医師ローン／不動産（REALTY）</div><div class="fee">転貸差益・リース料。高度管理医療機器貸与・古物商の許可も保有</div><span class="role heavy">資産が重い（真似ない）</span></div>
+      <div class="svc"><div class="h">05 AX</div><div class="items">AI活用の使用方法相談／AI導入支援（業務フロー整理→ツール導入→運用設計）</div><div class="fee">設計スポット＋運用伴走の月額と推測。外販AIプロダクトは未確認</div><span class="role new">2025/7〜 既存顧客へ追加提案</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= H. AI ================= -->
+<section id="h">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">H</div><div><h2>AI事業 — スタイル・エッジ vs ランバード</h2><p>向こうはAIを「顧客を離さない追加レイヤー」として社内浸透中。こちらは実装物が先にあり、顧客基盤が薄い。</p></div></div>
+    <div class="vs">
+      <div class="h k">観点</div><div class="h se">スタイル・エッジ</div><div class="h rb">ランバード（斗×RUNBIRD）</div>
+      <div class="k">入口</div><div data-co="SE"><strong>既存450名・既存顧客</strong>へのAX追加提案。自社の問い合わせ対応の自動化が起点</div><div data-co="RB"><strong>新規開拓前提</strong>の第4の柱（診断5〜10万→導入50〜150万＋月額→顧問月10〜50万）</div>
+      <div class="k">強み</div><div data-co="SE">士業・医業のデータと業務フローを握っている（CRM・常駐）</div><div data-co="RB"><strong>自社業務で実証済みの実装力</strong>（CTI/AXT・リスト収集・行政書士AI・AI店長・AI動画）</div>
+      <div class="k">開発姿勢</div><div data-co="SE">「自前主義にこだわらず外部AIを取り込む」「開発をやめる勇気」</div><div data-co="RB">自前実装が強み。ただしMiiTel再販のように「作らない」判断も済み</div>
+      <div class="k">社内浸透</div><div data-co="SE">全社員AI研修（2024）→賞金198万のAIコンテスト（応募106件）→AI戦略室（2025/7）→「AIエージェントを組織全体に」（2026/6 媒体）</div><div data-co="RB">教育型協業スキームにそのまま使える順番。賞金付きコンテストは安く効く</div>
+      <div class="k">公表プロダクト</div><div data-co="SE"><strong>無し</strong>（LeadU+/RaKKaRへの組込み・社内ツール）。計画中: LINE自動応答・電話AI・顧客データ×AIマーケ</div><div data-co="RB">行政書士AI（月1.5万サブスク設計）、AI店長、トルトルくん、AXT など複数 → <strong>計画中領域でランバードが先行できる</strong></div>
+    </div>
+    <div class="callout" style="margin-top:14px"><b>学ぶべきは実装ではなく順番:</b> 「既存顧客に乗せる順番」と「業務フローの中に入る売り方」。士業・医業以外の市場では、動くものを先に世に出せば先行者になれる。</div>
+  </div>
+</section>
+
+<!-- ================= I. 応用 ================= -->
+<section id="i">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">I</div><div><h2>ランバードへの応用 — 取り入れる6つの仕組み（優先順）</h2><p>緑＝スタイル・エッジの仕組み、オレンジ＝ランバードでの形、右＝既にある材料。</p></div></div>
+    <div class="map">
+      <div class="maprow"><div class="no">1</div><div class="se-b"><b>集客→一次対応→管理を1社で持つ</b><br>広告・常駐・CRMの三位一体</div><div class="arr">→</div><div class="rb-b"><b>HP/MEO/動画 ＋ AXT・CTI ＋ 顧客管理SaaS を1パッケージで売る</b><br>単品HP・単品動画を減らす</div><div class="as"><b>既存アセット</b>4選3パッケージ・ビズクラウド保守月額・AXT・顧客管理アプリ・CTI×顧客管理統合設計書</div></div>
+      <div class="maprow"><div class="no">2</div><div class="se-b"><b>単品を断り、運用伴走で契約する</b><br>「HP制作のみ」は17年断り続けて継続率9割</div><div class="arr">→</div><div class="rb-b"><b>全商材に保守・運用月額を必ず付ける</b><br>ビズリンクで決めたプロパゲート型を全商材に</div><div class="as"><b>既存アセット</b>ビズリンク商品仕様（月5回編集＋月1レポート＋LINE窓口）</div></div>
+      <div class="maprow"><div class="no">3</div><div class="se-b"><b>人を顧客の業務に常駐させるストック</b><br>未経験採用→教育→配置の人月課金</div><div class="arr">→</div><div class="rb-b"><b>「AI担当者派遣」を常駐型の月額として本格化</b><br>テレアポで鍛えた人材＋AIツールで「AIオペレーター常駐」</div><div class="as"><b>既存アセット</b>AI担当者派遣_商品設計_v1・SVマニュアル・トルトルくん</div></div>
+      <div class="maprow"><div class="no">4</div><div class="se-b"><b>1業界で完成させてから横展開</b><br>士業で完成→医業へ移して祖業超え</div><div class="arr">→</div><div class="rb-b"><b>福祉（142事業所）か行政書士か新規開業店舗の1つで三位一体を完成</b><br>第1候補は福祉、第2は行政書士AI</div><div class="as"><b>既存アセット</b>OWL福祉・行政書士AIサブスク・リスト収集×AXT</div></div>
+      <div class="maprow"><div class="no">5</div><div class="se-b"><b>顧客データを自社システムに集める</b><br>LeadU+の「広告→問い合わせ→受任→入金→出金」一元管理</div><div class="arr">→</div><div class="rb-b"><b>広告ごとの成果（CPA・アポ率・成約率）を顧客に月次レポートで返すのを標準装備に</b><br>契約後（請求・入金・未収）まで持つのが差別化</div><div class="as"><b>既存アセット</b>CTI×顧客管理×ナレッジ統合 00_設計書・ロボペイ連携・マイページ要件定義</div></div>
+      <div class="maprow"><div class="no">6</div><div class="se-b"><b>権威づけと規制対応を集客装置にする</b><br>業界団体参画・調査リリース・書籍・特許</div><div class="arr">→</div><div class="rb-b"><b>「開業店舗向け営業AIの特許」「福祉FCの運営データ公表」「嶋田社長の発信」</b></div><div class="as"><b>既存アセット</b>AXT特許調査済み・YouTube・PR本文</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= J. 100億 ================= -->
+<section id="j">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">J</div><div><h2>年商100億への型 — 人で伸ばすか、プロダクトで伸ばすか</h2><p>スタイル・エッジ（人）とSK通信（プロダクト・4/13レポート）の中間「人＋AI」がランバードの道。</p></div></div>
+    <div class="hundred">
+      <div class="card">
+        <h3>1人あたり売上（万円/年）</h3>
+        <div class="hbar"><div class="l"><span>スタイル・エッジ（70億÷450名）</span><span class="num">約1,550万</span></div><div class="track"><div class="fill se" style="width:33%">人＋ストック</div></div></div>
+        <div class="hbar"><div class="l"><span>SK通信（220億÷473名）</span><span class="num">約4,650万</span></div><div class="track"><div class="fill sk" style="width:100%">プロダクト</div></div><p class="small" style="margin-top:3px">自社CRM＋5年契約</p></div>
+        <div class="hbar"><div class="l"><span>ランバード目標（人＋AI）</span><span class="num">2,500〜3,000万</span></div><div class="track"><div class="fill rb range" style="width:65%">人＋AI</div></div><p class="small" style="margin-top:3px">AXT・AI店長・行政書士AIで、人を増やさずに売上を積む</p></div>
+        <p class="small" style="margin-top:8px">ランバードの現在は従業員約25名・売上非公開。中核はテレアポ＋HP/動画制作（単発）。</p>
+      </div>
+      <div class="card">
+        <h3>100億に必要な人数</h3>
+        <div class="formula">
+          <div class="card se"><div class="big">450〜650名</div><div class="s">人で伸ばす型（スタイル・エッジ）<br>採用力があれば現実的だが離職率と教育コストが利益を決める</div></div>
+          <div class="card sk"><div class="big">約215名</div><div class="s">プロダクト型（SK通信）<br>1人あたり売上3倍</div></div>
+          <div class="card rbx"><div class="big">300〜400名</div><div class="s">人＋AI型（ランバード）<br>1人あたり2,500〜3,000万で射程</div></div>
+        </div>
+        <div class="callout" style="margin-top:12px"><b>両社に共通する4点:</b> (a) 自社CRMで顧客を離さない (b) 単品売りをしない (c) 1業界でモデルを完成させてから横展開 (d) 採用・教育を仕組み化。<br>嶋田社長の9/28「ナンバー2と部署責任者の土台がないと100億も望めない」は、スタイル・エッジが2021年以降に取締役7名・部長裁量に移行したのと同じ段階。IPO準備（透明性・与信・採用力）を100億の手段と明言している点も参考。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= K. 真似ない ================= -->
+<section id="k">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">K</div><div><h2>真似ない方がいいもの</h2><p>スタイル・エッジの特殊条件の上に乗っている部分。構造は真似ても、ここは外す。</p></div></div>
+    <div class="dont">
+      <div class="card"><b>広告費のグロス立替</b>売掛金110億・買掛金42億・短期借入30億の正体。成長するほど運転資金が要る。→ 媒体直接払い＋ネット手数料で受ける</div>
+      <div class="card"><b>インフラ事業</b>物件転貸・機器リース・医師ローン。有形固定資産23億と許認可（医療機器貸与・古物商）が要る。資本規模的に不要</div>
+      <div class="card"><b>銀行API直結</b>電子決済等代行業の登録は規制コストが高い。請求管理ロボ・ロボペイで足りる</div>
+      <div class="card"><b>ラジオ事業</b>法律事務所のラジオCMから派生した特殊事情。収益柱ではない</div>
+      <div class="card"><b>身内に最大顧客</b>代表が創業したみつ葉グループが最大顧客と読める。再現不能かつ利益相反リスク</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= L. 見解 ================= -->
+<section id="l">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-no">L</div><div><h2>斗・鈴木の見解</h2><p>調査を踏まえて、ランバードが取り入れるべきものと取り入れないものの判断。</p></div></div>
+    <div class="opinion">
+      <div class="badge">鈴木さん確認前（嶋田社長へ出す時に外す）</div>
+      <p class="conc">結論: 取り入れる価値はある。ただし<em>「サービスの中身」ではなく「売り方の構造」</em>を取り入れる。</p>
+      <div class="op-list">
+        <div class="op"><div class="n">1</div><div><b>一番の学びは「単品を売らない」こと</b><p>ランバードはHP、AI動画、MEO、YouTube広告をそれぞれ売っている。スタイル・エッジは17年「HPだけ」を断り続けて継続率9割を作った。4選3パッケージとビズクラウド保守月額は既にこの方向なので、全商材に運用月額を付けるルールを徹底するのが最短の応用。</p></div></div>
+        <div class="op"><div class="n">2</div><div><b>AXT・顧客管理SaaSは「LeadU+型」を目指して正しい</b><p>差は「契約後（請求・入金・未収）まで持つか」。設計書どおりCTI×顧客管理×請求を繋ぎ、月次成果レポートを顧客に返すところまで作れば、スタイル・エッジが士業で握っている接着剤を店舗・福祉で握れる。</p></div></div>
+        <div class="op"><div class="n">3</div><div><b>AIコンサルは新規開拓より既存顧客への追加提案を先に</b><p>スタイル・エッジはAI戦略室を作って1年強、外販プロダクトはまだ無い。ランバードは動くものが複数ある。福祉142事業所・HP顧客・動画顧客にAI店長／LINE自動応答を乗せて事例を作る方が、新規にAI診断を売るより早く月額が積む。</p></div></div>
+        <div class="op"><div class="n">4</div><div><b>1業界に絞る</b><p>スタイル・エッジは士業で完成させてから医業に移して祖業を超えた。ランバードの候補は福祉（既存顧客と業界知見が最も厚い）。行政書士AIは第2候補として並走。</p></div></div>
+        <div class="op"><div class="n">5</div><div><b>注意点: 真似るのは「構造」、「数字」は参考値</b><p>利益率の高さは、債務整理・美容医療という高LTV市場、法規制の堀、代表が最大顧客側の出身という特殊条件の上にある。ランバードの主戦場（新規開業店舗）はLTVが低く解約も早いので、同じ粗利は出ない。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= footer ================= -->
+<section>
+  <div class="wrap">
+    <h3>未確認事項（公開情報で取れなかったもの）</h3>
+    <p class="small" style="margin-bottom:14px">サービス別の料金表・契約期間（全て個別見積）／顧客数・顧客単価・事業別売上・ストック比率／2024・2026/5期の売上／主要顧客の構成（みつ葉グループへの依存度）／AX支援の導入実績・料金・体制／RaKKaR・ツナガルの機能・導入数／売掛金が売上を上回る理由の内訳</p>
+    <details><summary>主な出典</summary>
+      <div class="srcs" style="margin-top:8px">
+        <p>公式（10/26 原文確認）: styleedge.co.jp の会社情報・サービス・沿革・役員紹介・実績・ニュース・電子公告（第15〜17期 決算公告PDF）。2026/7/29 リニューアル後のURL</p>
+        <p>取材: data-max（2025・売上70億/純利益13億/AI戦略室）、NewsPicks「知られざる士業広告の世界」（売上30億/営業利益9億）、HRpro、Forbes JAPAN BrandVoice（2023/8）、BizHint（2018・200%成長）、社長名鑑</p>
+        <p>IR・登記: Zenken 2023/3/27 資本業務提携リリース、catr.jp 決算公告（第18期ほか）、Wikipedia</p>
+        <p>プレス: PR TIMES（LeadU+特許、Ai Innovation CONTEST 2024、オウンドメディア開設、役員人事）、Wantedly（3社合併）、LINEヤフー for Business 導入事例</p>
+        <p>求人・口コミ: Green、doda、HRMOS、マイナビ転職、OpenWork、エン カイシャの評判</p>
+        <p>社内参照: 戦略レポート_SK通信を超える_20260413、AI事業構想、新商品設計_20261012、行政書士サブスク展開設計、CTI×顧客管理×ナレッジ統合 00_設計書</p>
+      </div>
+    </details>
+  </div>
+</section>
+<div class="foot"><div class="wrap">株式会社斗 作成 ／ 株式会社ランバード 嶋田社長 向け ／ 作成 2026-10-25・更新 2026-10-26 ／ 公開情報ベース（公式サイト・決算公告・取材記事）。本文の詳細版は別紙 md</div></div>
+</body>
+</html>
