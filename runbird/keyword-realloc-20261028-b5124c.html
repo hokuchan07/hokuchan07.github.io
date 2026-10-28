@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>検索語の配置替え 図解</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--a:#2563eb;--b:#16a34a;--warn:#dc2626;--amber:#d97706;--soft:#eef2ff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--mute);font-size:13px;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h2{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;align-items:center;justify-content:center}
+  .lead{font-size:14px;margin:0 0 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  svg{width:100%;height:auto;display:block}
+  .note{font-size:12.5px;color:var(--mute);margin-top:8px}
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+  .kpi div{background:var(--soft);border-radius:10px;padding:10px 12px}
+  .kpi b{display:block;font-size:20px}
+  .kpi span{font-size:12px;color:var(--mute)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+  th{background:#f3f4f6;font-weight:600}
+  .tagA{color:var(--a);font-weight:700}.tagB{color:var(--b);font-weight:700}.bad{color:var(--warn);font-weight:700}
+  .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+  .step{flex:1 1 150px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:13px;position:relative}
+  .step b{display:block;font-size:13.5px;margin-bottom:2px}
+  .step small{color:var(--mute)}
+  .arrow{align-self:center;color:var(--mute);font-size:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>検索語の配置替え ― 何が起きていて、何を変えるか</h1>
+  <div class="sub">2026-10-28 ／ 根拠: _分析_20261028_検索語の重なりと1周時間.md ・ _提案_20261028_検索語の配置替え.md ／ 本番設定は未変更</div>
+
+  <!-- 1 -->
+  <div class="card">
+    <h2><span class="num">1</span>収集PCの回り方 ― 町ごとに全部の語を回す。並び順は結果を変えない</h2>
+    <p class="lead">1つの町で設定された語を全部検索してから次の町へ進む。だから「エステ」と「フェイシャルエステ」を離して並べても、同じ町で続けて検索されることに変わりはない。</p>
+    <svg viewBox="0 0 1040 150" role="img" aria-label="町ごとに全語を回す">
+      <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6b7280"/></marker></defs>
+      <g font-size="13">
+        <rect x="10" y="20" width="300" height="110" rx="10" fill="#f3f4f6" stroke="#e5e7eb"/>
+        <text x="24" y="44" font-weight="700">A町</text>
+        <rect x="24" y="58" width="80" height="28" rx="6" fill="#dbeafe"/><text x="64" y="77" text-anchor="middle">エステ</text>
+        <rect x="112" y="58" width="110" height="28" rx="6" fill="#dbeafe"/><text x="167" y="77" text-anchor="middle">フェイシャル</text>
+        <rect x="230" y="58" width="70" height="28" rx="6" fill="#dcfce7"/><text x="265" y="77" text-anchor="middle">ドッグ</text>
+        <text x="24" y="116" fill="#6b7280" font-size="12">① → ② → ③ の順で全部回す</text>
+        <line x1="316" y1="75" x2="356" y2="75" stroke="#6b7280" stroke-width="2" marker-end="url(#ah)"/>
+        <rect x="364" y="20" width="300" height="110" rx="10" fill="#f3f4f6" stroke="#e5e7eb"/>
+        <text x="378" y="44" font-weight="700">B町</text>
+        <rect x="378" y="58" width="80" height="28" rx="6" fill="#dbeafe"/><text x="418" y="77" text-anchor="middle">エステ</text>
+        <rect x="466" y="58" width="110" height="28" rx="6" fill="#dbeafe"/><text x="521" y="77" text-anchor="middle">フェイシャル</text>
+        <rect x="584" y="58" width="70" height="28" rx="6" fill="#dcfce7"/><text x="619" y="77" text-anchor="middle">ドッグ</text>
+        <text x="378" y="116" fill="#6b7280" font-size="12">同じ順で全部回す</text>
+        <line x1="670" y1="75" x2="710" y2="75" stroke="#6b7280" stroke-width="2" marker-end="url(#ah)"/>
+        <rect x="718" y="20" width="120" height="110" rx="10" fill="#f3f4f6" stroke="#e5e7eb"/>
+        <text x="732" y="44" font-weight="700">C町 …</text>
+        <text x="860" y="60" font-size="12.5" fill="#1f2937">1周 = 町の数 × 語の数</text>
+        <text x="860" y="82" font-size="12.5" fill="#1f2937">語を減らす → 1周が縮む</text>
+        <text x="860" y="104" font-size="12.5" fill="#1f2937">並び順 → 変わらない</text>
+      </g>
+    </svg>
+    <div class="note">通常収集は 2 周目以降「最後に検索した時刻が古い順」で回る。72 時間ルールは 9/23 以降「今の周で済んだ検索を飛ばす目印」で、再検索の間隔を縛っていない。実際の間隔は 1 周の長さそのもの。</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <h2><span class="num">2</span>似た語が無駄になる理由 ― Google は関連度上位 67〜120 件しか返さない</h2>
+    <div class="grid">
+      <div>
+        <svg viewBox="0 0 480 230" role="img" aria-label="似た語は同じ店を返す">
+          <g font-size="13">
+            <text x="20" y="24" font-weight="700">似た語</text>
+            <circle cx="150" cy="130" r="75" fill="#2563eb" fill-opacity=".25" stroke="#2563eb"/>
+            <circle cx="205" cy="130" r="75" fill="#2563eb" fill-opacity=".25" stroke="#2563eb"/>
+            <text x="95" y="135" font-size="12">エステ</text>
+            <text x="215" y="135" font-size="12">フェイシャル</text>
+            <text x="150" y="222" text-anchor="middle" fill="#dc2626" font-size="12.5">2語目はほぼ既知の店の見直し＝時間だけ使う</text>
+            <text x="330" y="60" font-size="12" fill="#6b7280">同じ上位店を</text>
+            <text x="330" y="78" font-size="12" fill="#6b7280">2回取りに行く</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <svg viewBox="0 0 480 230" role="img" aria-label="離れた語は別の店を返す">
+          <g font-size="13">
+            <text x="20" y="24" font-weight="700">離れた語</text>
+            <circle cx="130" cy="130" r="75" fill="#2563eb" fill-opacity=".25" stroke="#2563eb"/>
+            <circle cx="320" cy="130" r="75" fill="#16a34a" fill-opacity=".25" stroke="#16a34a"/>
+            <text x="130" y="135" text-anchor="middle" font-size="12">エステ</text>
+            <text x="320" y="135" text-anchor="middle" font-size="12">ドッグサロン</text>
+            <text x="225" y="222" text-anchor="middle" fill="#16a34a" font-size="12.5">1検索あたりの新規店が増える</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="note">ただし「離れていれば何でもよい」ではない。下の 3 を見ると、離れた語で効くのはペットと占い・カウンセリングまで。</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <h2><span class="num">3</span>語の収穫 ― 投入 1,000 件あたりの 7 日内アポ（直近 60 日）と先手率</h2>
+    <svg viewBox="0 0 1040 330" role="img" aria-label="カテゴリ別の7日内アポと先手率">
+      <g font-size="12.5">
+        <!-- bars: value scale 13.3 -> 260px -->
+        <g transform="translate(130,20)">
+          <text x="-120" y="-4" font-weight="700" font-size="13">7日内アポ／投入1,000件</text>
+          <g>
+            <text x="-8" y="26" text-anchor="end">整体・リラク</text><rect x="0" y="12" width="260" height="20" fill="#16a34a"/><text x="266" y="27">13.3</text>
+            <text x="-8" y="52" text-anchor="end">ネイル</text><rect x="0" y="38" width="260" height="20" fill="#16a34a"/><text x="266" y="53">13.3</text>
+            <text x="-8" y="78" text-anchor="end">ペット</text><rect x="0" y="64" width="223" height="20" fill="#16a34a"/><text x="229" y="79">11.4</text>
+            <text x="-8" y="104" text-anchor="end">エステ・脱毛</text><rect x="0" y="90" width="174" height="20" fill="#2563eb"/><text x="180" y="105">8.9</text>
+            <text x="-8" y="130" text-anchor="end">ジム</text><rect x="0" y="116" width="115" height="20" fill="#2563eb"/><text x="121" y="131">5.9</text>
+            <text x="-8" y="156" text-anchor="end">占い・カウンセリング</text><rect x="0" y="142" width="113" height="20" fill="#2563eb"/><text x="119" y="157">5.8</text>
+            <text x="-8" y="182" text-anchor="end">教室</text><rect x="0" y="168" width="35" height="20" fill="#9ca3af"/><text x="41" y="183">1.8</text>
+            <text x="-8" y="208" text-anchor="end">ヘア</text><rect x="0" y="194" width="33" height="20" fill="#9ca3af"/><text x="39" y="209">1.7</text>
+            <text x="-8" y="234" text-anchor="end">修理・工事</text><rect x="0" y="220" width="16" height="20" fill="#9ca3af"/><text x="22" y="235">0.8</text>
+            <text x="-8" y="260" text-anchor="end">飲食</text><rect x="0" y="246" width="14" height="20" fill="#9ca3af"/><text x="20" y="261">0.7</text>
+            <text x="-8" y="286" text-anchor="end">物販</text><rect x="0" y="272" width="8" height="20" fill="#9ca3af"/><text x="14" y="287">0.4</text>
+          </g>
+          <text x="0" y="310" fill="#dc2626" font-size="12.5">灰色の 5 層＝投入の 73%・7日内アポの 26%</text>
+        </g>
+        <!-- 先手率 -->
+        <g transform="translate(640,20)">
+          <text x="0" y="-4" font-weight="700" font-size="13">先手率（接触店のうち他社・契約済み）</text>
+          <!-- scale 5.3% -> 240px -->
+          <text x="90" y="26" text-anchor="end">まつげ</text><rect x="100" y="12" width="240" height="20" fill="#dc2626"/><text x="346" y="27">5.3%</text>
+          <text x="90" y="52" text-anchor="end">エステ</text><rect x="100" y="38" width="231" height="20" fill="#dc2626"/><text x="337" y="53">5.1%</text>
+          <text x="90" y="78" text-anchor="end">ジム</text><rect x="100" y="64" width="213" height="20" fill="#dc2626"/><text x="319" y="79">4.7%</text>
+          <text x="90" y="104" text-anchor="end">物販</text><rect x="100" y="90" width="181" height="20" fill="#d97706"/><text x="287" y="105">4.0%</text>
+          <text x="90" y="130" text-anchor="end">飲食</text><rect x="100" y="116" width="177" height="20" fill="#d97706"/><text x="283" y="131">3.9%</text>
+          <text x="90" y="156" text-anchor="end">修理</text><rect x="100" y="142" width="154" height="20" fill="#d97706"/><text x="260" y="157">3.4%</text>
+          <text x="90" y="182" text-anchor="end">ヘア</text><rect x="100" y="168" width="100" height="20" fill="#16a34a"/><text x="206" y="183">2.2%</text>
+          <text x="90" y="208" text-anchor="end">ペット</text><rect x="100" y="194" width="68" height="20" fill="#16a34a"/><text x="174" y="209">1.5%</text>
+          <text x="90" y="234" text-anchor="end">ネイル</text><rect x="100" y="220" width="59" height="20" fill="#16a34a"/><text x="165" y="235">1.3%</text>
+          <text x="0" y="276" fill="#1f2937" font-size="12.5">赤＝競合も同じ語で早く着いている → 周回を速くしないと負ける</text>
+          <text x="0" y="296" fill="#16a34a" font-size="12.5">緑＝まだ空いている（ペット・ネイル）</text>
+        </g>
+      </g>
+    </svg>
+    <div class="note">語ごとの数字は中央 DB に無い（検索記録と語は PC のローカルにだけ残る）。グループとカテゴリ単位の比較。</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <h2><span class="num">4</span>1 周の長さ ― 新店に着くまでの遅れの正体</h2>
+    <svg viewBox="0 0 1040 200" role="img" aria-label="本体種別ごとの1周の日数">
+      <g font-size="12.5">
+        <!-- scale 18日 -> 700px -->
+        <g transform="translate(220,16)">
+          <line x1="0" y1="0" x2="0" y2="160" stroke="#e5e7eb"/>
+          <line x1="117" y1="0" x2="117" y2="160" stroke="#fca5a5" stroke-dasharray="4 4"/><text x="117" y="175" text-anchor="middle" fill="#dc2626">72時間</text>
+          <text x="-10" y="24" text-anchor="end">通常収集 41本体</text><rect x="16" y="10" width="85" height="20" fill="#16a34a"/><text x="107" y="25">0.4〜2.6 日（全て72h以内）</text>
+          <text x="-10" y="56" text-anchor="end">N 1県26語</text><rect x="117" y="42" width="155" height="20" fill="#d97706"/><text x="278" y="57">3〜7 日（東京 5.9・福岡 3.9・埼玉 3.5〜4.0）</text>
+          <text x="-10" y="88" text-anchor="end">N 北関東3県</text><rect x="0" y="74" width="467" height="20" fill="#dc2626"/><text x="473" y="89">12 日（ミッキー・フラミンゴ3）</text>
+          <text x="-10" y="120" text-anchor="end">N 旧設定 90語</text><rect x="0" y="106" width="700" height="20" fill="#dc2626"/><text x="706" y="121">15〜18 日</text>
+          <text x="0" y="152" fill="#6b7280">72h を超える N 本体: 20。語を 1〜3 減らしても 3〜8% しか縮まない → 分割（4〜5語×複数本）か通常収集へ戻す別提案</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <h2><span class="num">5</span>案 A と案 B ― 何を外し、何を得て、何を失うか</h2>
+    <div class="grid">
+      <div>
+        <h3 style="margin:0 0 6px;font-size:15px"><span class="tagA">案 A</span> 重なりの除去だけ</h3>
+        <div class="kpi">
+          <div><b>−21%</b><span>語数 5,943 → 4,676</span></div>
+          <div><b>284→255日</b><span>1周の合計</span></div>
+          <div><b>0</b><span>失うアポ</span></div>
+        </div>
+        <p class="note">外す語の例: リフレクソロジスト／理容室／鍼師／鍼灸院／barber／床屋 など、同じ町で同じ店を返す語。</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 6px;font-size:15px"><span class="tagB">案 B</span> 新店アポ最適（判断軸＝新店に誰より早く着く）</h3>
+        <div class="kpi">
+          <div><b>−47%</b><span>語数 → 3,176</span></div>
+          <div><b>284→227日</b><span>1周の合計（通常収集は半減）</span></div>
+          <div><b class="bad">−44件/30日</b><span>失う既存アポ（月500件の9%）</span></div>
+        </div>
+        <p class="note">案 A に加えて 教室・修理・飲食・物販 を外し、ペット語を全通常収集に投入。美容主要語は押し出さない。同じ町に戻る頻度が約 2 倍、架電までの遅れが平均 0.8 日縮む。</p>
+      </div>
+    </div>
+    <svg viewBox="0 0 1040 120" role="img" aria-label="通常収集の1周の変化">
+      <g font-size="12.5">
+        <text x="20" y="22" font-weight="700" font-size="13">通常収集（例: ありさん）1 周</text>
+        <!-- scale 1.9日 -> 600px -->
+        <text x="100" y="52" text-anchor="end">現状</text><rect x="110" y="38" width="600" height="18" fill="#9ca3af"/><text x="716" y="52">1.9 日・164 語</text>
+        <text x="100" y="78" text-anchor="end" class="tagA" fill="#2563eb">案 A</text><rect x="110" y="64" width="474" height="18" fill="#2563eb"/><text x="590" y="78">1.5 日・125 語</text>
+        <text x="100" y="104" text-anchor="end" fill="#16a34a">案 B</text><rect x="110" y="90" width="284" height="18" fill="#16a34a"/><text x="400" y="104">0.9 日・73 語（＋ペット語）</text>
+      </g>
+    </svg>
+    <table style="margin-top:10px">
+      <tr><th>区分</th><th>本体数</th><th>案 A</th><th>案 B</th></tr>
+      <tr><td>通常収集 a,b,c（ありさん・ごんずい1〜4・だっくす ほか）</td><td>22</td><td>164→125 語</td><td>164→73 語</td></tr>
+      <tr><td>通常収集 m／q／ina 系</td><td>11</td><td>121→78／90→85／104→68</td><td>→53／→50／→47</td></tr>
+      <tr><td>N 設定Nのみ（いるか3/4・おれんじ ほか）</td><td>6</td><td>26→24 語</td><td>26→25（ペット5語追加・リフォーム等を外す）</td></tr>
+      <tr><td>N 設定N＋t/u/w/z（しまじろう・みみず・プー・ミッキー ほか）</td><td>19</td><td>−2〜−7 語</td><td>−1〜−13 語</td></tr>
+      <tr><td>N 旧設定・設定A（しまじろう5・めんだこ4・フラミンゴ4）</td><td>3</td><td>116→109／90→64</td><td>116→75（18→12 日）／90→61</td></tr>
+      <tr><td>触らない（ふくろう1〜5・かに1〜4・ごーるでん・クロネコ1/2）</td><td>12</td><td>—</td><td>—</td></tr>
+    </table>
+    <div class="note">方式: 新グループ（n2・a2・b2…）を作って本体ごとに付け替える。既存グループは無傷、戻す時はグループを戻すだけ。どの語をどのPCにするかは <a href="keyword-realloc-by-pc-20261028-b5124c.html">県別・本体別ページ</a>。</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <h2><span class="num">6</span>適用の流れ ― 可視化 → 1 本で試す → 全台 → 効果測定</h2>
+    <div class="flow">
+      <div class="step"><b>① 案を決める</b><small>案 A／案 B／中間案（未架電 300 件超の本体にはペット語を足さない）</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>② dry-run</b><small>keyword_realloc_plan.py で差分を表示（書き込みなし・済み）</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>③ 1 本で試す</b><small>平日日中・ありさん・--only で適用 → 翌日に件数と 1 周を見る</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>④ 全台へ</b><small>語数の変更は 1 日 1 回。ふくろう・かには触らない</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>⑤ 効果測定</b><small>11/4 に同じ SQL で「新店アポ／日」「先手率」「1 周」を比較</small></div>
+    </div>
+    <div class="note" style="margin-top:12px">戻し: 本体のグループを元に戻すだけ（新グループは残してよい）。語単位の当たり外れを測るには、PC の検索記録を日次で中央に上げる 1 表と、投入時に語を残す列が必要（別改修）。</div>
+  </div>
+</div>
+</body>
+</html>
