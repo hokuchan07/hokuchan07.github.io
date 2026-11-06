@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OWL福祉 ToDo 図解（11/4 河合さん定例より）</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--a:#2563eb;--b:#16a34a;--warn:#dc2626;--amber:#d97706;--soft:#eef2ff;--green:#ecfdf5;--amb:#fff7ed;--grey:#f3f4f6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--mute);font-size:13px;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .card h2{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;align-items:center;justify-content:center;flex:none}
+  .lead{font-size:14px;margin:0 0 12px}
+  .lanes{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px}
+  @media(max-width:860px){.lanes{grid-template-columns:1fr}}
+  .lane{border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+  .lane h3{margin:0 0 8px;font-size:14px;display:flex;align-items:center;gap:6px}
+  .lane.me{background:var(--soft)}.lane.them{background:var(--amb)}.lane.done{background:var(--green)}
+  .lane ol,.lane ul{margin:0;padding-left:20px;font-size:13.5px}
+  .lane li{margin-bottom:6px}
+  .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--mute);margin-left:4px;vertical-align:middle}
+  .pill.hot{background:var(--warn);color:#fff;border-color:var(--warn)}
+  .pill.h{background:#dbeafe;color:#1e40af;border-color:#bfdbfe}
+  .pill.s{background:#fef3c7;color:#92400e;border-color:#fde68a}
+  .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+  .step{flex:1 1 150px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:13px;position:relative}
+  .step b{display:block;font-size:13.5px;margin-bottom:2px}
+  .step small{color:var(--mute)}
+  .step.gate{background:var(--amb);border:1px dashed var(--amber)}
+  .step.goal{background:var(--green)}
+  .arrow{align-self:center;color:var(--mute);font-size:18px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+  .kpi div{background:var(--grey);border-radius:10px;padding:10px 12px}
+  .kpi b{display:block;font-size:20px}
+  .kpi span{font-size:12px;color:var(--mute)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+  th{background:var(--grey);font-weight:600;white-space:nowrap}
+  .note{font-size:12.5px;color:var(--mute);margin-top:8px}
+  .warnbox{border-left:4px solid var(--warn);background:#fef2f2;padding:8px 12px;font-size:13px;border-radius:6px;margin-top:10px}
+  .okbox{border-left:4px solid var(--b);background:var(--green);padding:8px 12px;font-size:13px;border-radius:6px;margin-top:10px}
+  code{background:var(--grey);padding:1px 5px;border-radius:4px;font-size:12.5px}
+  .media{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:600px){.media{grid-template-columns:1fr}}
+  .media div{border-radius:10px;padding:12px 14px;font-size:13.5px;border:1px solid var(--line)}
+  .media .y{background:#fff1f2}.media .g{background:#f0fdf4}
+  .media b{display:block;font-size:15px;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>OWL福祉 ToDo 図解 — 11/4 河合さん定例（録音76）より</h1>
+<div class="sub">作成 2026-11-06 ／ 出典: 11/4 ボイスメモ 3本の仕分け表 §2・§3 ／ 担当は「案」。公開・広告操作・河合さんへの連絡は鈴木さんが押す</div>
+
+<div class="card">
+  <h2><span class="num">1</span>全体像 — 3レーン</h2>
+  <p class="lead">河合さんのレビューで出た宿題は <b>LP 改修 5 件＋運用方針 1 件＋その他 2 件</b>。消化済みは 2 件、河合さん待ちが 3 件。</p>
+  <div class="lanes">
+    <div class="lane me">
+      <h3>🟦 こちらのボール（斗）<span class="pill">8件</span></h3>
+      <ol>
+        <li><b>新LPを公開まで進める</b> <span class="pill hot">最優先</span><span class="pill s">鈴木さん</span><br><small>要承認 A-2（WPプレビュー）→ A-3（公開・CP06着地切替）が止まっている</small></li>
+        <li><b>FVにインタビュー動画をワンスクロール内</b> <span class="pill h">着手候補</span><br><small>河合さんに「すぐ変えておきます」と返答済み</small></li>
+        <li><b>LPを3分の2に削る</b> <span class="pill h">着手候補</span><br><small>フォーム到達 4.5%→20% が目標。Clarity の離脱点で切る</small></li>
+        <li><b>FAQを上へ＋ABテスト／「知りたいこと」直下にフォーム埋め込み</b> <span class="pill h">着手候補</span><br><small>AB は WordPress の複製ページで</small></li>
+        <li><b>FV直下のバッジを画像化</b> <span class="pill h">着手候補</span></li>
+        <li><b>「質より数」で2版運用に切る</b> <span class="pill s">鈴木さん判断</span><br><small>Yahoo＝ロング版／Google＝簡易版。11/1 戦略と向きが逆＝要すり合わせ</small></li>
+        <li><b>河合さんのチラシ＋開業シミュレーターの中身チェック</b><br><small>届いてから</small></li>
+        <li><b>河合さん定例を2週に1回で日程化</b> <span class="pill s">鈴木さん</span><br><small>11/18 週目安</small></li>
+      </ol>
+    </div>
+    <div class="lane them">
+      <h3>🟧 河合さん待ち<span class="pill">3件</span></h3>
+      <ul>
+        <li>YouTube を今週末（11/8〜9）に公開</li>
+        <li>チラシ＋開業シミュレーターを貼る</li>
+        <li>キャンペーン分け（利回り投資／不動産）後の<b>予算割り振り</b><br><small>どちらのボールか要確認</small></li>
+      </ul>
+    </div>
+    <div class="lane done">
+      <h3>🟩 消化済み<span class="pill">2件</span></h3>
+      <ul>
+        <li>河合さん側: FC／経営者向けCPの検索語絞り・介護カット<br><small>河合さん本人が実施済み</small></li>
+        <li>「0円を顔にしない・加盟金440万で何が付くか」のLPたたき<br><small>11/1 夜間成果の新LP <code>lp_keiei</code> として作成済み・未公開（→ 上の 1 へ）</small></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="num">2</span>LP 改修の流れ — 指摘4点を先に当ててから公開</h2>
+  <div class="flow">
+    <div class="step"><b>① 河合さん指摘4点を新LPに反映</b><small>FV動画／3分の2に短縮／FAQ上＋フォーム埋め込み／バッジ画像化<br>場所: <code>_04_新LP/index.html</code></small></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>② レスポンシブ確認</b><small><code>tools/responsive_check.py</code> 360〜1440px。<code>_check/結果.md</code> を更新</small></div>
+    <div class="arrow">→</div>
+    <div class="step gate"><b>③ A-2 WPプレビュー</b><small>Cowork 指示書 <code>_05_本番実装_Cowork指示書.md</code>。CF7 4581 に事前質問3つ追加。<b>公開はしない</b></small></div>
+    <div class="arrow">→</div>
+    <div class="step gate"><b>④ A-3 公開＋CP06切替</b><small>着地切替・予算半減・上限CPC ¥1,000・KW入替・RSA差替（<code>_06</code> ③④⑤）<br><b>鈴木さん承認が必要</b></small></div>
+    <div class="arrow">→</div>
+    <div class="step goal"><b>⑤ 11/30 判定</b><small>商談化 ≥5・契約見込み ≥1。未達なら TO 予算さらに半減</small></div>
+  </div>
+  <div class="warnbox">③④は本番 WordPress・広告への書き込み。Sanity Pause 3問 → 鈴木さんの明示承認後に実行。星崎さん側は ①② まで進めて、スクショと差分で報告する形が安全。</div>
+</div>
+
+<div class="card">
+  <h2><span class="num">3</span>運用方針 — 「質より数」で 2 版運用（鈴木さん判断待ち）</h2>
+  <div class="kpi">
+    <div><b>35〜40件/月</b><span>河合さんが欲しい問い合わせ数</span></div>
+    <div><b>4.5% → 20%</b><span>フォーム到達率（現状→目標）</span></div>
+    <div><b>8% / 12%</b><span>ヒートマップ: 最下部到達／Q&amp;A到達</span></div>
+  </div>
+  <div class="media">
+    <div class="y"><b>Yahoo ＝ ロング版（新LP）</b>軽い層が多い媒体。詳しく書いて納得させる。収益シミュレーションは「儲かりそう・信用できそう」の2点だけ（詳細を見せると満足して離脱）</div>
+    <div class="g"><b>Google ＝ 簡易版</b>手短に。質を取る層は専用KWで別狙い。11/1 戦略 J-6「ライト版（CP05）を残す」と整合させる</div>
+  </div>
+  <div class="warnbox">11/1 夜間戦略 <code>_02_戦略.md</code> は「商談化率×契約率」重視＝向きが逆。どちらで 11 月を走るかは鈴木さんが決めてから LP の長さを確定する（②③の前に決める）。</div>
+</div>
+
+<div class="card">
+  <h2><span class="num">4</span>ToDo 一覧（担当案・次の1手・場所）</h2>
+  <table>
+    <tr><th>#</th><th>内容</th><th>担当（案）</th><th>次の1手</th><th>場所・根拠</th></tr>
+    <tr><td>1</td><td>新LP公開（A-2→A-3）</td><td>鈴木さん</td><td>2〜5 を当てたあと、Cowork 指示書を流してプレビュー → 承認 → 公開・CP06切替</td><td><code>福祉事業/_夜間成果_20261101_OWL福祉LP戦略/_00_朝イチ読む.md</code></td></tr>
+    <tr><td>2</td><td>FV に動画をワンスクロール内</td><td>星崎さん（候補）</td><td>FV 直下にインタビュー動画（サムネ＋再生）ブロックを足す</td><td><code>_04_新LP/index.html</code>・動画は愛知・三重インタビュー（匿名）</td></tr>
+    <tr><td>3</td><td>LP を 3分の2 に</td><td>星崎さん（候補）</td><td>Clarity のスクロール到達で落ちる箇所から削る。7,000〜8,000px 目安</td><td>Clarity（OWL）・<code>_02_戦略.md</code> §3</td></tr>
+    <tr><td>4</td><td>FAQ を上へ＋AB／フォーム埋め込み</td><td>星崎さん（候補）</td><td>FAQ をアコーディオンで「知りたいこと」の位置へ。直下に CF7 フォーム本体（iframe 不可）</td><td>WordPress 複製ページで AB</td></tr>
+    <tr><td>5</td><td>バッジを画像化</td><td>星崎さん（候補）</td><td>FV 直下のバッジ列を 1 枚画像に（長辺 2000px・JPEG 80・圧縮して commit）</td><td>LFS ルール</td></tr>
+    <tr><td>6</td><td>2版運用（Yahoo ロング／Google 簡易）</td><td>鈴木さん判断</td><td>11/1 戦略と向きを揃える → 簡易版をライト版（CP05）で流用するか決める</td><td><code>_02_戦略.md</code> J-6</td></tr>
+    <tr><td>7</td><td>チラシ＋開業シミュレーター確認</td><td>斗</td><td>河合さんから届いたら誤字・数字・導線（簡易版＋「詳細は公式LINEで」ボタン）を見る</td><td>河合さん送付待ち</td></tr>
+    <tr><td>8</td><td>定例を 2 週に 1 回</td><td>鈴木さん</td><td>11/18 週で候補日を提案</td><td>—</td></tr>
+  </table>
+  <div class="note">担当は「案」。星崎さんが 2〜5 を引き取る場合は、①②（実装＋レスポンシブ確認）まで進めて差分とスクショで報告。③④は鈴木さんの承認後。</div>
+</div>
+
+<div class="card">
+  <h2><span class="num">5</span>読む順（星崎さん）</h2>
+  <ol style="font-size:13.5px;margin:0;padding-left:20px">
+    <li><code>受託事業/クライアント/RUNBIRD/福祉事業/_夜間成果_20261101_OWL福祉LP戦略/_00_朝イチ読む.md</code> — 要承認 A-1〜A-5・要判断 J-1〜J-9</li>
+    <li>同 <code>_04_新LP/README.md</code> — v2 との差分・未確定数字 5 箇所・本番で差し替える箇所</li>
+    <li><code>受託事業/クライアント/RUNBIRD/議事録/2026-11-04_ボイスメモ_11-04_3本_録音内容とTODO仕分け.md</code> — 河合さんの発言原文（§5）</li>
+    <li><code>社内戦略ログ/ナレッジ/runbird_owl_lp_boundary_kw_2026.md</code> — 鈴木＝障がい者GH系／河合＝福祉FC の境界。河合さんの語に触らない</li>
+  </ol>
+  <div class="okbox">公開・広告操作・河合さんへの連絡は鈴木さんが押す（クライアント連絡100%ルール）。星崎さんは実装＋確認まで。</div>
+</div>
+
+</div>
+</body>
+</html>
