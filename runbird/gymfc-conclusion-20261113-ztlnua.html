@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ジムFC加盟開発 結論の図解</title>
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#fff; --ink:#1d2430; --sub:#5b6472; --line:#ddd8cc;
+    --stop:#b3261e; --stop-bg:#fbeceb; --go:#1f6f4a; --go-bg:#e8f3ec;
+    --warn:#8a5a00; --warn-bg:#fdf3dc; --navy:#1f3a5f; --navy-bg:#e9eef5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.7;font-size:16px}
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 56px}
+  .meta{color:var(--sub);font-size:13px;margin:0 0 10px}
+  h1{font-size:22px;margin:0 0 18px;line-height:1.4}
+  h2{font-size:18px;margin:44px 0 14px;padding-left:12px;border-left:5px solid var(--navy);line-height:1.4}
+  .num{font-variant-numeric:tabular-nums}
+  .hero{background:var(--navy);color:#fff;border-radius:14px;padding:26px 24px}
+  .hero .big{font-size:clamp(22px,4.4vw,34px);font-weight:700;line-height:1.4;margin:0 0 10px}
+  .hero p{margin:0;font-size:15px;opacity:.92}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .card h3{margin:0 0 10px;font-size:16px;line-height:1.4}
+  .card p{margin:8px 0 0;font-size:14px;color:var(--sub)}
+  .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;margin-bottom:8px}
+  .t-stop{background:var(--stop-bg);color:var(--stop)}
+  .t-go{background:var(--go-bg);color:var(--go)}
+  .t-warn{background:var(--warn-bg);color:var(--warn)}
+  .t-navy{background:var(--navy-bg);color:var(--navy)}
+  /* 入口→結果 */
+  .funnel{display:flex;align-items:stretch;gap:8px;margin-top:6px}
+  .funnel .box{flex:1;border-radius:10px;padding:10px 8px;text-align:center;background:var(--navy-bg)}
+  .funnel .box b{display:block;font-size:clamp(17px,1.9vw,22px);line-height:1.3;white-space:nowrap}
+  .funnel .box span{font-size:12px;color:var(--sub)}
+  .funnel .zero{background:var(--stop-bg)} .funnel .zero b{color:var(--stop)}
+  .funnel .ok{background:var(--go-bg)} .funnel .ok b{color:var(--go)}
+  .funnel .arr{align-self:center;color:var(--sub);font-size:18px}
+  .lane{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+  .lane .name{font-size:13px;font-weight:700}
+  .lesson{background:var(--warn-bg);border-radius:12px;padding:14px 18px;margin-top:14px;font-weight:700}
+  /* 比較 */
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:var(--navy-bg);font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .scroll{overflow-x:auto}
+  /* 流れ */
+  .flow{display:grid;gap:10px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .step h3{margin:0 0 10px;font-size:17px}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .checks li{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:#fcfbf8}
+  .checks .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
+  .checks .who{display:block;font-size:12px;color:var(--sub)}
+  .checks .done .n{background:var(--go)}
+  .down{text-align:center;color:var(--sub);font-size:22px;line-height:1}
+  .branch{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .yes{border:2px solid var(--go);background:var(--go-bg)}
+  .no{border:2px solid var(--stop);background:var(--stop-bg)}
+  .branch ul{margin:8px 0 0;padding-left:20px;font-size:14px}
+  .branch li{margin:4px 0}
+  /* 架電の母数 */
+  .bars{display:grid;gap:10px}
+  .bar{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:10px;align-items:center;font-size:14px}
+  .bar .track{background:#ebe7dc;border-radius:8px;height:30px;position:relative}
+  .bar .fill{background:var(--navy);height:100%;border-radius:8px;min-width:4px}
+  .bar .val{position:absolute;left:10px;top:0;line-height:30px;font-weight:700;color:#fff;white-space:nowrap}
+  .bar .val.out{color:var(--ink)}
+  .bar .q{background:repeating-linear-gradient(45deg,#ebe7dc,#ebe7dc 6px,#f6f4ef 6px,#f6f4ef 12px)}
+  .bar .free{height:auto;min-height:30px;padding:4px 10px}
+  .bar .free .val{position:static;white-space:normal;line-height:1.5;display:block}
+  .note{font-size:13px;color:var(--sub);margin-top:10px}
+  .next{background:var(--navy);color:#fff;border-radius:12px;padding:20px 22px}
+  .next h3{margin:0 0 8px;font-size:17px}
+  .next ol{margin:0;padding-left:22px;font-size:15px}
+  .next li{margin:4px 0}
+  h1,h2,h3,.big,.lesson{text-wrap:balance}
+  p,li{text-wrap:pretty}
+  .hint{display:none;font-size:12px;color:var(--sub);margin:6px 0 0}
+  .scroll table{min-width:560px}
+  td:first-child,th:first-child{white-space:nowrap}
+  @media (max-width:560px){
+    .hint{display:block}
+    .funnel{flex-direction:column}
+    .funnel .arr{transform:rotate(90deg)}
+    .funnel .box b{font-size:22px}
+    .bar{grid-template-columns:1fr}
+  }
+  @media print{body{background:#fff}.wrap{padding:0}.card,.step,table{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="meta">作成 2026-11-13 ／ 社内用（平田さん・鈴木さん）／ 先方共有不可</p>
+  <h1><span style="display:inline-block">ジムFC加盟開発</span><span style="display:inline-block">（CIVEXUS 尾形さん）</span><span style="display:inline-block">を受けるか</span> <span style="display:inline-block">— 結論の図解</span></h1>
+
+  <div class="hero">
+    <p class="big">広告を先に回す形では受けない。<br>お金を使わない確認7つを先に済ませ、その結果で決める。</p>
+    <p>確認が通った場合も、最初は件数を約束しない小さな実測から。止める基準と持ち出しの上限を先に紙に書く。</p>
+  </div>
+
+  <h2>理由1：葬儀（家族葬光）は「クリックは買えたが、電話は0件」だった</h2>
+  <div class="grid g2">
+    <div class="card">
+      <span class="tag t-stop">家族葬光（10/15〜11/11・実測）</span>
+      <h3>月予算をほぼ使い切って、電話は0件</h3>
+      <div class="funnel num">
+        <div class="box"><b>93,733円</b><span>広告費</span></div>
+        <div class="arr">→</div>
+        <div class="box"><b>775</b><span>クリック<br>（計画の約10倍）</span></div>
+        <div class="arr">→</div>
+        <div class="box zero"><b>0件</b><span>つながった電話<br>（計画6件）</span></div>
+      </div>
+      <p>買えたのは「費用・相場」を調べている人のクリックで、今すぐ頼みたい人ではなかった。着信履歴で確認できているのは 10/19 まで。</p>
+    </div>
+    <div class="card">
+      <span class="tag t-stop">採算</span>
+      <h3>元を取るには、月に2件の成約が必要だった</h3>
+      <p>月約19万円の費用に対し、元を取るには成約が月2件、電話に直すと月約7件が必要だった（成約率30%は置き値）。</p>
+    </div>
+  </div>
+  <div class="lesson">葬儀は電話0件で1か月で分かった。FC加盟は資料請求が「来てしまう」商材なので、失敗に気づくのが遅く、高くつく。</div>
+
+  <h2>理由2：ジムFCの側にも、広告が効きにくい条件が3つある</h2>
+  <div class="grid g3">
+    <div class="card">
+      <span class="tag t-stop">競合</span>
+      <h3>条件の良い本部が、すでに広告を出している</h3>
+      <p>下の表のとおり。8月に「空白」と見た場所は、もう空いていない。</p>
+    </div>
+    <div class="card">
+      <span class="tag t-stop">需要</span>
+      <h3>本命のトレーナー独立層は検索が少ない</h3>
+      <p>「パーソナルトレーナー 独立」は月136回、「トレーナー 独立」は24回（公開ツールの推定値。実測は未実施）。</p>
+    </div>
+    <div class="card">
+      <span class="tag t-stop">条件</span>
+      <h3>年12件の条件と、見立てが合わない</h3>
+      <p>受託条件は年12件。前回の見立ては契約ベースで年3〜6件。本部の広告枠は月10万円。</p>
+    </div>
+  </div>
+  <p class="hint">表は横にスクロールできます（右に AUN'S GYM の列）→</p>
+  <div class="scroll" style="margin-top:14px">
+    <table class="num">
+      <tr><th></th><th>今回の本部（INPEC マシンの24hジム）</th><th>AUN'S GYM（広告主の主張・裏取りなし）</th></tr>
+      <tr><td>ロイヤリティ</td><td>月15万円 固定</td><td>永久0円</td></tr>
+      <tr><td>加盟時に要るお金</td><td>加盟金 400〜500万円（総投資 約1,646万円）</td><td>自己資金 400万円</td></tr>
+      <tr><td>実績の見せ方</td><td>直営1店（開業3か月）・加盟はリファラル2件</td><td>回収1年8ヶ月・半年で20加盟</td></tr>
+    </table>
+  </div>
+
+  <h2>進め方：確認7つ → 結果で分かれる</h2>
+  <div class="flow">
+    <div class="step">
+      <h3>① お金を使う前に確かめる7つ（どれも0円）</h3>
+      <ul class="checks">
+        <li><span class="n">1</span><span>「インスタ広告 月10万円で2件」は加盟契約か、問い合わせか<span class="who">尾形さんに聞く</span></span></li>
+        <li><span class="n">2</span><span>リファラルで加盟した2件は誰で、何が決め手だったか<span class="who">尾形さんに聞く</span></span></li>
+        <li><span class="n">3</span><span>小田原の月次実績と損益分岐の会員数、見学できる店<span class="who">尾形さんに聞く</span></span></li>
+        <li><span class="n">4</span><span>AUN'S GYM と並べたとき、こちらを選ぶ理由<span class="who">尾形さんに聞く</span></span></li>
+        <li><span class="n">5</span><span>取り分の向き・報酬の発生時点・返金時の扱いを書面に<span class="who">尾形さん・中村さん</span></span></li>
+        <li><span class="n">6</span><span>融資否決でも返金しない設計と、説明する側の責任<span class="who">弁護士</span></span></li>
+        <li><span class="n">7</span><span>検索数・入札単価の実測と、CTI のジム系件数<span class="who">社内（CTI 件数は 11/13 に実測済み。検索数は未実施）</span></span></li>
+      </ul>
+    </div>
+    <div class="down">▼</div>
+    <div class="branch">
+      <div class="step yes">
+        <span class="tag t-go">7つが通った</span>
+        <h3>② 小さな実測に進む（提案値）</h3>
+        <ul>
+          <li>相手は既存のジム・整骨院の経営者と異業種の法人</li>
+          <li>測るのは「自己資金の条件を満たす面談」の件数</li>
+          <li>広告は本部の月10万円の枠で、経営者の語に絞る</li>
+          <li>架電を並べて試す（例：200件）</li>
+          <li>固定費を先に契約しない</li>
+          <li>止める基準を先に書く（例：6週間で面談0〜1件なら終了）</li>
+          <li>重要事項の説明と加盟金の受け取りは本部側</li>
+        </ul>
+      </div>
+      <div class="step no">
+        <span class="tag t-stop">どれか1つでも当たる</span>
+        <h3>受けない（実測にも進まない）</h3>
+        <ul>
+          <li>「2件」が問い合わせで、リファラルも知人だった</li>
+          <li>小田原の月次実績と損益分岐が出てこない</li>
+          <li>AUN'S GYM と並べたときの答えが無い</li>
+          <li>取り分と報酬の発生時点が書面にならない</li>
+          <li>「片手間」前提のまま、営業の担当と時間が決まらない</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2>架電で試す場合の母数（CTI 本番・11/13 実測）</h2>
+  <div class="card">
+    <div class="bars num">
+      <div class="bar"><span>独立系のジム系の店</span><div class="track"><div class="fill" style="width:100%"></div><span class="val">3,691</span></div></div>
+      <div class="bar"><span>うち未架電</span><div class="track"><div class="fill" style="width:70.2%"></div><span class="val">2,591</span></div></div>
+      <div class="bar"><span>話せる店（接触率 約21%で計算）</span><div class="track"><div class="fill" style="width:14.6%"></div><span class="val out" style="left:calc(14.6% + 10px)">約540</span></div></div>
+      <div class="bar"><span>面談に進む店</span><div class="track q free"><span class="val out">分からない（FC加盟を電話で提案した実績が無い）</span></div></div>
+    </div>
+    <p class="note">約9割が2026年に投入した新店で、欲しい「数年続いていて資金のある既存店」かどうかはこのリストでは選べない。チェーンの除外は店名の一致だけなので、数は目安。</p>
+  </div>
+
+  <h2>次の一手</h2>
+  <div class="next">
+    <h3>来月の条件協議の前に、尾形さんへ4つ聞く（上の 1〜4）</h3>
+    <ol>
+      <li>インスタ広告の「2件」の中身</li>
+      <li>リファラル2件の加盟者像</li>
+      <li>小田原の月次実績と損益分岐</li>
+      <li>AUN'S GYM に対する優位</li>
+    </ol>
+  </div>
+  <p class="note">根拠と詳細：同じフォルダの「ジムFC加盟開発 家族葬光の失敗を踏まえた再評価.md」。</p>
+</div>
+</body>
+</html>
